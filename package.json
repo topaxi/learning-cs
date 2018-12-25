@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "test": "ts-node node_modules/.bin/_mocha"
+    "test-one": "ts-node node_modules/.bin/_mocha",
+    "test": "ts-node node_modules/.bin/_mocha **/*.test.ts"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
