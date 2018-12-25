@@ -1,0 +1,21 @@
+{
+  "name": "learning-cs",
+  "private": true,
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "test": "ts-node node_modules/.bin/_mocha"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.5",
+    "@types/lodash": "^4.14.85",
+    "@types/mocha": "^2.2.44",
+    "@types/node": "^8.0.53",
+    "chai": "^4.1.2",
+    "lodash": "^4.17.4",
+    "mocha": "^4.0.1",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.6.1"
+  },
+  "dependencies": {}
+}
