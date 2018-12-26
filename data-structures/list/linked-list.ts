@@ -26,6 +26,10 @@ export class LinkedList<T> implements Iterable<T> {
   private firstNode: LinkedListNode<T> | null = null
   private lastNode: LinkedListNode<T> | null = null
 
+  get empty() {
+    return this.firstNode === null
+  }
+
   unshift(value: T): this {
     this.firstNode = new LinkedListNode(value, this.firstNode)
     return this
@@ -144,7 +148,13 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   tail(): LinkedList<T> {
-    return Object.assign(new LinkedList<T>(), { firstNode: this.firstNode })
+    if (this.firstNode === null) {
+      return new LinkedList<T>()
+    }
+
+    return Object.assign(new LinkedList<T>(), {
+      firstNode: this.firstNode.next
+    })
   }
 
   size(): number {
@@ -165,7 +175,7 @@ export class LinkedList<T> implements Iterable<T> {
       }, LinkedList.from(this))
   }
 
-  flatten<U>(this: LinkedList<LinkedList<U>>): LinkedList<U> {
+  flat<U>(this: LinkedList<LinkedList<U>>): LinkedList<U> {
     return this.reduce((flat, list) => flat.concat(list), new LinkedList<U>())
   }
 
@@ -195,11 +205,50 @@ export class LinkedList<T> implements Iterable<T> {
     }
   }
 
+  find(callback: (value: T, key: number, list: this) => boolean): T | null {
+    let i = -1
+    for (let value of this) {
+      if (callback(value, ++i, this) === true) {
+        return value
+      }
+    }
+
+    return null
+  }
+
+  findIndex(callback: (value: T, key: number, list: this) => boolean): number {
+    let i = -1
+    for (let value of this) {
+      if (callback(value, ++i, this) === true) {
+        return i
+      }
+    }
+
+    return i
+  }
+
   slice(start: number, end: number): LinkedList<T> {
     let list = LinkedList.from(this)
     list.seekNode(end - 1).next = null
     list.firstNode = list.seekNode(start)
     return list
+  }
+
+  splice(start: number, deleteCount: number, ...items: T[]): LinkedList<T> {
+    let startNode = this.seekNode(start)
+    let spliced = new LinkedList<T>()
+    let current = null
+
+    if (deleteCount > 0) {
+      spliced.firstNode = this.seekNode(start + 1)
+      spliced.seekNode(deleteCount).next = null
+    }
+
+    for (let i = 0; i < items.length; i++) {
+      startNode.next = new LinkedListNode(items[i], startNode.next)
+    }
+
+    return spliced
   }
 
   join(delimiter: string): string {

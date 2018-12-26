@@ -13,7 +13,7 @@
     "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.53",
     "chai": "^4.1.2",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.11",
     "mocha": "^4.0.1",
     "ts-node": "^3.3.0",
     "typescript": "^2.6.1"
