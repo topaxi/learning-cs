@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "test-one": "ts-node node_modules/.bin/_mocha",
-    "test": "ts-node node_modules/.bin/_mocha **/*.test.ts"
+    "test": "nyc ts-node node_modules/.bin/_mocha **/*.test.ts"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
@@ -15,8 +15,15 @@
     "chai": "^4.1.2",
     "lodash": "^4.17.11",
     "mocha": "^4.0.1",
+    "nyc": "^13.1.0",
     "ts-node": "^3.3.0",
     "typescript": "^2.6.1"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "nyc": {
+    "all": true,
+    "cache": true,
+    "extension": [".ts"],
+    "exclude": "**/*.test.ts"
+  }
 }
