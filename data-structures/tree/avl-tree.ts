@@ -93,6 +93,62 @@ export class AvlTree<T> extends BinarySearchTree<T> {
     this.rotateLeftLeft(node)
   }
 
-  private rotateRightLeft(node: BinarySearchTreeNode<T>): void {}
-  private rotateRightRight(node: BinarySearchTreeNode<T>): void {}
+  /**
+   * 10
+   *  \
+   *  15
+   *  /
+   * 12
+   * ===>
+   * 10
+   *  \
+   *  12
+   *   \
+   *   15
+   * ===> rotateRightRight
+   *   12
+   *  /  \
+   * 10  15
+   */
+  private rotateRightLeft(node: BinarySearchTreeNode<T>): void {
+    let right = node.right!
+    let rightLeft = right.left!
+
+    right.left = null
+
+    if (rightLeft.right !== null) {
+      right.left = rightLeft.right
+      rightLeft.right = null
+    }
+
+    node.right = rightLeft
+    rightLeft.right = right
+
+    this.rotateRightRight(node)
+  }
+
+  /**
+   * 10
+   *  \
+   *   15
+   *    \
+   *    17
+   * ===>
+   *   15
+   *  /  \
+   * 10  17
+   */
+  private rotateRightRight(node: BinarySearchTreeNode<T>): void {
+    let right = node.right!
+    let parent = node.parent
+
+    if (parent !== null) {
+      parent.right = right
+    } else if (node === this.root) {
+      this.root = right
+    }
+
+    node.right = right.left
+    right.left = node
+  }
 }
