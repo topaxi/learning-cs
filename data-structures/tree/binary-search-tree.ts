@@ -1,7 +1,7 @@
 import { BinarySearchTreeNode } from './binary-search-tree-node'
 
 export class BinarySearchTree<T> {
-  private root: BinarySearchTreeNode<T> | null = null
+  protected root: BinarySearchTreeNode<T> | null = null
 
   constructor(protected readonly compare = (a: any, b: any) => a - b) {}
 
