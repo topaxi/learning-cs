@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "test-one": "ts-node node_modules/.bin/_mocha",
-    "test": "nyc ts-node node_modules/.bin/_mocha **/*.test.ts",
+    "test": "nyc --reporter=lcov --reporter=text ts-node node_modules/.bin/_mocha **/*.test.ts",
     "test:watch": "ts-node node_modules/.bin/_mocha -- --watch-extensions ts --watch -R min **/*.test.ts"
   },
   "devDependencies": {
@@ -25,6 +25,6 @@
     "all": true,
     "cache": true,
     "extension": [".ts"],
-    "exclude": "**/*.test.ts"
+    "exclude": ["**/*.test.ts", "coverage/**"]
   }
 }
