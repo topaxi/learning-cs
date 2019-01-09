@@ -6,17 +6,17 @@ import { pluck } from '../../utils/pluck'
 export class HashMap<T> {
   private readonly slots = Array.from(
     { length: this.size },
-    () => new LinkedList<{ key: string; value: T }>()
+    () => new LinkedList<{ key: string | number; value: T }>()
   )
-  private readonly keyMap: Record<string, number> = {}
+  private readonly keyMap: Record<string | number, number> = {}
 
   constructor(private readonly size = 32) {}
 
-  private hash(key: string): number {
-    return hashCode(key) % this.slots.length
+  private hash(key: string | number): number {
+    return hashCode(String(key)) % this.slots.length
   }
 
-  set(key: string, value: T): T {
+  set(key: string | number, value: T): T {
     let keyHash = this.hash(key)
     this.keyMap[key] = keyHash
 
@@ -32,13 +32,13 @@ export class HashMap<T> {
     return value
   }
 
-  get(key: string): T | null {
+  get(key: string | number): T | null {
     let node = this.slots[this.hash(key)].find(byKey(key))
 
     return node === null ? null : node.value
   }
 
-  delete(key: string): T | null {
+  delete(key: string | number): T | null {
     if (!this.has(key)) {
       return null
     }
@@ -53,11 +53,11 @@ export class HashMap<T> {
     return null
   }
 
-  has(key: string): boolean {
+  has(key: string | number): boolean {
     return Reflect.has(this.keyMap, key)
   }
 
-  keys(): string[] {
+  keys(): Array<string | number> {
     return Object.keys(this.keyMap)
   }
 
