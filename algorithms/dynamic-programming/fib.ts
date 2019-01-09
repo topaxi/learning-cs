@@ -22,7 +22,7 @@ export function fib_memo(n: number, memo = new HashMap<number>()): number {
 export function fib_bu(n: number): number {
   let fib = [1, 1]
 
-  for (let k of range(2, n - 1)) {
+  for (let k of range(2, n)) {
     fib[k] = fib[k - 1] + fib[k - 2]
   }
 
