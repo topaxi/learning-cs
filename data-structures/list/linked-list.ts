@@ -1,3 +1,5 @@
+import { eq } from '../../utils/eq'
+
 class LinkedListNode<T> {
   constructor(public value: T, public next: LinkedListNode<T> | null = null) {}
 
@@ -235,13 +237,15 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   splice(start: number, deleteCount: number, ...items: T[]): LinkedList<T> {
-    let startNode = this.seekNode(start)
+    let startNode = this.seekNode(start - 1)
     let spliced = new LinkedList<T>()
     let current = null
 
     if (deleteCount > 0) {
-      spliced.firstNode = this.seekNode(start + 1)
-      spliced.seekNode(deleteCount).next = null
+      spliced.firstNode = startNode.next
+      let to = spliced.seekNode(deleteCount - 1)
+      startNode.next = to.next
+      to.next = null
     }
 
     for (let i = 0; i < items.length; i++) {
@@ -249,6 +253,22 @@ export class LinkedList<T> implements Iterable<T> {
     }
 
     return spliced
+  }
+
+  delete(value: T): T | null {
+    let index = this.findIndex(eq(value))
+    if (index === -1) return null
+    return this.splice(index, 1).head()
+  }
+
+  includes(value: T): boolean {
+    for (let v of this) {
+      if (value === v) {
+        return true
+      }
+    }
+
+    return false
   }
 
   join(delimiter: string): string {
@@ -289,7 +309,7 @@ export class LinkedList<T> implements Iterable<T> {
 
   private seekNode(index: number): LinkedListNode<T> {
     if (index < 0 || this.firstNode === null) {
-      throw new Error('Out of bounds!')
+      throw new Error(`Index ${index} is out of bounds!`)
     }
 
     let node = this.firstNode
