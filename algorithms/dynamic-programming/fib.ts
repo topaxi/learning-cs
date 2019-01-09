@@ -28,3 +28,20 @@ export function fib_bu(n: number): number {
 
   return fib[n - 1]
 }
+
+// T: O(n) S: O(1)
+export function fib_buo(n: number): number {
+  if (n <= 2) return 1
+
+  let current = 1
+  let previous = 1
+  let fib = 0
+
+  while (--n !== 1) {
+    fib = current + previous
+    previous = current
+    current = fib
+  }
+
+  return fib
+}
