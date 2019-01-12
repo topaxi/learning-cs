@@ -22,6 +22,12 @@ describe('LinkedList<T>', () => {
 
       expect(list.slice(1, 3).toArray()).to.deep.equal([2, 3])
     })
+
+    it('should slice to end', () => {
+      let list = LinkedList.of(1, 2, 3, 4, 5)
+
+      expect(list.slice(2).toArray()).to.deep.equal([3, 4, 5])
+    })
   })
 
   describe('#splice()', () => {

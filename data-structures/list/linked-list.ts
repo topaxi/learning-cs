@@ -229,10 +229,15 @@ export class LinkedList<T> implements Iterable<T> {
     return i
   }
 
-  slice(start: number, end: number): LinkedList<T> {
+  slice(start: number, end?: number): LinkedList<T> {
     let list = LinkedList.from(this)
-    list.seekNode(end - 1).next = null
+
+    if (end !== undefined) {
+      list.seekNode(end - 1).next = null
+    }
+
     list.firstNode = list.seekNode(start)
+
     return list
   }
 
