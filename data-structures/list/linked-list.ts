@@ -63,6 +63,8 @@ export class LinkedList<T> implements Iterable<T> {
       if (this.firstNode === null) {
         this.lastNode = null
       }
+    } else {
+      this.firstNode = null
     }
 
     return value

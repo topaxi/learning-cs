@@ -1,4 +1,5 @@
 import { range } from '../utils/range'
+import { Queue } from '../data-structures/queue/queue'
 
 function fill(
   screen: number[][],
@@ -6,10 +7,10 @@ function fill(
   y: number,
   color: number
 ): number[][] {
-  return flood(screen, x, y, screen[y][x], color)
+  return floodQ(screen, x, y, screen[y][x], color)
 }
 
-function flood(
+function floodR(
   screen: number[][],
   x: number,
   y: number,
@@ -26,12 +27,43 @@ function flood(
 
   screen[y][x] = newColor
 
-  screen = flood(screen, x + 1, y, oldColor, newColor)
-  screen = flood(screen, x, y + 1, oldColor, newColor)
-  screen = flood(screen, x - 1, y, oldColor, newColor)
-  screen = flood(screen, x, y - 1, oldColor, newColor)
+  screen = floodR(screen, x + 1, y, oldColor, newColor)
+  screen = floodR(screen, x, y + 1, oldColor, newColor)
+  screen = floodR(screen, x - 1, y, oldColor, newColor)
+  screen = floodR(screen, x, y - 1, oldColor, newColor)
 
   return screen
+}
+
+function floodQ(
+  screen: number[][],
+  x: number,
+  y: number,
+  oldColor: number,
+  newColor: number
+): number[][] {
+  let queue = new Queue<[number, number]>()
+
+  if (screen[y][x] === newColor) return screen
+
+  queue.enqueue([x, y])
+
+  while (!queue.empty) {
+    ;[x, y] = queue.dequeue()
+
+    screen[y][x] = newColor
+
+    if (isOldColor(x + 1, y)) queue.enqueue([x + 1, y])
+    if (isOldColor(x, y + 1)) queue.enqueue([x, y + 1])
+    if (isOldColor(x - 1, y)) queue.enqueue([x - 1, y])
+    if (isOldColor(x, y - 1)) queue.enqueue([x, y - 1])
+  }
+
+  return screen
+
+  function isOldColor(x: number, y: number) {
+    return screen[y] !== undefined && screen[y][x] === oldColor
+  }
 }
 
 console.log(
