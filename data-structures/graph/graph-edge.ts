@@ -7,8 +7,14 @@ export class GraphEdge<T> {
     public weight = 0
   ) {}
 
-  reverse(): void {
+  reverse(): this {
     ;[this.startVertex, this.endVertex] = [this.endVertex, this.startVertex]
+
+    return this
+  }
+
+  clone(): GraphEdge<T> {
+    return new GraphEdge(this.startVertex, this.endVertex, this.weight)
   }
 
   toString(): string {
