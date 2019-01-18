@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { isAnagram } from './anagram'
 
-describe.only('isAnagram', () => {
+describe('isAnagram', () => {
   it('should return true if strings are anagrams', () => {
     expect(isAnagram('', '')).to.be.true
     expect(isAnagram('ab', 'ba')).to.be.true

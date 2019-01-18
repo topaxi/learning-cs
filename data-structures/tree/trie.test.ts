@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { Trie } from './trie'
 
-describe.only('Trie', () => {
+describe('Trie', () => {
   it('should store words', () => {
     let trie = new Trie()
 

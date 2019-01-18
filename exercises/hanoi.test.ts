@@ -3,7 +3,7 @@ import { Stack } from '../data-structures/stack/stack'
 import { range } from '../utils/range'
 import { move } from './hanoi'
 
-describe.only('hanoi', () => {
+describe('hanoi', () => {
   it('should work', () => {
     let disks = 5
     let stack1 = Stack.from(range(disks))
