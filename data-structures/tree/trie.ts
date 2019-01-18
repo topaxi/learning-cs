@@ -3,11 +3,15 @@ import { HashMap } from '../hash'
 class TrieNode {
   readonly children = new HashMap<TrieNode>()
 
-  constructor(readonly character: string, readonly isCompleteWord = false) {}
+  constructor(readonly character: string, public isCompleteWord = false) {}
 
   addChild(character: string, isCompleteWord = false) {
     if (this.children.has(character)) {
-      return this.children.get(character)!
+      let node = this.children.get(character)!
+
+      node.isCompleteWord = node.isCompleteWord || isCompleteWord
+
+      return node
     }
 
     return this.children.set(
