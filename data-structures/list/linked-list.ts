@@ -315,6 +315,10 @@ export class LinkedList<T> implements Iterable<T> {
     return this.toArray()
   }
 
+  toString(): string {
+    return this.toArray().toString()
+  }
+
   private seekNode(index: number): LinkedListNode<T> {
     if (index < 0 || this.firstNode === null) {
       throw new Error(`Index ${index} is out of bounds!`)
