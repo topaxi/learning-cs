@@ -5,7 +5,7 @@ class TrieNode {
 
   constructor(readonly character: string, public isCompleteWord = false) {}
 
-  addChild(character: string, isCompleteWord = false) {
+  addChild(character: string, isCompleteWord = false): TrieNode {
     if (this.children.has(character)) {
       let node = this.children.get(character)!
 
@@ -36,16 +36,36 @@ export class Trie {
     }
   }
 
-  getWords(): string[] {
+  getWords(startNode = this.root, word = ''): string[] {
     let words: string[] = []
 
-    this.traverseDF(this.root, '', (character, word, isCompleteWord) => {
-      if (isCompleteWord) {
-        words.push(word)
+    this.traverseDF(
+      startNode,
+      word,
+      (character, currentWord, isCompleteWord) => {
+        if (isCompleteWord) {
+          words.push(currentWord)
+        }
       }
-    })
+    )
 
     return words
+  }
+
+  suggestWords(partialWord: string): string[] {
+    if (partialWord === '') return []
+
+    let currentNode = this.root
+
+    for (let character of partialWord) {
+      if (!currentNode.children.has(character)) {
+        return []
+      }
+
+      currentNode = currentNode.children.get(character)!
+    }
+
+    return this.getWords(currentNode, partialWord.slice(0, -1))
   }
 
   private traverseDF(
