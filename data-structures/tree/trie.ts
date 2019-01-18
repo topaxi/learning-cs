@@ -21,7 +21,7 @@ class TrieNode {
   }
 
   toString() {
-    return this.isCompleteWord ? this.character : '*'
+    return this.character
   }
 }
 
