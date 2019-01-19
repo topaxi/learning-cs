@@ -19,8 +19,8 @@ export class Stack<T> {
     return this.list.empty
   }
 
-  push(value: T) {
-    this.list.unshift(value)
+  push(...values: T[]) {
+    this.list.unshift(...values)
   }
 
   pop(): T {
@@ -29,6 +29,12 @@ export class Stack<T> {
 
   peek(): T | null {
     return this.list.head()
+  }
+
+  *consume(): IterableIterator<T> {
+    while (!this.empty) {
+      yield this.pop()
+    }
   }
 
   toString(): string {

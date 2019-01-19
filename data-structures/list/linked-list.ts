@@ -19,11 +19,7 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   static from<T>(values: Iterable<T>) {
-    let list = new this<T>()
-    for (let value of values) {
-      list.push(value)
-    }
-    return list
+    return new this<T>().push(...values)
   }
 
   private firstNode: LinkedListNode<T> | null = null
@@ -33,22 +29,28 @@ export class LinkedList<T> implements Iterable<T> {
     return this.firstNode === null
   }
 
-  unshift(value: T): this {
-    this.firstNode = new LinkedListNode(value, this.firstNode)
+  unshift(...values: T[]): this {
+    for (let i = 0; i < values.length; i++) {
+      this.firstNode = new LinkedListNode(values[i], this.firstNode)
+    }
+
     return this
   }
 
-  push(value: T): this {
-    let node = new LinkedListNode(value)
+  push(...values: T[]): this {
+    for (let i = 0; i < values.length; i++) {
+      let node = new LinkedListNode(values[i])
 
-    if (this.firstNode === null) {
-      this.firstNode = node
-      return this
+      if (this.firstNode === null) {
+        this.firstNode = node
+        continue
+      }
+
+      let prev = this.firstNode
+      while (prev.next !== null) prev = prev.next
+      this.lastNode = prev.next = node
     }
 
-    let prev = this.firstNode
-    while (prev.next !== null) prev = prev.next
-    this.lastNode = prev.next = node
     return this
   }
 
@@ -59,13 +61,10 @@ export class LinkedList<T> implements Iterable<T> {
 
     let value = this.firstNode.value
 
-    if (this.firstNode.next !== null) {
-      this.firstNode = this.firstNode.next
-      if (this.firstNode === null) {
-        this.lastNode = null
-      }
-    } else {
-      this.firstNode = null
+    this.firstNode = this.firstNode.next
+
+    if (this.firstNode === null) {
+      this.lastNode = null
     }
 
     return value

@@ -7,8 +7,10 @@ export class Queue<T> {
     return this.list.empty
   }
 
-  enqueue(value: T) {
-    this.list.push(value)
+  enqueue(...values: T[]): this {
+    this.list.push(...values)
+
+    return this
   }
 
   dequeue(): T {
@@ -17,6 +19,12 @@ export class Queue<T> {
 
   peek(): T | null {
     return this.list.head()
+  }
+
+  *consume(): IterableIterator<T> {
+    while (!this.empty) {
+      yield this.dequeue()
+    }
   }
 
   toString(): string {
