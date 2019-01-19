@@ -7,6 +7,10 @@ export class Queue<T> {
     return this.list.empty
   }
 
+  get length(): number {
+    return this.list.size()
+  }
+
   enqueue(...values: T[]): this {
     this.list.push(...values)
 
