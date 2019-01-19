@@ -4,11 +4,7 @@ export class Stack<T> {
   private readonly list = new LinkedList<T>()
 
   static from<T>(iterable: Iterable<T>) {
-    let stack = new this<T>()
-
-    for (let value of iterable) stack.push(value)
-
-    return stack
+    return new this<T>().push(...iterable)
   }
 
   static of<T>(...args: T[]) {
