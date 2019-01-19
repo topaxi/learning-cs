@@ -15,8 +15,9 @@ export class Stack<T> {
     return this.list.empty
   }
 
-  push(...values: T[]) {
+  push(...values: T[]): this {
     this.list.unshift(...values)
+    return this
   }
 
   pop(): T {
