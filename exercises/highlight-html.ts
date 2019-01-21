@@ -6,7 +6,7 @@ export function hightlightHTML(body: string, terms: string[]): string {
 
   for (let i = 0; i < body.length; i++) {
     for (let term of terms) {
-      if (body.slice(i).startsWith(term)) {
+      if (body.startsWith(term, i)) {
         if (startPoints[i] === undefined) {
           startPoints[i] = 0
         }
