@@ -23,20 +23,16 @@ export function hightlightHTML(body: string, terms: string[]): string {
 
     let c = counter
     counter += startPoints[i] || 0
-    if (c === 0) {
-      if (counter > 0) {
-        output += '<b>'
-      }
+    if (c === 0 && counter !== 0) {
+      output += '<b>'
     }
 
     output += body[i]
 
     c = counter
     counter -= endPoints[i] || 0
-    if (c !== 0) {
-      if (counter === 0) {
-        output += '</b>'
-      }
+    if (c !== 0 && counter === 0) {
+      output += '</b>'
     }
   }
 
