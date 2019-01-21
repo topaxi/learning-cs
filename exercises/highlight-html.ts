@@ -11,12 +11,13 @@ export function hightlightHTML(body: string, terms: string[]): string {
           startPoints[i] = 0
         }
 
-        if (endPoints[i + term.length - 1] === undefined) {
-          endPoints[i + term.length - 1] = 0
+        let endIndex = i + term.length - 1
+        if (endPoints[endIndex] === undefined) {
+          endPoints[endIndex] = 0
         }
 
         startPoints[i]++
-        endPoints[i + term.length - 1]++
+        endPoints[endIndex]++
       }
     }
 
