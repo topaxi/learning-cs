@@ -12,6 +12,8 @@ describe('rand7', () => {
       m.set(r, (m.get(r) || 0) + 1)
     }
 
+    expect(m.size).to.equal(7)
+
     for (let v of m.values()) {
       expect(v).to.be.above(900)
       expect(v).to.be.below(1100)
