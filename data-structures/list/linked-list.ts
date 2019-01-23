@@ -194,7 +194,7 @@ export class LinkedList<T> implements Iterable<T> {
     let i = 0
     return this.reduce(
       (flat, list, _index, self) =>
-        flat.concat(...list.map(value => project(value, i++, this))),
+        flat.concat(...list.map(value => project(value, i++, self))),
       new LinkedList<R>()
     )
   }
