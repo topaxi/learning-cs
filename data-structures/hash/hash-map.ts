@@ -3,17 +3,30 @@ import { hashCode } from '../../utils/string-hash'
 import { byKey } from '../../utils/filters'
 import { pluck } from '../../utils/pluck'
 
+interface HashMapNode<T> {
+  key: string | number
+  value: T
+}
+
 export class HashMap<T> {
-  private readonly slots = Array.from(
-    { length: this.size },
-    () => new LinkedList<{ key: string | number; value: T }>()
+  protected readonly slots = Array.from(
+    { length: this.internalSize },
+    () => new LinkedList<HashMapNode<T>>()
   )
   private readonly keyMap: Record<string | number, number> = {}
 
-  constructor(private readonly size = 32) {}
+  get size(): number {
+    return this.keys().length
+  }
 
-  private hash(key: string | number): number {
+  constructor(private readonly internalSize = 32) {}
+
+  protected hash(key: string | number): number {
     return hashCode(String(key)) % this.slots.length
+  }
+
+  protected getNode(key: string | number): HashMapNode<T> | null {
+    return this.slots[this.hash(key)].find(byKey(key))
   }
 
   set(key: string | number, value: T): T {
@@ -33,7 +46,7 @@ export class HashMap<T> {
   }
 
   get(key: string | number): T | null {
-    let node = this.slots[this.hash(key)].find(byKey(key))
+    let node = this.getNode(key)
 
     return node === null ? null : node.value
   }
