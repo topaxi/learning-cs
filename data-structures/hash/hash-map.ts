@@ -60,7 +60,7 @@ export class HashMap<T> {
     let index = this.slots[keyHash].findIndex(byKey(key))
 
     if (index !== -1) {
-      return this.slots[keyHash].splice(index, 1).head()!.value
+      return this.slots[keyHash].deleteAt(index)!.value
     }
 
     return null

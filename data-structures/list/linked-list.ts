@@ -263,7 +263,10 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   delete(value: T): T | null {
-    let index = this.findIndex(eq(value))
+    return this.deleteAt(this.findIndex(eq(value)))
+  }
+
+  deleteAt(index: number): T | null {
     if (index === -1) return null
     return this.splice(index, 1).head()
   }
