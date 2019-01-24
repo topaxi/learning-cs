@@ -1,14 +1,14 @@
 import { memoize, MemoStore } from './memo'
 
-export const Y = (m: <F extends Function>(f: F) => any) => {
-  const f = m((...args: any[]): any => f(...args))
+export const Y = <F extends Function>(m: (f: F) => F) => {
+  const f = m(((...args: any[]): any => f(...args)) as any)
   return f
 }
 
-export const memoizedY = (
-  m: <F extends Function>(f: F) => any,
+export const memoizedY = <F extends Function>(
+  m: (f: F) => F,
   store: MemoStore = new WeakMap<any, any>()
 ) => {
-  const f = m(memoize((...args: any[]): any => f(...args), store))
+  const f = m(memoize((...args: any[]): any => f(...args), store) as any)
   return f
 }

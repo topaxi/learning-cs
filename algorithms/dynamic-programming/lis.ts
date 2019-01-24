@@ -27,7 +27,7 @@ const lisr = (list: ReadonlyArray<number>) => (
 
 export function lis(list: ReadonlyArray<number>): number[] {
   let sequence: number[] = []
-  let lisr_ = memoizedY(lisr(list) as any, new HashMap())
+  let lisr_ = memoizedY(lisr(list), new HashMap())
 
   for (let i of range(list.length)) {
     let subSequence = lisr_(i)

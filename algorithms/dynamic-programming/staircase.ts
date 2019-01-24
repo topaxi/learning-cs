@@ -9,8 +9,5 @@ const staircase = (staircase: (n: number) => number) => (n: number) => {
   return staircase(n - 1) + staircase(n - 2)
 }
 
-export const staircase_naive = Y(staircase as any)
-export const staircase_memo = memoizedY(
-  staircase as any,
-  new HashMap<number>()
-)
+export const staircase_naive = Y(staircase)
+export const staircase_memo = memoizedY(staircase, new HashMap<number>())
