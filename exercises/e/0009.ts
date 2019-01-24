@@ -1,4 +1,4 @@
-import { range } from '../utils/range'
+import { range } from '../../utils/range'
 
 for (let a of range(500)) {
   for (let b of range(500)) {

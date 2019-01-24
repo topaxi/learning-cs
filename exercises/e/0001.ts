@@ -1,4 +1,4 @@
-import { range } from '../utils/range'
+import { range } from '../../utils/range'
 
 console.log(
   Array.from(range(1000))

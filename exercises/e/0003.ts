@@ -1,4 +1,4 @@
-import { primes } from '../utils/prime'
+import { primes } from '../../utils/prime'
 
 let n = 600851475143
 let factors = []
