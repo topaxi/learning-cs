@@ -118,4 +118,8 @@ export class BinaryTreeNode<T, M = any> {
   traverse(callback: (value: T) => any): void {
     for (let value of this) callback(value)
   }
+
+  equals(node: BinaryTreeNode<T>): boolean {
+    return this.value === node.value
+  }
 }
