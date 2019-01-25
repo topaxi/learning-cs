@@ -288,8 +288,8 @@ export class LinkedList<T> implements Iterable<T> {
     return false
   }
 
-  join(delimiter: string): string {
-    return this.reduce((str, value) => `${str},${value}`)
+  join(delimiter = ','): string {
+    return this.reduce((str, value) => `${str}${delimiter}${value}`)
   }
 
   get(index: number): T {

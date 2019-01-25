@@ -106,4 +106,14 @@ describe('LinkedList<T>', () => {
       expect(new LinkedList().reverse().toArray()).to.deep.equal([])
     })
   })
+
+  describe('#join()', () => {
+    it('should join elements to a string', () => {
+      let list = LinkedList.of(1, 2, 3)
+
+      expect(list.join()).to.equal('1,2,3')
+      expect(list.join('')).to.equal('123')
+      expect(list.join('|')).to.equal('1|2|3')
+    })
+  })
 })
