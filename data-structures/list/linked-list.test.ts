@@ -82,4 +82,28 @@ describe('LinkedList<T>', () => {
       expect(() => list.pop()).to.throw(/Out of bounds!/)
     })
   })
+
+  describe('#reverse()', () => {
+    it('should reverse list in place', () => {
+      expect(
+        LinkedList.of(1, 2, 3)
+          .reverse()
+          .toArray()
+      ).to.deep.equal([3, 2, 1])
+
+      expect(
+        LinkedList.of(1, 2)
+          .reverse()
+          .toArray()
+      ).to.deep.equal([2, 1])
+
+      expect(
+        LinkedList.of(1)
+          .reverse()
+          .toArray()
+      ).to.deep.equal([1])
+
+      expect(new LinkedList().reverse().toArray()).to.deep.equal([])
+    })
+  })
 })
