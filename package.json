@@ -6,7 +6,7 @@
   "scripts": {
     "test-one": "ts-node node_modules/.bin/_mocha",
     "test": "nyc --reporter=lcov --reporter=text ts-node node_modules/.bin/_mocha -- --watch-extensions ts algorithms/**/*.test.ts data-structures/**/*.test.ts exercises/**/*.test.ts utils/**/*.test.ts",
-    "test:watch": "ts-node node_modules/.bin/_mocha --watch -R min algorithms/**/*.test.ts data-structures/**/*.test.ts exercises/**/*.test.ts utils/**/*.test.ts"
+    "test:watch": "ts-node node_modules/.bin/_mocha --watch-extensions ts --watch -R min algorithms/**/*.test.ts data-structures/**/*.test.ts exercises/**/*.test.ts utils/**/*.test.ts"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
