@@ -8,26 +8,21 @@ function random(min: number, max: number): number {
 export function quickselect(
   list: number[],
   k: number,
-  leftIndex = 0,
-  rightIndex = list.length - 1
+  compare = (value: number, pivotElement: number) => value < pivotElement,
+  left = 0,
+  right = list.length - 1
 ): number {
-  if (leftIndex === rightIndex) {
-    return list[leftIndex]
+  if (left === right) {
+    return list[left]
   }
 
-  let pivot = partitionInline(
-    list,
-    random(leftIndex, rightIndex),
-    (v, pivotElement) => v < pivotElement,
-    leftIndex,
-    rightIndex
-  )
+  let pivot = partitionInline(list, random(left, right), compare, left, right)
 
   if (k === pivot) {
     return list[k]
   } else if (k < pivot) {
-    return quickselect(list, k, leftIndex, pivot - 1)
+    return quickselect(list, k, compare, left, pivot - 1)
   } else {
-    return quickselect(list, k, pivot + 1, rightIndex)
+    return quickselect(list, k, compare, pivot + 1, right)
   }
 }
