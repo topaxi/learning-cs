@@ -21,14 +21,6 @@ export class HashMap<T> {
 
   constructor(private readonly internalSize = 32) {}
 
-  protected hash(key: string | number): number {
-    return hashCode(String(key)) % this.slots.length
-  }
-
-  protected getNode(key: string | number): HashMapNode<T> | null {
-    return this.slots[this.hash(key)].find(byKey(key))
-  }
-
   set(key: string | number, value: T): T {
     let keyHash = this.hash(key)
     this.keyMap[key] = keyHash
@@ -56,11 +48,11 @@ export class HashMap<T> {
       return null
     }
 
-    let keyHash = this.hash(key)
-    let index = this.slots[keyHash].findIndex(byKey(key))
+    let list = this.getSlot(key)
+    let index = list.findIndex(byKey(key))
 
     if (index !== -1) {
-      return this.slots[keyHash].deleteAt(index)!.value
+      return list.deleteAt(index)!.value
     }
 
     return null
@@ -76,5 +68,17 @@ export class HashMap<T> {
 
   values(): T[] {
     return this.slots.flatMap(list => Array.from(list, pluck('value')))
+  }
+
+  protected hash(key: string | number): number {
+    return Math.abs(hashCode(String(key))) % this.slots.length
+  }
+
+  protected getNode(key: string | number): HashMapNode<T> | null {
+    return this.getSlot(key).find(byKey(key))
+  }
+
+  protected getSlot(key: string | number): LinkedList<HashMapNode<T>> {
+    return this.slots[this.hash(key)]
   }
 }

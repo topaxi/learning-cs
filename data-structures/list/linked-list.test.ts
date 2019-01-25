@@ -38,6 +38,13 @@ describe('LinkedList<T>', () => {
       expect(list.toArray()).to.deep.equal([1, 5])
     })
 
+    it.skip('should remove elements from beginning of list', () => {
+      let list = LinkedList.of(1, 2, 3, 4, 5)
+
+      expect(list.splice(0, 3).toArray()).to.deep.equal([1, 2, 3])
+      expect(list.toArray()).to.deep.equal([4, 5])
+    })
+
     it.skip('should add elements to list', () => {
       let list = LinkedList.of(1, 2, 5)
 
