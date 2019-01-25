@@ -68,4 +68,18 @@ describe('LinkedList<T>', () => {
       expect(list.toArray()).to.deep.equal([1, 3])
     })
   })
+
+  describe('#pop()', () => {
+    it('should remove and return last element', () => {
+      let list = LinkedList.of(1, 2, 3)
+
+      expect(list.pop()).to.equal(3)
+      expect(list.toArray()).to.deep.equal([1, 2])
+      expect(list.pop()).to.equal(2)
+      expect(list.toArray()).to.deep.equal([1])
+      expect(list.pop()).to.equal(1)
+      expect(list.toArray()).to.deep.equal([])
+      expect(() => list.pop()).to.throw(/Out of bounds!/)
+    })
+  })
 })

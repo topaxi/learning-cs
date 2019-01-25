@@ -76,6 +76,13 @@ export class LinkedList<T> implements Iterable<T> {
     }
 
     let currentNode = this.firstNode
+
+    if (currentNode.next === null) {
+      this.firstNode = null
+
+      return currentNode.value
+    }
+
     let previousNode = null
     while (currentNode.next !== null) {
       previousNode = currentNode
