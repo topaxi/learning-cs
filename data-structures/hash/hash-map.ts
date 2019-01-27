@@ -70,6 +70,12 @@ export class HashMap<T> {
     return this.slots.flatMap(list => Array.from(list, pluck('value')))
   }
 
+  entries(): [string | number, T][] {
+    return this.slots.flatMap(list =>
+      Array.from(list, node => [node.key, node.value])
+    ) as [string | number, T][]
+  }
+
   protected hash(key: string | number): number {
     return Math.abs(hashCode(String(key))) % this.slots.length
   }
