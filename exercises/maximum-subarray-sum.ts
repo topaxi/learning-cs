@@ -1,5 +1,7 @@
+import { head } from '../utils/array'
+
 export function maximumSubarraySum(list: ReadonlyArray<number>): number {
-  let maximum = list[0]
+  let maximum = head(list)
   let currentMaximum = maximum
 
   for (let i = 1; i < list.length; i++) {

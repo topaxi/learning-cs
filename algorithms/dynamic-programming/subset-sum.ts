@@ -1,5 +1,5 @@
 import { range } from '../../utils/range'
-import { tail } from '../../utils/array'
+import { head, tail } from '../../utils/array'
 
 // Given a set of non-negative integers, and a value sum,
 // determine if there is a subset of the given set with sum equal to given sum.
@@ -11,8 +11,8 @@ export function subsetSum(list: ReadonlyArray<number>, sum: number): boolean {
   if (list.length === 0) return false
 
   // Recurrence, ignore head if it is greater than the given sum
-  if (list[0] > sum) return subsetSum(tail(list), sum)
+  if (head(list) > sum) return subsetSum(tail(list), sum)
 
   // Recurrence, is there a subset sum if we add the value or not?
-  return subsetSum(tail(list), sum) || subsetSum(tail(list), sum - list[0])
+  return subsetSum(tail(list), sum) || subsetSum(tail(list), sum - head(list))
 }
