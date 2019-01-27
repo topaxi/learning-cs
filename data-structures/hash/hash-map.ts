@@ -77,6 +77,8 @@ export class HashMap<T> {
   }
 
   protected hash(key: string | number): number {
+    if (this.keyMap[key] !== undefined) return this.keyMap[key]
+
     return Math.abs(hashCode(String(key))) % this.slots.length
   }
 
