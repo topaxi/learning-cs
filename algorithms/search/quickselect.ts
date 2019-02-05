@@ -17,12 +17,13 @@ export function quickselect(
   }
 
   let pivot = partitionInline(list, random(left, right), compare, left, right)
+  let length = pivot - left + 1
 
-  if (k === pivot) {
-    return list[k]
-  } else if (k < pivot) {
+  if (k === length) {
+    return list[pivot]
+  } else if (k < length) {
     return quickselect(list, k, compare, left, pivot - 1)
   } else {
-    return quickselect(list, k, compare, pivot + 1, right)
+    return quickselect(list, k - length, compare, pivot + 1, right)
   }
 }
