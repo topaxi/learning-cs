@@ -44,11 +44,19 @@ export function memoize<T extends (...args: any[]) => any>(
   store: MemoStore = new MemoTrie()
 ): T & { memo: MemoStore } {
   function memoized(this: any, ...args: any[]): any {
-    if (memoized.memo.has(args)) return memoized.memo.get(args)
+    if (memoized.memo.has(args)) {
+      return memoized.memo.get(args)
+    }
 
     let r = fn.apply(this, args)
     memoized.memo.set(args, r)
     return r
+  }
+
+  if (fn.name !== '') {
+    Object.defineProperty(memoized, 'name', {
+      value: `memoized(${fn.name})`
+    })
   }
 
   memoized.memo = store
