@@ -1,6 +1,7 @@
 import { range } from '../../utils/range'
 import { Y, memoizedY } from '../../utils/y'
 import { HashMap } from '../../data-structures/hash/hash-map'
+import { SingleParamStore } from '../../utils/memo'
 
 // Longest increasing subsequence
 // Subproblem: Suffix
@@ -27,7 +28,7 @@ const lisr = (list: ReadonlyArray<number>) => (
 
 export function lis(list: ReadonlyArray<number>): number[] {
   let sequence: number[] = []
-  let lisr_ = memoizedY(lisr(list), new HashMap())
+  let lisr_ = memoizedY(lisr(list), new SingleParamStore())
 
   for (let i of range(list.length)) {
     let subSequence = lisr_(i)

@@ -7,8 +7,8 @@ export const Y = <F extends Function>(m: (f: F) => F) => {
 
 export const memoizedY = <F extends Function>(
   m: (f: F) => F,
-  store: MemoStore = new WeakMap<any, any>()
-) => {
-  const f = m(memoize((...args: any[]): any => f(...args), store) as any)
+  store?: MemoStore
+): F & { memo: MemoStore } => {
+  const f: any = m(memoize((...args: any[]): any => f(...args), store) as any)
   return f
 }

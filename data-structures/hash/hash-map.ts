@@ -9,11 +9,11 @@ interface HashMapNode<T> {
 }
 
 export class HashMap<T> {
-  protected readonly slots = Array.from(
+  protected slots = Array.from(
     { length: this.internalSize },
     () => new LinkedList<HashMapNode<T>>()
   )
-  private readonly keyMap: Record<string | number, number> = {}
+  private keyMap: Record<string | number, number> = {}
 
   get size(): number {
     return this.keys().length
@@ -60,6 +60,11 @@ export class HashMap<T> {
 
   has(key: string | number): boolean {
     return Reflect.has(this.keyMap, key)
+  }
+
+  clear(): void {
+    this.slots = this.slots.map(() => new LinkedList())
+    this.keyMap = {}
   }
 
   keys(): Array<string | number> {

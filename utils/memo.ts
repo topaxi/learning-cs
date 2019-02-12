@@ -1,18 +1,35 @@
-export type MemoStore = {
-  has(k: any): boolean
-  get(k: any): any
-  set(k: any, value: any): any
+import { MemoTrie } from '../data-structures/tree/memo-trie'
+
+export class SingleParamStore<T extends any[], U> extends Map<T, U> {
+  get(key: T) {
+    return super.get(key[0])
+  }
+
+  set(key: T, value: U) {
+    return super.set(key[0], value)
+  }
+
+  has(key: T) {
+    return super.has(key[0])
+  }
 }
 
-export function memoize<T extends (a: any) => any>(
-  fn: T,
-  store: MemoStore = new WeakMap<any, any>()
-): T {
-  function memoized(this: any, a: any): any {
-    if (memoized.memo.has(a)) return memoized.memo.get(a)
+export type MemoStore = {
+  has(k: any[]): boolean
+  get(k: any[]): any
+  set(k: any[], value: any): any
+  clear(): void
+}
 
-    let r = fn.call(this, a)
-    memoized.memo.set(a, r)
+export function memoize<T extends (...args: any[]) => any>(
+  fn: T,
+  store: MemoStore = new MemoTrie()
+): T & { memo: MemoStore } {
+  function memoized(this: any, ...args: any[]): any {
+    if (memoized.memo.has(args)) return memoized.memo.get(args)
+
+    let r = fn.apply(this, args)
+    memoized.memo.set(args, r)
     return r
   }
 

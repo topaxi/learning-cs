@@ -1,5 +1,6 @@
 import { HashMap } from '../../data-structures/hash/hash-map'
 import { Y, memoizedY } from '../../utils/y'
+import { SingleParamStore } from '../../utils/memo'
 
 const staircase = (staircase: (n: number) => number) => (n: number) => {
   if (n < 1) return 0
@@ -10,4 +11,4 @@ const staircase = (staircase: (n: number) => number) => (n: number) => {
 }
 
 export const staircase_naive = Y(staircase)
-export const staircase_memo = memoizedY(staircase, new HashMap<number>())
+export const staircase_memo = memoizedY(staircase, new SingleParamStore())
