@@ -89,7 +89,7 @@ export class MemoTrie {
     }
   }
 
-  get(args: any[]): any[] | undefined {
+  get(args: any[]): any | undefined {
     let node = this._getNode(args)
 
     return node.isCompleteArguments ? node.value : undefined
