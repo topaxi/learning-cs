@@ -78,10 +78,11 @@ class MemoTrieNode {
 }
 
 export class MemoTrie {
-  root = new MemoTrieNode(null)
+  private _root = new MemoTrieNode(null)
+  private _lookups = new WeakMap<any[], MemoTrieNode>()
 
   set(args: any[], value: any): void {
-    let currentNode = this.root
+    let currentNode = this._root
 
     for (let i = 0; i < args.length; i++) {
       currentNode = currentNode.addChild(args[i], i === args.length - 1, value)
@@ -99,16 +100,19 @@ export class MemoTrie {
   }
 
   clear(): void {
-    this.root.clear()
+    this._root.clear()
   }
 
   private _getNode(args: any[]): MemoTrieNode {
-    let node = this.root
+    let node = this._lookups.get(args)
+    if (node !== undefined) return node
+    node = this._root
     for (let i = 0; i < args.length; i++) {
       if (!node.children.has(args[i])) break
 
       node = node.children.get(args[i])!
     }
+    this._lookups.set(args, node)
     return node
   }
 }
