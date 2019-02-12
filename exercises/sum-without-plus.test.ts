@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { sumWithoutPlus } from './sum-without-plus'
 
-describe.only('sumWithoutPlus', () => {
+describe('sumWithoutPlus', () => {
   it('should sum two numbers', () => {
     expect(sumWithoutPlus(5, 7)).to.equal(12)
     expect(sumWithoutPlus(-2, 2)).to.equal(0)
