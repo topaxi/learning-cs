@@ -11,7 +11,7 @@
   "devDependencies": {
     "@types/chai": "4.1.7",
     "@types/lodash": "4.14.121",
-    "@types/mocha": "5.2.5",
+    "@types/mocha": "5.2.6",
     "@types/node": "10.12.26",
     "chai": "4.2.0",
     "core-js": "2.6.4",
