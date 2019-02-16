@@ -25,10 +25,6 @@ class MemoMap<T, U> {
     this._weak.clear()
     this._static.clear()
   }
-
-  forEachStatic(fn: (v: any) => void): void {
-    this._static.forEach(fn)
-  }
 }
 
 class MemoTrieNode {
