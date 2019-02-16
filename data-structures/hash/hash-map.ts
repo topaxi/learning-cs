@@ -75,10 +75,12 @@ export class HashMap<T> {
     return this.slots.flatMap(list => Array.from(list, pluck('value')))
   }
 
-  entries(): [string | number, T][] {
-    return this.slots.flatMap(list =>
-      Array.from(list, node => [node.key, node.value])
-    ) as [string | number, T][]
+  *entries(): IterableIterator<[string | number, T]> {
+    for (let i = 0; i < this.slots.length; i++) {
+      for (let node of this.slots[i]) {
+        yield [node.key, node.value]
+      }
+    }
   }
 
   protected hash(key: string | number): number {

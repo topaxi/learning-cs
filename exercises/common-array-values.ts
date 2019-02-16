@@ -16,8 +16,7 @@ export function commonArrayValues<T extends number | string>(
     }
   }
 
-  return map
-    .entries()
+  return Array.from(map.entries())
     .filter(([_key, value]) => value === arrays.length)
     .map(([key]) => key) as T[]
 }
