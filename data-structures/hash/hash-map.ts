@@ -51,6 +51,8 @@ export class HashMap<K extends string | number, T> {
     let list = this.getSlot(key)
     let index = list.findIndex(byKey(key))
 
+    delete this.keyMap[key]
+
     if (index !== -1) {
       return list.deleteAt(index)!.value
     }

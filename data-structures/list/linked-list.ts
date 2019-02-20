@@ -251,9 +251,11 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   splice(start: number, deleteCount: number, ...items: T[]): LinkedList<T> {
-    let startNode = this.seekNode(start - 1)
+    let startNode =
+      start > 0
+        ? this.seekNode(start - 1)
+        : new LinkedListNode(null as any, this.firstNode)
     let spliced = new LinkedList<T>()
-    let current = null
 
     if (deleteCount > 0) {
       spliced.firstNode = startNode.next
@@ -262,8 +264,12 @@ export class LinkedList<T> implements Iterable<T> {
       to.next = null
     }
 
-    for (let i = 0; i < items.length; i++) {
-      startNode.next = new LinkedListNode(items[i], startNode.next)
+    if (start === 0) {
+      this.firstNode = startNode.next
+    }
+
+    for (let i = items.length; i > 0; i--) {
+      startNode.next = new LinkedListNode(items[i - 1], startNode.next)
     }
 
     return spliced

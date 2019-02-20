@@ -36,7 +36,7 @@ describe('HashMap', () => {
     expect(map.size).to.equal(4)
   })
 
-  it.skip('should be able to delete keys', () => {
+  it('should be able to delete keys', () => {
     let map = new HashMap(2)
 
     map.set('test1', 'foo')
@@ -55,6 +55,7 @@ describe('HashMap', () => {
     map.delete('test4')
 
     expect(map.size).to.equal(0)
+    expect(map.has('test2')).to.be.false
   })
 
   it('should be able to check key presence', () => {
