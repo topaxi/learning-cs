@@ -73,6 +73,8 @@ describe('LinkedList<T>', () => {
     it('should append values', () => {
       let list = new LinkedList()
 
+      list.push()
+
       expect(list.toArray()).to.deep.equal([])
 
       list.push(1)
