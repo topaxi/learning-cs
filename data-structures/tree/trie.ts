@@ -1,7 +1,7 @@
 import { HashMap } from '../hash'
 
 class TrieNode {
-  readonly children = new HashMap<TrieNode>()
+  readonly children = new HashMap<string, TrieNode>()
 
   constructor(readonly character: string, public isCompleteWord = false) {}
 

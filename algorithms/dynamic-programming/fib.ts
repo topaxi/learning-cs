@@ -9,7 +9,10 @@ export function fib_naive(n: number): number {
 }
 
 // O(n)
-export function fib_memo(n: number, memo = new HashMap<number>()): number {
+export function fib_memo(
+  n: number,
+  memo = new HashMap<number, number>()
+): number {
   if (memo.has(n)) return memo.get(n)!
 
   return memo.set(

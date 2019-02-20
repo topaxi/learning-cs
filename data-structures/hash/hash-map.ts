@@ -3,17 +3,17 @@ import { hashCode } from '../../utils/string-hash'
 import { byKey } from '../../utils/filters'
 import { pluck } from '../../utils/pluck'
 
-interface HashMapNode<T> {
-  key: string | number
+interface HashMapNode<K, T> {
+  key: K
   value: T
 }
 
-export class HashMap<T> {
+export class HashMap<K extends string | number, T> {
   protected slots = Array.from(
     { length: this.internalSize },
-    () => new LinkedList<HashMapNode<T>>()
+    () => new LinkedList<HashMapNode<K, T>>()
   )
-  private keyMap: Record<string | number, number> = {}
+  private keyMap: Record<K, number> = {} as any
 
   get size(): number {
     return this.keys().length
@@ -21,7 +21,7 @@ export class HashMap<T> {
 
   constructor(private readonly internalSize = 32) {}
 
-  set(key: string | number, value: T): T {
+  set(key: K, value: T): T {
     let keyHash = this.hash(key)
     this.keyMap[key] = keyHash
 
@@ -37,13 +37,13 @@ export class HashMap<T> {
     return value
   }
 
-  get(key: string | number): T | null {
+  get(key: K): T | null {
     let node = this.getNode(key)
 
     return node === null ? null : node.value
   }
 
-  delete(key: string | number): T | null {
+  delete(key: K): T | null {
     if (!this.has(key)) {
       return null
     }
@@ -64,18 +64,18 @@ export class HashMap<T> {
 
   clear(): void {
     this.slots = this.slots.map(() => new LinkedList())
-    this.keyMap = {}
+    this.keyMap = {} as any
   }
 
-  keys(): Array<string | number> {
-    return Object.keys(this.keyMap)
+  keys(): K[] {
+    return Object.keys(this.keyMap) as K[]
   }
 
   values(): T[] {
     return this.slots.flatMap(list => Array.from(list, pluck('value')))
   }
 
-  *entries(): IterableIterator<[string | number, T]> {
+  *entries(): IterableIterator<[K, T]> {
     for (let i = 0; i < this.slots.length; i++) {
       for (let node of this.slots[i]) {
         yield [node.key, node.value]
@@ -83,17 +83,21 @@ export class HashMap<T> {
     }
   }
 
-  protected hash(key: string | number): number {
+  [Symbol.iterator](): IterableIterator<[K, T]> {
+    return this.entries()
+  }
+
+  protected hash(key: K): number {
     if (this.keyMap[key] !== undefined) return this.keyMap[key]
 
     return Math.abs(hashCode(String(key))) % this.slots.length
   }
 
-  protected getNode(key: string | number): HashMapNode<T> | null {
+  protected getNode(key: K): HashMapNode<K, T> | null {
     return this.getSlot(key).find(byKey(key))
   }
 
-  protected getSlot(key: string | number): LinkedList<HashMapNode<T>> {
+  protected getSlot(key: K): LinkedList<HashMapNode<K, T>> {
     return this.slots[this.hash(key)]
   }
 }

@@ -1,7 +1,7 @@
 import { HashMap } from '../hash/hash-map'
 
 export class BinaryTreeNode<T, M = any> {
-  readonly meta = new HashMap<M>()
+  readonly meta = new HashMap<string | number, M>()
 
   private _left: this | null = null
   private _right: this | null = null

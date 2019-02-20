@@ -1,13 +1,15 @@
 import { HashMap } from './hash-map'
 
-export class HashMapWithDefault<T> extends HashMap<T> {
+export class HashMapWithDefault<K extends string | number, T> extends HashMap<
+  K,
+  T
+> {
   constructor(protected defaultValue: T, size?: number) {
     super(size)
   }
 
-  get(key: string | number): T {
-    let node = this.getNode(key)
-
-    return node === null ? this.defaultValue : node.value
+  get(key: K): T {
+    if (this.has(key)) return super.get(key)!
+    return this.defaultValue
   }
 }
