@@ -69,6 +69,26 @@ describe('LinkedList<T>', () => {
     })
   })
 
+  describe('#push()', () => {
+    it('should append values', () => {
+      let list = new LinkedList()
+
+      expect(list.toArray()).to.deep.equal([])
+
+      list.push(1)
+
+      expect(list.toArray()).to.deep.equal([1])
+
+      list.push(2, 3)
+
+      expect(list.toArray()).to.deep.equal([1, 2, 3])
+
+      list.push(4, 5, 6)
+
+      expect(list.toArray()).to.deep.equal([1, 2, 3, 4, 5, 6])
+    })
+  })
+
   describe('#pop()', () => {
     it('should remove and return last element', () => {
       let list = LinkedList.of(1, 2, 3)

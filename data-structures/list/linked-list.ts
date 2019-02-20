@@ -2,7 +2,29 @@ import { eq } from '../../utils/eq'
 import 'core-js/fn/array/flat-map'
 
 export class LinkedListNode<T> {
+  static of<T>(...values: T[]): LinkedListNode<T> {
+    let node = new this<T>(values[0])
+
+    for (let i = values.length; i > 1; i--) {
+      node.next = new this<T>(values[i - 1], node.next)
+    }
+
+    return node
+  }
+
+  static from<T>(values: Iterable<T>) {
+    return this.of(...values)
+  }
+
   constructor(public value: T, public next: LinkedListNode<T> | null = null) {}
+
+  last(): LinkedListNode<T> {
+    let prev: LinkedListNode<T> = this
+    while (prev.next !== null) {
+      prev = prev.next
+    }
+    return prev
+  }
 
   toJSON() {
     return this.value
@@ -38,18 +60,22 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   push(...values: T[]): this {
-    for (let i = 0; i < values.length; i++) {
-      let node = new LinkedListNode(values[i])
+    if (values.length === 0) return this
 
-      if (this.firstNode === null) {
-        this.firstNode = node
-        continue
-      }
+    let node =
+      values.length === 1
+        ? new LinkedListNode(values[0])
+        : LinkedListNode.from(values)
 
-      let prev = this.firstNode
-      while (prev.next !== null) prev = prev.next
-      this.lastNode = prev.next = node
+    if (this.firstNode === null) {
+      this.firstNode = node
     }
+
+    if (this.lastNode !== null) {
+      this.lastNode.next = node
+    }
+
+    this.lastNode = node.last()
 
     return this
   }
