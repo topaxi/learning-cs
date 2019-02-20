@@ -321,7 +321,9 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   join(delimiter = ','): string {
-    return this.reduce((str, value) => `${str}${delimiter}${value}`)
+    return this.firstNode === null
+      ? ''
+      : this.reduce((str, value) => `${str}${delimiter}${value}`)
   }
 
   get(index: number): T {
@@ -357,7 +359,7 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   toString(): string {
-    return this.toArray().toString()
+    return this.join()
   }
 
   private seekNode(index: number): LinkedListNode<T> {

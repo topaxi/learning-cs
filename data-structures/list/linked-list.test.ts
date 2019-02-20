@@ -137,5 +137,15 @@ describe('LinkedList<T>', () => {
       expect(list.join('')).to.equal('123')
       expect(list.join('|')).to.equal('1|2|3')
     })
+
+    it('should return empty string for empty list', () => {
+      expect(new LinkedList().toString()).to.equal('')
+    })
+  })
+
+  describe('#toString()', () => {
+    it('should return list values separated by a comma', () => {
+      expect(LinkedList.of(1, 2, 3).toString()).to.equal('1,2,3')
+    })
   })
 })
