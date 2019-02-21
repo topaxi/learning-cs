@@ -25,14 +25,6 @@ export class LinkedListNode<T> {
     }
     return prev
   }
-
-  toJSON() {
-    return this.value
-  }
-
-  toString() {
-    return String(this.value)
-  }
 }
 
 export class LinkedList<T> implements Iterable<T> {
