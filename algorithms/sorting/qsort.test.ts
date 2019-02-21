@@ -1,38 +1,37 @@
-import { expect } from 'chai'
 import { qsort } from './qsort'
 import { shuffle } from 'lodash'
 
 function expectSorted<T>(array: T[], cmp?: (a: T, b: T) => number) {
-  expect(qsort(shuffle(array), cmp)).to.deep.equal(array)
-  expect(qsort(shuffle(array), cmp)).to.deep.equal(array)
-  expect(qsort(shuffle(array), cmp)).to.deep.equal(array)
+  expect(qsort(shuffle(array), cmp)).toEqual(array)
+  expect(qsort(shuffle(array), cmp)).toEqual(array)
+  expect(qsort(shuffle(array), cmp)).toEqual(array)
 }
 
-describe('qsort', function() {
-  it('returns empty array for empty array', function() {
-    expect(qsort([])).to.deep.equal([])
+describe('qsort', () => {
+  test('returns empty array for empty array', () => {
+    expect(qsort([])).toEqual([])
   })
 
-  it('returns the same array for one element', function() {
-    expect(qsort([1])).to.deep.equal([1])
+  test('returns the same array for one element', () => {
+    expect(qsort([1])).toEqual([1])
   })
 
-  it('sorts with two elements', function() {
+  test('sorts with two elements', () => {
     expectSorted([1, 2])
     expectSorted([2, 3])
   })
 
-  it('sorts with three elements', function() {
+  test('sorts with three elements', () => {
     expectSorted([0, 1, 2])
     expectSorted([2, 3, 4])
   })
 
-  it('sorts', function() {
+  test('sorts', () => {
     expectSorted([-Infinity, -5, -2, -1, 0, 1, 2, 3, Math.PI, 4, 5, 16, 100])
   })
 
-  describe('callback', function() {
-    it('accepts a sort callback', function() {
+  describe('callback', () => {
+    test('accepts a sort callback', () => {
       expectSorted([6, 5, 4, 3, 2, 1], (a, b) => a - b)
       expectSorted(['a', 'ä', 'b', 'c'], (a, b) => b.localeCompare(a))
       expectSorted(

@@ -4,28 +4,20 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "test-one": "ts-node node_modules/.bin/_mocha",
-    "test": "nyc --reporter=lcov --reporter=text ts-node node_modules/.bin/_mocha -- --watch-extensions ts algorithms/**/*.test.ts data-structures/**/*.test.ts exercises/**/*.test.ts utils/**/*.test.ts",
-    "test:watch": "ts-node node_modules/.bin/_mocha --watch-extensions ts --watch -R min algorithms/**/*.test.ts data-structures/**/*.test.ts exercises/**/*.test.ts utils/**/*.test.ts"
+    "test": "jest",
+    "test:ci": "yarn test --coverage",
+    "test:watch": "yarn test --watch"
   },
   "devDependencies": {
-    "@types/chai": "4.1.7",
+    "@types/jest": "24.0.6",
     "@types/lodash": "4.14.121",
-    "@types/mocha": "5.2.6",
     "@types/node": "10.12.26",
-    "chai": "4.2.0",
     "core-js": "2.6.5",
+    "jest": "24.1.0",
     "lodash": "4.17.11",
-    "mocha": "6.0.0",
-    "nyc": "13.3.0",
+    "ts-jest": "24.0.0",
     "ts-node": "8.0.2",
     "typescript": "3.3.3"
   },
-  "dependencies": {},
-  "nyc": {
-    "all": true,
-    "cache": true,
-    "extension": [".ts"],
-    "exclude": ["**/*.test.ts", "coverage/**"]
-  }
+  "dependencies": {}
 }

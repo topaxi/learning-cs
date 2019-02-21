@@ -1,8 +1,7 @@
-import { expect } from 'chai'
 import { topKFrequentWords } from './top-k-frequent-words'
 
 describe('topKFrequentWords()', () => {
-  it('should return top k frequent words', () => {
+  test('should return top k frequent words', () => {
     let words = [
       'the',
       'day',
@@ -16,12 +15,12 @@ describe('topKFrequentWords()', () => {
       'is'
     ]
 
-    expect(topKFrequentWords(words, 1)).to.deep.equal(['the'])
-    expect(topKFrequentWords(words, 2)).to.deep.equal(['the', 'is'])
-    expect(topKFrequentWords(words, 3)).to.deep.equal(['the', 'is', 'sunny'])
+    expect(topKFrequentWords(words, 1)).toEqual(['the'])
+    expect(topKFrequentWords(words, 2)).toEqual(['the', 'is'])
+    expect(topKFrequentWords(words, 3)).toEqual(['the', 'is', 'sunny'])
   })
 
-  it('should sort words with same frequency by locale', () => {
+  test('should sort words with same frequency by locale', () => {
     let words = [
       'the',
       'day',
@@ -38,8 +37,8 @@ describe('topKFrequentWords()', () => {
       'is'
     ]
 
-    expect(topKFrequentWords(words, 1)).to.deep.equal(['the'])
-    expect(topKFrequentWords(words, 2)).to.deep.equal(['the', 'is'])
-    expect(topKFrequentWords(words, 3)).to.deep.equal(['the', 'is', 'it'])
+    expect(topKFrequentWords(words, 1)).toEqual(['the'])
+    expect(topKFrequentWords(words, 2)).toEqual(['the', 'is'])
+    expect(topKFrequentWords(words, 3)).toEqual(['the', 'is', 'it'])
   })
 })

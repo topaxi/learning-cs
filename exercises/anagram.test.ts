@@ -1,16 +1,15 @@
-import { expect } from 'chai'
 import { isAnagram } from './anagram'
 
 describe('isAnagram', () => {
-  it('should return true if strings are anagrams', () => {
-    expect(isAnagram('', '')).to.be.true
-    expect(isAnagram('ab', 'ba')).to.be.true
-    expect(isAnagram('aa', 'aa')).to.be.true
-    expect(isAnagram('aab', 'aab')).to.be.true
+  test('should return true if strings are anagrams', () => {
+    expect(isAnagram('', '')).toBe(true)
+    expect(isAnagram('ab', 'ba')).toBe(true)
+    expect(isAnagram('aa', 'aa')).toBe(true)
+    expect(isAnagram('aab', 'aab')).toBe(true)
   })
 
-  it('should return false if strings are not anagrams', () => {
-    expect(isAnagram('aa', 'a')).to.be.false
-    expect(isAnagram('ab', 'ba')).to.be.true
+  test('should return false if strings are not anagrams', () => {
+    expect(isAnagram('aa', 'a')).toBe(false)
+    expect(isAnagram('ab', 'ba')).toBe(true)
   })
 })

@@ -1,24 +1,23 @@
-import { expect } from 'chai'
 import { MinHeap } from './min-heap'
 
 describe('MinHeap', () => {
-  it('should create empty heap', () => {
+  test('should create empty heap', () => {
     let heap = new MinHeap<number>((a, b) => a - b)
 
-    expect(heap.peek()).to.be.null
-    expect(heap.empty).to.be.true
+    expect(heap.peek()).toBeNull()
+    expect(heap.empty).toBe(true)
   })
 
-  it('should push value to heap', () => {
+  test('should push value to heap', () => {
     let heap = new MinHeap<number>((a, b) => a - b)
 
     heap.push(42)
 
-    expect(heap.peek()).to.equal(42)
-    expect(heap.empty).to.be.false
+    expect(heap.peek()).toBe(42)
+    expect(heap.empty).toBe(false)
   })
 
-  it('should push values to heap', () => {
+  test('should push values to heap', () => {
     let heap = new MinHeap<number>((a, b) => a - b)
 
     heap.push(43)
@@ -26,7 +25,7 @@ describe('MinHeap', () => {
     heap.push(46)
     heap.push(42)
 
-    expect(heap.peek()).to.equal(42)
-    expect(heap.empty).to.be.false
+    expect(heap.peek()).toBe(42)
+    expect(heap.empty).toBe(false)
   })
 })

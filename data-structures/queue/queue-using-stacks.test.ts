@@ -1,17 +1,16 @@
-import { expect } from 'chai'
 import { Queue } from './queue-using-stacks'
 
 describe('Queue<T> using stacks', () => {
-  it('should enqueue/dequeue items', () => {
+  test('should enqueue/dequeue items', () => {
     let queue = new Queue()
 
     queue.enqueue(1, 2, 3)
 
-    expect(queue.peek()).to.equal(1)
-    expect(queue.dequeue()).to.equal(1)
-    expect(queue.peek()).to.equal(2)
-    expect(queue.dequeue()).to.equal(2)
-    expect(queue.peek()).to.equal(3)
-    expect(queue.dequeue()).to.equal(3)
+    expect(queue.peek()).toBe(1)
+    expect(queue.dequeue()).toBe(1)
+    expect(queue.peek()).toBe(2)
+    expect(queue.dequeue()).toBe(2)
+    expect(queue.peek()).toBe(3)
+    expect(queue.dequeue()).toBe(3)
   })
 })
