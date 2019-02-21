@@ -31,6 +31,10 @@ export class Queue<T> {
     }
   }
 
+  toJSON() {
+    return this.list.toArray()
+  }
+
   toString(): string {
     return this.list.toString()
   }
