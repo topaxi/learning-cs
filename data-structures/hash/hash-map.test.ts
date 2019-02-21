@@ -86,6 +86,8 @@ describe('HashMap', () => {
     map.set('test3', 'baz')
     map.set('test4', 'qux')
 
-    expect(map.values()).toEqual(expect.arrayContaining(['foo', 'bar', 'baz', 'qux']))
+    expect(map.values()).toEqual(
+      expect.arrayContaining(['foo', 'bar', 'baz', 'qux'])
+    )
   })
 })

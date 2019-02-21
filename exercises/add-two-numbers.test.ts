@@ -12,6 +12,8 @@ describe('addTwoNumbers', () => {
       new LinkedListNode(6, new LinkedListNode(4))
     )
 
-    expect(addTwoNumbers(l1, l2)).toEqual(new LinkedListNode(7, new LinkedListNode(0, new LinkedListNode(8))))
+    expect(addTwoNumbers(l1, l2)).toEqual(
+      new LinkedListNode(7, new LinkedListNode(0, new LinkedListNode(8)))
+    )
   })
 })

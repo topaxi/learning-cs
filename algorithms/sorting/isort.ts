@@ -4,7 +4,7 @@ export function defaultCompare(a: any, b: any): number {
 
 export function isort<T>(
   list: T[],
-  compare: (a: T, b: T) => number = defaultCompare,
+  compare: (a: T, b: T) => number = defaultCompare
 ): T[] {
   for (let i = 0; i < list.length; i++) {
     let tmp = list[i]
