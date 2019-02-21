@@ -1,3 +1,5 @@
+import { swap } from '../../utils/swap'
+
 export abstract class Heap<T> {
   private readonly memory: T[] = []
 
@@ -37,7 +39,20 @@ export abstract class Heap<T> {
   }
 
   pop() {
-    // this.memory.
+    if (this.memory.length === 0) {
+      return null
+    }
+
+    if (this.memory.length === 1) {
+      return this.memory.pop()
+    }
+
+    const value = this.memory[0]
+
+    this.memory[0] = this.memory.pop()!
+    this.heapifyDown()
+
+    return value
   }
 
   toString(): string {
@@ -48,11 +63,12 @@ export abstract class Heap<T> {
     return [...this.memory]
   }
 
+  toJSON(): T[] {
+    return [...this.memory]
+  }
+
   private swap(indexOne: number, indexTwo: number): void {
-    ;[this.memory[indexTwo], this.memory[indexOne]] = [
-      this.memory[indexOne],
-      this.memory[indexTwo]
-    ]
+    swap(this.memory, indexOne, indexTwo)
   }
 
   private heapifyUp() {
@@ -61,6 +77,39 @@ export abstract class Heap<T> {
     while (this.comparator(this.parent(current), this.value(current)) > 0) {
       this.swap(current, this.getParentIndex(current))
       current = this.getParentIndex(current)
+    }
+  }
+
+  private hasLeftChild(parentIndex: number): boolean {
+    return this.left(parentIndex) < this.memory.length
+  }
+
+  private hasRightChild(parentIndex: number): boolean {
+    return this.right(parentIndex) < this.memory.length
+  }
+
+  private heapifyDown() {
+    let current = 0
+    let next = null
+
+    while (this.hasLeftChild(current)) {
+      let left = this.left(current)
+
+      if (
+        this.hasRightChild(current) &&
+        this.comparator(this.value(left), this.value(this.right(current))) <= 0
+      ) {
+        next = this.right(current)
+      } else {
+        next = left
+      }
+
+      if (this.comparator(this.value(current), this.value(next)) <= 0) {
+        break
+      }
+
+      this.swap(current, next)
+      current = next
     }
   }
 }

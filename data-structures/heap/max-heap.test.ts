@@ -27,5 +27,20 @@ describe('MaxHeap', () => {
 
     expect(heap.peek()).toBe(46)
     expect(heap.empty).toBe(false)
+    expect(heap).toMatchSnapshot()
+  })
+
+  test.skip('should pop values from the heap', () => {
+    let heap = new MaxHeap()
+
+    heap.push(43)
+    heap.push(44)
+    heap.push(46)
+    heap.push(42)
+
+    expect(heap.pop()).toBe(46)
+    expect(heap.pop()).toBe(44)
+    expect(heap.empty).toBe(false)
+    expect(heap).toMatchSnapshot()
   })
 })

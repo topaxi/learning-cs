@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MaxHeap should push values to heap 1`] = `
+Array [
+  46,
+  44,
+  43,
+  42,
+]
+`;
