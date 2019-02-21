@@ -1,41 +1,39 @@
-import { range } from '../utils/range'
 import { Queue } from '../data-structures/queue/queue'
 
-function fill(
+export function fill(
   screen: number[][],
   x: number,
   y: number,
   color: number
 ): number[][] {
-  return floodQ(screen, x, y, screen[y][x], color)
+  return floodQueue(screen, x, y, screen[y][x], color)
 }
 
-function floodR(
+function boundaryCheck(screen: number[][], x: number, y: number) {
+  return y < 0 || x < 0 || y >= screen.length || x >= screen[y].length
+}
+
+export function floodRecursive(
   screen: number[][],
   x: number,
   y: number,
   oldColor: number,
   newColor: number
 ): number[][] {
-  if (y < 0 || x < 0 || y >= screen.length || x >= screen[y].length) {
-    return screen
-  }
-
-  if (screen[y][x] !== oldColor) {
-    return screen
-  }
+  if (boundaryCheck(screen, x, y)) return screen
+  if (screen[y][x] !== oldColor) return screen
 
   screen[y][x] = newColor
 
-  screen = floodR(screen, x + 1, y, oldColor, newColor)
-  screen = floodR(screen, x, y + 1, oldColor, newColor)
-  screen = floodR(screen, x - 1, y, oldColor, newColor)
-  screen = floodR(screen, x, y - 1, oldColor, newColor)
+  screen = floodRecursive(screen, x + 1, y, oldColor, newColor)
+  screen = floodRecursive(screen, x, y + 1, oldColor, newColor)
+  screen = floodRecursive(screen, x - 1, y, oldColor, newColor)
+  screen = floodRecursive(screen, x, y - 1, oldColor, newColor)
 
   return screen
 }
 
-function floodQ(
+export function floodQueue(
   screen: number[][],
   x: number,
   y: number,
@@ -65,18 +63,3 @@ function floodQ(
     return screen[y] !== undefined && screen[y][x] === oldColor
   }
 }
-
-console.log(
-  fill(
-    [
-      [1, 1, 2, 2, 4, 4],
-      [1, 2, 2, 2, 4, 5],
-      [1, 2, 1, 4, 4, 5],
-      [1, 1, 4, 4, 5, 4],
-      [1, 1, 1, 1, 4, 4]
-    ],
-    1,
-    3,
-    9
-  )
-)
