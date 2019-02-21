@@ -34,6 +34,10 @@ export class Stack<T> {
     }
   }
 
+  toJSON(): T[] {
+    return this.list.toJSON()
+  }
+
   toString(): string {
     return this.list.toString()
   }
