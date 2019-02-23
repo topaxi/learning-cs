@@ -1,5 +1,9 @@
-export function deduplicateInPlace<T>(array: T[]): T[] {
-  let seen = new Set<T>()
+import { HashSet } from '../data-structures/hash/hash-set'
+
+export function deduplicateInPlace<T extends string | number>(
+  array: T[]
+): T[] {
+  let seen = new HashSet<T>()
 
   for (let i = 0; i < array.length; ) {
     if (seen.has(array[i])) {

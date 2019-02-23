@@ -1,5 +1,7 @@
-function firstRecurringChar(str: string): string | null {
-  let seen = new Set<string>()
+import { HashSet } from '../data-structures/hash/hash-set'
+
+export function firstRecurringChar(str: string): string | null {
+  let seen = new HashSet<string>()
 
   for (let char of str) {
     if (seen.has(char)) return char
@@ -8,6 +10,3 @@ function firstRecurringChar(str: string): string | null {
 
   return null
 }
-
-console.log(firstRecurringChar('abca'))
-console.log(firstRecurringChar('abcba'))
