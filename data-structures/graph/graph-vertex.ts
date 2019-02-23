@@ -2,7 +2,7 @@ import { LinkedList } from '../list/linked-list'
 import { GraphEdge } from './graph-edge'
 
 export class GraphVertex<T> {
-  readonly edges = new LinkedList()
+  readonly edges = new LinkedList<GraphEdge<T>>()
 
   constructor(public value: T) {}
 

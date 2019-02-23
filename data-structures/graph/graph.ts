@@ -3,8 +3,8 @@ import { GraphVertex } from './graph-vertex'
 import { GraphEdge } from './graph-edge'
 
 export abstract class Graph<T> {
-  readonly vertices = new HashMap<GraphVertex<T>>()
-  readonly edges = new HashMap<GraphEdge<T>>()
+  readonly vertices = new HashMap<string, GraphVertex<T>>()
+  readonly edges = new HashMap<string, GraphEdge<T>>()
 
   get weight(): number {
     return this.edges.values().reduce(weightReducer, 0)
