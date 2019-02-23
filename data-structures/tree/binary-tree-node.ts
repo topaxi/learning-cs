@@ -122,4 +122,12 @@ export class BinaryTreeNode<T, M = any> {
   equals(node: BinaryTreeNode<T>): boolean {
     return this.value === node.value
   }
+
+  toJSON() {
+    return {
+      value: this.value,
+      left: this._left,
+      right: this._right
+    }
+  }
 }

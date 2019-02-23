@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BinaryTreeNode<T> #toJSON() should serialize to JSON 1`] = `
+Object {
+  "left": Object {
+    "left": null,
+    "right": null,
+    "value": "left",
+  },
+  "right": Object {
+    "left": Object {
+      "left": null,
+      "right": null,
+      "value": "rightleft",
+    },
+    "right": Object {
+      "left": null,
+      "right": null,
+      "value": "rightright",
+    },
+    "value": "right",
+  },
+  "value": "root",
+}
+`;
