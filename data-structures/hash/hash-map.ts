@@ -92,7 +92,12 @@ export class HashMap<K extends string | number, T> {
   protected hash(key: K): number {
     if (this.keyMap[key] !== undefined) return this.keyMap[key]
 
-    return Math.abs(hashCode(String(key))) % this.slots.length
+    let hash =
+      typeof key === 'number' && Number.isFinite(key)
+        ? key
+        : hashCode(String(key))
+
+    return Math.abs(hash) % this.slots.length
   }
 
   protected getNode(key: K): HashMapNode<K, T> | null {
