@@ -1,6 +1,18 @@
 import { BinarySearchTree } from './binary-search-tree'
 
 describe('BinarySearchTree', () => {
+  test('is a binary tree', () => {
+    let tree = new BinarySearchTree()
+
+    tree.insert(5)
+    tree.insert(1)
+    tree.insert(7)
+    tree.insert(2)
+    tree.insert(3)
+
+    expect(tree).toMatchSnapshot()
+  })
+
   describe('#includes()', () => {
     test('should return true if value is in tree', () => {
       let tree = new BinarySearchTree()

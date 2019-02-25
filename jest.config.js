@@ -6,5 +6,6 @@ module.exports = {
     'data-structures/**/*.ts',
     'exercises/**/*.ts',
     'utils/**/*.ts'
-  ]
+  ],
+  snapshotSerializers: ['./tests/binary-tree-serializer.ts']
 }

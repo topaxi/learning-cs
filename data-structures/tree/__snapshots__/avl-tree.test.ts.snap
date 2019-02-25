@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AvlTree is a balanced binary tree 1`] = `
+AvlTree:
+  4
+ / \\
+1   6
+`;
+
+exports[`AvlTree is a balanced binary tree 2`] = `
+AvlTree:
+  4
+ / \\
+1   6
+ \\
+  2
+`;
+
+exports[`AvlTree is a balanced binary tree 3`] = `
+AvlTree:
+    4
+   / \\
+  2   6
+ / \\
+1   3
+`;
+
+exports[`AvlTree is a balanced binary tree 4`] = `
+AvlTree:
+    2
+   / \\
+  1   4
+ /   / \\
+0   3   6
+`;
+
+exports[`AvlTree is a balanced binary tree 5`] = `
+AvlTree:
+    2
+   / \\
+  1   4
+ /   / \\
+0   3   6
+       /
+      5
+`;
+
+exports[`AvlTree is a balanced binary tree 6`] = `
+AvlTree:
+    2
+   / \\
+  1   4
+ /   / \\
+0   3   6
+       / \\
+      5   7
+`;
+
+exports[`AvlTree is a binary tree 1`] = `
+AvlTree:
+    2
+   / \\
+  1   5
+ /   / \\
+0   /   \\
+   /     \\
+  3       7
+   \\     /
+    4   6
+`;
+
+exports[`AvlTree leftLeft rotation 1`] = `
+AvlTree:
+    2
+   / \\
+  1   4
+ /   / \\
+0   3   5
+`;
+
+exports[`AvlTree leftRight rotation 1`] = `
+AvlTree:
+    3
+   / \\
+  1   4
+ / \\
+0   2
+`;
+
+exports[`AvlTree rightLeft rotation 1`] = `
+AvlTree:
+  1
+ / \\
+0   3
+   / \\
+  2   4
+`;
+
+exports[`AvlTree rightRight rotation 1`] = `
+AvlTree:
+    3
+   / \\
+  1   4
+ / \\   \\
+0   2   5
+`;

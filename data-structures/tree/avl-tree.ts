@@ -7,7 +7,7 @@ export class AvlTree<T> extends BinarySearchTree<T> {
     let currentNode: BinarySearchTreeNode<T> | null = node
 
     // Walk up and balance each node
-    while (currentNode) {
+    while (currentNode !== null) {
       this.balance(currentNode)
       currentNode = currentNode.parent
     }
@@ -20,15 +20,15 @@ export class AvlTree<T> extends BinarySearchTree<T> {
 
     // AvlTree can have an imbalanceFactor of at most 1
     if (node.balanceFactor > 1) {
-      if (node.left !== null && node.left.balanceFactor > 0) {
+      if (node.left!.balanceFactor > 0) {
         this.rotateLeftLeft(node)
-      } else if (node.left !== null && node.left.balanceFactor < 0) {
+      } else if (node.left!.balanceFactor < 0) {
         this.rotateLeftRight(node)
       }
     } else if (node.balanceFactor < -1) {
-      if (node.right !== null && node.right.balanceFactor > 0) {
+      if (node.right!.balanceFactor > 0) {
         this.rotateRightLeft(node)
-      } else if (node.right !== null && node.right.balanceFactor < 0) {
+      } else if (node.right!.balanceFactor < 0) {
         this.rotateRightRight(node)
       }
     }
@@ -49,13 +49,22 @@ export class AvlTree<T> extends BinarySearchTree<T> {
     let left = node.left!
     let parent = node.parent
 
+    node.left = null
+
     if (parent !== null) {
-      parent.left = left
+      if (parent.left === node) {
+        parent.left = left
+      } else {
+        parent.right = left
+      }
     } else if (node === this.root) {
       this.root = left
     }
 
-    node.left = left.right
+    if (left.right !== null) {
+      node.left = left.right
+    }
+
     left.right = node
   }
 
@@ -80,6 +89,7 @@ export class AvlTree<T> extends BinarySearchTree<T> {
     let left = node.left!
     let leftRight = left.right!
 
+    node.left = null
     left.right = null
 
     if (leftRight.left !== null) {
@@ -114,6 +124,7 @@ export class AvlTree<T> extends BinarySearchTree<T> {
     let right = node.right!
     let rightLeft = right.left!
 
+    node.right = null
     right.left = null
 
     if (rightLeft.right !== null) {
@@ -142,13 +153,22 @@ export class AvlTree<T> extends BinarySearchTree<T> {
     let right = node.right!
     let parent = node.parent
 
+    node.right = null
+
     if (parent !== null) {
-      parent.right = right
+      if (parent.right === node) {
+        parent.right = right
+      } else {
+        parent.left = right
+      }
     } else if (node === this.root) {
       this.root = right
     }
 
-    node.right = right.left
+    if (right.left !== null) {
+      node.right = right.left
+    }
+
     right.left = node
   }
 }

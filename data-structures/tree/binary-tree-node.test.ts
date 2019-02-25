@@ -9,7 +9,7 @@ describe('BinaryTreeNode<T>', () => {
       node.right.right = new BinaryTreeNode('rightright')
       node.right.left = new BinaryTreeNode('rightleft')
 
-      expect(node).toMatchSnapshot()
+      expect(JSON.parse(JSON.stringify(node))).toMatchSnapshot()
     })
   })
 

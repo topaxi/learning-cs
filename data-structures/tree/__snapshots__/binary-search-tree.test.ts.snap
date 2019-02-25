@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BinarySearchTree is a binary tree 1`] = `
+BinarySearchTree:
+  5
+ / \\
+1   7
+ \\
+  2
+   \\
+    3
+`;

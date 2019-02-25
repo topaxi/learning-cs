@@ -5,6 +5,10 @@ export class BinarySearchTree<T> {
 
   constructor(protected readonly compare = (a: any, b: any) => a - b) {}
 
+  get balanceFactor(): number {
+    return this.root === null ? 0 : this.root.balanceFactor
+  }
+
   insert(value: T): BinarySearchTreeNode<T> {
     if (this.root === null) {
       this.root = new BinarySearchTreeNode(value, this.compare)
@@ -25,5 +29,9 @@ export class BinarySearchTree<T> {
 
   findMax(): T | null {
     return this.root && this.root.findMax()
+  }
+
+  toJSON() {
+    return this.root
   }
 }
