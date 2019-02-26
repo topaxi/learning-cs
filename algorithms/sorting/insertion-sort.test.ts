@@ -1,19 +1,19 @@
-import { msort } from './msort'
+import { isort } from './insertion-sort'
 import { shuffle } from 'lodash'
 
 function expectSorted<T>(array: T[], cmp?: (a: T, b: T) => number) {
-  expect(msort(shuffle(array), cmp)).toEqual(array)
-  expect(msort(shuffle(array), cmp)).toEqual(array)
-  expect(msort(shuffle(array), cmp)).toEqual(array)
+  expect(isort(shuffle(array), cmp)).toEqual(array)
+  expect(isort(shuffle(array), cmp)).toEqual(array)
+  expect(isort(shuffle(array), cmp)).toEqual(array)
 }
 
-describe('msort', () => {
+describe('isort', () => {
   test('returns empty array for empty array', () => {
-    expect(msort([])).toEqual([])
+    expect(isort([])).toEqual([])
   })
 
   test('returns the same array for one element', () => {
-    expect(msort([1])).toEqual([1])
+    expect(isort([1])).toEqual([1])
   })
 
   test('sorts with two elements', () => {

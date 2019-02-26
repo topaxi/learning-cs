@@ -1,19 +1,19 @@
-import { qsort } from './qsort'
+import { msort } from './merge-sort'
 import { shuffle } from 'lodash'
 
 function expectSorted<T>(array: T[], cmp?: (a: T, b: T) => number) {
-  expect(qsort(shuffle(array), cmp)).toEqual(array)
-  expect(qsort(shuffle(array), cmp)).toEqual(array)
-  expect(qsort(shuffle(array), cmp)).toEqual(array)
+  expect(msort(shuffle(array), cmp)).toEqual(array)
+  expect(msort(shuffle(array), cmp)).toEqual(array)
+  expect(msort(shuffle(array), cmp)).toEqual(array)
 }
 
-describe('qsort', () => {
+describe('msort', () => {
   test('returns empty array for empty array', () => {
-    expect(qsort([])).toEqual([])
+    expect(msort([])).toEqual([])
   })
 
   test('returns the same array for one element', () => {
-    expect(qsort([1])).toEqual([1])
+    expect(msort([1])).toEqual([1])
   })
 
   test('sorts with two elements', () => {

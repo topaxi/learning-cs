@@ -1,19 +1,19 @@
-import { isort } from './isort'
+import { qsort } from './quick-sort'
 import { shuffle } from 'lodash'
 
 function expectSorted<T>(array: T[], cmp?: (a: T, b: T) => number) {
-  expect(isort(shuffle(array), cmp)).toEqual(array)
-  expect(isort(shuffle(array), cmp)).toEqual(array)
-  expect(isort(shuffle(array), cmp)).toEqual(array)
+  expect(qsort(shuffle(array), cmp)).toEqual(array)
+  expect(qsort(shuffle(array), cmp)).toEqual(array)
+  expect(qsort(shuffle(array), cmp)).toEqual(array)
 }
 
-describe('isort', () => {
+describe('qsort', () => {
   test('returns empty array for empty array', () => {
-    expect(isort([])).toEqual([])
+    expect(qsort([])).toEqual([])
   })
 
   test('returns the same array for one element', () => {
-    expect(isort([1])).toEqual([1])
+    expect(qsort([1])).toEqual([1])
   })
 
   test('sorts with two elements', () => {
