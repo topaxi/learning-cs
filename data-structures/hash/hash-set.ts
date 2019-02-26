@@ -3,6 +3,20 @@ import { HashMap } from './hash-map'
 export class HashSet<T extends string | number> {
   private _hash = new HashMap<T, T>(this.size)
 
+  static of<T extends string | number>(...args: T[]) {
+    let set = new this<T>()
+
+    for (let value of args) {
+      set.add(value)
+    }
+
+    return set
+  }
+
+  static from<T extends string | number>(iterable: Iterable<T>) {
+    return this.of(...iterable)
+  }
+
   constructor(private readonly size = 32) {}
 
   has(value: T): boolean {
@@ -20,13 +34,23 @@ export class HashSet<T extends string | number> {
   }
 
   union(...iterables: Array<Iterable<T>>): HashSet<T> {
-    let set = new HashSet<T>()
-
-    iterables.unshift(this)
+    let set = HashSet.from(this)
 
     for (let i = 0; i < iterables.length; i++) {
       for (let value of iterables[i]) {
         set.add(value)
+      }
+    }
+
+    return set
+  }
+
+  difference(...iterables: Array<Iterable<T>>): HashSet<T> {
+    let set = HashSet.from(this)
+
+    for (let i = 0; i < iterables.length; i++) {
+      for (let value of iterables[i]) {
+        set.delete(value)
       }
     }
 

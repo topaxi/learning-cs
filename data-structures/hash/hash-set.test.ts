@@ -25,42 +25,60 @@ describe('HashSet<T>', () => {
   })
 
   test('should be iterable over all the values', () => {
-    let set = new HashSet()
+    expect([...HashSet.of(1, 2, 3)]).toEqual([1, 2, 3])
+  })
 
-    set.add(1)
-    set.add(2)
-    set.add(3)
+  describe('.of()', () => {
+    test('should create set with given values', () => {
+      let set = HashSet.of<number>(1, 2, 3)
+      expect(set.has(0)).toBe(false)
+      expect(set.has(1)).toBe(true)
+      expect(set.has(2)).toBe(true)
+      expect(set.has(3)).toBe(true)
+      expect(set.has(4)).toBe(false)
+    })
+  })
 
-    expect([...set]).toEqual([1, 2, 3])
+  describe('.from()', () => {
+    test('should create set from given iterable', () => {
+      let set = HashSet.from<number>([1, 2, 3])
+      expect(set.has(0)).toBe(false)
+      expect(set.has(1)).toBe(true)
+      expect(set.has(2)).toBe(true)
+      expect(set.has(3)).toBe(true)
+      expect(set.has(4)).toBe(false)
+    })
   })
 
   describe('#union()', () => {
     test('should create an union of the given iterables', () => {
-      let set = new HashSet()
-
-      set.add(1)
+      let set = HashSet.of<number>(1)
 
       expect(set.union()).not.toBe(set)
 
-      set = set.union(new HashSet().add(2).add(3))
+      set = set.union(HashSet.of(2, 3))
 
       expect(set.toArray()).toEqual([1, 2, 3])
 
-      set = set.union(new HashSet().add(4), [5], [6, 7])
+      set = set.union(HashSet.of(4), [5], [6, 7])
 
       expect(set.toArray()).toEqual([1, 2, 3, 4, 5, 6, 7])
     })
   })
 
+  describe('#difference()', () => {
+    test('should return the difference of the given iterables', () => {
+      let set = HashSet.of<number>(1, 2)
+
+      expect(set.difference()).not.toBe(set)
+      expect(set.difference(HashSet.of(2, 3)).toArray()).toEqual([1])
+      expect(set.difference([1], [2]).toArray()).toEqual([])
+    })
+  })
+
   describe('#toArray()', () => {
     test('should convert to an array', () => {
-      let set = new HashSet()
-
-      set.add(1)
-      set.add(2)
-      set.add(3)
-
-      expect(set.toArray()).toEqual([1, 2, 3])
+      expect(HashSet.of(1, 2, 3).toArray()).toEqual([1, 2, 3])
     })
   })
 })
