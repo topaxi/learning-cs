@@ -1,7 +1,9 @@
 import { HashMap } from './hash-map'
 
 export class HashSet<T extends string | number> {
-  private _hash = new HashMap<T, T>()
+  private _hash = new HashMap<T, T>(this.size)
+
+  constructor(private readonly size = 32) {}
 
   has(value: T): boolean {
     return this._hash.has(value)
