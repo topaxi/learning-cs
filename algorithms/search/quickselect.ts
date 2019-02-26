@@ -1,8 +1,5 @@
 import { partitionInline } from '../../utils/partition'
-
-function random(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
+import { random } from '../../utils/random'
 
 export function quickselect(
   list: number[],

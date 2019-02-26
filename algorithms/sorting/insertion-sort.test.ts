@@ -1,5 +1,5 @@
 import { isort } from './insertion-sort'
-import { shuffle } from 'lodash'
+import { shuffle } from '../../utils/array'
 
 function expectSorted<T>(array: T[], cmp?: (a: T, b: T) => number) {
   expect(isort(shuffle(array), cmp)).toEqual(array)

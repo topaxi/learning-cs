@@ -1,19 +1,19 @@
-import { qsort } from './quick-sort'
+import { bsort } from './bogo-sort'
 import { shuffle } from '../../utils/array'
 
 function expectSorted<T>(array: T[], cmp?: (a: T, b: T) => number) {
-  expect(qsort(shuffle(array), cmp)).toEqual(array)
-  expect(qsort(shuffle(array), cmp)).toEqual(array)
-  expect(qsort(shuffle(array), cmp)).toEqual(array)
+  expect(bsort(shuffle(array), cmp)).toEqual(array)
+  expect(bsort(shuffle(array), cmp)).toEqual(array)
+  expect(bsort(shuffle(array), cmp)).toEqual(array)
 }
 
-describe('qsort', () => {
+describe('bsort', () => {
   test('returns empty array for empty array', () => {
-    expect(qsort([])).toEqual([])
+    expect(bsort([])).toEqual([])
   })
 
   test('returns the same array for one element', () => {
-    expect(qsort([1])).toEqual([1])
+    expect(bsort([1])).toEqual([1])
   })
 
   test('sorts with two elements', () => {
@@ -27,7 +27,7 @@ describe('qsort', () => {
   })
 
   test('sorts', () => {
-    expectSorted([-Infinity, -5, -2, -1, 0, 1, 2, 3, Math.PI, 4, 5, 16, 100])
+    expectSorted([-Infinity, -5, -1, 0, 1, Math.PI, 4])
   })
 
   describe('callback', () => {
