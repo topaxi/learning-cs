@@ -68,9 +68,7 @@ export class HashSet<T extends string | number> {
   }
 
   *[Symbol.iterator](): IterableIterator<T> {
-    for (let value of this._hash.values()) {
-      yield value
-    }
+    yield* this._hash.values()
   }
 
   toArray(): T[] {
