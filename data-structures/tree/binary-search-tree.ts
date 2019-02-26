@@ -34,4 +34,10 @@ export class BinarySearchTree<T> {
   toJSON() {
     return this.root
   }
+
+  *[Symbol.iterator](): IterableIterator<T> {
+    if (this.root !== null) {
+      yield* this.root
+    }
+  }
 }
