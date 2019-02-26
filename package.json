@@ -9,7 +9,7 @@
     "test:watch": "yarn test --watch"
   },
   "devDependencies": {
-    "@types/jest": "24.0.6",
+    "@types/jest": "24.0.9",
     "@types/lodash": "4.14.121",
     "@types/node": "10.12.27",
     "core-js": "2.6.5",
