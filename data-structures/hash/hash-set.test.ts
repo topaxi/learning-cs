@@ -50,6 +50,22 @@ describe('HashSet<T>', () => {
     })
   })
 
+  describe('#clear()', () => {
+    test('should remove all values from set', () => {
+      let set = HashSet.of(1, 2)
+
+      expect(set.has(1)).toBe(true)
+      expect(set.has(2)).toBe(true)
+      expect(set.size).toBe(2)
+
+      set.clear()
+
+      expect(set.size).toBe(0)
+      expect(set.has(1)).toBe(false)
+      expect(set.has(2)).toBe(false)
+    })
+  })
+
   describe('#union()', () => {
     test('should create an union of the given iterables', () => {
       let set = HashSet.of<number>(1)

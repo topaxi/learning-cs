@@ -1,7 +1,7 @@
 import { HashMap } from './hash-map'
 
 export class HashSet<T extends string | number> {
-  private _hash = new HashMap<T, T>(this.size)
+  private _hash = new HashMap<T, T>(this._hashSize)
 
   static of<T extends string | number>(...args: T[]) {
     let set = new this<T>()
@@ -17,7 +17,11 @@ export class HashSet<T extends string | number> {
     return this.of(...iterable)
   }
 
-  constructor(private readonly size = 32) {}
+  constructor(private readonly _hashSize = 32) {}
+
+  get size(): number {
+    return this._hash.size
+  }
 
   has(value: T): boolean {
     return this._hash.has(value)
@@ -30,6 +34,12 @@ export class HashSet<T extends string | number> {
 
   delete(value: T): this {
     this._hash.delete(value)
+    return this
+  }
+
+  clear(): this {
+    this._hash = new HashMap(this._hashSize)
+
     return this
   }
 
