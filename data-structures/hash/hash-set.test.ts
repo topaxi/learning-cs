@@ -92,6 +92,16 @@ describe('HashSet<T>', () => {
     })
   })
 
+  describe('#intersection()', () => {
+    test('should return the intersection of the given iterables', () => {
+      let set = HashSet.of<number>(1, 2)
+
+      expect(set.intersection()).not.toBe(set)
+      expect(set.intersection(HashSet.of(2, 3)).toArray()).toEqual([2])
+      expect(set.intersection([1], [2]).toArray()).toEqual([])
+    })
+  })
+
   describe('#toArray()', () => {
     test('should convert to an array', () => {
       expect(HashSet.of(1, 2, 3).toArray()).toEqual([1, 2, 3])
