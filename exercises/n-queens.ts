@@ -9,7 +9,13 @@ export abstract class ChessFigure {
     return this.row + this.column
   }
 
-  abstract threatens(chessFigure: ChessFigure): boolean
+  abstract threatens(chessFigure: ChessFigure | null): boolean
+
+  threatenedBy(chessFigure: ChessFigure | null): boolean {
+    if (chessFigure === null) return false
+
+    return chessFigure.threatens(this)
+  }
 }
 
 export class Queen extends ChessFigure {
@@ -46,7 +52,7 @@ function solve(
   for (let column = 0; column < queenCount; column++) {
     let queen = new Queen(row, column)
 
-    if (!queens.some(q => queen.threatens(q))) {
+    if (!queens.some(q => queen.threatenedBy(q))) {
       queens[row] = queen
       solutions = solve(solutions, queens, queenCount, row + 1)
       queens[row] = null
