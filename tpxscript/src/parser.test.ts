@@ -35,6 +35,9 @@ describe('tpxscript::Parser', () => {
 
   test('should parse function declarations', () => {
     expect(parse('fn (x) x')).toMatchSnapshot()
+    expect(parse('fn (x) { x }')).toMatchSnapshot()
+    expect(parse('fn foo(x) x')).toMatchSnapshot()
+    expect(parse('fn foo(x) { x }')).toMatchSnapshot()
   })
 
   test('should parse function calls', () => {

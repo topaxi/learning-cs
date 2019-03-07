@@ -124,6 +124,64 @@ Object {
         "type": "var",
         "value": "x",
       },
+      "name": undefined,
+      "type": "fn",
+      "vars": Array [
+        "x",
+      ],
+    },
+  ],
+  "type": "prog",
+}
+`;
+
+exports[`tpxscript::Parser should parse function declarations 2`] = `
+Object {
+  "prog": Array [
+    Object {
+      "body": Object {
+        "type": "var",
+        "value": "x",
+      },
+      "name": undefined,
+      "type": "fn",
+      "vars": Array [
+        "x",
+      ],
+    },
+  ],
+  "type": "prog",
+}
+`;
+
+exports[`tpxscript::Parser should parse function declarations 3`] = `
+Object {
+  "prog": Array [
+    Object {
+      "body": Object {
+        "type": "var",
+        "value": "x",
+      },
+      "name": "foo",
+      "type": "fn",
+      "vars": Array [
+        "x",
+      ],
+    },
+  ],
+  "type": "prog",
+}
+`;
+
+exports[`tpxscript::Parser should parse function declarations 4`] = `
+Object {
+  "prog": Array [
+    Object {
+      "body": Object {
+        "type": "var",
+        "value": "x",
+      },
+      "name": "foo",
       "type": "fn",
       "vars": Array [
         "x",

@@ -1,6 +1,22 @@
 import { InputStream } from './input-stream'
 
-export type Token<T = any> = { type: string; value: T }
+export type TokenType =
+  | 'num'
+  | 'kw'
+  | 'punc'
+  | 'op'
+  | 'str'
+  | 'bool'
+  | 'var'
+  | 'binary'
+  | 'assign'
+  | 'let'
+  | 'fn'
+  | 'if'
+  | 'prog'
+  | 'call'
+
+export type Token<T = any> = { type: TokenType; value: T }
 
 export class TokenStream {
   private current: Token | null = null

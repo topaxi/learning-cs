@@ -1,7 +1,7 @@
 import { InputStream } from './input-stream'
 import { TokenStream, Token } from './token-stream'
 
-const FALSE: Token<false> = { type: 'bool', value: false }
+export const FALSE: Token<false> = { type: 'bool', value: false }
 const PRECEDENCE: Record<string, number> = {
   '=': 2,
   '||': 3,
@@ -179,6 +179,10 @@ export class Parser {
   parseFn() {
     return {
       type: 'fn',
+      name:
+        this.tokens.peek()!.type === 'var'
+          ? this.tokens.next()!.value
+          : undefined,
       vars: this.delimited('(', ')', ',', this.parseVarname),
       body: this.parseExpression()
     }
