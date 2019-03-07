@@ -5,7 +5,9 @@ export const FALSE: Token<false> = { type: 'bool', value: false }
 const PRECEDENCE: Record<string, number> = {
   '=': 2,
   '||': 3,
+  or: 3,
   '&&': 4,
+  and: 4,
   '<': 8,
   '>': 8,
   '>=': 8,
@@ -59,7 +61,9 @@ export class Parser {
   }
 
   isOperator(op?: string): Token | false {
-    return this.isToken('op', op)
+    return (
+      this.isToken('op', op) || this.isKeyword('or') || this.isKeyword('and')
+    )
   }
 
   skipPunctuation(ch: string) {
@@ -92,8 +96,9 @@ export class Parser {
     )
   }
 
-  maybeBinary(left: any, myPrec: any): any {
-    let token: any = this.isOperator()
+  maybeBinary(left: Token | any, myPrec: number): Token {
+    let token = this.isOperator()
+    console.log(token)
 
     if (token !== false) {
       let hisPrec = PRECEDENCE[token.value as any]
@@ -140,7 +145,7 @@ export class Parser {
     return a
   }
 
-  parseCall(func: any) {
+  parseCall(func: Token) {
     return {
       type: 'call',
       func,
@@ -195,45 +200,40 @@ export class Parser {
     }
   }
 
-  maybeCall(expr: () => Token) {
-    let res = expr()
+  maybeCall(expr: (this: this) => Token) {
+    let res = expr.call(this)
 
     return this.isPunctuation('(') !== false ? this.parseCall(res) : res
   }
 
+  private _parseAtom() {
+    if (this.isPunctuation('(') !== false) {
+      this.tokens.next()
+      let expr = this.parseExpression()
+      this.skipPunctuation(')')
+      return expr
+    }
+
+    if (this.isPunctuation('{') !== false) return this.parseProg()
+    if (this.isKeyword('if') !== false) return this.parseIf()
+    if (this.isKeyword('true') !== false || this.isKeyword('false') !== false)
+      return this.parseBool()
+    if (this.isKeyword('fn') !== false) {
+      this.tokens.next()
+      return this.parseFn()
+    }
+
+    let token = this.tokens.next()!
+
+    if (token.type === 'var' || token.type === 'num' || token.type === 'str') {
+      return token
+    }
+
+    this.unexpected()
+  }
+
   parseAtom() {
-    return this.maybeCall(() => {
-      if (this.isPunctuation('(') !== false) {
-        this.tokens.next()
-        let expr = this.parseExpression()
-        this.skipPunctuation(')')
-        return expr
-      }
-
-      if (this.isPunctuation('{') !== false) return this.parseProg()
-      if (this.isKeyword('if') !== false) return this.parseIf()
-      if (
-        this.isKeyword('true') !== false ||
-        this.isKeyword('false') !== false
-      )
-        return this.parseBool()
-      if (this.isKeyword('fn') !== false) {
-        this.tokens.next()
-        return this.parseFn()
-      }
-
-      let token = this.tokens.next()!
-
-      if (
-        token.type === 'var' ||
-        token.type === 'num' ||
-        token.type === 'str'
-      ) {
-        return token
-      }
-
-      this.unexpected()
-    })
+    return this.maybeCall(this._parseAtom)
   }
 
   parseToplevel(): { type: 'prog'; prog: Token[] } {

@@ -54,7 +54,7 @@ describe('tpxscript::Parser', () => {
   })
 
   test('should parse arithmetic', () => {
-    expect(parse('x + y * z;')).toMatchSnapshot()
+    expect(parse('x + y * z')).toMatchSnapshot()
   })
 
   test.skip('should parse blocks', () => {

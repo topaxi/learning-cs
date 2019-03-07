@@ -17,6 +17,11 @@ exports[`tpxscript::JsCodegen should codegen conditionals 2`] = `
 "
 `;
 
+exports[`tpxscript::JsCodegen should codegen conditionals 3`] = `
+"foo ? (bar ? baz : false) : false
+"
+`;
+
 exports[`tpxscript::JsCodegen should codegen function calls 1`] = `
 "foo(x, 1)
 "

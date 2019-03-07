@@ -20,7 +20,7 @@ export type Token<T = any> = { type: TokenType; value: T }
 
 export class TokenStream {
   private current: Token | null = null
-  private keywords = 'if then else fn true false'
+  private keywords = 'if then else fn true false and or'
 
   constructor(readonly input: InputStream) {}
 

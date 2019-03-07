@@ -44,9 +44,20 @@ export class JsCodegen {
   }
 
   private binary(exp: Token | any): string {
-    return `(${this.generate(exp.left)} ${exp.operator} ${this.generate(
-      exp.right
-    )})`
+    return `(${this.generate(exp.left)} ${this.operator(
+      exp.operator
+    )} ${this.generate(exp.right)})`
+  }
+
+  private operator(operator: string): string {
+    switch (operator) {
+      case 'or':
+        return '||'
+      case 'and':
+        return '&&'
+      default:
+        return operator
+    }
   }
 
   private assign(exp: Token): string {
