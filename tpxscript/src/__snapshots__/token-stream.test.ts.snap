@@ -1,0 +1,289 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tpxscript::TokenStream should tokenize arithmetic 1`] = `
+Array [
+  Object {
+    "type": "var",
+    "value": "x",
+  },
+  Object {
+    "type": "op",
+    "value": "+",
+  },
+  Object {
+    "type": "var",
+    "value": "y",
+  },
+  Object {
+    "type": "op",
+    "value": "*",
+  },
+  Object {
+    "type": "var",
+    "value": "z",
+  },
+]
+`;
+
+exports[`tpxscript::TokenStream should tokenize assignments 1`] = `
+Array [
+  Object {
+    "type": "var",
+    "value": "x",
+  },
+  Object {
+    "type": "op",
+    "value": "=",
+  },
+  Object {
+    "type": "num",
+    "value": 10,
+  },
+]
+`;
+
+exports[`tpxscript::TokenStream should tokenize block variables 1`] = `
+Array [
+  Object {
+    "type": "var",
+    "value": "let",
+  },
+  Object {
+    "type": "punc",
+    "value": "(",
+  },
+  Object {
+    "type": "kw",
+    "value": "a",
+  },
+  Object {
+    "type": "op",
+    "value": "=",
+  },
+  Object {
+    "type": "num",
+    "value": 10,
+  },
+  Object {
+    "type": "punc",
+    "value": ",",
+  },
+  Object {
+    "type": "var",
+    "value": "b",
+  },
+  Object {
+    "type": "op",
+    "value": "=",
+  },
+  Object {
+    "type": "kw",
+    "value": "a",
+  },
+  Object {
+    "type": "op",
+    "value": "*",
+  },
+  Object {
+    "type": "num",
+    "value": 10,
+  },
+  Object {
+    "type": "punc",
+    "value": ")",
+  },
+  Object {
+    "type": "punc",
+    "value": "{",
+  },
+  Object {
+    "type": "kw",
+    "value": "a",
+  },
+  Object {
+    "type": "op",
+    "value": "+",
+  },
+  Object {
+    "type": "var",
+    "value": "b",
+  },
+  Object {
+    "type": "punc",
+    "value": "}",
+  },
+]
+`;
+
+exports[`tpxscript::TokenStream should tokenize blocks 1`] = `
+Array [
+  Object {
+    "type": "punc",
+    "value": "{",
+  },
+  Object {
+    "type": "kw",
+    "value": "a",
+  },
+  Object {
+    "type": "op",
+    "value": "=",
+  },
+  Object {
+    "type": "num",
+    "value": 5,
+  },
+  Object {
+    "type": "punc",
+    "value": ";",
+  },
+  Object {
+    "type": "var",
+    "value": "b",
+  },
+  Object {
+    "type": "op",
+    "value": "=",
+  },
+  Object {
+    "type": "kw",
+    "value": "a",
+  },
+  Object {
+    "type": "op",
+    "value": "*",
+  },
+  Object {
+    "type": "num",
+    "value": 2,
+  },
+  Object {
+    "type": "punc",
+    "value": ";",
+  },
+  Object {
+    "type": "kw",
+    "value": "a",
+  },
+  Object {
+    "type": "op",
+    "value": "+",
+  },
+  Object {
+    "type": "var",
+    "value": "b",
+  },
+  Object {
+    "type": "punc",
+    "value": ";",
+  },
+  Object {
+    "type": "punc",
+    "value": "}",
+  },
+]
+`;
+
+exports[`tpxscript::TokenStream should tokenize conditionals 1`] = `
+Array [
+  Object {
+    "type": "kw",
+    "value": "if",
+  },
+  Object {
+    "type": "var",
+    "value": "foo",
+  },
+  Object {
+    "type": "kw",
+    "value": "then",
+  },
+  Object {
+    "type": "var",
+    "value": "bar",
+  },
+  Object {
+    "type": "kw",
+    "value": "else",
+  },
+  Object {
+    "type": "var",
+    "value": "baz",
+  },
+]
+`;
+
+exports[`tpxscript::TokenStream should tokenize conditionals 2`] = `
+Array [
+  Object {
+    "type": "kw",
+    "value": "if",
+  },
+  Object {
+    "type": "var",
+    "value": "foo",
+  },
+  Object {
+    "type": "kw",
+    "value": "then",
+  },
+  Object {
+    "type": "var",
+    "value": "bar",
+  },
+]
+`;
+
+exports[`tpxscript::TokenStream should tokenize function calls 1`] = `
+Array [
+  Object {
+    "type": "var",
+    "value": "foo",
+  },
+  Object {
+    "type": "punc",
+    "value": "(",
+  },
+  Object {
+    "type": "var",
+    "value": "x",
+  },
+  Object {
+    "type": "punc",
+    "value": ",",
+  },
+  Object {
+    "type": "num",
+    "value": 1,
+  },
+  Object {
+    "type": "punc",
+    "value": ")",
+  },
+]
+`;
+
+exports[`tpxscript::TokenStream should tokenize function declarations 1`] = `
+Array [
+  Object {
+    "type": "kw",
+    "value": "fn",
+  },
+  Object {
+    "type": "punc",
+    "value": "(",
+  },
+  Object {
+    "type": "var",
+    "value": "x",
+  },
+  Object {
+    "type": "punc",
+    "value": ")",
+  },
+  Object {
+    "type": "var",
+    "value": "x",
+  },
+]
+`;

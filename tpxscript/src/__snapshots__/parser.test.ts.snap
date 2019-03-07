@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tpxscript::Parser should parse arithmetic 1`] = `
+Object {
+  "prog": Array [
+    Object {
+      "left": Object {
+        "type": "var",
+        "value": "x",
+      },
+      "operator": "+",
+      "right": Object {
+        "left": Object {
+          "type": "var",
+          "value": "y",
+        },
+        "operator": "*",
+        "right": Object {
+          "type": "var",
+          "value": "z",
+        },
+        "type": "binary",
+      },
+      "type": "binary",
+    },
+  ],
+  "type": "prog",
+}
+`;
+
+exports[`tpxscript::Parser should parse assignments 1`] = `
+Object {
+  "prog": Array [
+    Object {
+      "left": Object {
+        "type": "var",
+        "value": "x",
+      },
+      "operator": "=",
+      "right": Object {
+        "type": "num",
+        "value": 10,
+      },
+      "type": "assign",
+    },
+  ],
+  "type": "prog",
+}
+`;
+
+exports[`tpxscript::Parser should parse conditionals 1`] = `
+Object {
+  "prog": Array [
+    Object {
+      "cond": Object {
+        "type": "var",
+        "value": "foo",
+      },
+      "else": Object {
+        "type": "var",
+        "value": "baz",
+      },
+      "then": Object {
+        "type": "var",
+        "value": "bar",
+      },
+      "type": "if",
+    },
+  ],
+  "type": "prog",
+}
+`;
+
+exports[`tpxscript::Parser should parse conditionals 2`] = `
+Object {
+  "prog": Array [
+    Object {
+      "cond": Object {
+        "type": "var",
+        "value": "foo",
+      },
+      "else": undefined,
+      "then": Object {
+        "type": "var",
+        "value": "bar",
+      },
+      "type": "if",
+    },
+  ],
+  "type": "prog",
+}
+`;
+
+exports[`tpxscript::Parser should parse function calls 1`] = `
+Object {
+  "prog": Array [
+    Object {
+      "args": Array [
+        Object {
+          "type": "var",
+          "value": "x",
+        },
+        Object {
+          "type": "num",
+          "value": 1,
+        },
+      ],
+      "func": Object {
+        "type": "var",
+        "value": "foo",
+      },
+      "type": "call",
+    },
+  ],
+  "type": "prog",
+}
+`;
+
+exports[`tpxscript::Parser should parse function declarations 1`] = `
+Object {
+  "prog": Array [
+    Object {
+      "body": Object {
+        "type": "var",
+        "value": "x",
+      },
+      "type": "fn",
+      "vars": Array [
+        "x",
+      ],
+    },
+  ],
+  "type": "prog",
+}
+`;
