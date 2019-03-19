@@ -1,4 +1,4 @@
-type Movie = { name: string; start: number; end: number }
+interface Movie { name: string; start: number; end: number }
 
 let movies: Movie[] = [
   { name: "The Predident's Algorist", start: 1, end: 6 },

@@ -1,6 +1,5 @@
 import { range } from '../../utils/range'
-import { Y, memoizedY } from '../../utils/y'
-import { HashMap } from '../../data-structures/hash/hash-map'
+import { memoizedY } from '../../utils/y'
 import { SingleParamStore } from '../../utils/memo'
 
 // Longest increasing subsequence

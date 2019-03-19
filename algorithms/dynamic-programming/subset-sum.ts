@@ -1,4 +1,3 @@
-import { range } from '../../utils/range'
 import { head, tail } from '../../utils/array'
 import { memoizedY } from '../../utils/y'
 

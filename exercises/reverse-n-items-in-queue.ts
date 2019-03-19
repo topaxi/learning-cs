@@ -8,13 +8,13 @@ export function reverseQueue(
 ): void {
   let reversed = new Stack<number>()
 
-  for (let i of range(n)) {
+  for (let _i of range(n)) {
     reversed.push(queue.dequeue())
   }
 
   let rest = new Queue<number>()
 
-  for (let i of range(queue.length)) {
+  for (let _i of range(queue.length)) {
     rest.enqueue(queue.dequeue())
   }
 

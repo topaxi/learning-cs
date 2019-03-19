@@ -9,8 +9,6 @@ function* fib() {
     previous = current
     current = fib
   }
-
-  return fib
 }
 
 let sum = 0

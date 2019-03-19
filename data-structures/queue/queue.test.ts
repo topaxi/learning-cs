@@ -20,7 +20,7 @@ describe('Queue<T>', () => {
     expect(queue.empty).toBe(true)
     expect(queue.length).toBe(0)
     expect(queue.peek()).toBeNull()
-    expect(() => queue.dequeue()).toThrowError()
+    expect(() => queue.dequeue()).toThrow()
   })
 
   test('should serialize to an array', () => {

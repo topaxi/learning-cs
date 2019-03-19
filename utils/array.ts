@@ -19,7 +19,7 @@ export function head(list: any): any {
   return list[0]
 }
 
-export function shuffleInplace<T extends Array<any>>(array: T): T {
+export function shuffleInplace<T extends any[]>(array: T): T {
   let lastIndex = array.length - 1
 
   for (let i = 0; i < array.length; i++) {

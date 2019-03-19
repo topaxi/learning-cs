@@ -1,5 +1,4 @@
 import { lis } from './lis'
-import { LinkedList } from '../../data-structures/list/linked-list'
 
 describe('lis', () => {
   test('should return longest increasing subsequence', () => {

@@ -1,4 +1,4 @@
-import { fill, floodQueue, floodRecursive } from './flood-fill'
+import { fill } from './flood-fill'
 
 describe('FloodFill', () => {
   test('should flood fill', () => {

@@ -100,7 +100,7 @@ describe('LinkedList<T>', () => {
       expect(list.toArray()).toEqual([1])
       expect(list.pop()).toBe(1)
       expect(list.toArray()).toEqual([])
-      expect(() => list.pop()).toThrowError(/Out of bounds!/)
+      expect(() => list.pop()).toThrow(/Out of bounds!/)
     })
   })
 

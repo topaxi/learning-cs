@@ -6,7 +6,7 @@ function rand5(): number {
 
 export function rand7(): number {
   let r = 0
-  for (let i of range(7)) {
+  for (let _i of range(7)) {
     r += rand5()
   }
   return (r % 7) + 1

@@ -6,6 +6,6 @@ describe('parseBinary', () => {
   })
 
   test('should throw on non binary strings', () => {
-    expect(() => parseBinary('2')).toThrowError()
+    expect(() => parseBinary('2')).toThrow()
   })
 })

@@ -32,7 +32,7 @@ export class WeakSingleParamStore<T extends any[], U> extends ClearableWeakmap<
   }
 }
 
-export type MemoStore = {
+export interface MemoStore {
   has(k: any[]): boolean
   get(k: any[]): any
   set(k: any[], value: any): any

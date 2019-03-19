@@ -7,7 +7,7 @@ export function partition<T>(
   let a: T[] = []
   let b: T[] = []
 
-  array.forEach((t, i, arr) => {
+  array.forEach((t, i, array) => {
     ;(fn(array[i], i, array) ? a : b).push(array[i])
   })
 
