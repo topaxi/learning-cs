@@ -1,5 +1,5 @@
 import { eq } from '../../utils/eq'
-import 'core-js/fn/array/flat-map'
+import 'core-js/features/array/flat-map'
 
 export class LinkedListNode<T> {
   static of<T>(...values: T[]): LinkedListNode<T> {
