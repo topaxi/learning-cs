@@ -1,6 +1,9 @@
 import { BinaryTreeNode } from './binary-tree-node'
 
-export class BinarySearchTreeNode<T, M = any> extends BinaryTreeNode<T, M> {
+export class BinarySearchTreeNode<T, M = unknown> extends BinaryTreeNode<
+  T,
+  M
+> {
   insert(value: T): BinarySearchTreeNode<T> {
     if (this.value === null) {
       this.value = value

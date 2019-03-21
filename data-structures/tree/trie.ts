@@ -20,7 +20,7 @@ class TrieNode {
     )
   }
 
-  toString() {
+  toString(): string {
     return this.character
   }
 }
@@ -76,7 +76,7 @@ export class Trie {
       currentWord: string,
       isCompleteWord: boolean
     ) => void
-  ) {
+  ): void {
     if (this.root !== node) {
       callback(
         node.character,

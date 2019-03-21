@@ -30,7 +30,7 @@ export class Queen extends ChessFigure {
     )
   }
 
-  toString() {
+  toString(): string {
     return '♕'
   }
 }
@@ -40,7 +40,7 @@ function solve(
   prevQueens: Array<Queen | null>,
   queenCount: number,
   row: number
-) {
+): Queen[][] {
   let queens = Array.from(prevQueens)
 
   if (row === queenCount) {

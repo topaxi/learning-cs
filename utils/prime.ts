@@ -1,8 +1,11 @@
 import { range } from './range'
 
-const returnTrue = () => true
-const primeReducer = (primes: Set<number>, isPrime: boolean, prime: number) =>
-  isPrime ? primes.add(prime) : primes
+const returnTrue = (): boolean => true
+const primeReducer = (
+  primes: Set<number>,
+  isPrime: boolean,
+  prime: number
+): Set<number> => (isPrime ? primes.add(prime) : primes)
 
 export function primes(max: number): Set<number> {
   let primes = Array.from(range(max), returnTrue)
@@ -19,7 +22,7 @@ export function primes(max: number): Set<number> {
   return primes.reduce(primeReducer, new Set())
 }
 
-export function isPrime(value: number) {
+export function isPrime(value: number): boolean {
   for (let i = 2; i < value; i++) {
     if (value % i === 0) {
       return false

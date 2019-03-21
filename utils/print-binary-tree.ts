@@ -16,13 +16,9 @@ class AsciiNode {
   parentDir: -1 | 0 | 1 = 0
 }
 
-const returnZero = () => 0
+const returnZero = (): number => 0
 
-export function printBinaryTree(tree: BinaryTreeNode<any>) {
-  console.log(new BinaryTreePrinter().print(tree))
-}
-
-export class BinaryTreePrinter {
+export class BinaryTreePrinter<T extends BinaryTreeNode<any, any>> {
   private lprofile = Array.from({ length: this.maxHeight }, returnZero)
   private rprofile = Array.from({ length: this.maxHeight }, returnZero)
   private gap = 3
@@ -32,7 +28,7 @@ export class BinaryTreePrinter {
   constructor(private readonly maxHeight = MAX_HEIGHT) {}
 
   //prints ascii tree for given Tree structure
-  print(root: BinaryTreeNode<any>): string {
+  print(root: T): string {
     if (root === null) return ''
 
     let proot = this.buildAsciiTree(root)!
@@ -64,13 +60,13 @@ export class BinaryTreePrinter {
     return this.out.trimRight()
   }
 
-  printf(str: string) {
+  printf(str: string): void {
     this.out += str
   }
 
   //This function prints the given level of the given tree, assuming
   //that the node has the given x cordinate.
-  private printLevel(node: AsciiNode | null, x: number, level: number) {
+  private printLevel(node: AsciiNode | null, x: number, level: number): void {
     if (node === null) return
 
     let isleft = node.parentDir === -1 ? 1 : 0
@@ -122,7 +118,7 @@ export class BinaryTreePrinter {
 
   //This function fills in the edgeLength and
   //height fields of the specified tree
-  private computeEdgeLengths(node: AsciiNode | null) {
+  private computeEdgeLengths(node: AsciiNode | null): void {
     if (node === null) return
 
     this.computeEdgeLengths(node.left)
@@ -184,9 +180,7 @@ export class BinaryTreePrinter {
     node.height = h
   }
 
-  private buildAsciiTreeRecursive(
-    root: BinaryTreeNode<any> | null
-  ): AsciiNode | null {
+  private buildAsciiTreeRecursive(root: T | null): AsciiNode | null {
     if (root === null) return null
 
     let node = new AsciiNode()
@@ -206,7 +200,7 @@ export class BinaryTreePrinter {
   }
 
   //Copy the tree into the ascii node structre
-  private buildAsciiTree(root: BinaryTreeNode<any>) {
+  private buildAsciiTree(root: T): AsciiNode | null {
     if (root === null) return null
 
     let node = this.buildAsciiTreeRecursive(root)!
@@ -218,7 +212,7 @@ export class BinaryTreePrinter {
   //It assumes that the center of the label of the root of this tree
   //is located at a position (x,y).  It assumes that the edgeLength
   //fields have been computed for this tree.
-  private computeLprofile(node: AsciiNode | null, x: number, y: number) {
+  private computeLprofile(node: AsciiNode | null, x: number, y: number): void {
     if (node === null) return
 
     let isleft = node.parentDir === -1 ? 1 : 0
@@ -246,7 +240,7 @@ export class BinaryTreePrinter {
     )
   }
 
-  private computeRprofile(node: AsciiNode | null, x: number, y: number) {
+  private computeRprofile(node: AsciiNode | null, x: number, y: number): void {
     if (node === null) return
 
     let notleft = node.parentDir != -1 ? 1 : 0
@@ -273,4 +267,8 @@ export class BinaryTreePrinter {
       y + node.edgeLength + 1
     )
   }
+}
+
+export function printBinaryTree(tree: BinaryTreeNode<unknown, unknown>): void {
+  console.log(new BinaryTreePrinter().print(tree))
 }

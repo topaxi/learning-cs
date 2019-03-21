@@ -5,9 +5,9 @@ export function move(
   stackFrom: Stack<number>,
   stackTo: Stack<number>,
   stackSpare: Stack<number>
-) {
+): void {
   if (stackFrom.empty) return
-  if (disks === 1) return stackTo.push(stackFrom.pop())
+  if (disks === 1) return void stackTo.push(stackFrom.pop())
 
   move(disks - 1, stackFrom, stackSpare, stackTo)
   move(1, stackFrom, stackTo, stackFrom)

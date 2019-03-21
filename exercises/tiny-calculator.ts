@@ -32,7 +32,7 @@ export function tinyCalculator(s: string): number {
         {
           let cur = 0
           while (i < s.length && s[i] >= '0' && s[i] <= '9') {
-            cur = cur * 10 + ((s[i++] as any) | 0)
+            cur = cur * 10 + (((s[i++] as unknown) as number) | 0)
           }
           i--
           value += sign * cur

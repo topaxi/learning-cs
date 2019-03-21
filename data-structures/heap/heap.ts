@@ -5,46 +5,47 @@ export abstract class Heap<T> {
 
   constructor(private readonly comparator: (a: T, b: T) => number) {}
 
-  get empty() {
+  get empty(): boolean {
     return this.memory.length === 0
   }
 
-  value(i: number) {
+  value(i: number): T {
     return this.memory[i]
   }
 
-  peek() {
+  peek(): T | null {
     return this.empty ? null : this.value(0)
   }
 
-  left(i: number) {
+  left(i: number): number {
     return i * 2 + 1
   }
 
-  right(i: number) {
+  right(i: number): number {
     return i * 2 + 2
   }
 
-  getParentIndex(i: number) {
+  getParentIndex(i: number): number {
     return Math.floor(i / 2)
   }
 
-  parent(i: number) {
+  parent(i: number): T {
     return this.value(this.getParentIndex(i))
   }
 
-  push(value: T) {
+  push(value: T): void {
     this.memory.push(value)
     this.heapifyUp()
   }
 
-  pop() {
+  pop(): T | null {
     if (this.memory.length === 0) {
       return null
     }
 
     if (this.memory.length === 1) {
-      return this.memory.pop()
+      let value = this.memory.pop()
+      return value === undefined ? null : value
     }
 
     const value = this.memory[0]
@@ -71,7 +72,7 @@ export abstract class Heap<T> {
     swap(this.memory, indexOne, indexTwo)
   }
 
-  private heapifyUp() {
+  private heapifyUp(): void {
     let current = this.memory.length - 1
 
     while (this.comparator(this.parent(current), this.value(current)) > 0) {
@@ -88,7 +89,7 @@ export abstract class Heap<T> {
     return this.right(parentIndex) < this.memory.length
   }
 
-  private heapifyDown() {
+  private heapifyDown(): void {
     let current = 0
     let next = null
 

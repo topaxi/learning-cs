@@ -1,6 +1,6 @@
 import { HashMap } from '../hash/hash-map'
 
-export class BinaryTreeNode<T, M = any> {
+export class BinaryTreeNode<T = number, M = unknown> {
   readonly meta = new HashMap<string | number, M>()
 
   private _left: this | null = null
@@ -115,7 +115,7 @@ export class BinaryTreeNode<T, M = any> {
     if (this.right !== null) yield* this.right
   }
 
-  traverse(callback: (value: T) => any): void {
+  traverse(callback: (value: T) => unknown): void {
     for (let value of this) callback(value)
   }
 
@@ -123,7 +123,11 @@ export class BinaryTreeNode<T, M = any> {
     return this.value === node.value
   }
 
-  toJSON() {
+  toJSON(): {
+    value: T
+    left: BinaryTreeNode<T> | null
+    right: BinaryTreeNode<T> | null
+  } {
     return {
       value: this.value,
       left: this._left,

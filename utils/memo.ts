@@ -48,7 +48,7 @@ export function memoize<
   T extends (...args: any[]) => any,
   M extends MemoStore = MemoTrie
 >(fn: T, store: M = (new MemoTrie() as unknown) as M): MemoizedFunction<T, M> {
-  function memoized(this: any, ...args: any[]): ReturnType<T> {
+  function memoized(this: unknown, ...args: unknown[]): ReturnType<T> {
     if (memoized.memo.has(args)) {
       return memoized.memo.get(args)
     }

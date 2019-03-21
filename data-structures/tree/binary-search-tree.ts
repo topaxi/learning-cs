@@ -3,7 +3,10 @@ import { BinarySearchTreeNode } from './binary-search-tree-node'
 export class BinarySearchTree<T> {
   protected root: BinarySearchTreeNode<T> | null = null
 
-  constructor(protected readonly compare = (a: any, b: any) => a - b) {}
+  constructor(
+    protected readonly compare: (a: T, b: T) => number = (a: any, b: any) =>
+      a - b
+  ) {}
 
   get balanceFactor(): number {
     return this.root === null ? 0 : this.root.balanceFactor
@@ -31,7 +34,7 @@ export class BinarySearchTree<T> {
     return this.root && this.root.findMax()
   }
 
-  toJSON() {
+  toJSON(): BinarySearchTreeNode<T> | null {
     return this.root
   }
 

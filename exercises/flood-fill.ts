@@ -9,7 +9,7 @@ export function fill(
   return floodQueue(screen, x, y, screen[y][x], color)
 }
 
-function boundaryCheck(screen: number[][], x: number, y: number) {
+function boundaryCheck(screen: number[][], x: number, y: number): boolean {
   return y < 0 || x < 0 || y >= screen.length || x >= screen[y].length
 }
 
@@ -59,7 +59,7 @@ export function floodQueue(
 
   return screen
 
-  function isOldColor(x: number, y: number) {
+  function isOldColor(x: number, y: number): boolean {
     return screen[y] !== undefined && screen[y][x] === oldColor
   }
 }

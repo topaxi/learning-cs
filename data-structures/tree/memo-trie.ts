@@ -1,10 +1,12 @@
 import { ClearableWeakmap } from '../../utils/clearable-weakmap'
 
 class MemoMap<T, U> {
-  private _weak = new ClearableWeakmap<any, U>()
+  private _weak = new ClearableWeakmap<object, U>()
   private _static = new Map<T, U>()
 
-  private _getMap(key: T) {
+  private _getMap(key: T): Map<T, U>
+  private _getMap(key: object): WeakMap<object, U>
+  private _getMap(key: T | object): unknown {
     return key !== null && typeof key === 'object' ? this._weak : this._static
   }
 
@@ -28,13 +30,13 @@ class MemoMap<T, U> {
 }
 
 class MemoTrieNode {
-  readonly children = new MemoMap<any, MemoTrieNode>()
-  value = undefined
+  readonly children = new MemoMap<unknown, MemoTrieNode>()
+  value: unknown = undefined
 
   constructor(
-    readonly arg: any,
+    readonly arg: unknown,
     public isCompleteArguments = false,
-    value?: any
+    value?: unknown
   ) {
     if (isCompleteArguments === true) {
       this.value = value
@@ -42,9 +44,9 @@ class MemoTrieNode {
   }
 
   addChild(
-    arg: any,
+    arg: unknown,
     isCompleteArguments = false,
-    value = undefined
+    value: unknown = undefined
   ): MemoTrieNode {
     if (this.children.has(arg)) {
       let node = this.children.get(arg)!
@@ -68,16 +70,16 @@ class MemoTrieNode {
     this.children.clear()
   }
 
-  toString() {
+  toString(): string {
     return String(this.arg)
   }
 }
 
 export class MemoTrie {
   private _root = new MemoTrieNode(null)
-  private _lookups = new WeakMap<any[], MemoTrieNode>()
+  private _lookups = new WeakMap<unknown[], MemoTrieNode>()
 
-  set(args: any[], value: any): void {
+  set(args: unknown[], value: unknown): void {
     let currentNode = this._root
 
     for (let i = 0; i < args.length; i++) {
@@ -85,13 +87,13 @@ export class MemoTrie {
     }
   }
 
-  get(args: any[]): any | undefined {
+  get(args: unknown[]): unknown | undefined {
     let node = this._getNode(args)
 
     return node.isCompleteArguments ? node.value : undefined
   }
 
-  has(args: any[]): boolean {
+  has(args: unknown[]): boolean {
     return this._getNode(args).isCompleteArguments
   }
 
@@ -99,7 +101,7 @@ export class MemoTrie {
     this._root.clear()
   }
 
-  private _getNode(args: any[]): MemoTrieNode {
+  private _getNode(args: unknown[]): MemoTrieNode {
     let node = this._lookups.get(args)
     if (node !== undefined) return node
     node = this._root

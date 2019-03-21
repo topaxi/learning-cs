@@ -38,6 +38,6 @@ export abstract class Graph<T> {
   }
 }
 
-function weightReducer(weight: number, edge: GraphEdge<any>): number {
+function weightReducer(weight: number, edge: GraphEdge<unknown>): number {
   return weight + edge.weight
 }

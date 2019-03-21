@@ -37,7 +37,11 @@ module.exports = {
     '@typescript-eslint/no-parameter-properties': 'off',
     '@typescript-eslint/no-use-before-define': 'warn',
     '@typescript-eslint/array-type': ['off', 'array-simple'],
-    '@typescript-eslint/camelcase': 'off'
+    '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/explicit-function-return-type': [
+      'warn',
+      { allowExpressions: true }
+    ]
   },
   overrides: [
     {

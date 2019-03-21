@@ -88,17 +88,29 @@ export class HashSet<T extends string | number> {
   }
 }
 
+function isSetLike(
+  iterable: object
+): iterable is { has(key: unknown): boolean } {
+  return Reflect.has(iterable, 'has')
+}
+
+function isArrayLike(
+  iterable: object
+): iterable is { includes(key: unknown): boolean } {
+  return Reflect.has(iterable, 'includes')
+}
+
 function has(
   iterable:
-    | { has(key: any): boolean }
-    | { includes(key: any): boolean }
-    | Iterable<any>,
-  key: any
+    | { has(key: unknown): boolean }
+    | { includes(key: unknown): boolean }
+    | Iterable<unknown>,
+  key: unknown
 ): boolean {
-  if (Reflect.has(iterable, 'has')) return (iterable as any).has(key)
-  if (Reflect.has(iterable, 'includes')) return (iterable as any).includes(key)
+  if (isSetLike(iterable)) return iterable.has(key)
+  if (isArrayLike(iterable)) return iterable.includes(key)
 
-  for (let value of iterable as any) {
+  for (let value of iterable) {
     if (value === key) return true
   }
 

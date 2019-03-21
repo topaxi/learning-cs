@@ -39,7 +39,7 @@ export class LinkedList<T> implements Iterable<T> {
   private firstNode: LinkedListNode<T> | null = null
   private lastNode: LinkedListNode<T> | null = null
 
-  get empty() {
+  get empty(): boolean {
     return this.firstNode === null
   }
 
@@ -122,9 +122,9 @@ export class LinkedList<T> implements Iterable<T> {
     initialValue: A
   ): A
   reduce<A>(
-    reducer: (accumulator: any, value: T, index: number, self: this) => A,
+    reducer: (accumulator: unknown, value: T, index: number, self: this) => A,
     initialValue?: A
-  ): any {
+  ): unknown {
     if (this.firstNode === null) {
       if (initialValue !== undefined) {
         return initialValue
@@ -163,8 +163,12 @@ export class LinkedList<T> implements Iterable<T> {
   filter<S extends T>(
     filter: (value: T, index: number, list: this) => value is S
   ): LinkedList<S>
-  filter(filter: (value: T, index: number, list: this) => any): LinkedList<T>
-  filter(filter: (value: T, index: number, list: this) => any): LinkedList<T> {
+  filter(
+    filter: (value: T, index: number, list: this) => unknown
+  ): LinkedList<T>
+  filter(
+    filter: (value: T, index: number, list: this) => unknown
+  ): LinkedList<T> {
     return this.reduce(
       (list, value, index, self) =>
         filter(value, index, self) ? list.push(value) : list,
@@ -192,7 +196,7 @@ export class LinkedList<T> implements Iterable<T> {
 
   concat(...lists: (Iterable<T> | T)[]): LinkedList<T>
   concat<S>(...lists: (Iterable<S> | S)[]): LinkedList<T | S>
-  concat(...lists: (Iterable<any> | any)[]): LinkedList<any> {
+  concat(...lists: (Iterable<unknown> | unknown)[]): LinkedList<unknown> {
     return lists
       .map(list =>
         this.isIterable(list) ? LinkedList.from(list) : LinkedList.of(list)

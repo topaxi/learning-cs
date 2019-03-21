@@ -1,6 +1,6 @@
 import { BinaryTreeNode } from '../data-structures/tree/binary-tree-node'
 
-export function isUnivalTree(node: BinaryTreeNode<any> | null): boolean {
+export function isUnivalTree<T>(node: BinaryTreeNode<T> | null): boolean {
   if (node === null) return true
   if (node.left === null && node.right === null) return true
   if (node.left !== null && !node.equals(node.left)) return false
