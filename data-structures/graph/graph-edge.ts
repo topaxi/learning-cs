@@ -1,6 +1,10 @@
 import { GraphVertex } from './graph-vertex'
 
 export class GraphEdge<T> {
+  private static nextId = 0
+
+  readonly id = GraphEdge.nextId++
+
   constructor(
     public startVertex: GraphVertex<T>,
     public endVertex: GraphVertex<T>,

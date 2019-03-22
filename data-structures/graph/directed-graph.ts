@@ -10,6 +10,6 @@ export class DirectedGraph<T> extends Graph<T> {
   ): void {
     let edge = new GraphEdge(vertexA, vertexB, weight)
 
-    this.edges.set(edge.toString(), edge)
+    this.edges.set(edge.id, edge)
   }
 }
