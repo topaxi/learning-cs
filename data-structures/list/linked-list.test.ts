@@ -174,6 +174,18 @@ describe('LinkedList<T>', () => {
     })
   })
 
+  describe('#flat()', () => {
+    test('should flatten list', () => {
+      let list = LinkedList.of(
+        LinkedList.of(1, 2),
+        LinkedList.of(3, 4),
+        LinkedList.of(5, 6)
+      )
+
+      expect(list.flat().join('|')).toBe('1|2|3|4|5|6')
+    })
+  })
+
   describe('#toString()', () => {
     test('should return list values separated by a comma', () => {
       expect(LinkedList.of(1, 2, 3).toString()).toBe('1,2,3')
