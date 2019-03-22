@@ -259,7 +259,7 @@ export class LinkedList<T> implements Iterable<T> {
       }
     }
 
-    return callback(null, i, this)
+    return callback(null, -1, this)
   }
 
   slice(start: number, end?: number): LinkedList<T> {
@@ -300,7 +300,7 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   delete(value: T): T | null {
-    return this.deleteAt(this.findIndex(eq(value)))
+    return this.deleteAt(this.indexOf(value))
   }
 
   deleteAt(index: number): T | null {
@@ -309,13 +309,11 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   includes(value: T): boolean {
-    for (let v of this) {
-      if (value === v) {
-        return true
-      }
-    }
+    return this.indexOf(value) !== -1
+  }
 
-    return false
+  indexOf(value: T): number {
+    return this.findIndex(eq(value))
   }
 
   join(delimiter = ','): string {
