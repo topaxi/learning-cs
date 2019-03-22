@@ -142,6 +142,38 @@ describe('LinkedList<T>', () => {
     })
   })
 
+  describe('#concat()', () => {
+    test('should concat lists', () => {
+      let listA = LinkedList.of(1, 2, 3)
+      let listB = LinkedList.of(4, 5, 6)
+
+      expect(listA.concat(listB).toString()).toBe('1,2,3,4,5,6')
+    })
+
+    test('should accept iterable values', () => {
+      let list = LinkedList.of(1, 2, 3)
+
+      expect(list.concat([4, 5, 6]).toString()).toBe('1,2,3,4,5,6')
+      expect(list.concat('4,5,6').toString()).toBe('1,2,3,4,5,6')
+      expect(list.concat(new Set([4, 5, 6])).toString()).toBe('1,2,3,4,5,6')
+    })
+
+    test('should accept multiple lists', () => {
+      let list = LinkedList.of(1)
+
+      expect(
+        list.concat([2], 3, new Set([4]), 5, LinkedList.of(6)).toString()
+      ).toBe('1,2,3,4,5,6')
+    })
+
+    test('should work with empty lists', () => {
+      let list = new LinkedList()
+
+      expect(list.concat(new LinkedList()).toString()).toBe('')
+      expect(list.concat(new LinkedList(), [1]).toString()).toBe('1')
+    })
+  })
+
   describe('#toString()', () => {
     test('should return list values separated by a comma', () => {
       expect(LinkedList.of(1, 2, 3).toString()).toBe('1,2,3')

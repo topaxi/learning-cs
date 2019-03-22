@@ -1,4 +1,5 @@
 import { HashMapWithDefault } from '../data-structures/hash/hash-map-with-default'
+import { head } from '../utils/array'
 
 export function commonArrayValues<T extends number | string>(
   array1: T[],
@@ -8,7 +9,7 @@ export function commonArrayValues<T extends number | string>(
 export function commonArrayValues<T extends number | string>(
   ...arrays: T[][]
 ): T[] {
-  let map = new HashMapWithDefault(0)
+  let map = new HashMapWithDefault<T, number>(0)
 
   for (let i = 0; i < arrays.length; i++) {
     for (let j = 0; j < arrays[i].length; j++) {
@@ -18,5 +19,5 @@ export function commonArrayValues<T extends number | string>(
 
   return Array.from(map.entries())
     .filter(([_key, value]) => value === arrays.length)
-    .map(([key]) => key) as T[]
+    .map(e => head(e))
 }

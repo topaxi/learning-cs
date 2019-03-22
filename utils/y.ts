@@ -1,7 +1,6 @@
-import { memoize, MemoizedFunction, MemoStore } from './memo'
 import { MemoTrie } from '../data-structures/tree/memo-trie'
-
-const identity = <T>(x: T): T => x
+import { memoize, MemoizedFunction, MemoStore } from './memo'
+import { identity } from './identity'
 
 // eslint-disable-next-line
 type AnyFunction = (...args: any[]) => any

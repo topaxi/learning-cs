@@ -1,4 +1,5 @@
 import { eq } from '../../utils/eq'
+import { concat } from '../../utils/operators'
 import 'core-js/features/array/flat-map'
 
 export class LinkedListNode<T> {
@@ -124,7 +125,7 @@ export class LinkedList<T> implements Iterable<T> {
   reduce<A>(
     reducer: (accumulator: unknown, value: T, index: number, self: this) => A,
     initialValue?: A
-  ): unknown {
+  ): A {
     if (this.firstNode === null) {
       if (initialValue !== undefined) {
         return initialValue
@@ -150,7 +151,7 @@ export class LinkedList<T> implements Iterable<T> {
       node = node.next
     }
 
-    return accumulator
+    return accumulator as A
   }
 
   map<R>(project: (value: T, index: number, list: this) => R): LinkedList<R> {
@@ -199,17 +200,16 @@ export class LinkedList<T> implements Iterable<T> {
   concat(...lists: (Iterable<unknown> | unknown)[]): LinkedList<unknown> {
     return lists
       .map(list =>
-        this.isIterable(list) ? LinkedList.from(list) : LinkedList.of(list)
+        typeof list !== 'string' && this.isIterable(list)
+          ? LinkedList.from(list)
+          : LinkedList.of(list)
       )
       .filter(list => list.lastNode !== null)
-      .reduce((acc, list) => {
-        acc.lastNode!.next = list.firstNode
-        return acc
-      }, LinkedList.from(this))
+      .reduce(this.concatReducer, LinkedList.from(this))
   }
 
   flat<U>(this: LinkedList<LinkedList<U>>): LinkedList<U> {
-    return this.reduce((flat, list) => flat.concat(list), new LinkedList<U>())
+    return this.reduce<LinkedList<U>>(concat, new LinkedList<U>())
   }
 
   flatMap<U, R>(
@@ -238,26 +238,28 @@ export class LinkedList<T> implements Iterable<T> {
     }
   }
 
-  find(callback: (value: T, key: number, list: this) => boolean): T | null {
-    let i = -1
-    for (let value of this) {
-      if (callback(value, ++i, this) === true) {
-        return value
-      }
-    }
-
-    return null
+  find(predicate: (value: T, key: number, list: this) => boolean): T | null {
+    return this._find(predicate, value => value)
   }
 
-  findIndex(callback: (value: T, key: number, list: this) => boolean): number {
+  findIndex(
+    predicate: (value: T, key: number, list: this) => boolean
+  ): number {
+    return this._find(predicate, (_value, index) => index)
+  }
+
+  private _find<U>(
+    predicate: (value: T, key: number, list: this) => boolean,
+    callback: (value: T | null, key: number, list: this) => U
+  ): U {
     let i = -1
     for (let value of this) {
-      if (callback(value, ++i, this) === true) {
-        return i
+      if (predicate(value, ++i, this) === true) {
+        return callback(value, i, this)
       }
     }
 
-    return i
+    return callback(null, i, this)
   }
 
   slice(start: number, end?: number): LinkedList<T> {
@@ -319,7 +321,7 @@ export class LinkedList<T> implements Iterable<T> {
   join(delimiter = ','): string {
     return this.firstNode === null
       ? ''
-      : this.reduce((str, value) => `${str}${delimiter}${value}`)
+      : String(this.reduce((str, value) => `${str}${delimiter}${value}`))
   }
 
   get(index: number): T {
@@ -377,5 +379,20 @@ export class LinkedList<T> implements Iterable<T> {
 
   private isIterable<T>(iterable: any): iterable is Iterable<T> {
     return iterable != null && typeof iterable[Symbol.iterator] !== 'undefined'
+  }
+
+  private concatReducer<T>(
+    acc: LinkedList<T>,
+    list: LinkedList<T>
+  ): LinkedList<T> {
+    if (acc.lastNode === null) {
+      acc.firstNode = list.firstNode
+    } else {
+      acc.lastNode.next = list.firstNode
+    }
+
+    acc.lastNode = list.lastNode
+
+    return acc
   }
 }

@@ -2,17 +2,15 @@ import { byValue } from '../../utils/filters'
 import { HashMap } from '../hash/hash-map'
 import { GraphVertex } from './graph-vertex'
 import { GraphEdge } from './graph-edge'
-
-function weightReducer(weight: number, edge: GraphEdge<unknown>): number {
-  return weight + edge.weight
-}
+import { prop } from '../../utils/prop'
+import { add } from '../../utils/operators'
 
 export abstract class Graph<T> {
   readonly vertices = new HashMap<number, GraphVertex<T>>()
   readonly edges = new HashMap<number, GraphEdge<T>>()
 
   get weight(): number {
-    return this.edges.values().reduce(weightReducer, 0)
+    return Array.from(this.edges.values(), prop('weight')).reduce(add, 0)
   }
 
   addVertex(vertex: GraphVertex<T>): void {
