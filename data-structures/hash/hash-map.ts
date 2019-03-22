@@ -1,7 +1,7 @@
 import { LinkedList } from '../list'
 import { hashCode } from '../../utils/string-hash'
 import { byKey } from '../../utils/filters'
-import { pluck } from '../../utils/pluck'
+import { prop } from '../../utils/prop'
 
 interface HashMapNode<K, T> {
   key: K
@@ -74,7 +74,7 @@ export class HashMap<K extends string | number, T> {
   }
 
   values(): T[] {
-    return this.slots.flatMap(list => Array.from(list, pluck('value')))
+    return this.slots.flatMap(list => Array.from(list, prop('value')))
   }
 
   *entries(): IterableIterator<[K, T]> {
