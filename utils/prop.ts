@@ -1,3 +1,3 @@
 export function prop<T, P extends keyof T = keyof T>(key: P): (t: T) => T[P] {
-  return (t: T) => t[key]
+  return t => t[key]
 }
