@@ -3,13 +3,13 @@ import { GraphEdge } from './graph-edge'
 
 describe('GraphEdge<T>', () => {
   test('should take two vertices', () => {
-    let vertex1 = new GraphVertex(1)
-    let vertex2 = new GraphVertex(2)
+    let startVertex = new GraphVertex(1)
+    let endVertex = new GraphVertex(2)
 
-    let edge = new GraphEdge(vertex1, vertex2)
+    let edge = new GraphEdge(startVertex, endVertex)
 
-    expect(edge.startVertex).toBe(vertex1)
-    expect(edge.endVertex).toBe(vertex2)
+    expect(edge.startVertex).toBe(startVertex)
+    expect(edge.endVertex).toBe(endVertex)
   })
 
   test('should have a default weight of 0', () => {
@@ -26,27 +26,27 @@ describe('GraphEdge<T>', () => {
 
   describe('#reverse()', () => {
     test('should swap start and end vertex', () => {
-      let vertex1 = new GraphVertex(1)
-      let vertex2 = new GraphVertex(2)
+      let startVertex = new GraphVertex(1)
+      let endVertex = new GraphVertex(2)
 
-      let edge = new GraphEdge(vertex1, vertex2)
+      let edge = new GraphEdge(startVertex, endVertex)
 
-      expect(edge.startVertex).toBe(vertex1)
-      expect(edge.endVertex).toBe(vertex2)
+      expect(edge.startVertex).toBe(startVertex)
+      expect(edge.endVertex).toBe(endVertex)
 
       edge.reverse()
 
-      expect(edge.startVertex).toBe(vertex2)
-      expect(edge.endVertex).toBe(vertex1)
+      expect(edge.startVertex).toBe(endVertex)
+      expect(edge.endVertex).toBe(startVertex)
     })
   })
 
   describe('#clone()', () => {
     test('should return a clone', () => {
-      let vertex1 = new GraphVertex(1)
-      let vertex2 = new GraphVertex(2)
+      let startVertex = new GraphVertex(1)
+      let endVertex = new GraphVertex(2)
 
-      let edge = new GraphEdge(vertex1, vertex2)
+      let edge = new GraphEdge(startVertex, endVertex)
       let clone = edge.clone()
 
       expect(edge.weight).toBe(clone.weight)
