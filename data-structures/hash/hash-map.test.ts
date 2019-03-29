@@ -75,7 +75,9 @@ describe('HashMap', () => {
     map.set('test3', 'baz')
     map.set('test4', 'qux')
 
-    expect(map.keys()).toEqual(['test1', 'test2', 'test3', 'test4'])
+    expect(Array.from(map.keys())).toEqual(
+      expect.arrayContaining(['test1', 'test2', 'test3', 'test4'])
+    )
   })
 
   test('should be able to list values', () => {
@@ -86,7 +88,7 @@ describe('HashMap', () => {
     map.set('test3', 'baz')
     map.set('test4', 'qux')
 
-    expect(map.values()).toEqual(
+    expect(Array.from(map.values())).toEqual(
       expect.arrayContaining(['foo', 'bar', 'baz', 'qux'])
     )
   })

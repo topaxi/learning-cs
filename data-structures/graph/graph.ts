@@ -27,7 +27,7 @@ export abstract class Graph<T> {
   }
 
   protected _findVertex(value: T): GraphVertex<T> | undefined {
-    return this.vertices.values().find(byValue(value))
+    return Array.from(this.vertices.values()).find(byValue(value))
   }
 
   protected _addEdge(

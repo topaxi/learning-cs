@@ -1,6 +1,5 @@
-import 'core-js/features/array/flat-map'
 import { LinkedList } from '../list'
-import { hashCode, byKey, prop } from '../../utils'
+import { hashCode, byKey } from '../../utils'
 
 interface HashMapNode<K, T> {
   key: K
@@ -15,7 +14,7 @@ export class HashMap<K extends string | number, T> {
   private keyMap: Record<K, number> = {} as any
 
   get size(): number {
-    return this.keys().length
+    return Object.keys(this.keyMap).length
   }
 
   constructor(private readonly internalSize = 32) {}
@@ -68,19 +67,21 @@ export class HashMap<K extends string | number, T> {
     this.keyMap = {} as any
   }
 
-  keys(): K[] {
-    return Object.keys(this.keyMap) as K[]
+  *keys(): IterableIterator<K> {
+    for (let { key } of this.nodes()) yield key
   }
 
-  values(): T[] {
-    return this.slots.flatMap(list => Array.from(list, prop('value')))
+  *values(): IterableIterator<T> {
+    for (let { value } of this.nodes()) yield value
   }
 
   *entries(): IterableIterator<[K, T]> {
+    for (let { key, value } of this.nodes()) yield [key, value]
+  }
+
+  private *nodes(): IterableIterator<HashMapNode<K, T>> {
     for (let i = 0; i < this.slots.length; i++) {
-      for (let node of this.slots[i]) {
-        yield [node.key, node.value]
-      }
+      yield* this.slots[i]
     }
   }
 
