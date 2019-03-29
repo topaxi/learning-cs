@@ -1,5 +1,5 @@
-import { HashMapWithDefault } from '../data-structures/hash/hash-map-with-default'
-import { add } from '../utils/operators'
+import { HashMapWithDefault } from '../data-structures'
+import { add, gt } from '../utils'
 
 // Without sort
 export function isAnagram(str1: string, str2: string): boolean {
@@ -17,7 +17,7 @@ export function isAnagram(str1: string, str2: string): boolean {
 
   return (
     Array.from(map.values())
-      .filter(count => count > 0)
+      .filter(gt(0))
       .reduce(add, 0) === 0
   )
 }

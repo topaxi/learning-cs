@@ -1,5 +1,4 @@
-import { partition } from '../../utils/partition'
-import { random } from '../../utils/random'
+import { partition, random } from '../../utils'
 
 export function defaultCompare(a: any, b: any): number {
   return b - a

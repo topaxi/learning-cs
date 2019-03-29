@@ -1,5 +1,5 @@
-import { Stack } from '../data-structures/stack/stack'
-import { range } from '../utils/range'
+import { Stack } from '../data-structures'
+import { range } from '../utils'
 import { move } from './hanoi'
 
 describe('hanoi', () => {

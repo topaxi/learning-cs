@@ -1,4 +1,4 @@
-import { Queue } from '../data-structures/queue/queue'
+import { Queue } from '../data-structures'
 
 export function fill(
   screen: number[][],

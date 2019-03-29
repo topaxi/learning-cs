@@ -1,4 +1,4 @@
-import { LinkedList } from '../list/linked-list'
+import { LinkedList } from '../list'
 import { GraphEdge } from './graph-edge'
 
 export class GraphVertex<T> {

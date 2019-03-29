@@ -1,5 +1,5 @@
 import { msort } from './merge-sort'
-import { shuffle } from '../../utils/array'
+import { shuffle } from '../../utils'
 
 function expectSorted<T>(array: T[], cmp?: (a: T, b: T) => number) {
   expect(msort(shuffle(array), cmp)).toEqual(array)

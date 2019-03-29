@@ -1,4 +1,4 @@
-import { HashMap } from '../hash/hash-map'
+import { HashMap } from '../hash'
 
 export class BinaryTreeNode<T = number, M = unknown> {
   readonly meta = new HashMap<string | number, M>()

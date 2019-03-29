@@ -1,4 +1,4 @@
-import { BinaryTreeNode } from '../data-structures/tree/binary-tree-node'
+import { BinaryTreeNode } from '../data-structures'
 import { isUnivalTree } from './unival-tree'
 
 describe('isUnivalTree', () => {

@@ -1,9 +1,7 @@
-import { byValue } from '../../utils/filters'
-import { HashMap } from '../hash/hash-map'
+import { byValue, prop, add } from '../../utils'
+import { HashMap } from '../hash'
 import { GraphVertex } from './graph-vertex'
 import { GraphEdge } from './graph-edge'
-import { prop } from '../../utils/prop'
-import { add } from '../../utils/operators'
 
 export abstract class Graph<T> {
   readonly vertices = new HashMap<number, GraphVertex<T>>()

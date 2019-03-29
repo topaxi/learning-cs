@@ -1,5 +1,5 @@
-import { AvlTree } from '../../data-structures/tree/avl-tree'
-import { neg } from '../../utils/neg'
+import { AvlTree } from '../../data-structures'
+import { neg } from '../../utils'
 
 export function defaultCompare(a: any, b: any): number {
   return b - a

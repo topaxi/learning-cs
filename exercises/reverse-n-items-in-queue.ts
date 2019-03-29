@@ -1,6 +1,5 @@
-import { range } from '../utils/range'
-import { Stack } from '../data-structures/stack'
-import { Queue } from '../data-structures/queue'
+import { range } from '../utils'
+import { Stack, Queue } from '../data-structures'
 
 export function reverseQueue(
   queue: Queue<number>,

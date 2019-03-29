@@ -1,4 +1,4 @@
-import { Stack } from '../data-structures/stack/stack'
+import { Stack } from '../data-structures'
 
 export function tinyCalculator(s: string): number {
   let stack = new Stack<number>()

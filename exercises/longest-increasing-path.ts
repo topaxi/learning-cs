@@ -1,4 +1,4 @@
-import { memoizedY } from '../utils/y'
+import { memoizedY } from '../utils'
 
 export function longestIncreasingPath(matrix: number[][]): number {
   let longestPath = 0

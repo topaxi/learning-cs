@@ -1,4 +1,4 @@
-import { swap } from '../../utils/swap'
+import { swap } from '../../utils'
 
 export abstract class Heap<T> {
   private readonly memory: T[] = []

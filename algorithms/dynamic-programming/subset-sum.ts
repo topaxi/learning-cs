@@ -1,5 +1,4 @@
-import { head, tail } from '../../utils/array'
-import { memoizedY } from '../../utils/y'
+import { head, tail, memoizedY } from '../../utils'
 
 // Given a set of non-negative integers, and a value sum,
 // determine if there is a subset of the given set with sum equal to given sum.

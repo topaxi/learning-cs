@@ -1,5 +1,5 @@
 import { qsort } from './quick-sort'
-import { shuffle } from '../../utils/array'
+import { shuffle } from '../../utils'
 
 function expectSorted<T>(array: T[], cmp?: (a: T, b: T) => number) {
   expect(qsort(shuffle(array), cmp)).toEqual(array)

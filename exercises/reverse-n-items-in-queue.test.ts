@@ -1,4 +1,4 @@
-import { Queue } from '../data-structures/queue'
+import { Queue } from '../data-structures'
 import { reverseQueue } from './reverse-n-items-in-queue'
 
 describe('Reverse n items in queue', () => {

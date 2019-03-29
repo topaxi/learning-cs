@@ -1,5 +1,5 @@
 import { HashMap } from '../../data-structures'
-import { range } from '../../utils/range'
+import { range } from '../../utils'
 
 // O(n²)
 export function fib_naive(n: number): number {

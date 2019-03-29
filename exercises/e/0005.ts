@@ -1,4 +1,4 @@
-import { range } from '../../utils/range'
+import { range } from '../../utils'
 
 function isEvenlyDivisibleBy(n: number, divisors: number[]): boolean {
   for (let i of divisors) {

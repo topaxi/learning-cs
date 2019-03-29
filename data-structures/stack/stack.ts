@@ -1,4 +1,4 @@
-import { LinkedList } from '../list/linked-list'
+import { LinkedList } from '../list'
 
 export class Stack<T> {
   private readonly list = new LinkedList<T>()

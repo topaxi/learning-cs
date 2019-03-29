@@ -1,4 +1,4 @@
-import { shuffleInplace } from '../../utils/array'
+import { shuffleInplace } from '../../utils'
 
 export function defaultCompare(a: any, b: any): number {
   return b - a

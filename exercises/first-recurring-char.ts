@@ -1,4 +1,4 @@
-import { HashSet } from '../data-structures/hash/hash-set'
+import { HashSet } from '../data-structures'
 
 export function firstRecurringChar(str: string): string | null {
   let seen = new HashSet<string>()

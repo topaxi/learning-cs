@@ -1,5 +1,4 @@
-import { range } from '../../utils/range'
-import { memoizedY } from '../../utils/y'
+import { range, memoizedY } from '../../utils'
 import { SingleParamStore } from '../../utils/memo'
 
 // Longest increasing subsequence

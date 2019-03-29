@@ -1,5 +1,5 @@
 import { map, reverse, foreach } from './no-list'
-import { range } from '../utils/range'
+import { range } from '../utils'
 
 // http://lisperator.net/blog/a-little-javascript-problem/
 describe('a-little-javascript-problem', () => {

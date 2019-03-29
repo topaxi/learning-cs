@@ -1,4 +1,4 @@
-import { Y, memoizedY } from '../../utils/y'
+import { Y, memoizedY } from '../../utils'
 import { SingleParamStore } from '../../utils/memo'
 
 const staircase = (staircase: (n: number) => number) => (n: number) => {

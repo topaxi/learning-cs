@@ -1,6 +1,4 @@
-import { eq } from '../../utils/eq'
-import { concat } from '../../utils/operators'
-import 'core-js/features/array/flat-map'
+import { eq, concat } from '../../utils'
 
 export class LinkedListNode<T> {
   static of<T>(...values: T[]): LinkedListNode<T> {

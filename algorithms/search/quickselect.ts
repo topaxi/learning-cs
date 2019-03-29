@@ -1,5 +1,4 @@
-import { partitionInline } from '../../utils/partition'
-import { random } from '../../utils/random'
+import { partitionInline, random } from '../../utils'
 
 export function quickselect(
   list: number[],

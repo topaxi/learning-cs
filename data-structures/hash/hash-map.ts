@@ -1,7 +1,6 @@
+import 'core-js/features/array/flat-map'
 import { LinkedList } from '../list'
-import { hashCode } from '../../utils/string-hash'
-import { byKey } from '../../utils/filters'
-import { prop } from '../../utils/prop'
+import { hashCode, byKey, prop } from '../../utils'
 
 interface HashMapNode<K, T> {
   key: K

@@ -1,4 +1,4 @@
-import { Stack } from '../data-structures/stack'
+import { Stack } from '../data-structures'
 
 export function move(
   disks: number,

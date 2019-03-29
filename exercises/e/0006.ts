@@ -1,11 +1,10 @@
-import { range } from '../../utils/range'
+import { range, add } from '../../utils'
 
-const sum = (a: number, b: number) => a + b
 const sumOfSquares = Array.from(
   range(1, 100, { inclusive: true }),
   n => n ** 2
-).reduce(sum)
+).reduce(add)
 const squareOfSum =
-  Array.from(range(1, 100, { inclusive: true })).reduce(sum) ** 2
+  Array.from(range(1, 100, { inclusive: true })).reduce(add) ** 2
 
 console.log(squareOfSum - sumOfSquares)
