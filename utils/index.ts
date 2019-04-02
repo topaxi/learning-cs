@@ -1,3 +1,6 @@
+import * as iter from './iterator'
+
+export { iter }
 export * from './range'
 export * from './array'
 export * from './partition'

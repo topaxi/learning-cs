@@ -1,4 +1,4 @@
-import { byValue, prop, add } from '../../utils'
+import { byValue, prop, add, iter } from '../../utils'
 import { HashMap } from '../hash'
 import { GraphVertex } from './graph-vertex'
 import { GraphEdge } from './graph-edge'
@@ -27,7 +27,7 @@ export abstract class Graph<T> {
   }
 
   protected _findVertex(value: T): GraphVertex<T> | undefined {
-    return Array.from(this.vertices.values()).find(byValue(value))
+    return iter.find(this.vertices.values(), byValue(value))
   }
 
   protected _addEdge(
