@@ -228,11 +228,10 @@ export class LinkedList<T> implements Iterable<T> {
 
   *[Symbol.iterator](): IterableIterator<T> {
     let node = this.firstNode
-    if (node !== null) {
+
+    while (node !== null) {
       yield node.value
-      while ((node = node.next) !== null) {
-        yield node.value
-      }
+      node = node.next
     }
   }
 
