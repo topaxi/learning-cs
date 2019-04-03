@@ -1,3 +1,5 @@
+import { range } from '../utils'
+
 export abstract class ChessFigure {
   constructor(readonly row: number, readonly column: number) {}
 
@@ -49,7 +51,7 @@ function solve(
     return solutions
   }
 
-  for (let column = 0; column < queenCount; column++) {
+  for (let column of range(queenCount)) {
     let queen = new Queen(row, column)
 
     if (!queens.some(q => queen.threatenedBy(q))) {

@@ -1,9 +1,6 @@
-import { LinkedList } from '../data-structures/list/linked-list'
+import { LinkedList } from '../data-structures'
 
-export function add(a: number, b: number): number
-export function add(a: string, b: string): string
-// eslint-disable-next-line
-export function add(a: any, b: any): unknown {
+export function add(a: number, b: number): number {
   return a + b
 }
 

@@ -1,7 +1,7 @@
-import { eq, concat } from '../../utils'
+import { eq, concat, iter, prop, add, partial } from '../../utils'
 
 export class LinkedListNode<T> {
-  static of<T>(...values: T[]): LinkedListNode<T> {
+  static of<T>(...values: T[]) {
     let node = new this<T>(values[0])
 
     for (let i = values.length; i > 1; i--) {
@@ -17,12 +17,19 @@ export class LinkedListNode<T> {
 
   constructor(public value: T, public next: LinkedListNode<T> | null = null) {}
 
-  last(): LinkedListNode<T> {
-    let prev: LinkedListNode<T> = this
-    while (prev.next !== null) {
-      prev = prev.next
+  *[Symbol.iterator](): IterableIterator<LinkedListNode<T>> {
+    for (
+      let node: LinkedListNode<T> | null = this;
+      node !== null;
+      node = node.next
+    ) {
+      yield node
     }
-    return prev
+  }
+
+  last(): LinkedListNode<T> {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return iter.last(this)!
   }
 }
 
@@ -53,10 +60,7 @@ export class LinkedList<T> implements Iterable<T> {
   push(...values: T[]): this {
     if (values.length === 0) return this
 
-    let node =
-      values.length === 1
-        ? new LinkedListNode(values[0])
-        : LinkedListNode.from(values)
+    let node = LinkedListNode.from(values)
 
     if (this.firstNode === null) {
       this.firstNode = node
@@ -103,7 +107,7 @@ export class LinkedList<T> implements Iterable<T> {
     let previousNode = null
     while (currentNode.next !== null) {
       previousNode = currentNode
-      currentNode = currentNode.next!
+      currentNode = currentNode.next
     }
     if (previousNode !== null) {
       previousNode.next = null
@@ -190,7 +194,7 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   size(): number {
-    return this.reduce(size => ++size, 0)
+    return this.reduce(partial(add, 1), 0)
   }
 
   concat(...lists: (Iterable<T> | T)[]): LinkedList<T>
@@ -226,13 +230,12 @@ export class LinkedList<T> implements Iterable<T> {
     )
   }
 
-  *[Symbol.iterator](): IterableIterator<T> {
-    let node = this.firstNode
+  private *nodes(): IterableIterator<LinkedListNode<T>> {
+    if (this.firstNode !== null) yield* this.firstNode
+  }
 
-    while (node !== null) {
-      yield node.value
-      node = node.next
-    }
+  [Symbol.iterator](): IterableIterator<T> {
+    return iter.map(this.nodes(), prop('value'))
   }
 
   find(predicate: (value: T, key: number, list: this) => boolean): T | null {
@@ -372,8 +375,12 @@ export class LinkedList<T> implements Iterable<T> {
     return node
   }
 
-  private isIterable<T>(iterable: any): iterable is Iterable<T> {
-    return iterable != null && typeof iterable[Symbol.iterator] !== 'undefined'
+  private isIterable<T>(iterable: unknown): iterable is Iterable<T> {
+    return (
+      typeof iterable === 'object' &&
+      iterable != null &&
+      Reflect.has(iterable, Symbol.iterator)
+    )
   }
 
   private concatReducer<T>(

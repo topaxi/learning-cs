@@ -1,6 +1,7 @@
 import { memoize, WeakSingleParamStore } from './memo'
 import { random } from './random'
 import { swap } from './swap'
+import { add } from './operators'
 
 function _tail<T>(list: [unknown, ...T[]]): ReadonlyArray<T>[]
 function _tail<T>(list: ReadonlyArray<T>): ReadonlyArray<T>[]
@@ -33,4 +34,8 @@ export function shuffleInplace<T extends unknown[]>(array: T): T {
 
 export function shuffle<T>(array: ReadonlyArray<T>): T[] {
   return shuffleInplace(Array.from(array))
+}
+
+export function sum(array: ReadonlyArray<number>): number {
+  return array.reduce(add, 0)
 }

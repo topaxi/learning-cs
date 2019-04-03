@@ -18,3 +18,9 @@ export function find<T>(
 ): T | undefined {
   for (let value of iterator) if (predicate(value)) return value
 }
+
+export function last<T>(iterator: Iterable<T>): T | undefined {
+  let last = undefined
+  for (let value of iterator) last = value
+  return last
+}

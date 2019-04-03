@@ -1,4 +1,4 @@
-import { shuffleInplace } from '../../utils'
+import { shuffleInplace, range } from '../../utils'
 
 export function defaultCompare(a: any, b: any): number {
   return b - a
@@ -8,7 +8,7 @@ function isSorted(
   list: ReadonlyArray<any>,
   compare: (a: any, b: any) => number
 ): boolean {
-  for (let i = 0; i < list.length - 1; i++) {
+  for (let i of range(list.length - 1)) {
     if (compare(list[i], list[i + 1]) < 0) {
       return false
     }

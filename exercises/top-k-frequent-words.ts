@@ -21,6 +21,5 @@ function sortWordsByFrequency(
   wordB: [string, number]
 ): number {
   let order = wordB[1] - wordA[1]
-  if (order === 0) return wordA[0].localeCompare(wordB[0])
-  return order
+  return order === 0 ? wordA[0].localeCompare(wordB[0]) : order
 }

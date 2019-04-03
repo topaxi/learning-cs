@@ -1,4 +1,5 @@
 import { GraphVertex } from './graph-vertex'
+import { swap } from '../../utils'
 
 export class GraphEdge<T> {
   private static nextId = 0
@@ -12,9 +13,7 @@ export class GraphEdge<T> {
   ) {}
 
   reverse(): this {
-    ;[this.startVertex, this.endVertex] = [this.endVertex, this.startVertex]
-
-    return this
+    return swap(this, 'startVertex', 'endVertex')
   }
 
   clone(): GraphEdge<T> {

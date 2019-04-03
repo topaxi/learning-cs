@@ -1,32 +1,6 @@
-import { memoizedY } from '../utils'
+import { memoizedY, range, not, isWithinMatrix } from '../utils'
 
-export function longestIncreasingPath(matrix: number[][]): number {
-  let longestPath = 0
-
-  for (let row = 0; row < matrix.length; row++) {
-    for (let column = 0; column < matrix[row].length; column++) {
-      longestPath = Math.max(
-        longestPath,
-        measureLongestPath(matrix, row, column, -1)
-      )
-    }
-  }
-
-  return longestPath
-}
-
-function failsBoundaryCheck(
-  matrix: number[][],
-  row: number,
-  column: number
-): boolean {
-  return (
-    row < 0 ||
-    column < 0 ||
-    row >= matrix.length ||
-    column >= matrix[row].length
-  )
-}
+const failsBoundaryCheck = not(isWithinMatrix)
 
 const measureLongestPath = memoizedY(
   measureLongestPath => (
@@ -49,3 +23,18 @@ const measureLongestPath = memoizedY(
     )
   }
 )
+
+export function longestIncreasingPath(matrix: number[][]): number {
+  let longestPath = 0
+
+  for (let row of range(matrix.length)) {
+    for (let column of range(matrix[row].length)) {
+      longestPath = Math.max(
+        longestPath,
+        measureLongestPath(matrix, row, column, -1)
+      )
+    }
+  }
+
+  return longestPath
+}

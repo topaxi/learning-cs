@@ -7,21 +7,18 @@ interface HashMapNode<K, T> {
 }
 
 export class HashMap<K extends string | number, T> {
-  protected slots = Array.from(
-    { length: this.internalSize },
-    () => new LinkedList<HashMapNode<K, T>>()
-  )
-  private keyMap: Record<K, number> = {} as any
+  protected slots = this.initializeSlots()
+  private keyCache = this.initializeKeyCache()
 
   get size(): number {
-    return Object.keys(this.keyMap).length
+    return Object.keys(this.keyCache).length
   }
 
   constructor(private readonly internalSize = 32) {}
 
   set(key: K, value: T): T {
     let keyHash = this.hash(key)
-    this.keyMap[key] = keyHash
+    this.keyCache[key] = keyHash
 
     let list = this.slots[keyHash]
     let node = list.find(byKey(key))
@@ -49,9 +46,10 @@ export class HashMap<K extends string | number, T> {
     let list = this.getSlot(key)
     let index = list.findIndex(byKey(key))
 
-    delete this.keyMap[key]
+    delete this.keyCache[key]
 
     if (index !== -1) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       return list.deleteAt(index)!.value
     }
 
@@ -59,12 +57,12 @@ export class HashMap<K extends string | number, T> {
   }
 
   has(key: string | number): boolean {
-    return Reflect.has(this.keyMap, key)
+    return Reflect.has(this.keyCache, key)
   }
 
   clear(): void {
-    this.slots = this.slots.map(() => new LinkedList())
-    this.keyMap = {} as any
+    this.slots = this.initializeSlots()
+    this.keyCache = this.initializeKeyCache()
   }
 
   *keys(): IterableIterator<K> {
@@ -80,9 +78,7 @@ export class HashMap<K extends string | number, T> {
   }
 
   private *nodes(): IterableIterator<HashMapNode<K, T>> {
-    for (let i = 0; i < this.slots.length; i++) {
-      yield* this.slots[i]
-    }
+    for (let slot of this.slots) yield* slot
   }
 
   [Symbol.iterator](): IterableIterator<[K, T]> {
@@ -90,7 +86,7 @@ export class HashMap<K extends string | number, T> {
   }
 
   protected hash(key: K): number {
-    if (this.keyMap[key] !== undefined) return this.keyMap[key]
+    if (this.keyCache[key] !== undefined) return this.keyCache[key]
 
     let hash =
       typeof key === 'number' && Number.isFinite(key)
@@ -106,5 +102,13 @@ export class HashMap<K extends string | number, T> {
 
   protected getSlot(key: K): LinkedList<HashMapNode<K, T>> {
     return this.slots[this.hash(key)]
+  }
+
+  protected initializeSlots(): Array<LinkedList<HashMapNode<K, T>>> {
+    return Array.from({ length: this.internalSize }, () => new LinkedList())
+  }
+
+  protected initializeKeyCache(): Record<K, number> {
+    return ({} as unknown) as Record<K, number>
   }
 }

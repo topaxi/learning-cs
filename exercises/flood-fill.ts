@@ -1,3 +1,4 @@
+import { not, isWithinMatrix } from '../utils'
 import { Queue } from '../data-structures'
 
 export function fill(
@@ -9,9 +10,7 @@ export function fill(
   return floodQueue(screen, x, y, screen[y][x], color)
 }
 
-function boundaryCheck(screen: number[][], x: number, y: number): boolean {
-  return y < 0 || x < 0 || y >= screen.length || x >= screen[y].length
-}
+const boundaryCheck = not(isWithinMatrix)
 
 export function floodRecursive(
   screen: number[][],

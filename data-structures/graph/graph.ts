@@ -1,4 +1,4 @@
-import { byValue, prop, add, iter } from '../../utils'
+import { byValue, prop, sum, iter } from '../../utils'
 import { HashMap } from '../hash'
 import { GraphVertex } from './graph-vertex'
 import { GraphEdge } from './graph-edge'
@@ -8,7 +8,7 @@ export abstract class Graph<T> {
   readonly edges = new HashMap<number, GraphEdge<T>>()
 
   get weight(): number {
-    return Array.from(this.edges.values(), prop('weight')).reduce(add, 0)
+    return sum(Array.from(this.edges.values(), prop('weight')))
   }
 
   addVertex(vertex: GraphVertex<T>): void {

@@ -1,3 +1,4 @@
+import { iter } from '../../utils'
 import { HashMap } from './hash-map'
 
 export class HashSet<T extends string | number> {
@@ -71,7 +72,7 @@ export class HashSet<T extends string | number> {
     let set = HashSet.from(this)
 
     for (let value of set) {
-      if (!iterables.every(iterable => has(iterable, value))) {
+      if (!iterables.every(has(value))) {
         set.delete(value)
       }
     }
@@ -88,31 +89,28 @@ export class HashSet<T extends string | number> {
   }
 }
 
-function isSetLike(
-  iterable: object
-): iterable is { has(key: unknown): boolean } {
+function isSetLike<T>(iterable: object): iterable is { has(key: T): boolean } {
   return Reflect.has(iterable, 'has')
 }
 
-function isArrayLike(
+function isArrayLike<T>(
   iterable: object
-): iterable is { includes(key: unknown): boolean } {
+): iterable is { includes(key: T): boolean } {
   return Reflect.has(iterable, 'includes')
 }
 
-function has(
+function has<T>(
+  key: T
+): (
   iterable:
-    | { has(key: unknown): boolean }
-    | { includes(key: unknown): boolean }
-    | Iterable<unknown>,
-  key: unknown
-): boolean {
-  if (isSetLike(iterable)) return iterable.has(key)
-  if (isArrayLike(iterable)) return iterable.includes(key)
+    | { has(key: T): boolean }
+    | { includes(key: T): boolean }
+    | Iterable<T>
+) => boolean {
+  return iterable => {
+    if (isSetLike(iterable)) return iterable.has(key)
+    if (isArrayLike(iterable)) return iterable.includes(key)
 
-  for (let value of iterable) {
-    if (value === key) return true
+    return iter.includes(iterable, key)
   }
-
-  return false
 }
