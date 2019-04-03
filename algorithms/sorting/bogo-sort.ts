@@ -4,9 +4,9 @@ export function defaultCompare(a: any, b: any): number {
   return b - a
 }
 
-function isSorted(
-  list: ReadonlyArray<any>,
-  compare: (a: any, b: any) => number
+function isSorted<T>(
+  list: ReadonlyArray<T>,
+  compare: (a: T, b: T) => number
 ): boolean {
   for (let i of range(list.length - 1)) {
     if (compare(list[i], list[i + 1]) < 0) {
@@ -20,7 +20,7 @@ function isSorted(
 export function bsort<T>(
   list: ReadonlyArray<T>,
   compare: (a: T, b: T) => number = defaultCompare
-) {
+): T[] {
   let copy = Array.from(list)
 
   while (!isSorted(copy, compare)) shuffleInplace(copy)
