@@ -32,3 +32,5 @@ export function partial<T>(
 ): (...args: unknown[]) => T {
   return (...args) => fn(...pargs, ...args)
 }
+
+export const pa = partial

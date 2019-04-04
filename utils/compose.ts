@@ -257,3 +257,5 @@ export function compose(
 export function compose(...funcs: any[]) {
   return funcs.reduce((a, b) => (...args: any[]) => a(b(...args)), identity)
 }
+
+export const c = compose

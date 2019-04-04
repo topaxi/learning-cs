@@ -1,5 +1,5 @@
 import { HashMapWithDefault } from '../data-structures'
-import { head, eq, prop, compose } from '../utils'
+import { head, eq, prop, c } from '../utils'
 
 export function commonArrayValues<T extends number | string>(
   array1: T[],
@@ -18,11 +18,6 @@ export function commonArrayValues<T extends number | string>(
   }
 
   return Array.from(map.entries())
-    .filter(
-      compose<[T, number], boolean, number>(
-        eq(arrays.length),
-        prop(1)
-      )
-    )
+    .filter(c<[T, number], boolean, number>(eq(arrays.length), prop(1)))
     .map(e => head(e))
 }

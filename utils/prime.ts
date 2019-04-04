@@ -1,6 +1,6 @@
+import { returnTrue } from './return-true'
 import { range } from './range'
 
-const returnTrue = (): boolean => true
 const primeReducer = (
   primes: Set<number>,
   isPrime: boolean,
