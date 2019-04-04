@@ -3,7 +3,7 @@ export function defaultCompare(a: any, b: any): number {
 }
 
 export function msort<T>(
-  list: ReadonlyArray<T>,
+  list: readonly T[],
   compare: (a: T, b: T) => number = defaultCompare
 ): T[] {
   if (list.length < 2) return [...list]

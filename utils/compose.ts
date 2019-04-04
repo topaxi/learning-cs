@@ -2,7 +2,7 @@ import { identity } from './identity'
 
 // eslint-disable @typescript-eslint/no-explicit-any
 
-export type Many<T> = T | ReadonlyArray<T>
+export type Many<T> = T | readonly T[]
 
 // 0-argument first function
 export function compose<R2, R1>(f2: (a: R1) => R2, f1: () => R1): () => R2

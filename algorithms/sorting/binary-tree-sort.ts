@@ -6,7 +6,7 @@ export function defaultCompare(a: any, b: any): number {
 }
 
 export function binaryTreeSort<T>(
-  list: ReadonlyArray<T>,
+  list: readonly T[],
   compare: (a: T, b: T) => number = defaultCompare
 ) {
   // TODO: Seems like binary tree compare and sort compare are reversed

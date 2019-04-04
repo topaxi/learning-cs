@@ -1,5 +1,5 @@
 export function isWithinMatrix(
-  matrix: ReadonlyArray<ReadonlyArray<number>>,
+  matrix: readonly number[][],
   row: number,
   column: number
 ): boolean {

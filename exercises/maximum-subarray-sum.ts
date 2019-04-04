@@ -1,6 +1,6 @@
 import { head, range } from '../utils'
 
-export function maximumSubarraySum(list: ReadonlyArray<number>): number {
+export function maximumSubarraySum(list: readonly number[]): number {
   let maximum = head(list)
   let currentMaximum = maximum
 

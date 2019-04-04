@@ -1,8 +1,8 @@
 import { swap } from './swap'
 
 export function partition<T>(
-  array: ReadonlyArray<T>,
-  fn: (t: T, i: number, a: ReadonlyArray<T>) => boolean
+  array: readonly T[],
+  fn: (t: T, i: number, a: readonly T[]) => boolean
 ): [T[], T[]] {
   let a: T[] = []
   let b: T[] = []

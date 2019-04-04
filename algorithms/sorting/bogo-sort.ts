@@ -5,7 +5,7 @@ export function defaultCompare(a: any, b: any): number {
 }
 
 function isSorted<T>(
-  list: ReadonlyArray<T>,
+  list: readonly T[],
   compare: (a: T, b: T) => number
 ): boolean {
   for (let i of range(list.length - 1)) {
@@ -18,7 +18,7 @@ function isSorted<T>(
 }
 
 export function bsort<T>(
-  list: ReadonlyArray<T>,
+  list: readonly T[],
   compare: (a: T, b: T) => number = defaultCompare
 ): T[] {
   let copy = Array.from(list)
