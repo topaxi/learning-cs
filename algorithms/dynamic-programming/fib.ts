@@ -8,7 +8,7 @@ export function fib_naive(n: number): number {
   return fib_naive(n - 1) + fib_naive(n - 2)
 }
 
-// O(n)
+// T: O(n) S: O(n)
 export function fib_memo(
   n: number,
   memo = new HashMap<number, number>()
@@ -21,7 +21,7 @@ export function fib_memo(
   )
 }
 
-// O(n)
+// T: O(n) S: O(n)
 export function fib_bu(n: number): number {
   let fib = [1, 1]
 
