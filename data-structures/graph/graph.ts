@@ -1,7 +1,11 @@
-import { byValue, prop, sum, iter } from '../../utils'
+import { by, prop, sum, iter } from '../../utils'
 import { HashMap } from '../hash'
 import { GraphVertex } from './graph-vertex'
 import { GraphEdge } from './graph-edge'
+import {
+  depthFirstSearch,
+  DepthFirstSearchCallbacks
+} from '../../algorithms/graph/depth-first-search'
 
 export class Graph<T> {
   readonly vertices = new HashMap<number, GraphVertex<T>>()
@@ -26,8 +30,16 @@ export class Graph<T> {
     return this
   }
 
+  depthFirstSearch(callbacks: DepthFirstSearchCallbacks<T> = {}): void {
+    let visited = new Set<GraphVertex<T>>()
+
+    for (let vertex of this.vertices.values()) {
+      depthFirstSearch(vertex, callbacks, visited)
+    }
+  }
+
   protected _findVertex(value: T): GraphVertex<T> | undefined {
-    return iter.find(this.vertices.values(), byValue(value))
+    return iter.find(this.vertices.values(), by('value', value))
   }
 
   protected _addEdge(

@@ -1,22 +1,25 @@
-export function* map<T, U>(
+export function* map<T, U, This = undefined>(
   iterator: Iterable<T>,
-  project: (t: T) => U
+  project: (this: This, t: T) => U,
+  thisArg?: This
 ): IterableIterator<U> {
-  for (let value of iterator) yield project(value)
+  for (let value of iterator) yield project.call(thisArg!, value)
 }
 
-export function foreach<T>(
+export function foreach<T, This = undefined>(
   iterator: Iterable<T>,
-  callback: (t: T) => unknown
+  callback: (this: This, t: T) => unknown,
+  thisArg?: This
 ): void {
-  for (let value of iterator) callback(value)
+  for (let value of iterator) callback.call(thisArg!, value)
 }
 
-export function find<T>(
+export function find<T, This = undefined>(
   iterator: Iterable<T>,
-  predicate: (t: T) => boolean
+  predicate: (this: This, t: T) => boolean,
+  thisArg?: This
 ): T | undefined {
-  for (let value of iterator) if (predicate(value)) return value
+  for (let value of iterator) if (predicate.call(thisArg!, value)) return value
 }
 
 export function last<T>(iterator: Iterable<T>): T | undefined {

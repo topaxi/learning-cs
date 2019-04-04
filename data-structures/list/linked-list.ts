@@ -1,4 +1,4 @@
-import { eq, concat, iter, prop, add, partial } from '../../utils'
+import { eq, concat, iter, prop, add, pa } from '../../utils'
 
 export class LinkedListNode<T> {
   static of<T>(...values: T[]) {
@@ -32,6 +32,8 @@ export class LinkedListNode<T> {
     return iter.last(this)!
   }
 }
+
+const increment = pa(add, 1)
 
 export class LinkedList<T> implements Iterable<T> {
   static of<T>(...values: T[]) {
@@ -194,7 +196,7 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   size(): number {
-    return this.reduce(partial(add, 1), 0)
+    return this.reduce(increment, 0)
   }
 
   concat(...lists: (Iterable<T> | T)[]): LinkedList<T>

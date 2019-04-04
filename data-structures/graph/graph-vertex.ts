@@ -1,39 +1,50 @@
-import { LinkedList } from '../list'
 import { GraphEdge } from './graph-edge'
+import { HashMap } from '../hash/hash-map'
+import { iter } from '../../utils'
+
+function normalizeNeighbors<T>(
+  this: GraphVertex<T>,
+  { startVertex, endVertex }: GraphEdge<T>
+): GraphVertex<T> {
+  return startVertex === this ? endVertex : startVertex
+}
 
 export class GraphVertex<T> {
   private static nextId = 0
 
   readonly id = GraphVertex.nextId++
 
-  private readonly edges = new LinkedList<GraphEdge<T>>()
+  private readonly edges = new HashMap<number, GraphEdge<T>>()
 
   constructor(public value: T) {}
 
   get degree(): number {
-    return this.edges.size()
+    return this.edges.size
+  }
+
+  connect(vertex: GraphVertex<T>, weight?: number): this {
+    this.addEdge(new GraphEdge(this, vertex, weight))
+    return this
   }
 
   addEdge(edge: GraphEdge<T>): void {
-    this.edges.push(edge)
+    this.edges.set(edge.id, edge)
   }
 
   deleteEdge(edge: GraphEdge<T>): void {
-    this.edges.delete(edge)
+    this.edges.delete(edge.id)
   }
 
   hasEdge(edge: GraphEdge<T>): boolean {
-    return this.edges.includes(edge)
+    return this.edges.has(edge.id)
   }
 
-  getNeighbors(): Array<GraphVertex<T>> {
-    return Array.from(this.edges, ({ startVertex, endVertex }) =>
-      startVertex === this ? endVertex : startVertex
-    )
+  getNeighbors(): IterableIterator<GraphVertex<T>> {
+    return iter.map(this.getEdges(), normalizeNeighbors, this)
   }
 
-  getEdges(): Array<GraphEdge<T>> {
-    return Array.from(this.edges)
+  getEdges(): IterableIterator<GraphEdge<T>> {
+    return this.edges.values()
   }
 
   toString(): string {
