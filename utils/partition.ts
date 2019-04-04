@@ -17,7 +17,7 @@ export function partition<T>(
 export function partitionInline<T>(
   array: T[],
   pivot: number,
-  fn: (t: T, pivotElement: T) => boolean,
+  fn: (t: T, pivotElement: T) => boolean = (a, b) => a < b,
   left = 0,
   right = array.length - 1
 ): number {
