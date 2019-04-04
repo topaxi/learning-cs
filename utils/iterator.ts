@@ -24,3 +24,8 @@ export function last<T>(iterator: Iterable<T>): T | undefined {
   for (let value of iterator) last = value
   return last
 }
+
+export function includes<T>(iterator: Iterable<T>, value: T): boolean {
+  for (let v of iterator) if (value === v) return true
+  return false
+}
