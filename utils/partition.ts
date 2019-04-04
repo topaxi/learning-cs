@@ -29,8 +29,7 @@ export function partitionInline<T>(
 
   for (let i = left; i <= right; i++) {
     if (fn(array[i], pivotElement)) {
-      swap(array, i, newPivot)
-      newPivot++
+      swap(array, i, newPivot++)
     }
   }
 
