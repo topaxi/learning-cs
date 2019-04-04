@@ -5,7 +5,8 @@ export class GraphVertex<T> {
   private static nextId = 0
 
   readonly id = GraphVertex.nextId++
-  readonly edges = new LinkedList<GraphEdge<T>>()
+
+  private readonly edges = new LinkedList<GraphEdge<T>>()
 
   constructor(public value: T) {}
 
@@ -23,6 +24,16 @@ export class GraphVertex<T> {
 
   hasEdge(edge: GraphEdge<T>): boolean {
     return this.edges.includes(edge)
+  }
+
+  getNeighbors(): Array<GraphVertex<T>> {
+    return Array.from(this.edges, ({ startVertex, endVertex }) =>
+      startVertex === this ? endVertex : startVertex
+    )
+  }
+
+  getEdges(): Array<GraphEdge<T>> {
+    return Array.from(this.edges)
   }
 
   toString(): string {

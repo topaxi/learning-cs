@@ -3,7 +3,7 @@ import { HashMap } from '../hash'
 import { GraphVertex } from './graph-vertex'
 import { GraphEdge } from './graph-edge'
 
-export abstract class Graph<T> {
+export class Graph<T> {
   readonly vertices = new HashMap<number, GraphVertex<T>>()
   readonly edges = new HashMap<number, GraphEdge<T>>()
 
