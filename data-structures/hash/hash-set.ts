@@ -39,7 +39,7 @@ export class HashSet<T extends string | number> {
   }
 
   clear(): this {
-    this._hash = new HashMap(this._hashSize)
+    this._hash.clear()
 
     return this
   }
