@@ -1,3 +1,4 @@
+import { HashSet } from '../../data-structures/hash'
 import { GraphVertex } from '../../data-structures/graph'
 import { noop, returnTrue } from '../../utils'
 
@@ -5,7 +6,7 @@ export interface DepthFirstSearchCallbacks<T> {
   find?(
     currentVertex: GraphVertex<T>,
     previousVertex: GraphVertex<T> | null
-  ): unknown
+  ): boolean | unknown
 
   enterVertex?(
     currentVertex: GraphVertex<T>,
@@ -31,15 +32,15 @@ export function depthFirstSearch<T>(
     leaveVertex = noop,
     canVisitVertex = returnTrue
   }: DepthFirstSearchCallbacks<T>,
-  visited = new Set<GraphVertex<T>>()
+  visited = new HashSet<number>()
 ): GraphVertex<T> | undefined {
   function depthFirstSearchR(
     currentVertex: GraphVertex<T>,
     previousVertex: GraphVertex<T> | null
   ): GraphVertex<T> | undefined {
-    if (visited.has(currentVertex)) return
+    if (visited.has(currentVertex.id)) return
 
-    visited.add(currentVertex)
+    visited.add(currentVertex.id)
     enterVertex(currentVertex, previousVertex)
 
     if (find(currentVertex, previousVertex) === true) {

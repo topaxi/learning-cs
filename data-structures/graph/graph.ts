@@ -1,5 +1,5 @@
 import { by, prop, sum, iter } from '../../utils'
-import { HashMap } from '../hash'
+import { HashMap, HashSet } from '../hash'
 import { GraphVertex } from './graph-vertex'
 import { GraphEdge } from './graph-edge'
 import {
@@ -31,7 +31,7 @@ export class Graph<T> {
   }
 
   depthFirstSearch(callbacks: DepthFirstSearchCallbacks<T> = {}): void {
-    let visited = new Set<GraphVertex<T>>()
+    let visited = new HashSet<number>()
 
     for (let vertex of this.vertices.values()) {
       depthFirstSearch(vertex, callbacks, visited)
