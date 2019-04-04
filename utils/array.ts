@@ -24,9 +24,7 @@ export function shuffleInplace<T extends unknown[]>(array: T): T {
   let lastIndex = array.length - 1
 
   for (let i = 0; i < array.length; i++) {
-    var rand = random(i, lastIndex)
-
-    swap(array, rand, i)
+    swap(array, i, random(i, lastIndex))
   }
 
   return array

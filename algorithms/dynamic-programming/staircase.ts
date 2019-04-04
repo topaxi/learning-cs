@@ -1,4 +1,4 @@
-import { Y, memoizedY } from '../../utils'
+import { Y, mY } from '../../utils'
 import { SingleParamStore } from '../../utils/memo'
 
 const staircase = (staircase: (n: number) => number) => (n: number) => {
@@ -10,4 +10,4 @@ const staircase = (staircase: (n: number) => number) => (n: number) => {
 }
 
 export const staircase_naive = Y(staircase)
-export const staircase_memo = memoizedY(staircase, new SingleParamStore())
+export const staircase_memo = mY(staircase, new SingleParamStore())

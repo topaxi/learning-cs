@@ -1,4 +1,4 @@
-import { range, memoizedY } from '../../utils'
+import { range, mY } from '../../utils'
 import { SingleParamStore } from '../../utils/memo'
 
 // Longest increasing subsequence
@@ -6,7 +6,7 @@ import { SingleParamStore } from '../../utils/memo'
 
 // Recurrence
 // n: number -> indication of NP-Hard, it is!
-const lisr = (list: ReadonlyArray<number>) => (
+const lisr = (list: readonly number[]) => (
   lisr: (n: number) => number[]
 ) => (n: number): number[] => {
   let sequence = [list[n]]
@@ -24,9 +24,9 @@ const lisr = (list: ReadonlyArray<number>) => (
   return sequence
 }
 
-export function lis(list: ReadonlyArray<number>): number[] {
+export function lis(list: readonly number[]): number[] {
   let sequence: number[] = []
-  let lisr_ = memoizedY(lisr(list), new SingleParamStore())
+  let lisr_ = mY(lisr(list), new SingleParamStore())
 
   for (let i of range(list.length)) {
     let subSequence = lisr_(i)

@@ -1,8 +1,8 @@
-import { memoizedY, range, not, isWithinMatrix } from '../utils'
+import { mY, range, not, isWithinMatrix } from '../utils'
 
 const failsBoundaryCheck = not(isWithinMatrix)
 
-const measureLongestPath = memoizedY(
+const measureLongestPath = mY(
   measureLongestPath => (
     matrix: number[][],
     row: number,

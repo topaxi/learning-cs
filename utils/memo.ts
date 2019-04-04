@@ -39,7 +39,7 @@ export interface MemoStore {
   clear(): void
 }
 
-export type MemoizedFunction<
+export type Memoized<
   T extends Function,
   M extends MemoStore = MemoTrie
 > = T & { memo: M }
@@ -47,7 +47,7 @@ export type MemoizedFunction<
 export function memoize<
   T extends (...args: any[]) => any,
   M extends MemoStore = MemoTrie
->(fn: T, store: M = (new MemoTrie() as unknown) as M): MemoizedFunction<T, M> {
+>(fn: T, store: M = (new MemoTrie() as unknown) as M): Memoized<T, M> {
   function memoized(this: unknown, ...args: unknown[]): ReturnType<T> {
     if (memoized.memo.has(args)) {
       return memoized.memo.get(args)
@@ -66,5 +66,5 @@ export function memoize<
 
   memoized.memo = store
 
-  return memoized as MemoizedFunction<T, M>
+  return memoized as Memoized<T, M>
 }

@@ -1,5 +1,5 @@
 import { MemoTrie } from '../data-structures/tree/memo-trie'
-import { memoize, MemoizedFunction, MemoStore } from './memo'
+import { memoize, Memoized, MemoStore } from './memo'
 import { identity } from './identity'
 
 // eslint-disable-next-line
@@ -13,10 +13,7 @@ export const Y = <F extends AnyFunction, D extends (f: F) => F = (f: F) => F>(
   return f as ReturnType<D>
 }
 
-export const memoizedY = <
-  F extends AnyFunction,
-  M extends MemoStore = MemoTrie
->(
+export const mY = <F extends AnyFunction, M extends MemoStore = MemoTrie>(
   m: (f: F) => F,
   store?: M
-): MemoizedFunction<F, M> => Y(m, f => memoize(f, store))
+): Memoized<F, M> => Y(m, f => memoize(f, store))
