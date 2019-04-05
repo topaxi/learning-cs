@@ -66,6 +66,13 @@ describe('LinkedList<T>', () => {
       expect(list.delete(2)).toBe(2)
       expect(list.toArray()).toEqual([1, 3])
     })
+
+    test('should return null if element does not exist', () => {
+      let list = LinkedList.of(1, 2, 3)
+
+      expect(list.delete(4)).toBe(null)
+      expect(list.toArray()).toEqual([1, 2, 3])
+    })
   })
 
   describe('#push()', () => {
@@ -189,6 +196,45 @@ describe('LinkedList<T>', () => {
   describe('#toString()', () => {
     test('should return list values separated by a comma', () => {
       expect(LinkedList.of(1, 2, 3).toString()).toBe('1,2,3')
+    })
+  })
+
+  describe('#tail()', () => {
+    test('should return the tail of the list', () => {
+      expect(Array.from(LinkedList.of(1, 2, 3).tail())).toEqual([2, 3])
+      expect(Array.from(LinkedList.of(1).tail())).toEqual([])
+      expect(Array.from(new LinkedList().tail())).toEqual([])
+    })
+  })
+
+  describe('#map()', () => {
+    test('should map to a new list', () => {
+      expect(LinkedList.of(1, 2, 3).map(n => n + 1)).toEqual(
+        LinkedList.of(2, 3, 4)
+      )
+    })
+  })
+
+  describe('#filter()', () => {
+    test('should filter list', () => {
+      expect(LinkedList.of(1, 2, 3, 4).filter(n => n > 2)).toEqual(
+        LinkedList.of(3, 4)
+      )
+    })
+  })
+
+  describe('#includes()', () => {
+    test('should return whether the value is included or not', () => {
+      let list = LinkedList.of(1, 2, 3, 4)
+      expect(list.includes(3)).toBe(true)
+      expect(list.includes(5)).toBe(false)
+      expect(list.includes(0)).toBe(false)
+    })
+  })
+
+  describe('#toJSON()', () => {
+    test('should serialize to an array', () => {
+      expect(LinkedList.of(1, 2, 3).toJSON()).toEqual([1, 2, 3])
     })
   })
 })
