@@ -35,7 +35,11 @@ export class Queue<T> {
     }
   }
 
-  toJSON() {
+  [Symbol.iterator](): IterableIterator<T> {
+    return this.consume()
+  }
+
+  toJSON(): T[] {
     return this.list.toArray()
   }
 

@@ -117,5 +117,13 @@ describe('BinaryTreeNode<T>', () => {
         ).toMatchInlineSnapshot(`"I,H,G,F,E,D,C,B,A"`)
       })
     })
+
+    describe('#traverseLevelOrder()', () => {
+      test('should traverse level order', () => {
+        expect(
+          Array.from(node.traverseLevelOrder()).join()
+        ).toMatchInlineSnapshot(`"F,B,G,A,D,I,C,E,H"`)
+      })
+    })
   })
 })

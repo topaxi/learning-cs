@@ -6,6 +6,25 @@ export function* map<T, U, This = undefined>(
   for (let value of iterator) yield project.call(thisArg!, value)
 }
 
+export function filter<T, S extends T, This = undefined>(
+  iterator: Iterable<T>,
+  filter: (value: T, index: number) => value is S,
+  thisArg?: This
+): IterableIterator<S>
+export function filter<T, This = undefined>(
+  iterator: Iterable<T>,
+  filter: (value: T, index: number) => unknown,
+  thisArg?: This
+): IterableIterator<T>
+export function* filter<T, This = undefined>(
+  iterator: Iterable<T>,
+  filter: (value: T, index: number) => unknown,
+  thisArg?: This
+): IterableIterator<T> {
+  let i = 0
+  for (let value of iterator) if (filter.call(thisArg, value, i++)) yield value
+}
+
 export function foreach<T, This = undefined>(
   iterator: Iterable<T>,
   callback: (this: This, t: T) => unknown,
