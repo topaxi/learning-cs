@@ -1,11 +1,13 @@
 import { iter } from '../../utils'
-import { HashMap } from './hash-map'
+import { HashMap, Hashable } from './hash-map'
 
-export class HashSet<T extends string | number> {
+export class HashSet<T extends Hashable> {
   private _hash = new HashMap<T, T>(this._hashSize)
 
-  static of<T extends string | number>(...args: T[]) {
-    let set = new this<T>()
+  private static defaultSetSize = 32
+
+  static of<T extends Hashable>(...args: T[]) {
+    let set = new this<T>(Math.max(this.defaultSetSize, args.length))
 
     for (let value of args) {
       set.add(value)
@@ -14,11 +16,11 @@ export class HashSet<T extends string | number> {
     return set
   }
 
-  static from<T extends string | number>(iterable: Iterable<T>) {
+  static from<T extends Hashable>(iterable: Iterable<T>) {
     return this.of(...iterable)
   }
 
-  constructor(private readonly _hashSize = 32) {}
+  constructor(private readonly _hashSize = HashSet.defaultSetSize) {}
 
   get size(): number {
     return this._hash.size

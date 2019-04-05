@@ -6,7 +6,9 @@ interface HashMapNode<K, T> {
   value: T
 }
 
-export class HashMap<K extends string | number, T> {
+export type Hashable = string | number | { readonly id: string | number }
+
+export class HashMap<K extends Hashable, T> {
   protected slots = this.initializeSlots()
   private keyCache = this.initializeKeyCache()
 
@@ -18,7 +20,7 @@ export class HashMap<K extends string | number, T> {
 
   set(key: K, value: T): T {
     let keyHash = this.hash(key)
-    this.keyCache[key] = keyHash
+    this.keyCache[this.normalizeKey(key as Hashable)] = keyHash
 
     let list = this.slots[keyHash]
     let node = list.find(byKey(key))
@@ -46,7 +48,7 @@ export class HashMap<K extends string | number, T> {
     let list = this.getSlot(key)
     let index = list.findIndex(byKey(key))
 
-    delete this.keyCache[key]
+    delete this.keyCache[this.normalizeKey(key as Hashable)]
 
     if (index !== -1) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -56,8 +58,8 @@ export class HashMap<K extends string | number, T> {
     return null
   }
 
-  has(key: string | number): boolean {
-    return Reflect.has(this.keyCache, key)
+  has(key: K): boolean {
+    return Reflect.has(this.keyCache, this.normalizeKey(key))
   }
 
   clear(): void {
@@ -85,7 +87,8 @@ export class HashMap<K extends string | number, T> {
     return this.entries()
   }
 
-  protected hash(key: K): number {
+  protected hash(key: Hashable): number {
+    key = this.normalizeKey(key)
     if (this.keyCache[key] !== undefined) return this.keyCache[key]
 
     let hash =
@@ -108,7 +111,11 @@ export class HashMap<K extends string | number, T> {
     return Array.from({ length: this.internalSize }, () => new LinkedList())
   }
 
-  protected initializeKeyCache(): Record<K, number> {
-    return ({} as unknown) as Record<K, number>
+  protected initializeKeyCache(): Record<string | number, number> {
+    return ({} as unknown) as Record<string | number, number>
+  }
+
+  protected normalizeKey(key: Hashable): string | number {
+    return typeof key === 'object' ? key.id : key
   }
 }
