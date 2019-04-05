@@ -109,14 +109,32 @@ export class BinaryTreeNode<T = number, M = unknown> {
     return false
   }
 
-  *[Symbol.iterator](): IterableIterator<T> {
-    if (this.left !== null) yield* this.left
+  *traverseInOrder(): IterableIterator<T> {
+    if (this.left !== null) yield* this.left.traverseInOrder()
     yield this.value
-    if (this.right !== null) yield* this.right
+    if (this.right !== null) yield* this.right.traverseInOrder()
   }
 
-  traverse(callback: (value: T) => unknown): void {
-    for (let value of this) callback(value)
+  *traversePreOrder(): IterableIterator<T> {
+    yield this.value
+    if (this.left !== null) yield* this.left.traversePreOrder()
+    if (this.right !== null) yield* this.right.traversePreOrder()
+  }
+
+  *traversePostOrder(): IterableIterator<T> {
+    if (this.left !== null) yield* this.left.traversePostOrder()
+    if (this.right !== null) yield* this.right.traversePostOrder()
+    yield this.value
+  }
+
+  *traverseOutOrder(): IterableIterator<T> {
+    if (this.right !== null) yield* this.right.traverseOutOrder()
+    yield this.value
+    if (this.left !== null) yield* this.left.traverseOutOrder()
+  }
+
+  [Symbol.iterator](): IterableIterator<T> {
+    return this.traverseInOrder()
   }
 
   equals(node: BinaryTreeNode<T>): boolean {

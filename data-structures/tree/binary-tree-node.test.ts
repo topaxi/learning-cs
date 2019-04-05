@@ -66,4 +66,56 @@ describe('BinaryTreeNode<T>', () => {
       )
     })
   })
+
+  describe('traversals', () => {
+    let node: BinaryTreeNode<string>
+
+    beforeEach(() => {
+      let root = new BinaryTreeNode('F')
+
+      root.left = new BinaryTreeNode('B')
+      root.left.left = new BinaryTreeNode('A')
+      root.left.right = new BinaryTreeNode('D')
+      root.left.right.left = new BinaryTreeNode('C')
+      root.left.right.right = new BinaryTreeNode('E')
+
+      root.right = new BinaryTreeNode('G')
+      root.right.right = new BinaryTreeNode('I')
+      root.right.right.left = new BinaryTreeNode('H')
+
+      node = root
+    })
+
+    describe('#traverseInOrder()', () => {
+      test('should traverse in order', () => {
+        expect(
+          Array.from(node.traverseInOrder()).join()
+        ).toMatchInlineSnapshot(`"A,B,C,D,E,F,G,H,I"`)
+      })
+    })
+
+    describe('#traversePreOrder()', () => {
+      test('should traverse pre order', () => {
+        expect(
+          Array.from(node.traversePreOrder()).join()
+        ).toMatchInlineSnapshot(`"F,B,A,D,C,E,G,I,H"`)
+      })
+    })
+
+    describe('#traversePostOrder()', () => {
+      test('should traverse post order', () => {
+        expect(
+          Array.from(node.traversePostOrder()).join()
+        ).toMatchInlineSnapshot(`"A,C,E,D,B,H,I,G,F"`)
+      })
+    })
+
+    describe('#traverseOutOrder()', () => {
+      test('should traverse out order', () => {
+        expect(
+          Array.from(node.traverseOutOrder()).join()
+        ).toMatchInlineSnapshot(`"I,H,G,F,E,D,C,B,A"`)
+      })
+    })
+  })
 })
