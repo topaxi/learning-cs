@@ -6,11 +6,11 @@ describe('rand7', () => {
   test('should return number between 1 and 7', () => {
     let m = new HashMapWithDefault(0)
 
-    for (let _i of range(7000)) {
+    range(7000).forEach(() => {
       let r = rand7()
 
       m.set(r, m.get(r) + 1)
-    }
+    })
 
     expect(m.size).toBe(7)
 
@@ -25,11 +25,11 @@ describe('rand7m5', () => {
   test('should return number between 1 and 7', () => {
     let m = new HashMapWithDefault(0)
 
-    for (let _i of range(7000)) {
+    range(7000).forEach(() => {
       let r = rand7m5()
 
       m.set(r, m.get(r) + 1)
-    }
+    })
 
     expect(m.size).toBe(7)
 

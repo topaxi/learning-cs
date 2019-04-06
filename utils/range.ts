@@ -1,18 +1,44 @@
+import { identity } from './identity'
+
 export interface RangeOptions<T> {
-  step?: number
-  inclusive?: boolean
-  project?: (i: number, index: number) => T
+  step: number
+  inclusive: boolean
+  project: (i: number, index: number) => T
 }
 
-export function* range<T = number>(
+export class Range<T = number> {
+  constructor(
+    private readonly start: number,
+    private readonly end: number,
+    private readonly step: number,
+    private readonly project: RangeOptions<T>['project']
+  ) {}
+
+  *[Symbol.iterator](): IterableIterator<T> {
+    const { project } = this
+
+    for (let i = this.start, index = 0; i < this.end; i += this.step)
+      yield project(i, index++)
+  }
+
+  forEach<This = undefined>(
+    fn: (this: This, value: T, index: number) => unknown,
+    thisArg?: This
+  ): void {
+    let i = 0
+    for (let value of this) fn.call(thisArg!, value, i++)
+  }
+}
+
+export function range<T = number>(
   start: number,
   end?: number,
   {
     step = 1,
     inclusive = false,
-    project = i => (i as unknown) as T
-  }: RangeOptions<T> = {}
-): IterableIterator<ReturnType<typeof project>> {
+    project = identity as RangeOptions<T>['project']
+  }: Partial<RangeOptions<T>> = {}
+): Range<T> {
   if (end === undefined) {
     end = start
     start = 0
@@ -22,5 +48,5 @@ export function* range<T = number>(
     end++
   }
 
-  for (let i = start, index = 0; i < end; i += step) yield project(i, index++)
+  return new Range(start, end, step, project)
 }

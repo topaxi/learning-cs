@@ -8,21 +8,22 @@ export function* map<T, U, This = undefined>(
 
 export function filter<T, S extends T, This = undefined>(
   iterator: Iterable<T>,
-  filter: (value: T, index: number) => value is S,
+  filter: (this: This, value: T, index: number) => value is S,
   thisArg?: This
 ): IterableIterator<S>
 export function filter<T, This = undefined>(
   iterator: Iterable<T>,
-  filter: (value: T, index: number) => unknown,
+  filter: (this: This, value: T, index: number) => unknown,
   thisArg?: This
 ): IterableIterator<T>
 export function* filter<T, This = undefined>(
   iterator: Iterable<T>,
-  filter: (value: T, index: number) => unknown,
+  filter: (this: This, value: T, index: number) => unknown,
   thisArg?: This
 ): IterableIterator<T> {
   let i = 0
-  for (let value of iterator) if (filter.call(thisArg, value, i++)) yield value
+  for (let value of iterator)
+    if (filter.call(thisArg!, value, i++)) yield value
 }
 
 export function foreach<T, This = undefined>(
