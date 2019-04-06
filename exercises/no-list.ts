@@ -5,9 +5,7 @@ export function* map<T, U>(
   for (let value of iterator) yield project(value)
 }
 
-export function* reverse<T>(
-  iterator: IterableIterator<T>
-): IterableIterator<T> {
+export function* reverse<T>(iterator: Iterable<T>): IterableIterator<T> {
   for (let value of iterator) {
     yield* reverse(iterator)
     yield value

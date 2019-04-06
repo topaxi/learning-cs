@@ -6,7 +6,7 @@ export interface RangeOptions<T> {
   project: (i: number, index: number) => T
 }
 
-export class Range<T = number> {
+export class Range<T = number> implements Iterable<T> {
   constructor(
     private readonly start: number,
     private readonly end: number,

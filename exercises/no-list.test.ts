@@ -5,7 +5,7 @@ import { range } from '../utils'
 describe('a-little-javascript-problem', () => {
   test('should calculate squares from 1-10', () => {
     let result: number[] = []
-    let numbers = range(1, 10, { inclusive: true })
+    let numbers: Iterable<number> = range(1, 10, { inclusive: true })
     numbers = map(numbers, n => n * n)
     numbers = reverse(numbers)
     foreach(numbers, n => result.push(n))
