@@ -27,10 +27,17 @@ describe('MinHeap', () => {
 
     expect(heap.peek()).toBe(42)
     expect(heap.empty).toBe(false)
-    expect(heap).toMatchSnapshot()
+    expect(heap).toMatchInlineSnapshot(`
+      Array [
+        42,
+        43,
+        46,
+        44,
+      ]
+    `)
   })
 
-  test.skip('should pop values from the heap', () => {
+  test('should pop values from the heap', () => {
     let heap = new MinHeap()
 
     heap.push(43)
@@ -41,6 +48,11 @@ describe('MinHeap', () => {
     expect(heap.pop()).toBe(42)
     expect(heap.pop()).toBe(43)
     expect(heap.empty).toBe(false)
-    expect(heap).toMatchSnapshot()
+    expect(heap).toMatchInlineSnapshot(`
+      Array [
+        44,
+        46,
+      ]
+    `)
   })
 })

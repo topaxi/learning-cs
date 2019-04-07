@@ -98,7 +98,7 @@ export abstract class Heap<T> {
 
       if (
         this.hasRightChild(current) &&
-        this.comparator(this.value(left), this.value(this.right(current))) <= 0
+        this.comparator(this.value(this.right(current)), this.value(left)) <= 0
       ) {
         next = this.right(current)
       } else {
