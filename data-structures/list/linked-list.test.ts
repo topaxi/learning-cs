@@ -237,4 +237,41 @@ describe('LinkedList<T>', () => {
       expect(LinkedList.of(1, 2, 3).toJSON()).toEqual([1, 2, 3])
     })
   })
+
+  describe('#entries()', () => {
+    test('should return index/value pairs', () => {
+      let list = LinkedList.of('a', 'b', 'c', 'd')
+
+      expect(Array.from(list.entries())).toEqual([
+        [0, 'a'],
+        [1, 'b'],
+        [2, 'c'],
+        [3, 'd']
+      ])
+    })
+  })
+
+  describe('#keys()', () => {
+    test('should return index numbers', () => {
+      let list = LinkedList.of('a', 'b', 'c', 'd')
+
+      expect(Array.from(list.keys())).toEqual([0, 1, 2, 3])
+    })
+  })
+
+  describe('#values()', () => {
+    test('should return values', () => {
+      let list = LinkedList.of('a', 'b', 'c', 'd')
+
+      expect(Array.from(list.values())).toEqual(['a', 'b', 'c', 'd'])
+    })
+  })
+
+  describe('#[Symbol.iterator]()', () => {
+    test('should return values', () => {
+      let list = LinkedList.of('a', 'b', 'c', 'd')
+
+      expect(Array.from(list)).toEqual(['a', 'b', 'c', 'd'])
+    })
+  })
 })

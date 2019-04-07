@@ -1,9 +1,12 @@
 import { LinkedList } from '../list'
-import { hashCode, byKey } from '../../utils'
+import { hashCode, byKey, prop, iter } from '../../utils'
 
-interface HashMapNode<K, T> {
-  key: K
-  value: T
+class HashMapNode<K, T> {
+  constructor(readonly key: K, public value: T) {}
+
+  toEntry(): [K, T] {
+    return [this.key, this.value]
+  }
 }
 
 export type Hashable = string | number | { readonly id: string | number }
@@ -26,7 +29,7 @@ export class HashMap<K extends Hashable, T> {
     let node = list.find(byKey(key))
 
     if (node === null) {
-      list.push({ key, value })
+      list.push(new HashMapNode(key, value))
     } else {
       node.value = value
     }
@@ -67,20 +70,20 @@ export class HashMap<K extends Hashable, T> {
     this.keyCache = this.initializeKeyCache()
   }
 
-  *keys(): IterableIterator<K> {
-    for (let { key } of this.nodes()) yield key
+  keys(): IterableIterator<K> {
+    return iter.map(this.nodes(), prop('key'))
   }
 
-  *values(): IterableIterator<T> {
-    for (let { value } of this.nodes()) yield value
+  values(): IterableIterator<T> {
+    return iter.map(this.nodes(), prop('value'))
   }
 
-  *entries(): IterableIterator<[K, T]> {
-    for (let { key, value } of this.nodes()) yield [key, value]
+  entries(): IterableIterator<[K, T]> {
+    return iter.map(this.nodes(), this.nodeToEntry)
   }
 
-  private *nodes(): IterableIterator<HashMapNode<K, T>> {
-    for (let slot of this.slots) yield* slot
+  private nodes(): IterableIterator<HashMapNode<K, T>> {
+    return iter.flat(this.slots)
   }
 
   [Symbol.iterator](): IterableIterator<[K, T]> {
@@ -117,5 +120,9 @@ export class HashMap<K extends Hashable, T> {
 
   protected normalizeKey(key: Hashable): string | number {
     return typeof key === 'object' ? key.id : key
+  }
+
+  private nodeToEntry(node: HashMapNode<K, T>): [K, T] {
+    return node.toEntry()
   }
 }

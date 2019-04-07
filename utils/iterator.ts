@@ -1,9 +1,10 @@
 export function* map<T, U, This = undefined>(
   iterator: Iterable<T>,
-  project: (this: This, t: T) => U,
+  project: (this: This, t: T, i: number) => U,
   thisArg?: This
 ): IterableIterator<U> {
-  for (let value of iterator) yield project.call(thisArg!, value)
+  let i = 0
+  for (let value of iterator) yield project.call(thisArg!, value, i++)
 }
 
 export function filter<T, S extends T, This = undefined>(
@@ -58,4 +59,44 @@ export function* reverse<T>(iterator: Iterable<T>): IterableIterator<T> {
     yield* reverse(iterator)
     yield value
   }
+}
+
+export function flat<T>(
+  iterator: Iterable<Iterable<Iterable<Iterable<T>>>>,
+  depth: 3
+): IterableIterator<T>
+export function flat<T>(
+  iterator: Iterable<Iterable<Iterable<T>>>,
+  depth: 2
+): IterableIterator<T>
+export function flat<T>(
+  iterator: Iterable<Iterable<T>>,
+  depth?: 1
+): IterableIterator<T>
+export function flat<T>(iterator: Iterable<T>, depth: 0): IterableIterator<T>
+export function flat(
+  iterator: Iterable<unknown>,
+  depth?: number
+): IterableIterator<unknown>
+export function* flat(
+  iterator: Iterable<unknown>,
+  depth = 1
+): IterableIterator<unknown> {
+  if (depth < 0) return yield iterator
+
+  for (let value of iterator) {
+    if (isIterable(value)) {
+      yield* flat(value, depth - 1)
+    } else {
+      yield value
+    }
+  }
+}
+
+export function isIterable<T>(iterable: unknown): iterable is Iterable<T> {
+  return (
+    typeof iterable === 'object' &&
+    iterable != null &&
+    Reflect.has(iterable, Symbol.iterator)
+  )
 }

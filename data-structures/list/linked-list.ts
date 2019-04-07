@@ -204,7 +204,7 @@ export class LinkedList<T> implements Iterable<T> {
   concat(...lists: (Iterable<unknown> | unknown)[]): LinkedList<unknown> {
     return lists
       .map(list =>
-        typeof list !== 'string' && this.isIterable(list)
+        typeof list !== 'string' && iter.isIterable(list)
           ? LinkedList.from(list)
           : LinkedList.of(list)
       )
@@ -237,6 +237,18 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   [Symbol.iterator](): IterableIterator<T> {
+    return this.values()
+  }
+
+  entries(): IterableIterator<[number, T]> {
+    return iter.map(this.nodes(), (node, i) => [i, node.value])
+  }
+
+  keys(): IterableIterator<number> {
+    return iter.map(this.nodes(), (_node, i) => i)
+  }
+
+  values(): IterableIterator<T> {
     return iter.map(this.nodes(), prop('value'))
   }
 
@@ -375,14 +387,6 @@ export class LinkedList<T> implements Iterable<T> {
     }
 
     return node
-  }
-
-  private isIterable<T>(iterable: unknown): iterable is Iterable<T> {
-    return (
-      typeof iterable === 'object' &&
-      iterable != null &&
-      Reflect.has(iterable, Symbol.iterator)
-    )
   }
 
   private concatReducer<T>(
