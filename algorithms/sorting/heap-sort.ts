@@ -1,15 +1,14 @@
 import { Heap } from '../../data-structures/heap'
-import { neg } from '../../utils'
 
 export function defaultCompare(a: any, b: any): number {
-  return b - a
+  return a - b
 }
 
 export function heapsort<T>(
-  list: T[],
+  list: readonly T[],
   compare: (a: T, b: T) => number = defaultCompare
 ): T[] {
-  let heap = new Heap(neg(compare))
+  let heap = new Heap(compare)
 
   heap.push(...list)
 

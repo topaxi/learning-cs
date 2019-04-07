@@ -1,19 +1,19 @@
-import { bsort } from './bogo-sort'
+import { bogosort } from './bogo-sort'
 import { shuffle } from '../../utils'
 
 function expectSorted<T>(array: T[], cmp?: (a: T, b: T) => number) {
-  expect(bsort(shuffle(array), cmp)).toEqual(array)
-  expect(bsort(shuffle(array), cmp)).toEqual(array)
-  expect(bsort(shuffle(array), cmp)).toEqual(array)
+  expect(bogosort(shuffle(array), cmp)).toEqual(array)
+  expect(bogosort(shuffle(array), cmp)).toEqual(array)
+  expect(bogosort(shuffle(array), cmp)).toEqual(array)
 }
 
-describe('bsort', () => {
+describe('bogosort', () => {
   test('returns empty array for empty array', () => {
-    expect(bsort([])).toEqual([])
+    expect(bogosort([])).toEqual([])
   })
 
   test('returns the same array for one element', () => {
-    expect(bsort([1])).toEqual([1])
+    expect(bogosort([1])).toEqual([1])
   })
 
   test('sorts with two elements', () => {
@@ -32,8 +32,8 @@ describe('bsort', () => {
 
   describe('callback', () => {
     test('accepts a sort callback', () => {
-      expectSorted([6, 5, 4, 3, 2, 1], (a, b) => a - b)
-      expectSorted(['a', 'ä', 'b', 'c'], (a, b) => b.localeCompare(a))
+      expectSorted([6, 5, 4, 3, 2, 1], (a, b) => b - a)
+      expectSorted(['a', 'ä', 'b', 'c'], (a, b) => a.localeCompare(b))
       expectSorted(
         [
           { id: 1 },
@@ -44,7 +44,7 @@ describe('bsort', () => {
           { id: 6 },
           { id: 7 }
         ],
-        (a, b) => b.id - a.id
+        (a, b) => a.id - b.id
       )
     })
   })

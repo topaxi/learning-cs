@@ -32,8 +32,8 @@ describe('heapsort', () => {
 
   describe('callback', () => {
     test('accepts a sort callback', () => {
-      expectSorted([6, 5, 4, 3, 2, 1], (a, b) => a - b)
-      expectSorted(['a', 'ä', 'b', 'c'], (a, b) => b.localeCompare(a))
+      expectSorted([6, 5, 4, 3, 2, 1], (a, b) => b - a)
+      expectSorted(['a', 'ä', 'b', 'c'], (a, b) => a.localeCompare(b))
       expectSorted(
         [
           { id: 1 },
@@ -44,7 +44,7 @@ describe('heapsort', () => {
           { id: 6 },
           { id: 7 }
         ],
-        (a, b) => b.id - a.id
+        (a, b) => a.id - b.id
       )
     })
   })
