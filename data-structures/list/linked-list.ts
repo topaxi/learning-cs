@@ -1,4 +1,13 @@
-import { identity, eq, concat, iter, prop, add, pa } from '../../utils'
+import {
+  identity,
+  eq,
+  concat,
+  iter,
+  prop,
+  add,
+  pa,
+  secondArg
+} from '../../utils'
 
 export class LinkedListNode<T> {
   static of<T>(...values: T[]) {
@@ -245,7 +254,7 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   keys(): IterableIterator<number> {
-    return iter.map(this.nodes(), (_node, i) => i)
+    return iter.map(this.nodes(), secondArg)
   }
 
   values(): IterableIterator<T> {
@@ -259,7 +268,7 @@ export class LinkedList<T> implements Iterable<T> {
   findIndex(
     predicate: (value: T, key: number, list: this) => boolean
   ): number {
-    return this._find(predicate, (_value, index) => index)
+    return this._find(predicate, secondArg)
   }
 
   private _find<U>(
