@@ -52,3 +52,10 @@ export function includes<T>(iterator: Iterable<T>, value: T): boolean {
   for (let v of iterator) if (value === v) return true
   return false
 }
+
+export function* reverse<T>(iterator: Iterable<T>): IterableIterator<T> {
+  for (let value of iterator) {
+    yield* reverse(iterator)
+    yield value
+  }
+}
