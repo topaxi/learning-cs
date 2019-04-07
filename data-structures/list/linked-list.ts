@@ -1,4 +1,4 @@
-import { eq, concat, iter, prop, add, pa } from '../../utils'
+import { identity, eq, concat, iter, prop, add, pa } from '../../utils'
 
 export class LinkedListNode<T> {
   static of<T>(...values: T[]) {
@@ -253,7 +253,7 @@ export class LinkedList<T> implements Iterable<T> {
   }
 
   find(predicate: (value: T, key: number, list: this) => boolean): T | null {
-    return this._find(predicate, value => value)
+    return this._find(predicate, identity)
   }
 
   findIndex(
