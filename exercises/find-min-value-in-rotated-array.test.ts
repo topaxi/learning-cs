@@ -9,9 +9,7 @@ describe('findMinValueInRotatedArray', () => {
     expect(findMinValueInRotatedArray([3, 4, 5, 6])).toBe(3)
     expect(findMinValueInRotatedArray([7, 8, 3, 4, 5, 6])).toBe(3)
     expect(findMinValueInRotatedArray([7, 3, 4, 5])).toBe(3)
-  })
-
-  test.skip('should pass', () => {
     expect(findMinValueInRotatedArray([7, 3, 4, 5, 6])).toBe(3)
+    expect(findMinValueInRotatedArray([1, 2, 3, 4, 5, 6])).toBe(1)
   })
 })

@@ -7,7 +7,7 @@ export function binarySearch<T = number>(
   let end = list.length - 1
 
   while (start <= end) {
-    let i = start + Math.floor((end - start) / 2)
+    let i = Math.floor((start + end) / 2)
     let r = compare(list[i], element)
 
     if (r === 0) {
