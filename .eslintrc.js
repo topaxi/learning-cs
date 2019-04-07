@@ -33,13 +33,14 @@ module.exports = {
       }
     ],
     '@typescript-eslint/explicit-member-accessibility': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'warn',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-parameter-properties': 'off',
     '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
     '@typescript-eslint/array-type': ['off', 'array-simple'],
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/explicit-function-return-type': [
-      'warn',
+      'off',
       { allowExpressions: true }
     ]
   },
