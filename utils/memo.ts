@@ -68,3 +68,10 @@ export function memoize<
 
   return memoized as Memoized<T, M>
 }
+
+export const memo = <
+  F extends (...args: unknown[]) => unknown,
+  M extends MemoStore = MemoTrie
+>(
+  store?: M
+) => (f: F) => memoize(f, store)
