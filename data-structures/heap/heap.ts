@@ -1,6 +1,6 @@
 import { swap } from '../../utils'
 
-export abstract class Heap<T> {
+export class Heap<T> {
   private readonly memory: T[] = []
 
   constructor(private readonly comparator: (a: T, b: T) => number) {}
@@ -65,7 +65,7 @@ export abstract class Heap<T> {
   }
 
   toJSON(): T[] {
-    return [...this.memory]
+    return this.toArray()
   }
 
   private swap(indexOne: number, indexTwo: number): void {
