@@ -1,19 +1,16 @@
 import { MemoTrie } from '../data-structures/tree/memo-trie'
 import { memoize, Memoized, MemoStore } from './memo'
-import { identity } from './identity'
+import { c } from './compose'
 
 // eslint-disable-next-line
 type AnyFunction = (...args: any[]) => any
 
-export const Y = <F extends AnyFunction, D extends (f: F) => F = (f: F) => F>(
-  m: (f: F) => F,
-  decorate: D = identity as any
-): ReturnType<D> => {
-  let f = m(decorate((<T>(...args: T[]): ReturnType<F> => f(...args)) as F))
-  return f as ReturnType<D>
+export const Y = <F extends AnyFunction>(m: (f: F) => F): F => {
+  let f = m((<T>(...args: T[]) => f(...args)) as F)
+  return f
 }
 
 export const mY = <F extends AnyFunction, M extends MemoStore = MemoTrie>(
   m: (f: F) => F,
   store?: M
-): Memoized<F, M> => Y(m, f => memoize(f, store))
+): Memoized<F, M> => Y(c(m, (f: F) => memoize(f, store))) as Memoized<F, M>
