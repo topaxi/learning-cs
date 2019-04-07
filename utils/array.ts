@@ -25,7 +25,7 @@ export function shuffleInplace<T extends unknown[]>(
   i = 0,
   lastIndex = array.length - 1
 ): T {
-  for (; i < array.length; i++) {
+  for (; i < lastIndex; i++) {
     swap(array, i, random(i, lastIndex))
   }
 

@@ -1,4 +1,4 @@
-import { shuffleInplace, range } from '../../utils'
+import { shuffleInplace, range, swap } from '../../utils'
 
 export function defaultCompare(a: any, b: any): number {
   return a - b
@@ -44,4 +44,33 @@ export function bogosortIncremental<T>(
   }
 
   return copy
+}
+
+export function bogosortMinIncremental<T>(
+  list: readonly T[],
+  compare: (a: T, b: T) => number = defaultCompare
+): T[] {
+  let copy = Array.from(list)
+
+  if (copy.length < 2) return copy
+
+  let lastIndex = list.length - 1
+  let sortedIndex = 0
+
+  swap(copy, 0, findSmallestIndex(list, compare))
+
+  while ((sortedIndex = isSorted(copy, compare)) !== lastIndex) {
+    shuffleInplace(copy, sortedIndex)
+  }
+
+  return copy
+}
+
+function findSmallestIndex<T>(
+  list: readonly T[],
+  compare: (a: T, b: T) => number
+): number {
+  return list.reduce((smallestIndex, value, i, list) =>
+    compare(list[smallestIndex], value) > 0 ? i : smallestIndex, 0
+  )
 }
