@@ -19,7 +19,7 @@ type is<S> = (value: S) => value is S
 
 export const includedIn = <T, S extends U, U extends T = S>(
   iterable: Iterable<T>,
-  project: (value: T) => U = identity.any,
+  project: (value: T) => U = identity as any,
   projectValue: (value: S) => U = project
 ): is<S> =>
   c(pa(setHas, new Set(iter.map(iterable, project))), projectValue) as is<S>
