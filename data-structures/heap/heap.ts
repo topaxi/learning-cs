@@ -26,16 +26,18 @@ export class Heap<T> {
   }
 
   getParentIndex(i: number): number {
-    return Math.floor(i / 2)
+    return Math.floor((i - 1) / 2)
   }
 
   parent(i: number): T {
     return this.value(this.getParentIndex(i))
   }
 
-  push(value: T): void {
-    this.memory.push(value)
-    this.heapifyUp()
+  push(...values: T[]): void {
+    for (let i = 0; i < values.length; i++) {
+      this.memory.push(values[i])
+      this.heapifyUp()
+    }
   }
 
   pop(): T | null {
@@ -60,12 +62,12 @@ export class Heap<T> {
     return this.memory.toString()
   }
 
-  toArray(): T[] {
+  toJSON(): T[] {
     return [...this.memory]
   }
 
-  toJSON(): T[] {
-    return this.toArray()
+  *consume(): IterableIterator<T> {
+    while (!this.empty) yield this.pop()!
   }
 
   private swap(indexOne: number, indexTwo: number): void {
@@ -75,7 +77,10 @@ export class Heap<T> {
   private heapifyUp(): void {
     let current = this.memory.length - 1
 
-    while (this.comparator(this.parent(current), this.value(current)) > 0) {
+    while (
+      this.getParentIndex(current) >= 0 &&
+      this.comparator(this.parent(current), this.value(current)) > 0
+    ) {
       this.swap(current, this.getParentIndex(current))
       current = this.getParentIndex(current)
     }

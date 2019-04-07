@@ -1,19 +1,19 @@
-import { quicksort } from './quick-sort'
+import { heapsort } from './heap-sort'
 import { shuffle } from '../../utils'
 
 function expectSorted<T>(array: T[], cmp?: (a: T, b: T) => number) {
-  expect(quicksort(shuffle(array), cmp)).toEqual(array)
-  expect(quicksort(shuffle(array), cmp)).toEqual(array)
-  expect(quicksort(shuffle(array), cmp)).toEqual(array)
+  expect(heapsort(shuffle(array), cmp)).toEqual(array)
+  expect(heapsort(shuffle(array), cmp)).toEqual(array)
+  expect(heapsort(shuffle(array), cmp)).toEqual(array)
 }
 
-describe('quicksort', () => {
+describe('heapsort', () => {
   test('returns empty array for empty array', () => {
-    expect(quicksort([])).toEqual([])
+    expect(heapsort([])).toEqual([])
   })
 
   test('returns the same array for one element', () => {
-    expect(quicksort([1])).toEqual([1])
+    expect(heapsort([1])).toEqual([1])
   })
 
   test('sorts with two elements', () => {

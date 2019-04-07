@@ -24,17 +24,27 @@ describe('MinHeap', () => {
     heap.push(44)
     heap.push(46)
     heap.push(42)
+    heap.push(44)
 
-    expect(heap.peek()).toBe(42)
-    expect(heap.empty).toBe(false)
     expect(heap).toMatchInlineSnapshot(`
-      Array [
-        42,
-        43,
-        46,
-        44,
-      ]
-    `)
+            Array [
+              42,
+              43,
+              46,
+              44,
+              44,
+            ]
+        `)
+
+    expect(Array.from(heap.consume())).toMatchInlineSnapshot(`
+                  Array [
+                    42,
+                    43,
+                    44,
+                    44,
+                    46,
+                  ]
+            `)
   })
 
   test('should pop values from the heap', () => {
@@ -42,17 +52,47 @@ describe('MinHeap', () => {
 
     heap.push(43)
     heap.push(44)
+    heap.push(42)
     heap.push(46)
     heap.push(42)
 
-    expect(heap.pop()).toBe(42)
-    expect(heap.pop()).toBe(43)
-    expect(heap.empty).toBe(false)
     expect(heap).toMatchInlineSnapshot(`
       Array [
+        42,
+        42,
+        43,
+        46,
         44,
+      ]
+    `)
+
+    expect(heap.pop()).toBe(42)
+
+    expect(heap).toMatchInlineSnapshot(`
+      Array [
+        42,
+        44,
+        43,
         46,
       ]
     `)
+
+    expect(heap.pop()).toBe(42)
+
+    expect(heap).toMatchInlineSnapshot(`
+            Array [
+              43,
+              44,
+              46,
+            ]
+        `)
+
+    expect(Array.from(heap.consume())).toMatchInlineSnapshot(`
+                        Array [
+                          43,
+                          44,
+                          46,
+                        ]
+                `)
   })
 })

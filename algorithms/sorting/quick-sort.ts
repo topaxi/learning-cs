@@ -4,7 +4,7 @@ export function defaultCompare(a: any, b: any): number {
   return b - a
 }
 
-export function qsort<T>(
+export function quicksort<T>(
   list: readonly T[],
   compare: (a: T, b: T) => number = defaultCompare
 ): readonly T[] {
@@ -21,5 +21,9 @@ export function qsort<T>(
     v => compare(pivotElement, v) >= 0
   )
 
-  return [...qsort(smaller, compare), pivotElement, ...qsort(greater, compare)]
+  return [
+    ...quicksort(smaller, compare),
+    pivotElement,
+    ...quicksort(greater, compare)
+  ]
 }
