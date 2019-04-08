@@ -20,7 +20,6 @@
     "jest": "24.7.1",
     "prettier": "1.16.4",
     "ts-jest": "24.0.2",
-    "ts-node": "8.0.3",
     "typescript": "3.4.2"
   },
   "dependencies": {}
