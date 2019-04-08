@@ -1,18 +1,12 @@
 import { AvlTree } from '../../data-structures'
+import { define, ListType } from './utils'
 
-export function defaultCompare(a: any, b: any): number {
-  return a - b
-}
+export const binaryTreeSort = define((list, compare) => {
+  let tree = new AvlTree<ListType<typeof list>>(compare)
 
-export function binaryTreeSort<T>(
-  list: readonly T[],
-  compare: (a: T, b: T) => number = defaultCompare
-) {
-  let tree = new AvlTree<T>(compare)
-
-  for (let i = 0; i < list.length; i++) {
-    tree.insert(list[i])
+  for (let value of list) {
+    tree.insert(value)
   }
 
   return Array.from(tree)
-}
+})

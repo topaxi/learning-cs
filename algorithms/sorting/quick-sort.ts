@@ -1,13 +1,7 @@
 import { partition, random } from '../../utils'
+import { define } from './utils'
 
-export function defaultCompare(a: any, b: any): number {
-  return a - b
-}
-
-export function quicksort<T>(
-  list: readonly T[],
-  compare: (a: T, b: T) => number = defaultCompare
-): readonly T[] {
+export const quicksort = define(function q(list, compare): typeof list {
   if (list.length < 2) return list
 
   let pivot = random(0, list.length - 1)
@@ -18,9 +12,5 @@ export function quicksort<T>(
     v => compare(pivotElement, v) < 0
   )
 
-  return [
-    ...quicksort(smaller, compare),
-    pivotElement,
-    ...quicksort(greater, compare)
-  ]
-}
+  return [...q(smaller, compare), pivotElement, ...q(greater, compare)]
+})

@@ -1,13 +1,7 @@
 import { swap } from '../../utils/swap'
+import { define } from './utils'
 
-export function defaultCompare(a: any, b: any): number {
-  return a - b
-}
-
-export function insertionsort<T>(
-  list: T[],
-  compare: (a: T, b: T) => number = defaultCompare
-): T[] {
+export const insertionsort = define((list, compare) => {
   for (let i = 0; i < list.length; i++) {
     let tmp = list[i]
     let j = i - 1
@@ -20,4 +14,4 @@ export function insertionsort<T>(
   }
 
   return list
-}
+})

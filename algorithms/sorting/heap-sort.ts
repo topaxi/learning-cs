@@ -1,16 +1,10 @@
 import { Heap } from '../../data-structures/heap'
+import { define } from './utils'
 
-export function defaultCompare(a: any, b: any): number {
-  return a - b
-}
-
-export function heapsort<T>(
-  list: readonly T[],
-  compare: (a: T, b: T) => number = defaultCompare
-): T[] {
+export const heapsort = define((list, compare) => {
   let heap = new Heap(compare)
 
   heap.push(...list)
 
   return Array.from(heap.consume())
-}
+})

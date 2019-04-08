@@ -1,13 +1,7 @@
 import { shuffleInplace, range, swap } from '../../utils'
+import { define, Compare } from './utils'
 
-export function defaultCompare(a: any, b: any): number {
-  return a - b
-}
-
-function isSorted<T>(
-  list: readonly T[],
-  compare: (a: T, b: T) => number
-): number {
+function isSorted<T>(list: readonly T[], compare: Compare<T>): number {
   for (let i of range(list.length - 1)) {
     if (compare(list[i], list[i + 1]) >= 0) {
       return i
@@ -17,60 +11,49 @@ function isSorted<T>(
   return list.length - 1
 }
 
-export function bogosort<T>(
-  list: readonly T[],
-  compare: (a: T, b: T) => number = defaultCompare
-): T[] {
-  let copy = Array.from(list)
+export const bogosort = define((list, compare) => {
   let lastIndex = list.length - 1
 
-  while (isSorted(copy, compare) !== lastIndex) {
-    shuffleInplace(copy)
+  while (isSorted(list, compare) !== lastIndex) {
+    shuffleInplace(list)
   }
 
-  return copy
-}
+  return list
+})
 
-export function bogosortIncremental<T>(
-  list: readonly T[],
-  compare: (a: T, b: T) => number = defaultCompare
-): T[] {
-  let copy = Array.from(list)
+export const bogosortIncremental = define((list, compare) => {
   let lastIndex = list.length - 1
   let sortedIndex = 0
 
-  while ((sortedIndex = isSorted(copy, compare)) !== lastIndex) {
-    shuffleInplace(copy, sortedIndex)
+  while ((sortedIndex = isSorted(list, compare)) !== lastIndex) {
+    shuffleInplace(list, sortedIndex)
   }
 
-  return copy
-}
-
-export function bogosortMinIncremental<T>(
-  list: readonly T[],
-  compare: (a: T, b: T) => number = defaultCompare
-): T[] {
-  let copy = Array.from(list)
-
-  if (copy.length < 2) return copy
-
-  let lastIndex = list.length - 1
-  let sortedIndex = 0
-
-  swap(copy, 0, findSmallestIndex(list, compare))
-
-  while ((sortedIndex = isSorted(copy, compare)) !== lastIndex) {
-    shuffleInplace(copy, sortedIndex)
-  }
-
-  return copy
-}
+  return list
+})
 
 function findSmallestIndex<T>(
   list: readonly T[],
-  compare: (a: T, b: T) => number
+  compare: Compare<T>
 ): number {
-  return list.reduce((smallestIndex, value, i, list) =>
-    compare(list[smallestIndex], value) > 0 ? i : smallestIndex, 0
+  return list.reduce(
+    (smallestIndex, value, i, list) =>
+      compare(list[smallestIndex], value) > 0 ? i : smallestIndex,
+    0
   )
 }
+
+export const bogosortMinIncremental = define((list, compare) => {
+  if (list.length < 2) return list
+
+  let lastIndex = list.length - 1
+  let sortedIndex = 0
+
+  swap(list, 0, findSmallestIndex(list, compare))
+
+  while ((sortedIndex = isSorted(list, compare)) !== lastIndex) {
+    shuffleInplace(list, sortedIndex)
+  }
+
+  return list
+})

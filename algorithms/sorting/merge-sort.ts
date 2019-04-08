@@ -1,19 +1,14 @@
-export function defaultCompare(a: any, b: any): number {
-  return a - b
-}
+import { define } from './utils'
 
-export function mergesort<T>(
-  list: readonly T[],
-  compare: (a: T, b: T) => number = defaultCompare
-): T[] {
-  if (list.length < 2) return [...list]
+export const mergesort = define(function m(list, compare): typeof list {
+  if (list.length < 2) return list
 
   let half = Math.floor(list.length / 2)
-  let left = mergesort(list.slice(0, half), compare)
-  let right = mergesort(list.slice(half), compare)
+  let left = m(list.slice(0, half), compare)
+  let right = m(list.slice(half), compare)
 
   return merge(left, right, compare)
-}
+})
 
 function merge<T>(
   left: T[],
