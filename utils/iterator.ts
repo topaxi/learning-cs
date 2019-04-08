@@ -100,3 +100,15 @@ export function isIterable<T>(iterable: unknown): iterable is Iterable<T> {
     Reflect.has(iterable, Symbol.iterator)
   )
 }
+
+export function* tap<T, This = undefined>(
+  iterable: Iterable<T>,
+  fn: (this: This, value: T, index: number) => unknown,
+  thisArg?: This
+): IterableIterator<T> {
+  let i = 0
+  for (let value of iterable) {
+    fn.call(thisArg!, value, i++)
+    yield value
+  }
+}

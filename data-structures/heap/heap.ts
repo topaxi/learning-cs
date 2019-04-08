@@ -9,6 +9,10 @@ export class Heap<T> {
     return this.memory.length === 0
   }
 
+  get size(): number {
+    return this.memory.length
+  }
+
   value(i: number): T {
     return this.memory[i]
   }
