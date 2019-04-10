@@ -98,17 +98,18 @@ export class LinkedList<T> implements Iterable<T> {
     return currentNode.value
   }
 
-  reduce<A>(
-    reducer: (accumulator: T | A, value: T, index: number, self: this) => A
-  ): A
+  reduce(
+    reducer: (accumulator: T, value: T, index: number, self: this) => T,
+    initialValue?: T
+  ): T
   reduce<A>(
     reducer: (accumulator: A, value: T, index: number, self: this) => A,
     initialValue: A
   ): A
   reduce<A>(
-    reducer: (accumulator: unknown, value: T, index: number, self: this) => A,
-    initialValue?: A
-  ): A {
+    reducer: (accumulator: T | A, value: T, index: number, self: this) => A,
+    initialValue: A
+  ): T | A {
     if (this.firstNode === null) {
       if (initialValue !== undefined) {
         return initialValue
@@ -140,7 +141,7 @@ export class LinkedList<T> implements Iterable<T> {
   map<R>(project: (value: T, index: number, list: this) => R): LinkedList<R> {
     return this.reduce(
       (list, value, index, self) => list.push(project(value, index, self)),
-      new LinkedList()
+      new LinkedList<R>()
     )
   }
 
@@ -150,13 +151,13 @@ export class LinkedList<T> implements Iterable<T> {
   filter(
     filter: (value: T, index: number, list: this) => unknown
   ): LinkedList<T>
-  filter(
-    filter: (value: T, index: number, list: this) => unknown
-  ): LinkedList<T> {
+  filter<S extends T>(
+    filter: (value: T, index: number, list: this) => value is S
+  ): LinkedList<S> {
     return this.reduce(
       (list, value, index, self) =>
         filter(value, index, self) ? list.push(value) : list,
-      new LinkedList()
+      new LinkedList<S>()
     )
   }
 
@@ -312,7 +313,10 @@ export class LinkedList<T> implements Iterable<T> {
   join(delimiter = ','): string {
     return this.firstNode === null
       ? ''
-      : String(this.reduce((str, value) => `${str}${delimiter}${value}`))
+      : this.tail().reduce(
+          (str, value) => `${str}${delimiter}${value}`,
+          String(this.firstNode.value)
+        )
   }
 
   get(index: number): T {
