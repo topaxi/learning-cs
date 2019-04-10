@@ -109,6 +109,23 @@ describe('LinkedList<T>', () => {
       expect(list.toArray()).toEqual([])
       expect(() => list.pop()).toThrow(/Out of bounds!/)
     })
+
+    test('should cleanup lastNode', () => {
+      let list = LinkedList.of(1)
+
+      list.pop()
+
+      expect(list['lastNode']).toBeNull()
+
+      list.push(1, 2)
+
+      expect(list['lastNode']).not.toBeNull()
+
+      list.pop()
+      list.pop()
+
+      expect(list['lastNode']).toBeNull()
+    })
   })
 
   describe('#reverse()', () => {

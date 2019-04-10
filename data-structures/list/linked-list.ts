@@ -80,6 +80,7 @@ export class LinkedList<T> implements Iterable<T> {
 
     if (currentNode.next === null) {
       this.firstNode = null
+      this.lastNode = null
 
       return currentNode.value
     }
