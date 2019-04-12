@@ -181,19 +181,14 @@ export class LinkedList<T> implements Iterable<T> {
 
   concat(...lists: (Iterable<T> | T)[]): LinkedList<T>
   concat<S>(...lists: (Iterable<S> | S)[]): LinkedList<T | S>
-  concat(...lists: (Iterable<unknown> | unknown)[]): LinkedList<unknown> {
+  concat<S>(...lists: (Iterable<S | T> | S | T)[]): LinkedList<T | S> {
     return lists
-      .map(list =>
-        typeof list !== 'string' && iter.isIterable(list)
-          ? LinkedList.from(list)
-          : LinkedList.of(list)
-      )
-      .filter(list => list.lastNode !== null)
+      .map(this.concatNormalizer)
       .reduce(this.concatReducer, LinkedList.from(this))
   }
 
   flat<U>(this: LinkedList<LinkedList<U>>): LinkedList<U> {
-    return this.reduce<LinkedList<U>>(concat, new LinkedList<U>())
+    return this.reduce(concat, new LinkedList<U>())
   }
 
   flatMap<U, R>(
@@ -372,10 +367,20 @@ export class LinkedList<T> implements Iterable<T> {
     return node
   }
 
+  private concatNormalizer<S>(
+    list: Iterable<S | T> | S | T
+  ): LinkedList<S | T> {
+    return typeof list !== 'string' && iter.isIterable(list)
+      ? LinkedList.from(list)
+      : LinkedList.of(list)
+  }
+
   private concatReducer<T>(
     acc: LinkedList<T>,
     list: LinkedList<T>
   ): LinkedList<T> {
+    if (list.lastNode === null) return acc
+
     if (acc.lastNode === null) {
       acc.firstNode = list.firstNode
     } else {
