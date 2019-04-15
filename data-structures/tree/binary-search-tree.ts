@@ -3,6 +3,20 @@ import { BinarySearchTreeNode } from './binary-search-tree-node'
 export class BinarySearchTree<T> {
   protected root: BinarySearchTreeNode<T> | null = null
 
+  static from<U>(iterable: Iterable<U>) {
+    let tree = new this<U>()
+
+    for (let value of iterable) {
+      tree.insert(value)
+    }
+
+    return tree
+  }
+
+  static of<U>(...values: U[]) {
+    return this.from(values)
+  }
+
   constructor(
     protected readonly compare: (a: T, b: T) => number = (a: any, b: any) =>
       a - b
