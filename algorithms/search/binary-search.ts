@@ -1,10 +1,12 @@
+import { lastIndex } from '../../utils'
+
 export function binarySearch<T = number>(
   list: T[],
   element: T,
   compare: (a: T, b: T) => number = ((a: number, b: number) => a - b) as any
 ): number {
   let start = 0
-  let end = list.length - 1
+  let end = lastIndex(list)
 
   while (start <= end) {
     let i = Math.floor((start + end) / 2)

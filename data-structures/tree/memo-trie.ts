@@ -1,4 +1,5 @@
 import { ClearableWeakmap } from '../../utils/clearable-weakmap'
+import { lastIndex } from '../../utils'
 
 class MemoMap<T, U> {
   private _weak = new ClearableWeakmap<object, U>()
@@ -83,7 +84,7 @@ export class MemoTrie {
     let currentNode = this._root
 
     for (let i = 0; i < args.length; i++) {
-      currentNode = currentNode.addChild(args[i], i === args.length - 1, value)
+      currentNode = currentNode.addChild(args[i], i === lastIndex(args), value)
     }
   }
 

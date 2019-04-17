@@ -1,3 +1,5 @@
+import { lastIndex } from './array'
+
 export function* map<T, U, This = undefined>(
   iterator: Iterable<T>,
   project: (this: This, t: T, i: number) => U,
@@ -44,6 +46,10 @@ export function find<T, This = undefined>(
 }
 
 export function last<T>(iterator: Iterable<T>): T | undefined {
+  if (Array.isArray(iterator) || typeof iterator === 'string') {
+    return iterator[lastIndex(iterator)]
+  }
+
   let last = undefined
   for (let value of iterator) last = value
   return last

@@ -35,6 +35,15 @@ export class PriorityQueue<T extends Hashable> {
     return this.heap.peek()
   }
 
+  updatePriority(value: T, priority: number): this {
+    if (this.heap.includes(value)) {
+      this.priorities.set(value, priority)
+      this.heap.push(this.heap.delete(value)!)
+    }
+
+    return this
+  }
+
   consume(): IterableIterator<T> {
     return iter.tap(this.heap.consume(), value =>
       this.priorities.delete(value)

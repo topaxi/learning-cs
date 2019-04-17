@@ -23,10 +23,10 @@ export function head(list: any): any {
 export function shuffleInplace<T extends unknown[]>(
   array: T,
   i = 0,
-  lastIndex = array.length - 1
+  toIndex = lastIndex(array)
 ): T {
-  for (; i < lastIndex; i++) {
-    swap(array, i, random(i, lastIndex))
+  for (; i < toIndex; i++) {
+    swap(array, i, random(i, toIndex))
   }
 
   return array
@@ -38,4 +38,10 @@ export function shuffle<T>(array: readonly T[]): T[] {
 
 export function sum(array: readonly number[]): number {
   return array.reduce(add, 0)
+}
+
+export function lastIndex(str: string): number
+export function lastIndex(array: readonly unknown[]): number
+export function lastIndex(stringOrArray: string | readonly unknown[]): number {
+  return stringOrArray.length - 1
 }

@@ -49,4 +49,21 @@ describe('PriorityQueue', () => {
     expect(Array.from(queue)).toEqual([3, 4, 1, 2])
     expect(queue.empty).toBe(true)
   })
+
+  it('should be able to reprioritize items', () => {
+    const queue = new PriorityQueue<number>()
+
+    queue
+      .enqueue(1, 1)
+      .enqueue(2, 2)
+      .enqueue(3, 0)
+
+    queue.updatePriority(3, 3)
+
+    expect(queue.peek()).toBe(1)
+
+    queue.updatePriority(2, 0)
+
+    expect(queue.peek()).toBe(2)
+  })
 })

@@ -1,4 +1,4 @@
-import { swap } from '../../utils'
+import { swap, lastIndex } from '../../utils'
 
 export class Heap<T> {
   private readonly memory: T[] = []
@@ -62,6 +62,39 @@ export class Heap<T> {
     return value
   }
 
+  indexOf(value: T): number {
+    return this.memory.indexOf(value)
+  }
+
+  includes(value: T): boolean {
+    return this.indexOf(value) !== -1
+  }
+
+  deleteAt(index: number): T | null {
+    if (index < 0) return null
+    if (index === lastIndex(this.memory)) return this.memory.pop()!
+
+    let value = this.value(index)
+    this.memory[index] = this.memory.pop()!
+
+    let parent = this.parent(index)
+
+    if (
+      this.hasLeftChild(index) &&
+      (!parent || this.comparator(parent, this.value(index)) <= 0)
+    ) {
+      this.heapifyDown(index)
+    } else {
+      this.heapifyUp(index)
+    }
+
+    return value
+  }
+
+  delete(value: T): T | null {
+    return this.deleteAt(this.indexOf(value))
+  }
+
   toString(): string {
     return this.memory.toString()
   }
@@ -78,8 +111,8 @@ export class Heap<T> {
     swap(this.memory, indexOne, indexTwo)
   }
 
-  private heapifyUp(): void {
-    let current = this.memory.length - 1
+  private heapifyUp(index = lastIndex(this.memory)): void {
+    let current = index
 
     while (
       this.getParentIndex(current) >= 0 &&
@@ -98,8 +131,8 @@ export class Heap<T> {
     return this.right(parentIndex) < this.memory.length
   }
 
-  private heapifyDown(): void {
-    let current = 0
+  private heapifyDown(index = 0): void {
+    let current = index
     let next = null
 
     while (this.hasLeftChild(current)) {

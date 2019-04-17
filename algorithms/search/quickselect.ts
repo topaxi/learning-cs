@@ -1,11 +1,11 @@
-import { partitionInline, random } from '../../utils'
+import { partitionInline, random, lastIndex } from '../../utils'
 
 export function quickselect(
   list: number[],
   k: number,
   compare = (value: number, pivotElement: number) => value < pivotElement,
   left = 0,
-  right = list.length - 1
+  right = lastIndex(list)
 ): number {
   if (left === right) {
     return list[left]

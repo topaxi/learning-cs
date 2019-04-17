@@ -1,6 +1,8 @@
+import { lastIndex } from '../utils'
+
 export function findMinValueInRotatedArray(array: number[]): number {
   let start = 0
-  let end = array.length - 1
+  let end = lastIndex(array)
 
   if (array[start] < array[end]) {
     return array[start]

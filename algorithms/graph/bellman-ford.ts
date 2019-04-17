@@ -1,6 +1,6 @@
 import { GraphEdge, GraphVertex } from '../../data-structures/graph'
 import { HashMap } from '../../data-structures/hash'
-import { iter } from '../../utils'
+import { iter, lastIndex } from '../../utils'
 
 export function bellmanFord<T>(
   edges: readonly GraphEdge<T>[],
@@ -19,7 +19,7 @@ export function bellmanFord<T>(
 
   for (
     let i = 0, didRelaxEdge = true;
-    i < vertices.length - 1 && didRelaxEdge;
+    i < lastIndex(vertices) && didRelaxEdge;
     i++
   ) {
     didRelaxEdge = false
@@ -34,7 +34,7 @@ export function bellmanFord<T>(
 
   for (
     let i = 0, didRelaxEdge = true;
-    i < vertices.length - 1 && didRelaxEdge;
+    i < lastIndex(vertices) && didRelaxEdge;
     i++
   ) {
     didRelaxEdge = false

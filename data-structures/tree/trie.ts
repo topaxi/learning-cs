@@ -1,4 +1,5 @@
 import { HashMap } from '../hash'
+import { lastIndex } from '../../utils/array'
 
 class TrieNode {
   readonly children = new HashMap<string, TrieNode>()
@@ -32,7 +33,7 @@ export class Trie {
     let currentNode = this.root
 
     for (let i = 0; i < str.length; i++) {
-      currentNode = currentNode.addChild(str[i], i === str.length - 1)
+      currentNode = currentNode.addChild(str[i], i === lastIndex(str))
     }
   }
 

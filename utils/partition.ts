@@ -1,4 +1,5 @@
 import { swap } from './swap'
+import { lastIndex } from './array'
 
 export function partition<T>(
   array: readonly T[],
@@ -19,7 +20,7 @@ export function partitionInline<T>(
   pivot: number,
   fn: (t: T, pivotElement: T) => boolean = (a, b) => a < b,
   left = 0,
-  right = array.length - 1
+  right = lastIndex(array)
 ): number {
   let pivotElement = array[pivot]
 

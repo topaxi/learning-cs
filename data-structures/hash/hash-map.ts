@@ -119,6 +119,8 @@ export class HashMap<K extends Hashable, T> {
   }
 
   protected normalizeKey(key: Hashable): string | number {
+    if (key == null) return String(key)
+
     return typeof key === 'object' ? key.id : key
   }
 
