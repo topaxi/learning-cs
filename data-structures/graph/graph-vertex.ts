@@ -44,6 +44,13 @@ export class GraphVertex<T> {
     return String(this.value)
   }
 
+  toJSON() {
+    return {
+      value: this.value,
+      edges: Array.from(this.edges.values())
+    }
+  }
+
   private normalizeNeighbors<T>(
     this: GraphVertex<T>,
     { startVertex, endVertex }: GraphEdge<T>

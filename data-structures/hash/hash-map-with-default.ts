@@ -1,9 +1,6 @@
-import { HashMap } from './hash-map'
+import { HashMap, Hashable } from './hash-map'
 
-export class HashMapWithDefault<K extends string | number, T> extends HashMap<
-  K,
-  T
-> {
+export class HashMapWithDefault<K extends Hashable, T> extends HashMap<K, T> {
   constructor(protected defaultValue: T, size?: number) {
     super(size)
   }

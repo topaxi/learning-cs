@@ -23,9 +23,7 @@ describe('bellmanFord()', () => {
     expect(
       bellmanFord(edges, v, v[0]).map(
         ([vertex, distance]) =>
-          `The cost to get from node ${v[0].value} to ${
-            vertex.value
-          } is ${distance}`
+          `The cost to get from node ${v[0]} to ${vertex} is ${distance}`
       )
     ).toMatchInlineSnapshot(`
       Array [
