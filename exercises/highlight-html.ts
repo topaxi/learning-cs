@@ -1,38 +1,27 @@
-export function hightlightHTML(body: string, terms: string[]): string {
-  let startPoints: Record<number, number> = {}
-  let endPoints: Record<number, number> = {}
-  let counter = 0
-  let output = ''
+import { range, lastIndex } from '../utils'
 
-  for (let i = 0; i < body.length; i++) {
+export function hightlightHTML(body: string, terms: string[]): string {
+  let output = ''
+  let openAt = Number.MAX_SAFE_INTEGER
+  let closeAt = -1
+
+  for (let i of range(body.length)) {
     for (let term of terms) {
       if (body.startsWith(term, i)) {
-        if (startPoints[i] === undefined) {
-          startPoints[i] = 0
-        }
-
-        let endIndex = i + term.length - 1
-        if (endPoints[endIndex] === undefined) {
-          endPoints[endIndex] = 0
-        }
-
-        startPoints[i]++
-        endPoints[endIndex]++
+        openAt = Math.min(openAt, i)
+        closeAt = Math.max(closeAt, i + lastIndex(term))
       }
     }
 
-    let c = counter
-    counter += startPoints[i] || 0
-    if (c === 0 && counter !== 0) {
+    if (openAt === i) {
       output += '<b>'
     }
 
     output += body[i]
 
-    c = counter
-    counter -= endPoints[i] || 0
-    if (c !== 0 && counter === 0) {
+    if (closeAt === i) {
       output += '</b>'
+      openAt = Number.MAX_SAFE_INTEGER
     }
   }
 
