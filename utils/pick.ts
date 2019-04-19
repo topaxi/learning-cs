@@ -1,6 +1,8 @@
 import { includedIn } from './filters'
 import { c } from './compose'
 import { prop } from './prop'
+import { arity2 } from './arity'
+import { paR } from './partial'
 
 type ObjectIndex = string | number | symbol
 type Entry<T, K extends keyof T = keyof T> = [K, T[K]]
@@ -14,7 +16,7 @@ const fromEntries = <T>(entries: Entry<T>[]): T =>
   }, {}) as T
 
 export const pickBy = <T>(o: T, predicate: PickPredicate<T>): Partial<T> =>
-  fromEntries(entries(o).filter((entry, index) => predicate(entry, index, o)))
+  fromEntries(entries(o).filter(arity2(paR(predicate, o))))
 
 export function pick<P extends ObjectIndex>(...keys: P[]) {
   return <T extends Record<P, unknown>>(o: T): Pick<T, P> =>
