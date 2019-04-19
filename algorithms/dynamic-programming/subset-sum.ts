@@ -11,11 +11,11 @@ export const subsetSum = mY(
     if (list.length === 0) return false
 
     // Recurrence, ignore head if it is greater than the given sum
-    if (head(list) > sum) return subsetSum(tail(list), sum)
+    if (head(list)! > sum) return subsetSum(tail(list), sum)
 
     // Recurrence, is there a subset sum if we add the value or not?
     return (
-      subsetSum(tail(list), sum) || subsetSum(tail(list), sum - head(list))
+      subsetSum(tail(list), sum) || subsetSum(tail(list), sum - head(list)!)
     )
   }
 )

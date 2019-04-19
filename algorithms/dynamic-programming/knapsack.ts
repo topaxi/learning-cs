@@ -14,12 +14,12 @@ export const knapsack = mY(
     if (space === 0) return 0
 
     // Recurrence, item is too big, I ain't carrying this!
-    if (head(list).size > space) return knapsack(tail(list), space)
+    if (head(list)!.size > space) return knapsack(tail(list), space)
 
     // Recurrence, do we get more value if we take it or not?
     return Math.max(
       knapsack(tail(list), space),
-      head(list).value + knapsack(tail(list), space - head(list).size)
+      head(list)!.value + knapsack(tail(list), space - head(list)!.size)
     )
   }
 )

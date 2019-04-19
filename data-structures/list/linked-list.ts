@@ -1,4 +1,5 @@
 import {
+  IHead,
   identity,
   eq,
   concat,
@@ -13,7 +14,7 @@ import { LinkedListNode } from './linked-list-node'
 
 const increment = pa(add, 1)
 
-export class LinkedList<T> implements Iterable<T> {
+export class LinkedList<T> implements Iterable<T>, IHead<T | null> {
   static of<T>(...values: T[]) {
     return this.from(values)
   }
@@ -27,6 +28,10 @@ export class LinkedList<T> implements Iterable<T> {
 
   get empty(): boolean {
     return this.firstNode === null
+  }
+
+  get 0(): T | null {
+    return this.head()
   }
 
   unshift(...values: T[]): this {

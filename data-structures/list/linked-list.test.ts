@@ -1,3 +1,4 @@
+import { head, tail } from '../../utils/array'
 import { LinkedList } from './linked-list'
 
 describe('LinkedList<T>', () => {
@@ -216,11 +217,29 @@ describe('LinkedList<T>', () => {
     })
   })
 
+  describe('#head()', () => {
+    test('should return head element', () => {
+      expect(LinkedList.of().head()).toBeNull()
+      expect(LinkedList.of(1).head()).toBe(1)
+      expect(LinkedList.of(1, 2).head()).toBe(1)
+    })
+
+    test('should implement IHead interface', () => {
+      expect(head(LinkedList.of())).toBeNull()
+      expect(head(LinkedList.of(1))).toBe(1)
+      expect(head(LinkedList.of(1, 2))).toBe(1)
+    })
+  })
+
   describe('#tail()', () => {
     test('should return the tail of the list', () => {
       expect(Array.from(LinkedList.of(1, 2, 3).tail())).toEqual([2, 3])
       expect(Array.from(LinkedList.of(1).tail())).toEqual([])
       expect(Array.from(new LinkedList().tail())).toEqual([])
+    })
+
+    test('should work with tail helper', () => {
+      expect(Array.from(tail(LinkedList.of(1, 2)))).toEqual([2])
     })
   })
 

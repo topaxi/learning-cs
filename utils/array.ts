@@ -7,6 +7,7 @@ function _tail<T>(list: [unknown, ...T[]]): readonly T[]
 function _tail<T>(list: readonly T[]): readonly T[]
 function _tail<T>(list: T[]): readonly T[]
 function _tail(str: string): string
+function _tail<T extends { slice(start: number, end?: number): T }>(list: T): T
 function _tail(
   list: readonly unknown[] | string
 ): readonly unknown[] | string {
@@ -15,14 +16,18 @@ function _tail(
 
 export const tail = memoize(_tail, new WeakSingleParamStore())
 
+export interface IHead<T> {
+  0: T
+}
+
 export function head<T>(list: [T]): T
 export function head<T>(list: [T, ...unknown[]]): T
-export function head<T>(list: readonly T[]): T
-export function head<T>(list: T[]): T
-export function head<T>(list: string): string
-export function head<T>(list: { 0: T }): T
+export function head<T>(list: readonly T[]): T | undefined
+export function head<T>(list: T[]): T | undefined
+export function head<T>(list: string): string | undefined
+export function head<T>(list: IHead<T>): T
 export function head(
-  list: readonly unknown[] | { 0: unknown } | string
+  list: readonly unknown[] | IHead<unknown> | string
 ): unknown {
   return list[0]
 }
