@@ -1,4 +1,4 @@
-import { memoize, WeakSingleParamStore } from './memo'
+import { memoize } from './memoize'
 import { random } from './random'
 import { swap } from './swap'
 import { add } from './operators'
@@ -11,9 +11,9 @@ function _tail(list: readonly unknown[]): readonly unknown[] {
   return list.slice(1)
 }
 
-export const tail = memoize(_tail, new WeakSingleParamStore())
+export const tail = memoize.weak.unary(_tail)
 
-export interface IHead<T> {
+export interface Head<T> {
   0: T
 }
 
@@ -22,9 +22,9 @@ export function head<T>(list: [T, ...unknown[]]): T
 export function head<T>(list: readonly T[]): T | undefined
 export function head<T>(list: T[]): T | undefined
 export function head<T>(list: string): string | undefined
-export function head<T>(list: IHead<T>): T
+export function head<T>(list: Head<T>): T
 export function head(
-  list: readonly unknown[] | IHead<unknown> | string
+  list: readonly unknown[] | Head<unknown> | string
 ): unknown {
   return list[0]
 }

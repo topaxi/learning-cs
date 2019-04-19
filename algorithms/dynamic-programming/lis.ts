@@ -1,14 +1,14 @@
 import { range, mY } from '../../utils'
-import { SingleParamStore } from '../../utils/memo'
+import { SingleParamStore } from '../../utils/memoize'
 
 // Longest increasing subsequence
 // Subproblem: Suffix
 
 // Recurrence
 // n: number -> indication of NP-Hard, it is!
-const lisr = (list: readonly number[]) => (
-  lisr: (n: number) => number[]
-) => (n: number): number[] => {
+const lisr = (list: readonly number[]) => (lisr: (n: number) => number[]) => (
+  n: number
+): number[] => {
   let sequence = [list[n]]
 
   for (let i of range(n)) {

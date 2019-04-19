@@ -1,5 +1,5 @@
 import { MemoTrie } from '../data-structures/tree/memo-trie'
-import { memo, Memoized, MemoStore } from './memo'
+import { memo, Memoized, MemoStore } from './memoize'
 import { c } from './compose'
 
 // eslint-disable-next-line

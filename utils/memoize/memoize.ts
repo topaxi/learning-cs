@@ -1,36 +1,5 @@
-import { MemoTrie } from '../data-structures/tree/memo-trie'
-import { ClearableWeakmap } from './clearable-weakmap'
-
-export class SingleParamStore<T extends any[], U> extends Map<T, U> {
-  get(key: T) {
-    return super.get(key[0])
-  }
-
-  set(key: T, value: U) {
-    return super.set(key[0], value)
-  }
-
-  has(key: T) {
-    return super.has(key[0])
-  }
-}
-
-export class WeakSingleParamStore<T extends any[], U> extends ClearableWeakmap<
-  T,
-  U
-> {
-  get(key: T) {
-    return super.get(key[0])
-  }
-
-  set(key: T, value: U) {
-    return super.set(key[0], value)
-  }
-
-  has(key: T) {
-    return super.has(key[0])
-  }
-}
+import { MemoTrie } from '../../data-structures/tree/memo-trie'
+import { SingleParamStore, WeakSingleParamStore } from './single-param-store'
 
 export interface MemoStore {
   has(k: any[]): boolean
@@ -67,6 +36,20 @@ export function memoize<
   memoized.memo = store
 
   return memoized as Memoized<T, M>
+}
+
+memoize.weak = {
+  unary: function memoizeWeakUnary<T, R>(
+    fn: (arg: T) => R
+  ): Memoized<typeof fn, WeakSingleParamStore<[T], R>> {
+    return memoize(fn, new WeakSingleParamStore())
+  }
+}
+
+memoize.unary = function memoizeUnary<T, R>(
+  fn: (arg: T) => R
+): Memoized<typeof fn, SingleParamStore<[T], R>> {
+  return memoize(fn, new SingleParamStore())
 }
 
 export const memo = <

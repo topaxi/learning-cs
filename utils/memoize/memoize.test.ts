@@ -1,4 +1,4 @@
-import { memoize } from './memo'
+import { memoize } from './memoize'
 
 describe('memoize', () => {
   test('should return same value for same input', () => {

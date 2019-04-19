@@ -1,5 +1,5 @@
 import { Y, mY } from '../../utils'
-import { SingleParamStore } from '../../utils/memo'
+import { SingleParamStore } from '../../utils/memoize'
 
 const staircase = (staircase: (n: number) => number) => (n: number) => {
   if (n < 1) return 0
