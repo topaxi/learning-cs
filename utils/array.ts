@@ -6,11 +6,8 @@ import { add } from './operators'
 function _tail<T>(list: [unknown, ...T[]]): readonly T[]
 function _tail<T>(list: readonly T[]): readonly T[]
 function _tail<T>(list: T[]): readonly T[]
-function _tail(str: string): string
 function _tail<T extends { slice(start: number, end?: number): T }>(list: T): T
-function _tail(
-  list: readonly unknown[] | string
-): readonly unknown[] | string {
+function _tail(list: readonly unknown[]): readonly unknown[] {
   return list.slice(1)
 }
 
