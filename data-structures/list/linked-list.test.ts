@@ -239,7 +239,7 @@ describe('LinkedList<T>', () => {
     })
 
     test('should work with tail helper', () => {
-      expect(Array.from(tail(LinkedList.of(1, 2)))).toEqual([2])
+      expect(tail(LinkedList.of(1, 2))).toEqual(LinkedList.of(2))
     })
   })
 
