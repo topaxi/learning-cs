@@ -20,6 +20,16 @@ describe('memoize', () => {
     expect(fn(b, c, a)).not.toBe(fn(a, b, c))
   })
 
+  test('should be able to clear memoized values', () => {
+    let fn = memoize((a: any) => [a])
+    let a = { a: 'a' }
+    let ret = fn(a)
+
+    expect(fn(a)).toBe(ret)
+    fn.memo.clear()
+    expect(fn(a)).not.toBe(ret)
+  })
+
   describe('.unary', () => {
     test('should memoize unary function', () => {
       let fn = memoize.unary((a: any) => [a])
