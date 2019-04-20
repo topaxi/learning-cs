@@ -313,12 +313,8 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   }
 
   join(delimiter = ','): string {
-    return this.firstNode === null
-      ? ''
-      : this.tail().reduce(
-          arity2(pa(join, delimiter)),
-          String(this.firstNode.value)
-        )
+    if (this.firstNode === null) return ''
+    return this.tail().reduce(arity2(pa(join, delimiter)), String(this.head()))
   }
 
   get(index: number): T {
