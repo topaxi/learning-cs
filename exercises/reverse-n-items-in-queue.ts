@@ -1,10 +1,7 @@
 import { range } from '../utils'
 import { Stack, Queue } from '../data-structures'
 
-export function reverseQueue(
-  queue: Queue<number>,
-  n: number = queue.length
-): void {
+export function reverseQueue(queue: Queue<number>, n = queue.length): void {
   let reversed = new Stack<number>()
 
   range(n).forEach(() => reversed.push(queue.dequeue()))

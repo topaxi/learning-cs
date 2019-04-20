@@ -1,3 +1,4 @@
+import { range } from './range'
 import { swap } from './swap'
 import { lastIndex } from './array'
 
@@ -8,9 +9,9 @@ export function partition<T>(
   let a: T[] = []
   let b: T[] = []
 
-  array.forEach((t, i, array) => {
+  for (let i of range(array.length)) {
     ;(fn(array[i], i, array) ? a : b).push(array[i])
-  })
+  }
 
   return [a, b]
 }
@@ -28,7 +29,7 @@ export function partitionInline<T>(
 
   let newPivot = left
 
-  for (let i = left; i <= right; i++) {
+  for (let i of range(left, right)) {
     if (fn(array[i], pivotElement)) {
       swap(array, i, newPivot++)
     }

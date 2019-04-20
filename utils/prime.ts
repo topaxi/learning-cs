@@ -23,7 +23,7 @@ export function primes(max: number): Set<number> {
 }
 
 export function isPrime(value: number): boolean {
-  for (let i = 2; i < value; i++) {
+  for (let i of range(2, value)) {
     if (value % i === 0) {
       return false
     }

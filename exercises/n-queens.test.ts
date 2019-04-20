@@ -43,7 +43,7 @@ function createEmptyBoard(size: number): Chessboard {
 function placeQueens(queens: Queen[]): Chessboard {
   let board = createEmptyBoard(queens.length)
 
-  for (let i = 0; i < queens.length; i++) {
+  for (let i of range(queens.length)) {
     board[queens[i].row][queens[i].column] = queens[i]
   }
 
