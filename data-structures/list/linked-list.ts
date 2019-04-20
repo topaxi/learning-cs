@@ -5,16 +5,12 @@ import {
   concat,
   iter,
   prop,
-  add,
-  pa,
   secondArg,
-  arity2,
-  join
+  paR,
+  arity3
 } from '../../utils'
 
 import { LinkedListNode } from './linked-list-node'
-
-const increment = pa(add, 1)
 
 export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   static of<T>(...values: T[]) {
@@ -125,24 +121,7 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
       throw new Error('Reduce of empty List with no initial value!')
     }
 
-    let node: LinkedListNode<T> | null = this.firstNode
-    let index = 0
-    let accumulator
-
-    if (initialValue === undefined) {
-      accumulator = node.value
-      node = node.next
-      index = 1
-    } else {
-      accumulator = initialValue
-    }
-
-    while (node !== null) {
-      accumulator = reducer(accumulator, node.value, index++, this)
-      node = node.next
-    }
-
-    return accumulator as A
+    return this.firstNode.reduce(arity3(paR(reducer, this)), initialValue)
   }
 
   map<R>(project: (value: T, index: number, list: this) => R): LinkedList<R> {
@@ -183,7 +162,7 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   }
 
   size(): number {
-    return this.reduce(increment, 0)
+    return this.firstNode === null ? 0 : this.firstNode.size()
   }
 
   concat(...lists: (Iterable<T> | T)[]): LinkedList<T>
@@ -313,8 +292,7 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   }
 
   join(delimiter = ','): string {
-    if (this.firstNode === null) return ''
-    return this.tail().reduce(arity2(pa(join, delimiter)), String(this.head()))
+    return this.firstNode === null ? '' : this.firstNode.join(delimiter)
   }
 
   get(index: number): T {
@@ -322,21 +300,12 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   }
 
   reverse(): this {
-    let current = this.firstNode
-    let prev = null
-    let next = null
+    if (this.firstNode !== null) {
+      let firstNode = this.firstNode
 
-    while (current !== null) {
-      next = current.next
-
-      current.next = prev
-
-      prev = current
-      current = next
+      this.firstNode = firstNode.reverse()
+      this.lastNode = firstNode
     }
-
-    this.lastNode = this.firstNode
-    this.firstNode = prev
 
     return this
   }

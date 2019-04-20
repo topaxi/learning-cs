@@ -68,4 +68,12 @@ describe('LinkedListNode<T>', () => {
       expect(last.last()).toBe(last)
     })
   })
+
+  describe('#reverse()', () => {
+    test('should reverse list nodes', () => {
+      expect(LinkedListNode.of(1, 2, 3, 4, 5).reverse()).toEqual(
+        LinkedListNode.of(5, 4, 3, 2, 1)
+      )
+    })
+  })
 })
