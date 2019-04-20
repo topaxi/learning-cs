@@ -7,7 +7,9 @@ import {
   prop,
   add,
   pa,
-  secondArg
+  secondArg,
+  arity2,
+  join
 } from '../../utils'
 
 import { LinkedListNode } from './linked-list-node'
@@ -314,7 +316,7 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
     return this.firstNode === null
       ? ''
       : this.tail().reduce(
-          (str, value) => `${str}${delimiter}${value}`,
+          arity2(pa(join, delimiter)),
           String(this.firstNode.value)
         )
   }
