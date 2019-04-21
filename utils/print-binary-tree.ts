@@ -118,6 +118,7 @@ export class BinaryTreePrinter<T extends BinaryTreeNode<any, any>> {
 
   //This function fills in the edgeLength and
   //height fields of the specified tree
+  // eslint-disable-next-line
   private computeEdgeLengths(node: AsciiNode | null): void {
     if (node === null) return
 

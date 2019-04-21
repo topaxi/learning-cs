@@ -24,6 +24,8 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
+    complexity: ['error', 10],
+    'prefer-object-spread': 'error',
     'no-dupe-class-members': 'off',
     '@typescript-eslint/no-unused-vars': [
       'error',
