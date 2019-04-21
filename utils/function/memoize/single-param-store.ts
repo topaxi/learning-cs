@@ -1,4 +1,4 @@
-import { ClearableWeakmap } from '../clearable-weakmap'
+import { ClearableWeakmap } from './clearable-weakmap'
 
 export class SingleParamStore<T extends any[], U> extends Map<T, U> {
   get(key: T) {

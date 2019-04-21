@@ -1,4 +1,4 @@
-import { MemoTrie } from '../../data-structures/tree/memo-trie'
+import { MemoTrie } from '../../../data-structures/tree/memo-trie'
 import { SingleParamStore, WeakSingleParamStore } from './single-param-store'
 
 export interface MemoStore {

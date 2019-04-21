@@ -1,6 +1,6 @@
 import { MemoTrie } from '../data-structures/tree/memo-trie'
-import { memo, Memoized, MemoStore } from './memoize'
-import { c } from './compose'
+import { memo, Memoized, MemoStore } from './function/memoize'
+import { c } from './function'
 
 // eslint-disable-next-line
 type AnyFunction = (...args: any[]) => any

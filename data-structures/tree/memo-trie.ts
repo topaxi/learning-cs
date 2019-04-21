@@ -1,4 +1,4 @@
-import { ClearableWeakmap } from '../../utils/clearable-weakmap'
+import { ClearableWeakmap } from '../../utils/function/memoize/clearable-weakmap'
 import { lastIndex } from '../../utils'
 
 class MemoMap<T, U> {

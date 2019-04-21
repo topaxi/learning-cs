@@ -1,4 +1,4 @@
-import { identity } from './identity'
+import { identity } from './function'
 
 export interface RangeOptions<T> {
   step: number

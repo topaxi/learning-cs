@@ -1,6 +1,6 @@
-import { range } from './range'
-import { swap } from './swap'
-import { lastIndex } from './array'
+import { range } from '../range'
+import { swap } from '../swap'
+import { lastIndex } from './last-index'
 
 export function partition<T>(
   array: readonly T[],

@@ -1,8 +1,6 @@
-import { includedIn } from './filters'
-import { c } from './compose'
+import { includedIn } from '../filters'
+import { c, arity2, paR } from '../function'
 import { prop } from './prop'
-import { arity2 } from './arity'
-import { paR } from './partial'
 
 type ObjectIndex = string | number | symbol
 type Entry<T, K extends keyof T = keyof T> = [K, T[K]]
