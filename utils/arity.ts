@@ -37,7 +37,11 @@ export function arity<T>(
   n: number,
   fn: NAryFunction<any, T>
 ): NAryFunction<unknown, T> {
-  return (...args: unknown[]) => fn(...args.slice(0, n))
+  return Object.defineProperty(
+    (...args: unknown[]) => fn(...args.slice(0, n)),
+    'length',
+    { value: n }
+  )
 }
 
 export const arity0 = pa(arity, 0) as AsNullaryFunction
