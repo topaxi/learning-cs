@@ -8,7 +8,8 @@
     "test:ci": "yarn test --coverage",
     "test:watch": "yarn test --watch",
     "lint": "eslint '**/*.ts'",
-    "precommit": "lint-staged"
+    "type-check": "tsc --noEmit -p .",
+    "precommit": "lint-staged && yarn type-check"
   },
   "devDependencies": {
     "@types/jest": "24.0.11",
