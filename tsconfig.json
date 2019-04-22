@@ -4,6 +4,7 @@
     "module": "commonjs",
     "target": "es2019",
     "strict": true,
+    "allowJs": true,
     "lib": [
       "es5",
       "es6",
