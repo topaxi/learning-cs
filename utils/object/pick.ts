@@ -15,11 +15,14 @@ type OmitFn = <P extends ObjectIndex>(
 ) => <T extends Record<ObjectIndex, unknown>>(o: T) => Omit<T, P>
 
 const entries: <T>(o: T) => Entry<T>[] = Object.entries
-const fromEntries = <T>(entries: Entry<T>[]): T =>
-  entries.reduce<Partial<T>>((o, [key, value]) => {
-    o[key] = value
-    return o
-  }, {}) as T
+const fromEntries: <T>(entries: Entry<T>[]) => T =
+  // @ts-ignore
+  Object.fromEntries ||
+  (<T>(entries: Entry<T>[]): T =>
+    entries.reduce<Partial<T>>((o, [key, value]) => {
+      o[key] = value
+      return o
+    }, {}) as T)
 
 export const pickBy: PickByFn = predicate => o =>
   fromEntries(entries(o).filter(arity2(paR(predicate, o))))
