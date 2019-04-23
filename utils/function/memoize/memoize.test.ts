@@ -30,6 +30,10 @@ describe('memoize', () => {
     expect(fn(a)).not.toBe(ret)
   })
 
+  test('should have meaningful function name', () => {
+    expect(memoize(function expensive() {}).name).toBe('memoized(expensive)')
+  })
+
   describe('.unary', () => {
     test('should memoize unary function', () => {
       let fn = memoize.unary((a: any) => [a])
