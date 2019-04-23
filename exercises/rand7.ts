@@ -1,4 +1,4 @@
-import { range } from '../utils'
+import { range } from '../utils/range'
 
 function rand5(): number {
   return Math.floor(Math.random() * 5) + 1

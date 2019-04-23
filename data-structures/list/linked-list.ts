@@ -1,15 +1,12 @@
-import {
-  Head,
-  identity,
-  eq,
-  concat,
-  iter,
-  prop,
-  secondArg,
-  paR,
-  arity3
-} from '../../utils'
-
+import { Head } from '../../utils/array/head'
+import { prop } from '../../utils/object/prop'
+import { arity3 } from '../../utils/function/arity'
+import { paR } from '../../utils/function/partial'
+import { secondArg } from '../../utils/function/nth-arg'
+import { identity } from '../../utils/function/identity'
+import { eq } from '../../utils/filters/eq'
+import { concat } from '../../utils/operators'
+import { map, isIterable } from '../../utils/iterator'
 import { LinkedListNode } from './linked-list-node'
 
 export class LinkedList<T> implements Iterable<T>, Head<T | null> {
@@ -202,15 +199,15 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   }
 
   entries(): IterableIterator<[number, T]> {
-    return iter.map(this.nodes(), (node, i) => [i, node.value])
+    return map(this.nodes(), (node, i) => [i, node.value])
   }
 
   keys(): IterableIterator<number> {
-    return iter.map(this.nodes(), secondArg)
+    return map(this.nodes(), secondArg)
   }
 
   values(): IterableIterator<T> {
-    return iter.map(this.nodes(), prop('value'))
+    return map(this.nodes(), prop('value'))
   }
 
   find(predicate: (value: T, key: number, list: this) => boolean): T | null {
@@ -342,7 +339,7 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   private concatNormalizer<S>(
     list: Iterable<S | T> | S | T
   ): LinkedList<S | T> {
-    return typeof list !== 'string' && iter.isIterable(list)
+    return typeof list !== 'string' && isIterable(list)
       ? LinkedList.from(list)
       : LinkedList.of(list)
   }

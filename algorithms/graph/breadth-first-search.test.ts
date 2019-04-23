@@ -1,4 +1,4 @@
-import { GraphVertex } from '../../data-structures/graph'
+import { GraphVertex } from '../../data-structures/graph/graph-vertex'
 import { breadthFirstSearch } from './breadth-first-search'
 
 describe('Graph Breadh First Search', () => {

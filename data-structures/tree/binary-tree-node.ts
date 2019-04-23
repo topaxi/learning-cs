@@ -1,6 +1,7 @@
-import { iter, notNull } from '../../utils'
-import { HashMap } from '../hash'
-import { Queue } from '../queue'
+import { notNull } from '../../utils/filters/null'
+import { filter } from '../../utils/iterator'
+import { HashMap } from '../hash/hash-map'
+import { Queue } from '../queue/queue'
 
 export class BinaryTreeNode<T = number, M = unknown> {
   readonly meta = new HashMap<string | number, M>()
@@ -138,7 +139,7 @@ export class BinaryTreeNode<T = number, M = unknown> {
   *traverseLevelOrder(): IterableIterator<T> {
     let queue = Queue.of<BinaryTreeNode<T> | null>(this)
 
-    for (let node of iter.filter(queue, notNull)) {
+    for (let node of filter(queue, notNull)) {
       yield node.value
       queue.enqueue(node.left, node.right)
     }

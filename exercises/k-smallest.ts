@@ -1,4 +1,4 @@
-import { BinarySearchTree } from '../data-structures'
+import { BinarySearchTree } from '../data-structures/tree/binary-search-tree'
 
 export function kSmallestBinarySearchTree(
   node: BinarySearchTree<number>,

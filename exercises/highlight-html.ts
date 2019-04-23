@@ -1,4 +1,5 @@
-import { range, lastIndex } from '../utils'
+import { lastIndex } from '../utils/array/last-index'
+import { range } from '../utils/range'
 
 export function hightlightHTML(body: string, terms: string[]): string {
   let output = ''

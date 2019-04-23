@@ -1,4 +1,5 @@
-import { swap, lastIndex } from '../../utils'
+import { lastIndex } from '../../utils/array/last-index'
+import { swap } from '../../utils/swap'
 
 export class Heap<T> {
   private readonly memory: T[] = []

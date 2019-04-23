@@ -1,4 +1,5 @@
-import { range, prop } from '../../utils'
+import { prop } from '../../utils/object/prop'
+import { range } from '../../utils/range'
 import { LinkedListNode } from './linked-list-node'
 
 describe('LinkedListNode<T>', () => {

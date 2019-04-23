@@ -1,5 +1,6 @@
-import { range } from '../utils'
-import { Stack, Queue } from '../data-structures'
+import { range } from '../utils/range'
+import { Queue } from '../data-structures/queue/queue'
+import { Stack } from '../data-structures/stack/stack'
 
 export function reverseQueue(queue: Queue<number>, n = queue.length): void {
   let reversed = new Stack<number>()

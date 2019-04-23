@@ -1,4 +1,5 @@
-import { range, add } from '../../utils'
+import { range } from '../../utils/range'
+import { add } from '../../utils/operators'
 
 const sumOfSquares = Array.from(
   range(1, 100, { inclusive: true }),

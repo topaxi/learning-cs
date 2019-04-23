@@ -1,4 +1,4 @@
-import { lastIndex } from '../utils'
+import { lastIndex } from '../utils/array/last-index'
 
 export function findMinValueInRotatedArray(array: number[]): number {
   let start = 0

@@ -1,5 +1,7 @@
-import { partition, random, lastIndex } from '../../utils'
 import { define } from './utils'
+import { lastIndex } from '../../utils/array/last-index'
+import { partition } from '../../utils/array/partition'
+import { random } from '../../utils/random'
 
 export const quicksort = define(function q(list, compare): typeof list {
   if (list.length < 2) return list

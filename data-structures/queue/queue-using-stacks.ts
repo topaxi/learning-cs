@@ -1,4 +1,4 @@
-import { Stack } from '../stack'
+import { Stack } from '../stack/stack'
 
 export class Queue<T> {
   private stackNewest = new Stack<T>()

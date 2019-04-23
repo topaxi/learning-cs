@@ -1,4 +1,6 @@
-import { identity, pa, c } from '../function'
+import { identity } from '../function/identity'
+import { pa } from '../function/partial'
+import { c } from '../function/compose'
 import { map } from '../iterator'
 
 export type is<S> = (value: S) => value is S

@@ -1,8 +1,9 @@
-import { range, iter } from '../utils'
+import { range } from '../utils/range'
+import { filter } from '../utils/iterator'
 
 export function selfDividingNumbers(left: number, right: number) {
   return Array.from(
-    iter.filter(range(left, right, { inclusive: true }), isSelfDividing)
+    filter(range(left, right, { inclusive: true }), isSelfDividing)
   )
 }
 

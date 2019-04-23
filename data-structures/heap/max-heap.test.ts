@@ -1,5 +1,5 @@
 import { MaxHeap } from './max-heap'
-import { range } from '../../utils'
+import { range } from '../../utils/range'
 
 describe('MaxHeap', () => {
   test('should create empty heap', () => {

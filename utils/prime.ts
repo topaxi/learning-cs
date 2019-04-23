@@ -1,4 +1,4 @@
-import { returnTrue } from './function'
+import { returnTrue } from './function/return-true'
 import { range } from './range'
 
 const primeReducer = (

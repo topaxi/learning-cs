@@ -1,5 +1,6 @@
 import { range } from '../../utils/range'
-import { GraphVertex, GraphEdge } from '../../data-structures'
+import { GraphVertex } from '../../data-structures/graph/graph-vertex'
+import { GraphEdge } from '../../data-structures/graph/graph-edge'
 import { dijkstra } from './dijkstra'
 
 describe('dijkstra', () => {

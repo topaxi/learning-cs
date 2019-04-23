@@ -1,5 +1,5 @@
-import { HashMap } from '../hash'
-import { lastIndex } from '../../utils/array'
+import { HashMap } from '../hash/hash-map'
+import { lastIndex } from '../../utils/array/last-index'
 
 class TrieNode {
   readonly children = new HashMap<string, TrieNode>()

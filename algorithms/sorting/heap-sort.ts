@@ -1,4 +1,4 @@
-import { Heap } from '../../data-structures/heap'
+import { Heap } from '../../data-structures/heap/heap'
 import { define } from './utils'
 
 export const heapsort = define((list, compare) => {

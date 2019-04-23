@@ -1,4 +1,5 @@
-import { range, swap } from '../utils'
+import { range } from '../utils/range'
+import { swap } from '../utils/swap'
 
 function swapDiagonal(obj: number[][], a: number, b: number): void {
   ;[obj[b][a], obj[a][b]] = [obj[a][b], obj[b][a]]

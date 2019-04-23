@@ -1,6 +1,8 @@
-import { GraphEdge, GraphVertex } from '../../data-structures/graph'
-import { HashMap } from '../../data-structures/hash'
-import { iter, lastIndex } from '../../utils'
+import { lastIndex } from '../../utils/array/last-index'
+import { filter } from '../../utils/iterator'
+import { HashMap } from '../../data-structures/hash/hash-map'
+import { GraphEdge } from '../../data-structures/graph/graph-edge'
+import { GraphVertex } from '../../data-structures/graph/graph-vertex'
 
 export function bellmanFord<T>(
   edges: readonly GraphEdge<T>[],
@@ -23,7 +25,7 @@ export function bellmanFord<T>(
     i++
   ) {
     didRelaxEdge = false
-    for (let edge of iter.filter(edges, isShorterDistance)) {
+    for (let edge of filter(edges, isShorterDistance)) {
       distances.set(
         edge.endVertex,
         distances.get(edge.startVertex)! + edge.weight
@@ -38,7 +40,7 @@ export function bellmanFord<T>(
     i++
   ) {
     didRelaxEdge = false
-    for (let edge of iter.filter(edges, isShorterDistance)) {
+    for (let edge of filter(edges, isShorterDistance)) {
       distances.set(edge.endVertex, -Infinity)
       didRelaxEdge = true
     }

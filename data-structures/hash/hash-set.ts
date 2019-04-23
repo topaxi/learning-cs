@@ -1,4 +1,4 @@
-import { iter } from '../../utils'
+import { includes } from '../../utils/iterator'
 import { HashMap, Hashable } from './hash-map'
 
 export class HashSet<T extends Hashable> {
@@ -113,6 +113,6 @@ function has<T>(
     if (isSetLike(iterable)) return iterable.has(key)
     if (isArrayLike(iterable)) return iterable.includes(key)
 
-    return iter.includes(iterable, key)
+    return includes(iterable, key)
   }
 }

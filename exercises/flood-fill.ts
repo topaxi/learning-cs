@@ -1,5 +1,6 @@
-import { not, isWithinMatrix } from '../utils'
-import { Queue } from '../data-structures'
+import { not } from '../utils/function/not'
+import { isWithinMatrix } from '../utils/matrix'
+import { Queue } from '../data-structures/queue/queue'
 
 export function fill(
   screen: number[][],

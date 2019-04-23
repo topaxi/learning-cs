@@ -1,4 +1,4 @@
-import { LinkedList } from '../list'
+import { LinkedList } from '../list/linked-list'
 
 export class Queue<T> {
   private readonly list = new LinkedList<T>()

@@ -1,5 +1,5 @@
-import { HashMapWithDefault } from '../data-structures'
-import { range } from '../utils'
+import { HashMapWithDefault } from '../data-structures/hash/hash-map-with-default'
+import { range } from '../utils/range'
 import { rand7, rand7m5 } from './rand7'
 
 describe('rand7', () => {

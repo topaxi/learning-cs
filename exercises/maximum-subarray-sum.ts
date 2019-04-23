@@ -1,4 +1,5 @@
-import { head, range } from '../utils'
+import { head } from '../utils/array/head'
+import { range } from '../utils/range'
 
 export function maximumSubarraySum(list: readonly number[]): number {
   let maximum = head(list) || 0

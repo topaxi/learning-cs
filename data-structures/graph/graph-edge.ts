@@ -1,5 +1,5 @@
 import { GraphVertex } from './graph-vertex'
-import { swap } from '../../utils'
+import { swap } from '../../utils/swap'
 
 export class GraphEdge<T> {
   private static nextId = 0

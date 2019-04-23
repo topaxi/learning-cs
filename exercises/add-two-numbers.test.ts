@@ -1,4 +1,4 @@
-import { LinkedListNode } from '../data-structures'
+import { LinkedListNode } from '../data-structures/list/linked-list-node'
 import { addTwoNumbers } from './add-two-numbers'
 
 describe('addTwoNumbers', () => {

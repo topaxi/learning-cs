@@ -1,5 +1,5 @@
 import { nQueens, ChessFigure, Queen } from './n-queens'
-import { range } from '../utils'
+import { range } from '../utils/range'
 
 describe('nQueens', () => {
   test('should place queens without threatening each other', () => {

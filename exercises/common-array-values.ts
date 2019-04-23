@@ -1,5 +1,10 @@
-import { Hashable, HashMapWithDefault } from '../data-structures'
-import { range, head, eq, prop, c } from '../utils'
+import { HashMapWithDefault } from '../data-structures/hash/hash-map-with-default'
+import { Hashable } from '../data-structures/hash/hash-map'
+import { c } from '../utils/function/compose'
+import { prop } from '../utils/object/prop'
+import { head } from '../utils/array/head'
+import { eq } from '../utils/filters/eq'
+import { range } from '../utils/range'
 
 export function commonArrayValues<T extends Hashable>(
   array1: T[],

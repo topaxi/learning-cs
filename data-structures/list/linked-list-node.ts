@@ -1,4 +1,8 @@
-import { pa, add, iter, arity2, join } from '../../utils'
+import { pa } from '../../utils/function/partial'
+import { arity2 } from '../../utils/function/arity'
+import { join } from '../../utils/string/join'
+import { add } from '../../utils/operators'
+import { last } from '../../utils/iterator'
 
 const increment = pa(add, 1)
 
@@ -40,7 +44,7 @@ export class LinkedListNode<T> {
 
   last(): LinkedListNode<T> {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return iter.last(this)!
+    return last(this)!
   }
 
   reverse(): LinkedListNode<T> {

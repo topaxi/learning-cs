@@ -1,5 +1,6 @@
-import { range, shuffleInplace } from '../utils'
-import { BinarySearchTree } from '../data-structures'
+import { shuffleInplace } from '../utils/array/shuffle'
+import { range } from '../utils/range'
+import { BinarySearchTree } from '../data-structures/tree/binary-search-tree'
 import { kSmallestBinarySearchTree } from './k-smallest'
 
 describe('k-smallest', () => {

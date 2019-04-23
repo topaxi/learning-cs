@@ -1,5 +1,6 @@
-import { range, mY } from '../../utils'
-import { SingleParamStore } from '../../utils/function/memoize'
+import { range } from '../../utils/range'
+import { mY } from '../../utils/function/y'
+import { SingleParamStore } from '../../utils/function/memoize/single-param-store'
 
 // Longest increasing subsequence
 // Subproblem: Suffix

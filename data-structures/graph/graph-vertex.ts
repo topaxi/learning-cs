@@ -1,6 +1,6 @@
 import { GraphEdge } from './graph-edge'
 import { HashMap } from '../hash/hash-map'
-import { iter } from '../../utils'
+import { map } from '../../utils/iterator'
 
 export class GraphVertex<T> {
   private static nextId = 0
@@ -33,7 +33,7 @@ export class GraphVertex<T> {
   }
 
   getNeighbors(): IterableIterator<GraphVertex<T>> {
-    return iter.map(this.getEdges(), this.normalizeNeighbors, this)
+    return map(this.getEdges(), this.normalizeNeighbors, this)
   }
 
   getEdges(): IterableIterator<GraphEdge<T>> {

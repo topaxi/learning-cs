@@ -1,4 +1,4 @@
-import { lastIndex } from './array'
+import { lastIndex } from './array/last-index'
 
 export function* map<T, U, This = undefined>(
   iterator: Iterable<T>,

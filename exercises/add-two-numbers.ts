@@ -1,4 +1,4 @@
-import { LinkedListNode } from '../data-structures'
+import { LinkedListNode } from '../data-structures/list/linked-list-node'
 
 export function addTwoNumbers(
   l1: LinkedListNode<number> | null,

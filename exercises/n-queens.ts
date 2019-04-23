@@ -1,4 +1,4 @@
-import { range } from '../utils'
+import { range } from '../utils/range'
 
 export abstract class ChessFigure {
   constructor(readonly row: number, readonly column: number) {}

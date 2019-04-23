@@ -1,5 +1,5 @@
 import { ClearableWeakmap } from '../../utils/function/memoize/clearable-weakmap'
-import { lastIndex } from '../../utils'
+import { lastIndex } from '../../utils/array/last-index'
 
 class MemoMap<T, U> {
   private _weak = new ClearableWeakmap<object, U>()

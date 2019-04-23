@@ -1,6 +1,6 @@
+import { tap } from '../../utils/iterator'
 import { HashMap, Hashable } from '../hash/hash-map'
 import { MinHeap } from '../heap/min-heap'
-import { iter } from '../../utils'
 
 export class PriorityQueue<T extends Hashable> {
   private readonly heap = new MinHeap<T>(this.compare.bind(this))
@@ -45,9 +45,7 @@ export class PriorityQueue<T extends Hashable> {
   }
 
   consume(): IterableIterator<T> {
-    return iter.tap(this.heap.consume(), value =>
-      this.priorities.delete(value)
-    )
+    return tap(this.heap.consume(), value => this.priorities.delete(value))
   }
 
   [Symbol.iterator](): IterableIterator<T> {

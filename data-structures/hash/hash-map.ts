@@ -1,5 +1,8 @@
-import { LinkedList } from '../list'
-import { hashCode, byKey, prop, iter } from '../../utils'
+import { hashCode } from '../../utils/string/string-hash'
+import { prop } from '../../utils/object/prop'
+import { byKey } from '../../utils/filters/by'
+import { map, flat } from '../../utils/iterator'
+import { LinkedList } from '../list/linked-list'
 
 class HashMapNode<K, T> {
   constructor(readonly key: K, public value: T) {}
@@ -71,19 +74,19 @@ export class HashMap<K extends Hashable, T> {
   }
 
   keys(): IterableIterator<K> {
-    return iter.map(this.nodes(), prop('key'))
+    return map(this.nodes(), prop('key'))
   }
 
   values(): IterableIterator<T> {
-    return iter.map(this.nodes(), prop('value'))
+    return map(this.nodes(), prop('value'))
   }
 
   entries(): IterableIterator<[K, T]> {
-    return iter.map(this.nodes(), this.nodeToEntry)
+    return map(this.nodes(), this.nodeToEntry)
   }
 
   private nodes(): IterableIterator<HashMapNode<K, T>> {
-    return iter.flat(this.slots)
+    return flat(this.slots)
   }
 
   [Symbol.iterator](): IterableIterator<[K, T]> {

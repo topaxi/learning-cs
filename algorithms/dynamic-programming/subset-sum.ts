@@ -1,4 +1,6 @@
-import { head, tail, mY } from '../../utils'
+import { mY } from '../../utils/function/y'
+import { head } from '../../utils/array/head'
+import { tail } from '../../utils/array/tail'
 
 // Given a set of non-negative integers, and a value sum,
 // determine if there is a subset of the given set with sum equal to given sum.

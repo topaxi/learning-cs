@@ -1,5 +1,6 @@
-import { HashMapWithDefault } from '../data-structures'
-import { sum, gt } from '../utils'
+import { sum } from '../utils/array/sum'
+import { gt } from '../utils/filters/eq'
+import { HashMapWithDefault } from '../data-structures/hash/hash-map-with-default'
 
 // Without sort
 export function isAnagram(str1: string, str2: string): boolean {

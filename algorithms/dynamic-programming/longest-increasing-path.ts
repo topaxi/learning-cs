@@ -1,4 +1,7 @@
-import { mY, range, not, isWithinMatrix } from '../../utils'
+import { not } from '../../utils/function/not'
+import { mY } from '../../utils/function/y'
+import { range } from '../../utils/range'
+import { isWithinMatrix } from '../../utils/matrix'
 
 const failsBoundaryCheck = not(isWithinMatrix)
 

@@ -1,4 +1,4 @@
-import { LinkedList } from '../data-structures'
+import { LinkedList } from '../data-structures/list/linked-list'
 
 export function add(a: number, b: number): number {
   return a + b

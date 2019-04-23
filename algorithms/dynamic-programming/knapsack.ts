@@ -1,4 +1,6 @@
-import { mY, head, tail } from '../../utils'
+import { mY } from '../../utils/function/y'
+import { head } from '../../utils/array/head'
+import { tail } from '../../utils/array/tail'
 
 export interface Item {
   value: number

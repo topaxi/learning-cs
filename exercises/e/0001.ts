@@ -1,4 +1,5 @@
-import { range, add } from '../../utils'
+import { range } from '../../utils/range'
+import { add } from '../../utils/operators'
 
 console.log(
   Array.from(range(1000))

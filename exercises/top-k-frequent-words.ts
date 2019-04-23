@@ -1,5 +1,5 @@
-import { HashMapWithDefault } from '../data-structures'
-import { head } from '../utils'
+import { HashMapWithDefault } from '../data-structures/hash/hash-map-with-default'
+import { head } from '../utils/array/head'
 
 export function topKFrequentWords(words: string[], k: number): string[] {
   return Array.from(words.reduce(countReducer, new HashMapWithDefault(0)))

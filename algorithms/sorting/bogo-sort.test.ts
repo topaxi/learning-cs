@@ -4,7 +4,7 @@ import {
   bogosortMinIncremental,
   bogosortMinMaxIncremental
 } from './bogo-sort'
-import { shuffle } from '../../utils'
+import { shuffle } from '../../utils/array/shuffle'
 
 describe('bogosort', () => {
   function expectSorted<T>(array: T[], cmp?: (a: T, b: T) => number) {

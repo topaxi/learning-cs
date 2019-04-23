@@ -1,4 +1,8 @@
-import { shuffleInplace, range, swap, neg, lastIndex } from '../../utils'
+import { lastIndex } from '../../utils/array/last-index'
+import { shuffleInplace } from '../../utils/array/shuffle'
+import { neg } from '../../utils/function/neg'
+import { range } from '../../utils/range'
+import { swap } from '../../utils/swap'
 import { define, Compare } from './utils'
 
 function isSortedTo<T>(list: T[], start: number, compare: Compare<T>): number {

@@ -1,4 +1,6 @@
-import { partitionInline, random, lastIndex } from '../../utils'
+import { lastIndex } from '../../utils/array/last-index'
+import { partitionInline } from '../../utils/array/partition'
+import { random } from '../../utils/random'
 
 export function quickselect(
   list: number[],

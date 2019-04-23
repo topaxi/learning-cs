@@ -1,6 +1,0 @@
-export * from './head'
-export * from './tail'
-export * from './shuffle'
-export * from './last-index'
-export * from './partition'
-export * from './sum'

@@ -1,4 +1,4 @@
-import { AvlTree } from '../../data-structures'
+import { AvlTree } from '../../data-structures/tree/avl-tree'
 import { define, ListType } from './utils'
 
 export const binaryTreeSort = define((list, compare) => {

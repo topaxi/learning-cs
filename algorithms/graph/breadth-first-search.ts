@@ -1,7 +1,8 @@
-import { HashSet } from '../../data-structures/hash'
-import { Queue } from '../../data-structures/queue'
-import { GraphVertex } from '../../data-structures/graph'
-import { noop, returnTrue } from '../../utils'
+import { noop } from '../../utils/function/noop'
+import { returnTrue } from '../../utils/function/return-true'
+import { HashSet } from '../../data-structures/hash/hash-set'
+import { Queue } from '../../data-structures/queue/queue'
+import { GraphVertex } from '../../data-structures/graph/graph-vertex'
 
 export interface BreadthFirstSearchCallbacks<T> {
   find?(currentVertex: GraphVertex<T>): boolean | unknown

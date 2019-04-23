@@ -1,6 +1,7 @@
-import { HashSet } from '../../data-structures/hash'
-import { GraphVertex } from '../../data-structures/graph'
-import { noop, returnTrue } from '../../utils'
+import { noop } from '../../utils/function/noop'
+import { returnTrue } from '../../utils/function/return-true'
+import { HashSet } from '../../data-structures/hash/hash-set'
+import { GraphVertex } from '../../data-structures/graph/graph-vertex'
 
 export interface DepthFirstSearchCallbacks<T> {
   find?(

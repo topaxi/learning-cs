@@ -1,4 +1,4 @@
-import { identity } from './function'
+import { identity } from './function/identity'
 
 export interface RangeOptions<T> {
   step: number
@@ -6,7 +6,7 @@ export interface RangeOptions<T> {
   project: (i: number, index: number) => T
 }
 
-export class Range<T = number> implements Iterable<T> {
+class Range<T = number> implements Iterable<T> {
   constructor(
     private readonly start: number,
     private readonly end: number,

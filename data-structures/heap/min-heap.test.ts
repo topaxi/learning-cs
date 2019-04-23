@@ -1,5 +1,5 @@
 import { MinHeap } from './min-heap'
-import { range } from '../../utils'
+import { range } from '../../utils/range'
 
 describe('MinHeap', () => {
   test('should create empty heap', () => {

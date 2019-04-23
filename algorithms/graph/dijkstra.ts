@@ -1,12 +1,9 @@
-import {
-  GraphVertex,
-  HashMap,
-  HashMapWithDefault,
-  HashSet,
-  PriorityQueue
-} from '../../data-structures'
-
-import { iter } from '../../utils'
+import { filter } from '../../utils/iterator'
+import { GraphVertex } from '../../data-structures/graph/graph-vertex'
+import { HashMapWithDefault } from '../../data-structures/hash/hash-map-with-default'
+import { HashSet } from '../../data-structures/hash/hash-set'
+import { HashMap } from '../../data-structures/hash/hash-map'
+import { PriorityQueue } from '../../data-structures/queue/priority-queue'
 
 export function dijkstra<T>(
   vertices: readonly GraphVertex<T>[],
@@ -19,7 +16,7 @@ export function dijkstra<T>(
 
   distances.set(startVertex, 0)
 
-  for (let vertex of iter.filter(queue, v => !visited.has(v))) {
+  for (let vertex of filter(queue, v => !visited.has(v))) {
     for (let edge of vertex.getEdges()) {
       if (!visited.has(edge.endVertex)) {
         queue.enqueue(edge.endVertex, Infinity)

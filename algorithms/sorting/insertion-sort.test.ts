@@ -1,5 +1,5 @@
 import { insertionsort } from './insertion-sort'
-import { shuffle } from '../../utils'
+import { shuffle } from '../../utils/array/shuffle'
 
 function expectSorted<T>(array: T[], cmp?: (a: T, b: T) => number) {
   expect(insertionsort(shuffle(array), cmp)).toEqual(array)

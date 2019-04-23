@@ -1,5 +1,5 @@
 import { binaryTreeSort } from './binary-tree-sort'
-import { shuffle } from '../../utils'
+import { shuffle } from '../../utils/array/shuffle'
 
 function expectSorted<T>(array: T[], cmp?: (a: T, b: T) => number) {
   expect(binaryTreeSort(shuffle(array), cmp)).toEqual(array)

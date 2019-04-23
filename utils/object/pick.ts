@@ -1,5 +1,8 @@
-import { includedIn } from '../filters'
-import { c, arity2, paR, not } from '../function'
+import { includedIn } from '../filters/included-in'
+import { c } from '../function/compose'
+import { arity2 } from '../function/arity'
+import { paR } from '../function/partial'
+import { not } from '../function/not'
 import { prop } from './prop'
 
 type ObjectIndex = string | number | symbol

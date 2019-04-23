@@ -1,4 +1,5 @@
-import { head, tail } from '../../utils/array'
+import { head } from '../../utils/array/head'
+import { tail } from '../../utils/array/tail'
 import { LinkedList } from './linked-list'
 
 describe('LinkedList<T>', () => {
