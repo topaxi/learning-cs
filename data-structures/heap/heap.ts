@@ -68,7 +68,7 @@ export class Heap<T> {
   }
 
   includes(value: T): boolean {
-    return this.indexOf(value) !== -1
+    return this.memory.includes(value)
   }
 
   deleteAt(index: number): T | null {

@@ -21,7 +21,8 @@ module.exports = {
   },
   parserOptions: {
     ecmaVersion: 2018,
-    sourceType: 'module'
+    sourceType: 'module',
+    project: './tsconfig.json'
   },
   rules: {
     complexity: ['error', 10],
@@ -41,6 +42,7 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
     '@typescript-eslint/array-type': ['off', 'array-simple'],
     '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/prefer-includes': 'error',
     '@typescript-eslint/explicit-function-return-type': [
       'off',
       { allowExpressions: true }

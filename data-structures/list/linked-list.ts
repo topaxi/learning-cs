@@ -281,7 +281,7 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   }
 
   includes(value: T): boolean {
-    return this.indexOf(value) !== -1
+    return this.indexOf(value) !== -1 // eslint-disable-line
   }
 
   indexOf(value: T): number {
