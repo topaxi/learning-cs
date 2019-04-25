@@ -1,4 +1,4 @@
-import { HashMapWithDefault } from '../data-structures/hash/hash-map-with-default'
+import { HashMap } from '../data-structures/hash/hash-map'
 import { Hashable } from '../data-structures/hash/hash-map'
 import { c } from '../utils/function/compose'
 import { prop } from '../utils/object/prop'
@@ -12,7 +12,7 @@ export function commonArrayValues<T extends Hashable>(
   ...arrays: T[][]
 ): T[]
 export function commonArrayValues<T extends Hashable>(...arrays: T[][]): T[] {
-  let map = new HashMapWithDefault<T, number>(0)
+  let map = new HashMap.withDefault<T, number>(0)
 
   for (let i of range(arrays.length)) {
     for (let j of range(arrays[i].length)) {

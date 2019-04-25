@@ -18,6 +18,9 @@ export class HashMap<K extends Hashable, T> {
   protected slots = this.initializeSlots()
   private keyCache = this.initializeKeyCache()
 
+  // eslint-disable-next-line
+  static withDefault: typeof HashMapWithDefault
+
   get size(): number {
     return Object.keys(this.keyCache).length
   }
@@ -131,3 +134,16 @@ export class HashMap<K extends Hashable, T> {
     return node.toEntry()
   }
 }
+
+export class HashMapWithDefault<K extends Hashable, T> extends HashMap<K, T> {
+  constructor(protected defaultValue: T, size?: number) {
+    super(size)
+  }
+
+  get(key: K): T {
+    if (this.has(key)) return super.get(key)!
+    return this.defaultValue
+  }
+}
+
+HashMap.withDefault = HashMapWithDefault

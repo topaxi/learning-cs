@@ -39,7 +39,10 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-parameter-properties': 'off',
-    '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
+    '@typescript-eslint/no-use-before-define': [
+      'error',
+      { functions: false, typedefs: false }
+    ],
     '@typescript-eslint/array-type': ['off', 'array-simple'],
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/prefer-includes': 'error',

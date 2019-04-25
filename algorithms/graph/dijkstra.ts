@@ -1,6 +1,5 @@
 import { filter } from '../../utils/iterator'
 import { GraphVertex } from '../../data-structures/graph/graph-vertex'
-import { HashMapWithDefault } from '../../data-structures/hash/hash-map-with-default'
 import { HashSet } from '../../data-structures/hash/hash-set'
 import { HashMap } from '../../data-structures/hash/hash-map'
 import { PriorityQueue } from '../../data-structures/queue/priority-queue'
@@ -9,7 +8,7 @@ export function dijkstra<T>(
   vertices: readonly GraphVertex<T>[],
   startVertex: GraphVertex<T>
 ) {
-  let distances = new HashMapWithDefault<GraphVertex<T>, number>(Infinity)
+  let distances = new HashMap.withDefault<GraphVertex<T>, number>(Infinity)
   let visited = new HashSet<GraphVertex<T>>()
   let previous = new HashMap<GraphVertex<T>, GraphVertex<T> | null>()
   let queue = new PriorityQueue<GraphVertex<T>>().enqueue(startVertex)

@@ -1,8 +1,8 @@
-import { HashMapWithDefault } from '../data-structures/hash/hash-map-with-default'
+import { HashMap, HashMapWithDefault } from '../data-structures/hash/hash-map'
 import { head } from '../utils/array/head'
 
 export function topKFrequentWords(words: string[], k: number): string[] {
-  return Array.from(words.reduce(countReducer, new HashMapWithDefault(0)))
+  return Array.from(words.reduce(countReducer, new HashMap.withDefault(0)))
     .sort(sortWordsByFrequency)
     .map(list => head(list))
     .slice(0, k)
