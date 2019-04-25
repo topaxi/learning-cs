@@ -24,8 +24,13 @@ describe('HashSet<T>', () => {
     expect(set.has(2)).toBe(false)
   })
 
-  test('should be iterable over all the values', () => {
+  test('should be iterable over all keys', () => {
+    expect([...HashSet.of(1, 2, 3).keys()]).toEqual([1, 2, 3])
+  })
+
+  test('should be iterable over all values', () => {
     expect([...HashSet.of(1, 2, 3)]).toEqual([1, 2, 3])
+    expect([...HashSet.of(1, 2, 3).values()]).toEqual([1, 2, 3])
   })
 
   describe('.of()', () => {

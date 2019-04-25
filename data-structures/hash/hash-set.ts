@@ -82,12 +82,24 @@ export class HashSet<T extends Hashable> {
     return set
   }
 
+  keys(): IterableIterator<T> {
+    return this.values()
+  }
+
+  values(): IterableIterator<T> {
+    return this._hash.values()
+  }
+
   *[Symbol.iterator](): IterableIterator<T> {
-    yield* this._hash.values()
+    yield* this.values()
   }
 
   toArray(): T[] {
     return [...this]
+  }
+
+  toJSON(): T[] {
+    return this.toArray()
   }
 }
 

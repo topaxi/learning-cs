@@ -52,4 +52,27 @@ describe('GraphVertex<T>', () => {
 
     expect(v.toString()).toEqual('0')
   })
+
+  test('should implement toJSON', () => {
+    let v0 = new GraphVertex(0)
+    let v1 = new GraphVertex(1)
+
+    v0.addEdge(new GraphEdge(v0, v1))
+
+    expect(v0).toMatchInlineSnapshot(`
+      Object {
+        "edges": Array [
+          Object {
+            "endVertex": Object {
+              "edges": Array [],
+              "value": 1,
+            },
+            "startVertex": [Circular],
+            "weight": 0,
+          },
+        ],
+        "value": 0,
+      }
+    `)
+  })
 })

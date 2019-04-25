@@ -1,5 +1,5 @@
 import { GraphEdge } from './graph-edge'
-import { HashMap } from '../hash/hash-map'
+import { HashSet } from '../hash/hash-set'
 import { map } from '../../utils/iterator'
 
 export class GraphVertex<T> {
@@ -7,7 +7,7 @@ export class GraphVertex<T> {
 
   readonly id = GraphVertex.nextId++
 
-  private readonly edges = new HashMap<number, GraphEdge<T>>()
+  private readonly edges = new HashSet<GraphEdge<T>>()
 
   constructor(public value: T) {}
 
@@ -21,15 +21,15 @@ export class GraphVertex<T> {
   }
 
   addEdge(edge: GraphEdge<T>): void {
-    this.edges.set(edge.id, edge)
+    this.edges.add(edge)
   }
 
   deleteEdge(edge: GraphEdge<T>): void {
-    this.edges.delete(edge.id)
+    this.edges.delete(edge)
   }
 
   hasEdge(edge: GraphEdge<T>): boolean {
-    return this.edges.has(edge.id)
+    return this.edges.has(edge)
   }
 
   getNeighbors(): IterableIterator<GraphVertex<T>> {
@@ -47,7 +47,7 @@ export class GraphVertex<T> {
   toJSON() {
     return {
       value: this.value,
-      edges: Array.from(this.edges.values())
+      edges: this.edges
     }
   }
 
