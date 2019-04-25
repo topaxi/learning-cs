@@ -44,7 +44,6 @@ module.exports = {
       { functions: false, typedefs: false }
     ],
     '@typescript-eslint/array-type': ['off', 'array-simple'],
-    '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/prefer-includes': 'error',
     '@typescript-eslint/explicit-function-return-type': [
       'off',

@@ -2,27 +2,24 @@ import { HashMap } from '../../data-structures/hash/hash-map'
 import { range } from '../../utils/range'
 
 // O(n²)
-export function fib_naive(n: number): number {
+export function fibNaive(n: number): number {
   if (n <= 2) return 1
 
-  return fib_naive(n - 1) + fib_naive(n - 2)
+  return fibNaive(n - 1) + fibNaive(n - 2)
 }
 
 // T: O(n) S: O(n)
-export function fib_memo(
+export function fibMemo(
   n: number,
   memo = new HashMap<number, number>()
 ): number {
   if (memo.has(n)) return memo.get(n)!
 
-  return memo.set(
-    n,
-    n <= 2 ? 1 : fib_memo(n - 1, memo) + fib_memo(n - 2, memo)
-  )
+  return memo.set(n, n <= 2 ? 1 : fibMemo(n - 1, memo) + fibMemo(n - 2, memo))
 }
 
 // T: O(n) S: O(n)
-export function fib_bu(n: number): number {
+export function fibbu(n: number): number {
   let fib = [1, 1]
 
   for (let k of range(2, n)) {
@@ -33,7 +30,7 @@ export function fib_bu(n: number): number {
 }
 
 // T: O(n) S: O(1)
-export function fib_buo(n: number): number {
+export function fibbuo(n: number): number {
   let current = 1
   let previous = 1
   let fib = 0
