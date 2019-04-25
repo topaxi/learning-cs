@@ -1,8 +1,9 @@
+import { range } from '../../utils/range'
 import { swap } from '../../utils/swap'
 import { define } from './utils'
 
 export const insertionsort = define((list, compare) => {
-  for (let i = 0; i < list.length; i++) {
+  for (let i of range(list.length)) {
     let tmp = list[i]
     let j = i - 1
 
