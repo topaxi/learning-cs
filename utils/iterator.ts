@@ -29,12 +29,13 @@ export function* filter<T, This = undefined>(
     if (filter.call(thisArg!, value, i++)) yield value
 }
 
-export function foreach<T, This = undefined>(
+export function forEach<T, This = undefined>(
   iterator: Iterable<T>,
-  callback: (this: This, t: T) => unknown,
+  callback: (this: This, t: T, i: number) => unknown,
   thisArg?: This
 ): void {
-  for (let value of iterator) callback.call(thisArg!, value)
+  let i = 0
+  for (let value of iterator) callback.call(thisArg!, value, i++)
 }
 
 export function find<T, This = undefined>(

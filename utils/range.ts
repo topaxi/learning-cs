@@ -1,4 +1,5 @@
 import { identity } from './function/identity'
+import { forEach } from './iterator'
 
 export interface RangeOptions<T> {
   step: number
@@ -15,18 +16,17 @@ class Range<T = number> implements Iterable<T> {
   ) {}
 
   *[Symbol.iterator](): IterableIterator<T> {
-    const { project } = this
+    const { start, end, step, project } = this
 
-    for (let i = this.start, index = 0; i < this.end; i += this.step)
+    for (let i = start, index = 0; i < end; i += step)
       yield project(i, index++)
   }
 
-  forEach<This = undefined>(
-    fn: (this: This, value: T, index: number) => unknown,
-    thisArg?: This
+  forEach<This = this>(
+    fn: (this: This | this, value: T, index: number) => unknown,
+    thisArg: This | this = this
   ): void {
-    let i = 0
-    for (let value of this) fn.call(thisArg!, value, i++)
+    return forEach(this, fn, thisArg)
   }
 }
 
