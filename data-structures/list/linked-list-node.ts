@@ -3,15 +3,20 @@ import { arity2 } from '../../utils/function/arity'
 import { join } from '../../utils/string/join'
 import { add } from '../../utils/operators'
 import { last } from '../../utils/iterator'
+import { traverseNext } from './utils'
 
 const increment = pa(add, 1)
 
 export class LinkedListNode<T> {
+  static get [Symbol.species]() {
+    return this
+  }
+
   static of<T>(...values: T[]) {
-    let node = new this<T>(values[0])
+    let node = new this[Symbol.species]<T>(values[0])
 
     for (let i = values.length; i > 1; i--) {
-      node.next = new this<T>(values[i - 1], node.next)
+      node.next = new this[Symbol.species]<T>(values[i - 1], node.next)
     }
 
     return node
@@ -27,41 +32,30 @@ export class LinkedListNode<T> {
     return this.reduce(increment, 0)
   }
 
-  push(...values: T[]): this {
-    this.last().next = LinkedListNode.from(values)
-    return this
+  [Symbol.iterator](): IterableIterator<this> {
+    return traverseNext(this)
   }
 
-  *[Symbol.iterator](): IterableIterator<LinkedListNode<T>> {
-    for (
-      let node: LinkedListNode<T> | null = this;
-      node !== null;
-      node = node.next
-    ) {
-      yield node
-    }
-  }
-
-  last(): LinkedListNode<T> {
+  last(): this {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return last(this)!
   }
 
   reverse(): LinkedListNode<T> {
-    let current: LinkedListNode<T> | null = this
-    let previous = null
+    let curr: LinkedListNode<T> | null = this
+    let prev = null
     let next = null
 
-    while (current !== null) {
-      next = current.next
+    while (curr !== null) {
+      next = curr.next
 
-      current.next = previous
+      curr.next = prev
 
-      previous = current
-      current = next
+      prev = curr
+      curr = next
     }
 
-    return (previous || current)!
+    return (prev || curr)!
   }
 
   reduce(
@@ -88,9 +82,8 @@ export class LinkedListNode<T> {
       accumulator = initialValue
     }
 
-    while (node !== null) {
-      accumulator = reducer(accumulator, node.value, index++, this)
-      node = node.next
+    for (let { value } of traverseNext(node)) {
+      accumulator = reducer(accumulator, value, index++, this)
     }
 
     return accumulator

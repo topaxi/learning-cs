@@ -6,20 +6,20 @@ describe('LinkedListNode<T>', () => {
   describe('of()', () => {
     test('should create nodes of given values', () => {
       expect(LinkedListNode.of(1, 2, 3, 4)).toMatchInlineSnapshot(`
-              LinkedListNode {
-                "next": LinkedListNode {
-                  "next": LinkedListNode {
-                    "next": LinkedListNode {
-                      "next": null,
-                      "value": 4,
-                    },
-                    "value": 3,
-                  },
-                  "value": 2,
-                },
-                "value": 1,
-              }
-          `)
+        LinkedListNode {
+          "next": LinkedListNode {
+            "next": LinkedListNode {
+              "next": LinkedListNode {
+                "next": null,
+                "value": 4,
+              },
+              "value": 3,
+            },
+            "value": 2,
+          },
+          "value": 1,
+        }
+      `)
     })
   })
 
