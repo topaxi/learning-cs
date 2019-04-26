@@ -1,4 +1,5 @@
 import { not } from '../utils/function/not'
+import { filter } from '../utils/iterator'
 import { isWithinMatrix } from '../utils/matrix'
 import { Queue } from '../data-structures/queue/queue'
 
@@ -46,20 +47,14 @@ export function floodQueue(
 
   queue.enqueue([x, y])
 
-  while (!queue.empty) {
-    ;[x, y] = queue.dequeue()
-
+  for (let [x, y] of filter(queue, isOldColor)) {
     screen[y][x] = newColor
-
-    if (isOldColor(x + 1, y)) queue.enqueue([x + 1, y])
-    if (isOldColor(x, y + 1)) queue.enqueue([x, y + 1])
-    if (isOldColor(x - 1, y)) queue.enqueue([x - 1, y])
-    if (isOldColor(x, y - 1)) queue.enqueue([x, y - 1])
+    queue.enqueue([x + 1, y], [x, y + 1], [x - 1, y], [x, y - 1])
   }
 
   return screen
 
-  function isOldColor(x: number, y: number): boolean {
+  function isOldColor([x, y]: [number, number]): boolean {
     return screen[y] !== undefined && screen[y][x] === oldColor
   }
 }
