@@ -5,56 +5,62 @@ import { Queue } from '../data-structures/queue/queue'
 
 export function fill(
   screen: number[][],
-  x: number,
-  y: number,
+  column: number,
+  row: number,
   color: number
 ): number[][] {
-  return floodQueue(screen, x, y, screen[y][x], color)
+  return floodQueue(screen, column, row, screen[row][column], color)
 }
 
 const boundaryCheck = not(isWithinMatrix)
 
 export function floodRecursive(
   screen: number[][],
-  x: number,
-  y: number,
+  column: number,
+  row: number,
   oldColor: number,
   newColor: number
 ): number[][] {
-  if (boundaryCheck(screen, x, y)) return screen
-  if (screen[y][x] !== oldColor) return screen
+  if (boundaryCheck(screen, column, row)) return screen
+  if (screen[row][column] !== oldColor) return screen
 
-  screen[y][x] = newColor
+  screen[row][column] = newColor
 
-  screen = floodRecursive(screen, x + 1, y, oldColor, newColor)
-  screen = floodRecursive(screen, x, y + 1, oldColor, newColor)
-  screen = floodRecursive(screen, x - 1, y, oldColor, newColor)
-  screen = floodRecursive(screen, x, y - 1, oldColor, newColor)
+  screen = floodRecursive(screen, column + 1, row, oldColor, newColor)
+  screen = floodRecursive(screen, column, row + 1, oldColor, newColor)
+  screen = floodRecursive(screen, column - 1, row, oldColor, newColor)
+  screen = floodRecursive(screen, column, row - 1, oldColor, newColor)
 
   return screen
 }
 
 export function floodQueue(
   screen: number[][],
-  x: number,
-  y: number,
+  column: number,
+  row: number,
   oldColor: number,
   newColor: number
 ): number[][] {
   let queue = new Queue<[number, number]>()
 
-  if (screen[y][x] === newColor) return screen
+  if (screen[row][column] === newColor) return screen
 
-  queue.enqueue([x, y])
+  queue.enqueue([row, column])
 
-  for (let [x, y] of filter(queue, isOldColor)) {
-    screen[y][x] = newColor
-    queue.enqueue([x + 1, y], [x, y + 1], [x - 1, y], [x, y - 1])
+  for (let [row, column] of filter(queue, isOldColor)) {
+    screen[row][column] = newColor
+
+    queue.enqueue(
+      [row + 1, column],
+      [row, column + 1],
+      [row - 1, column],
+      [row, column - 1]
+    )
   }
 
   return screen
 
-  function isOldColor([x, y]: [number, number]): boolean {
-    return screen[y] !== undefined && screen[y][x] === oldColor
+  function isOldColor([row, column]: [number, number]): boolean {
+    return screen[row] !== undefined && screen[row][column] === oldColor
   }
 }
