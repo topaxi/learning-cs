@@ -3,13 +3,22 @@ import { filter } from '../utils/iterator'
 import { isWithinMatrix } from '../utils/matrix'
 import { Queue } from '../data-structures/queue/queue'
 
-export function fill(
+export function fillQueue(
   screen: number[][],
   column: number,
   row: number,
   color: number
 ): number[][] {
   return floodQueue(screen, column, row, screen[row][column], color)
+}
+
+export function fillRecursive(
+  screen: number[][],
+  column: number,
+  row: number,
+  color: number
+): number[][] {
+  return floodRecursive(screen, column, row, screen[row][column], color)
 }
 
 const boundaryCheck = not(isWithinMatrix)
@@ -21,7 +30,8 @@ export function floodRecursive(
   oldColor: number,
   newColor: number
 ): number[][] {
-  if (boundaryCheck(screen, column, row)) return screen
+  if (boundaryCheck(screen, row, column)) return screen
+  if (screen[row][column] === newColor) return screen
   if (screen[row][column] !== oldColor) return screen
 
   screen[row][column] = newColor
@@ -41,11 +51,9 @@ export function floodQueue(
   oldColor: number,
   newColor: number
 ): number[][] {
-  let queue = new Queue<[number, number]>()
-
   if (screen[row][column] === newColor) return screen
 
-  queue.enqueue([row, column])
+  let queue = Queue.of<[number, number]>([row, column])
 
   for (let [row, column] of filter(queue, isOldColor)) {
     screen[row][column] = newColor
