@@ -13,11 +13,9 @@ describe('199. Binary Tree Right Side View', () => {
 })
 
 function buildTree(values: (number | null)[], i: number): BinaryTreeNode {
-  if (i >= values.length) {
+  if (values[i] == null) {
     return null!
   }
-
-  if (values[i] === null) return null!
 
   return {
     val: values[i]!,

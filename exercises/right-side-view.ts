@@ -8,17 +8,19 @@ export function rightSideView(root: BinaryTreeNode): number[] {
   let nodes = []
   let currentDepth = -1
   let queue: any[] = [root, currentDepth + 1]
-  let lastNode
+  let lastNode = null
 
   while (queue.length) {
     let node = queue.shift()
     let depth = queue.shift()
 
-    if (depth !== currentDepth && lastNode) nodes.push(lastNode.val)
+    if (depth !== currentDepth && lastNode !== null) {
+      nodes.push(lastNode.val)
+    }
 
     currentDepth = Math.max(currentDepth, depth)
 
-    if (!node) continue
+    if (node === null) continue
 
     lastNode = node
 
