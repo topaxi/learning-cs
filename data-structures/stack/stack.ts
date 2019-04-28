@@ -1,10 +1,15 @@
+import { identity } from '../../utils/function/identity'
+import { map } from '../../utils/iterator'
 import { LinkedList } from '../list/linked-list'
 
 export class Stack<T> {
   private readonly list = new LinkedList<T>()
 
-  static from<T>(iterable: Iterable<T>) {
-    return new this<T>().push(...iterable)
+  static from<T, R = T>(
+    iterable: Iterable<T>,
+    project: (value: T, i: number) => R = identity as any
+  ) {
+    return new this<R>().push(...map(iterable, project))
   }
 
   static of<T>(...args: T[]) {
