@@ -14,8 +14,11 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
     return this.from(values)
   }
 
-  static from<T>(values: Iterable<T>) {
-    return new this<T>().push(...values)
+  static from<T, R = T>(
+    values: Iterable<T>,
+    project: (value: T, i: number) => R = identity as any
+  ) {
+    return new this<R>().push(...map(values, project))
   }
 
   private firstNode: LinkedListNode<T> | null = null

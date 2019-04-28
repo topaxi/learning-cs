@@ -10,6 +10,21 @@ describe('LinkedList<T>', () => {
     })
   })
 
+  describe('from()', () => {
+    test('should create linked list from given iterable', () => {
+      let list = LinkedList.from([1, 2, 3])
+      expect(list.toArray()).toEqual([1, 2, 3])
+    })
+
+    test('should take optional project function', () => {
+      let list1 = LinkedList.from([1, 2, 3], n => n * 2)
+      expect(list1.toArray()).toEqual([2, 4, 6])
+
+      let list2 = LinkedList.from([1, 2, 3], (n, i) => i)
+      expect(list2.toArray()).toEqual([0, 1, 2])
+    })
+  })
+
   describe('#get()', () => {
     test('should return element of given index', () => {
       let list = LinkedList.of(1, 2, 3)

@@ -42,6 +42,42 @@ describe('LinkedListNode<T>', () => {
         }
       `)
     })
+
+    test('should take optional project function', () => {
+      expect(LinkedListNode.from(range(1, 4, { inclusive: true }), n => n * 2))
+        .toMatchInlineSnapshot(`
+        LinkedListNode {
+          "next": LinkedListNode {
+            "next": LinkedListNode {
+              "next": LinkedListNode {
+                "next": null,
+                "value": 8,
+              },
+              "value": 6,
+            },
+            "value": 4,
+          },
+          "value": 2,
+        }
+      `)
+
+      expect(LinkedListNode.from(range(0, 4), (_n, i) => i))
+        .toMatchInlineSnapshot(`
+        LinkedListNode {
+          "next": LinkedListNode {
+            "next": LinkedListNode {
+              "next": LinkedListNode {
+                "next": null,
+                "value": 3,
+              },
+              "value": 2,
+            },
+            "value": 1,
+          },
+          "value": 0,
+        }
+      `)
+    })
   })
 
   describe('#[Symbol.iterator]()', () => {

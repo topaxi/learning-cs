@@ -1,8 +1,9 @@
+import { identity } from '../../utils/function/identity'
 import { pa } from '../../utils/function/partial'
 import { arity2 } from '../../utils/function/arity'
 import { join } from '../../utils/string/join'
 import { add } from '../../utils/operators'
-import { last } from '../../utils/iterator'
+import { last, map } from '../../utils/iterator'
 import { traverseNext } from './utils'
 
 const increment = pa(add, 1)
@@ -22,8 +23,11 @@ export class LinkedListNode<T> {
     return node
   }
 
-  static from<T>(values: Iterable<T>) {
-    return this.of(...values)
+  static from<T, R = T>(
+    values: Iterable<T>,
+    project: (value: T, index: number) => R = identity as any
+  ) {
+    return this.of(...map(values, project))
   }
 
   constructor(public value: T, public next: LinkedListNode<T> | null = null) {}
