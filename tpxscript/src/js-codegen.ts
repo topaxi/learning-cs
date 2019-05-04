@@ -1,11 +1,8 @@
 import { Token } from './token-stream'
 import { FALSE } from './parser'
 
-function assertNever(x: any): never {
-  throw new Error(`Unexpected value ${x}`)
-}
-
 export class JsCodegen {
+  // eslint-disable-next-line complexity
   generate(exp: Token): string {
     switch (exp.type) {
       case 'num':
@@ -26,8 +23,12 @@ export class JsCodegen {
         return this.prog(exp)
       case 'call':
         return this.call(exp)
+      case 'kw':
+      case 'punc':
+      case 'op':
+      case 'let':
       default:
-        return assertNever(exp.type)
+        throw new Error(`Unexpected token ${exp.type}`)
     }
   }
 

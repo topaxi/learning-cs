@@ -16,16 +16,28 @@ export type TokenType =
   | 'prog'
   | 'call'
 
-export type Token<T = any> = { type: TokenType; value: T }
+export interface Token<T = any> {
+  type: TokenType
+  value: T
+}
 
 export class TokenStream {
   private current: Token | null = null
-  private keywords = 'if then else fn true false and or'
+  private keywords = new Set([
+    'if',
+    'then',
+    'else',
+    'fn',
+    'true',
+    'false',
+    'and',
+    'or'
+  ])
 
   constructor(readonly input: InputStream) {}
 
   isKeyword(ch: string): boolean {
-    return this.keywords.includes(ch)
+    return this.keywords.has(ch)
   }
 
   isDigit(ch: string): boolean {

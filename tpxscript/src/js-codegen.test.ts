@@ -55,14 +55,24 @@ describe('tpxscript::JsCodegen', () => {
   })
 
   test('should codegen arithmetic', () => {
+    expect(codegenUgly('x + y')).toMatchSnapshot()
     expect(codegenUgly('x + y * z')).toMatchSnapshot()
   })
 
   test('should codegen logical operators', () => {
-    expect(codegenUgly('a || b')).toEqual('(a || b)')
-    expect(codegenUgly('a && b')).toEqual('(a && b)')
-    expect(codegenUgly('a or b')).toEqual('(a || b)')
-    expect(codegenUgly('a and b')).toEqual('(a && b)')
+    expect(codegenUgly('x || y')).toEqual('((x || y))')
+    expect(codegenUgly('x && y')).toEqual('((x && y))')
+    expect(codegenUgly('x or y')).toEqual('((x || y))')
+    expect(codegenUgly('x and y')).toEqual('((x && y))')
+  })
+
+  test('should codegen program', () => {
+    let js = codegen(`
+      fib = fn fib(n) if n < 3 then 1 else fib(n - 1) + fib(n - 2);
+      ret = fib(10);
+    `)
+    expect(js).toMatchSnapshot()
+    expect(new Function(`${js}; return ret`)()).toBe(55)
   })
 
   test.skip('should codegen blocks', () => {

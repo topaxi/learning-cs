@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`tpxscript::JsCodegen should codegen arithmetic 1`] = `"((x + (y * z)))"`;
+exports[`tpxscript::JsCodegen should codegen arithmetic 1`] = `"((x + y))"`;
+
+exports[`tpxscript::JsCodegen should codegen arithmetic 2`] = `"((x + (y * z)))"`;
 
 exports[`tpxscript::JsCodegen should codegen assignments 1`] = `
 "x = 10
@@ -52,5 +54,13 @@ exports[`tpxscript::JsCodegen should codegen function declarations 4`] = `
 ";(function foo(x) {
   return x
 })
+"
+`;
+
+exports[`tpxscript::JsCodegen should codegen program 1`] = `
+";(fib = function fib(n) {
+  return n < 3 ? 1 : fib(n - 1) + fib(n - 2)
+}),
+  (ret = fib(10))
 "
 `;

@@ -52,7 +52,15 @@ describe('tpxscript::TokenStream', () => {
   })
 
   test('should tokenize arithmetic', () => {
+    expect(parse('x + y')).toMatchSnapshot()
     expect(parse('x + y * z')).toMatchSnapshot()
+  })
+
+  test('should tokenize logical operators', () => {
+    expect(parse('x && y')).toMatchSnapshot()
+    expect(parse('x || y')).toMatchSnapshot()
+    expect(parse('x and y')).toMatchSnapshot()
+    expect(parse('x or y')).toMatchSnapshot()
   })
 
   test('should tokenize blocks', () => {

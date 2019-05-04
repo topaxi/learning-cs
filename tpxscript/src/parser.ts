@@ -25,19 +25,6 @@ const PRECEDENCE: Record<string, number> = {
   '**': 25
 }
 
-export function parse(str: string) {
-  let input = new InputStream(str)
-  let tokens = new TokenStream(input)
-
-  return parseTokens(tokens)
-}
-
-export function parseTokens(tokens: TokenStream) {
-  let parser = new Parser(tokens)
-
-  return parser.parseToplevel()
-}
-
 export class Parser {
   constructor(readonly tokens: TokenStream) {}
 
@@ -90,18 +77,15 @@ export class Parser {
     }
   }
 
-  unexpected(): never {
-    return this.tokens.croak(
-      `Unexpected token: ${JSON.stringify(this.tokens.peek())}`
-    )
+  unexpected(token = this.tokens.peek()): never {
+    return this.tokens.croak(`Unexpected token: ${JSON.stringify(token)}`)
   }
 
   maybeBinary(left: Token | any, myPrec: number): Token {
     let token = this.isOperator()
-    console.log(token)
 
     if (token !== false) {
-      let hisPrec = PRECEDENCE[token.value as any]
+      let hisPrec = PRECEDENCE[token.value]
 
       if (hisPrec > myPrec) {
         this.tokens.next()
@@ -229,7 +213,7 @@ export class Parser {
       return token
     }
 
-    this.unexpected()
+    this.unexpected(token)
   }
 
   parseAtom() {
@@ -258,4 +242,17 @@ export class Parser {
   parseExpression(): any {
     return this.maybeCall(() => this.maybeBinary(this.parseAtom(), 0))
   }
+}
+
+export function parse(str: string) {
+  let input = new InputStream(str)
+  let tokens = new TokenStream(input)
+
+  return parseTokens(tokens)
+}
+
+export function parseTokens(tokens: TokenStream) {
+  let parser = new Parser(tokens)
+
+  return parser.parseToplevel()
 }
