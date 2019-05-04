@@ -66,11 +66,15 @@ export class JsCodegen {
   }
 
   private fn(exp: Token | any): string {
-    return `(function ${
-      typeof exp.name === 'string' ? this.makeVar(exp.name) : ''
-    }(${exp.vars.map(this.makeVar, this).join(', ')}) { return ${this.generate(
-      exp.body
-    )} })`
+    let argList = exp.vars.map(this.makeVar, this).join(', ')
+
+    let fnBody = `{ return ${this.generate(exp.body)} }`
+
+    if (typeof exp.name === 'string') {
+      return `(function ${this.makeVar(exp.name)}(${argList}) ${fnBody})`
+    }
+
+    return `(${argList}) => ${fnBody}`
   }
 
   private prog(exp: Token | any): string {

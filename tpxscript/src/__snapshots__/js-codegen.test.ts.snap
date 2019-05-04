@@ -30,16 +30,16 @@ exports[`tpxscript::JsCodegen should codegen function calls 1`] = `
 `;
 
 exports[`tpxscript::JsCodegen should codegen function declarations 1`] = `
-";(function(x) {
+"x => {
   return x
-})
+}
 "
 `;
 
 exports[`tpxscript::JsCodegen should codegen function declarations 2`] = `
-";(function(x) {
+"x => {
   return x
-})
+}
 "
 `;
 
