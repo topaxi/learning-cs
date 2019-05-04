@@ -67,11 +67,12 @@ export class JsCodegen {
 
   private fn(exp: Token | any): string {
     let argList = exp.vars.map(this.makeVar, this).join(', ')
-
-    let fnBody = `{ return ${this.generate(exp.body)} }`
+    let fnBody = this.generate(exp.body)
 
     if (typeof exp.name === 'string') {
-      return `(function ${this.makeVar(exp.name)}(${argList}) ${fnBody})`
+      return `(function ${this.makeVar(
+        exp.name
+      )}(${argList}) { return ${fnBody} })`
     }
 
     return `(${argList}) => ${fnBody}`
