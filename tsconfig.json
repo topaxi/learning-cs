@@ -4,6 +4,7 @@
     "target": "es2019",
     "module": "commonjs",
     "esModuleInterop": true,
+    "sourceMap": true,
     "strict": true,
     "allowJs": true,
     "lib": [
