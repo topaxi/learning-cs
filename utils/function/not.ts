@@ -1,3 +1,5 @@
-export function not<T extends (...args: any[]) => boolean>(fn: T): T {
-  return ((...args) => !fn(...args)) as T
+export function not<A extends unknown[]>(
+  fn: (...args: A) => boolean
+): (...args: A) => boolean {
+  return (...args) => !fn(...args)
 }

@@ -1,12 +1,48 @@
+import { eq } from './filters/eq'
+import { not } from './function/not'
+import { identity } from './function/identity'
+import { returnTrue } from './function/constant'
+import { prop } from './object/prop'
 import { lastIndex } from './array/last-index'
 
-export function* map<T, U, This = undefined>(
+export function* entries<T>(
+  iterator: Iterable<T>
+): IterableIterator<[number, T]> {
+  let i = 0
+  for (let value of iterator) yield [i++, value]
+}
+
+interface WithCallbackEntry<T, U> {
+  result: U
+  value: T
+  index: number
+}
+
+function* withCallback<
+  T,
+  U,
+  V = { result: U; value: T; index: number },
+  This = undefined
+>(
+  iterator: Iterable<T>,
+  callback: (this: This, value: T, index: number) => U,
+  thisArg?: This,
+  project: (result: WithCallbackEntry<T, U>) => V = identity as any
+): IterableIterator<V> {
+  for (let [index, value] of entries(iterator))
+    yield project({
+      result: callback.call(thisArg!, value, index),
+      value,
+      index
+    })
+}
+
+export function map<T, U, This = undefined>(
   iterator: Iterable<T>,
   project: (this: This, t: T, i: number) => U,
   thisArg?: This
 ): IterableIterator<U> {
-  let i = 0
-  for (let value of iterator) yield project.call(thisArg!, value, i++)
+  return withCallback(iterator, project, thisArg, prop('result'))
 }
 
 export function filter<T, S extends T, This = undefined>(
@@ -24,9 +60,8 @@ export function* filter<T, This = undefined>(
   filter: (this: This, value: T, index: number) => unknown,
   thisArg?: This
 ): IterableIterator<T> {
-  let i = 0
-  for (let value of iterator)
-    if (filter.call(thisArg!, value, i++)) yield value
+  for (let { result, value } of withCallback(iterator, filter, thisArg))
+    if (result) yield value
 }
 
 export function forEach<T, This = undefined>(
@@ -34,16 +69,27 @@ export function forEach<T, This = undefined>(
   callback: (this: This, t: T, i: number) => unknown,
   thisArg?: This
 ): void {
-  let i = 0
-  for (let value of iterator) callback.call(thisArg!, value, i++)
+  for (let _ of withCallback(iterator, callback, thisArg));
+}
+
+function _find<T, U, This = undefined>(
+  iterator: Iterable<T>,
+  predicate: (this: This, t: T, i: number) => boolean,
+  onResult: (entry: WithCallbackEntry<T, boolean>) => U,
+  defaultValue: U,
+  thisArg?: This
+): U {
+  for (let entry of withCallback(iterator, predicate, thisArg))
+    if (entry.result) return onResult(entry)
+  return defaultValue
 }
 
 export function find<T, This = undefined>(
   iterator: Iterable<T>,
-  predicate: (this: This, t: T) => boolean,
+  predicate: (this: This, t: T, i: number) => boolean,
   thisArg?: This
 ): T | undefined {
-  for (let value of iterator) if (predicate.call(thisArg!, value)) return value
+  return _find(iterator, predicate, prop('value'), undefined, thisArg)
 }
 
 export function last<T>(iterator: Iterable<T>): T | undefined {
@@ -56,9 +102,24 @@ export function last<T>(iterator: Iterable<T>): T | undefined {
   return last
 }
 
+export function some<T, This = undefined>(
+  iterator: Iterable<T>,
+  predicate: (this: This, t: T, i: number) => boolean,
+  thisArg?: This
+): boolean {
+  return _find(iterator, predicate, returnTrue, false, thisArg)
+}
+
+export function every<T, This = undefined>(
+  iterator: Iterable<T>,
+  predicate: (this: This, t: T, i: number) => boolean,
+  thisArg?: This
+): boolean {
+  return !some(iterator, not(predicate), thisArg)
+}
+
 export function includes<T>(iterator: Iterable<T>, value: T): boolean {
-  for (let v of iterator) if (value === v) return true
-  return false
+  return some(iterator, eq(value))
 }
 
 export function* reverse<T>(iterator: Iterable<T>): IterableIterator<T> {
@@ -108,14 +169,10 @@ export function isIterable<T>(iterable: unknown): iterable is Iterable<T> {
   )
 }
 
-export function* tap<T, This = undefined>(
+export function tap<T, This = undefined>(
   iterable: Iterable<T>,
   fn: (this: This, value: T, index: number) => unknown,
   thisArg?: This
 ): IterableIterator<T> {
-  let i = 0
-  for (let value of iterable) {
-    fn.call(thisArg!, value, i++)
-    yield value
-  }
+  return withCallback(iterable, fn, thisArg, prop('value'))
 }

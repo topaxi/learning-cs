@@ -3,6 +3,7 @@ import { c } from '../function/compose'
 import { arity2 } from '../function/arity'
 import { paR } from '../function/partial'
 import { not } from '../function/not'
+import { filter } from '../iterator'
 import { prop } from './prop'
 
 type ObjectIndex = string | number | symbol
@@ -19,10 +20,10 @@ type OmitFn = <P extends ObjectIndex>(
 
 const entries: <T>(o: T) => Entry<T>[] = Object.entries
 // @ts-ignore
-const fromEntries: <T>(entries: Entry<T>[]) => T = Object.fromEntries
+const fromEntries: <T>(entries: Iterable<Entry<T>>) => T = Object.fromEntries
 
 export const pickBy: PickByFn = predicate => o =>
-  fromEntries(entries(o).filter(arity2(paR(predicate, o))))
+  fromEntries(filter(entries(o), arity2(paR(predicate, o))))
 
 export const omitBy: PickByFn = c(pickBy, not) as any
 

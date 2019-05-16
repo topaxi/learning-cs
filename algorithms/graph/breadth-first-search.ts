@@ -1,5 +1,5 @@
 import { noop } from '../../utils/function/noop'
-import { returnTrue } from '../../utils/function/return-true'
+import { returnTrue } from '../../utils/function/constant'
 import { HashSet } from '../../data-structures/hash/hash-set'
 import { Queue } from '../../data-structures/queue/queue'
 import { GraphVertex } from '../../data-structures/graph/graph-vertex'

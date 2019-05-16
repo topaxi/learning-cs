@@ -1,3 +1,5 @@
-export function neg<T extends (...args: any[]) => number>(fn: T): T {
-  return ((...args) => fn(...args) * -1) as T
+export function neg<A extends unknown[]>(
+  fn: (...args: A) => number
+): (...args: A) => number {
+  return (...args) => fn(...args) * -1
 }
