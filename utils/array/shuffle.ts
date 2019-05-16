@@ -15,11 +15,6 @@ export function shuffleInplace<T extends unknown[]>(
   return array
 }
 
-export function shuffle<T>(array: readonly T[]): T[]
-export function shuffle<T>(array: string): string[]
-export function shuffle<T>(array: Iterable<T>): T[]
-export function shuffle(
-  array: readonly unknown[] | string | Iterable<unknown>
-): unknown[] {
+export function shuffle<T>(array: Iterable<T>): T[] {
   return shuffleInplace(Array.from(array))
 }
