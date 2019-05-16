@@ -1,14 +1,15 @@
 import { swap } from '../swap'
+import { range } from '../range'
 import { random } from '../random'
 import { lastIndex } from './last-index'
 
 export function shuffleInplace<T extends unknown[]>(
   array: T,
-  i = 0,
-  toIndex = lastIndex(array)
+  start = 0,
+  end = lastIndex(array)
 ): T {
-  for (; i < toIndex; i++) {
-    swap(array, i, random(i, toIndex))
+  for (let i of range(start, end)) {
+    swap(array, i, random(i, end))
   }
 
   return array
@@ -16,6 +17,9 @@ export function shuffleInplace<T extends unknown[]>(
 
 export function shuffle<T>(array: readonly T[]): T[]
 export function shuffle<T>(array: string): string[]
-export function shuffle(array: readonly unknown[] | string): unknown[] {
+export function shuffle<T>(array: Iterable<T>): T[]
+export function shuffle(
+  array: readonly unknown[] | string | Iterable<unknown>
+): unknown[] {
   return shuffleInplace(Array.from(array))
 }
