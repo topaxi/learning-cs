@@ -140,8 +140,6 @@ export class HashMap<K extends Hashable, T> {
 export class HashMapWithDefault<K extends Hashable, T> extends HashMap<K, T> {
   protected getDefaultValue: (key: K) => T
 
-  constructor(defaultValue: (key?: K) => T, size?: number)
-  constructor(defaultValue: T, size?: number)
   constructor(defaultValue: T | ((key?: K) => T), size?: number) {
     super(size)
 
