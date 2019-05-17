@@ -4,13 +4,15 @@ import { arity2 } from '../function/arity'
 import { paR } from '../function/partial'
 import { not } from '../function/not'
 import { filter } from '../iterator/filter'
+import { entries, Entry } from './entries'
 import { prop } from './prop'
 
 type ObjectIndex = string | number | symbol
-type Entry<T, K extends keyof T = keyof T> = [K, T[K]]
 type PickPredicate<T> = (entry: Entry<T>, index: number, obj: T) => boolean
 type Omit<T, P extends keyof T> = Pick<T, Exclude<keyof T, P>>
-type PickByFn = <T>(predicate: PickPredicate<T>) => (o: T) => Partial<T>
+type PickByFn = <T extends object>(
+  predicate: PickPredicate<T>
+) => (o: T) => Partial<T>
 type PickFn = <P extends ObjectIndex>(
   ...keys: P[]
 ) => <T extends Record<P, unknown>>(o: T) => Pick<T, P>
@@ -18,7 +20,6 @@ type OmitFn = <P extends ObjectIndex>(
   ...keys: P[]
 ) => <T extends Record<ObjectIndex, unknown>>(o: T) => Omit<T, P>
 
-const entries: <T>(o: T) => Entry<T>[] = Object.entries
 // @ts-ignore
 const fromEntries: <T>(entries: Iterable<Entry<T>>) => T = Object.fromEntries
 
