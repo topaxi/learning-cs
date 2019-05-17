@@ -1,6 +1,6 @@
 import { GraphEdge } from './graph-edge'
 import { HashSet } from '../hash/hash-set'
-import { map } from '../../utils/iterator'
+import { map } from '../../utils/iterator/map'
 
 export class GraphVertex<T> {
   private static nextId = 0

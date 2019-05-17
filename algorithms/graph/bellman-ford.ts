@@ -1,5 +1,5 @@
 import { lastIndex } from '../../utils/array/last-index'
-import { filter } from '../../utils/iterator'
+import { filter } from '../../utils/iterator/filter'
 import { HashMap } from '../../data-structures/hash/hash-map'
 import { GraphEdge } from '../../data-structures/graph/graph-edge'
 import { GraphVertex } from '../../data-structures/graph/graph-vertex'

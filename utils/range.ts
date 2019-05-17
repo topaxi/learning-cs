@@ -1,5 +1,5 @@
 import { identity } from './function/identity'
-import { forEach } from './iterator'
+import { forEach } from './iterator/for-each'
 
 export interface RangeOptions<T> {
   step: number

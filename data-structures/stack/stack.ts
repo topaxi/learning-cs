@@ -1,5 +1,5 @@
 import { identity } from '../../utils/function/identity'
-import { map } from '../../utils/iterator'
+import { map } from '../../utils/iterator/map'
 import { LinkedList } from '../list/linked-list'
 
 export class Stack<T> {

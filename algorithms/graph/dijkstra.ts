@@ -1,4 +1,4 @@
-import { filter } from '../../utils/iterator'
+import { filter } from '../../utils/iterator/filter'
 import { GraphVertex } from '../../data-structures/graph/graph-vertex'
 import { HashSet } from '../../data-structures/hash/hash-set'
 import { HashMap } from '../../data-structures/hash/hash-map'

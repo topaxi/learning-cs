@@ -1,4 +1,4 @@
-import { tap } from '../../utils/iterator'
+import { tap } from '../../utils/iterator/tap'
 import { HashMap, Hashable } from '../hash/hash-map'
 import { MinHeap } from '../heap/min-heap'
 

@@ -1,5 +1,5 @@
 import { not } from '../utils/function/not'
-import { filter } from '../utils/iterator'
+import { filter } from '../utils/iterator/filter'
 import { isWithinMatrix } from '../utils/matrix'
 import { Queue } from '../data-structures/queue/queue'
 

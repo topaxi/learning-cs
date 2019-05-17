@@ -1,5 +1,5 @@
 import { notNull } from '../../utils/filters/null'
-import { filter } from '../../utils/iterator'
+import { filter } from '../../utils/iterator/filter'
 import { HashMap } from '../hash/hash-map'
 import { Queue } from '../queue/queue'
 

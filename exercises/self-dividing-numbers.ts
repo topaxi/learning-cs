@@ -1,5 +1,5 @@
 import { range } from '../utils/range'
-import { filter } from '../utils/iterator'
+import { filter } from '../utils/iterator/filter'
 
 export function selfDividingNumbers(left: number, right: number) {
   return Array.from(

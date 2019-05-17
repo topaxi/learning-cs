@@ -3,7 +3,7 @@ import { c } from '../function/compose'
 import { arity2 } from '../function/arity'
 import { paR } from '../function/partial'
 import { not } from '../function/not'
-import { filter } from '../iterator'
+import { filter } from '../iterator/filter'
 import { prop } from './prop'
 
 type ObjectIndex = string | number | symbol

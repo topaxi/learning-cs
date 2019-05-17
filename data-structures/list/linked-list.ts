@@ -6,7 +6,8 @@ import { secondArg } from '../../utils/function/nth-arg'
 import { identity } from '../../utils/function/identity'
 import { eq } from '../../utils/filters/eq'
 import { concat } from '../../utils/operators'
-import { map, isIterable } from '../../utils/iterator'
+import { map } from '../../utils/iterator/map'
+import { isIterable } from '../../utils/iterator/is-iterable'
 import { LinkedListNode } from './linked-list-node'
 
 export class LinkedList<T> implements Iterable<T>, Head<T | null> {

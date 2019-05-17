@@ -3,7 +3,8 @@ import { pa } from '../../utils/function/partial'
 import { arity2 } from '../../utils/function/arity'
 import { join } from '../../utils/string/join'
 import { add } from '../../utils/operators'
-import { last, map } from '../../utils/iterator'
+import { map } from '../../utils/iterator/map'
+import { last } from '../../utils/iterator/last'
 import { traverseNext } from './utils'
 
 const increment = pa(add, 1)

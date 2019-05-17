@@ -1,4 +1,4 @@
-import { includes } from '../../utils/iterator'
+import { includes } from '../../utils/iterator/includes'
 import { HashMap, Hashable } from './hash-map'
 
 export class HashSet<T extends Hashable> {

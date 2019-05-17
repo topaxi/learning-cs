@@ -1,6 +1,6 @@
 import { LinkedList } from '../list/linked-list'
 import { identity } from '../../utils/function/identity'
-import { map } from '../../utils/iterator'
+import { map } from '../../utils/iterator/map'
 
 export class Queue<T> {
   private readonly list = new LinkedList<T>()

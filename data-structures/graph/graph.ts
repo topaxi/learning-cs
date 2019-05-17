@@ -1,6 +1,6 @@
 import { prop } from '../../utils/object/prop'
 import { sum } from '../../utils/array/sum'
-import { find } from '../../utils/iterator'
+import { find } from '../../utils/iterator/find'
 import { by } from '../../utils/filters/by'
 import { HashMap } from '../hash/hash-map'
 import { HashSet } from '../hash/hash-set'

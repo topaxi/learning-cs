@@ -1,5 +1,5 @@
 import { returnTrue } from './function/constant'
-import { filter } from './iterator'
+import { filter } from './iterator/filter'
 import { range } from './range'
 
 const primeReducer = (

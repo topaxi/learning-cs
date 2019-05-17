@@ -1,7 +1,8 @@
 import { hashCode } from '../../utils/string/string-hash'
 import { prop } from '../../utils/object/prop'
 import { byKey } from '../../utils/filters/by'
-import { map, flat } from '../../utils/iterator'
+import { map } from '../../utils/iterator/map'
+import { flat } from '../../utils/iterator/flat'
 import { LinkedList } from '../list/linked-list'
 
 class HashMapNode<K, T> {

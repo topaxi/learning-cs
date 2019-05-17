@@ -1,5 +1,7 @@
 import { range } from '../utils/range'
-import { map, reverse, forEach } from '../utils/iterator'
+import { map } from '../utils/iterator/map'
+import { forEach } from '../utils/iterator/for-each'
+import { reverse } from '../utils/iterator/reverse'
 
 // http://lisperator.net/blog/a-little-javascript-problem/
 describe('a-little-javascript-problem', () => {
