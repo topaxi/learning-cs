@@ -4,6 +4,7 @@ import { byKey } from '../../utils/filters/by'
 import { map } from '../../utils/iterator/map'
 import { flat } from '../../utils/iterator/flat'
 import { LinkedList } from '../list/linked-list'
+import { constant } from '../../utils/function/constant'
 
 class HashMapNode<K, T> {
   constructor(readonly key: K, public value: T) {}
@@ -137,13 +138,22 @@ export class HashMap<K extends Hashable, T> {
 }
 
 export class HashMapWithDefault<K extends Hashable, T> extends HashMap<K, T> {
-  constructor(protected defaultValue: T, size?: number) {
+  protected getDefaultValue: (key: K) => T
+
+  constructor(defaultValue: (key?: K) => T, size?: number)
+  constructor(defaultValue: T, size?: number)
+  constructor(defaultValue: T | ((key?: K) => T), size?: number) {
     super(size)
+
+    this.getDefaultValue =
+      typeof defaultValue === 'function'
+        ? (defaultValue as (key: K) => T)
+        : constant(defaultValue)
   }
 
   get(key: K): T {
     if (this.has(key)) return super.get(key)!
-    return this.defaultValue
+    return this.getDefaultValue(key)
   }
 }
 

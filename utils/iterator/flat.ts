@@ -21,7 +21,7 @@ export function* flat(
   iterator: Iterable<unknown>,
   depth = 1
 ): IterableIterator<unknown> {
-  if (depth < 0) return yield iterator
+  if (depth <= 0) return yield* iterator
 
   for (let value of iterator) {
     if (isIterable(value)) {
