@@ -6,7 +6,7 @@ import { map } from '../../utils/iterator/map'
 
 export class MultiHashMap<K extends Hashable, V extends Hashable> {
   private map = new HashMap.withDefault<K, HashSet<V>>(
-    () => new HashSet<V>(this.internalSize),
+    () => new HashSet<V>(Math.floor(this.internalSize / 2)),
     this.internalSize
   )
 
