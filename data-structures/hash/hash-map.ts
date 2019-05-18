@@ -1,4 +1,5 @@
 import { hashCode } from '../../utils/string/string-hash'
+import { size } from '../../utils/object/size'
 import { prop } from '../../utils/object/prop'
 import { byKey } from '../../utils/filters/by'
 import { map } from '../../utils/iterator/map'
@@ -24,14 +25,14 @@ export class HashMap<K extends Hashable, T> implements Iterable<[K, T]> {
   static withDefault: typeof HashMapWithDefault
 
   get size(): number {
-    return Object.keys(this.keyCache).length
+    return size(this.keyCache)
   }
 
   constructor(private readonly internalSize = 32) {}
 
   set(key: K, value: T): T {
     let keyHash = this.hash(key)
-    this.keyCache[this.normalizeKey(key as Hashable)] = keyHash
+    this.keyCache[this.normalizeKey(key)] = keyHash
 
     let list = this.slots[keyHash]
     let node = list.find(byKey(key))
