@@ -1,3 +1,4 @@
+import { filter } from '../iterator/filter'
 import { range } from '../range'
 import { swap } from '../swap'
 import { lastIndex } from './last-index'
@@ -29,10 +30,8 @@ export function partitionInline<T>(
 
   let newPivot = left
 
-  for (let i of range(left, right)) {
-    if (fn(array[i], pivotElement)) {
-      swap(array, i, newPivot++)
-    }
+  for (let i of filter(range(left, right), i => fn(array[i], pivotElement))) {
+    swap(array, i, newPivot++)
   }
 
   swap(array, right, newPivot)
