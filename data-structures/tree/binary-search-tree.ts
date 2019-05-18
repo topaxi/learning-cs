@@ -1,6 +1,6 @@
 import { BinarySearchTreeNode } from './binary-search-tree-node'
 
-export class BinarySearchTree<T> {
+export class BinarySearchTree<T> implements Iterable<T> {
   protected root: BinarySearchTreeNode<T> | null = null
 
   static from<U>(iterable: Iterable<U>) {

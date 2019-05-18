@@ -3,7 +3,7 @@ import { filter } from '../../utils/iterator/filter'
 import { HashMap } from '../hash/hash-map'
 import { Queue } from '../queue/queue'
 
-export class BinaryTreeNode<T = number, M = unknown> {
+export class BinaryTreeNode<T = number, M = unknown> implements Iterable<T> {
   readonly meta = new HashMap<string | number, M>()
 
   private _left: this | null = null

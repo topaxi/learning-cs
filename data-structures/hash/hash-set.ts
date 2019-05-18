@@ -1,7 +1,7 @@
 import { includes } from '../../utils/iterator/includes'
 import { HashMap, Hashable } from './hash-map'
 
-export class HashSet<T extends Hashable> {
+export class HashSet<T extends Hashable> implements Iterable<T> {
   private _hash = new HashMap<T, T>(this._hashSize)
 
   private static defaultSetSize = 32

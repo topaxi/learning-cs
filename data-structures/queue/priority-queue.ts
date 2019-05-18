@@ -2,7 +2,7 @@ import { tap } from '../../utils/iterator/tap'
 import { HashMap, Hashable } from '../hash/hash-map'
 import { MinHeap } from '../heap/min-heap'
 
-export class PriorityQueue<T extends Hashable> {
+export class PriorityQueue<T extends Hashable> implements Iterable<T> {
   private readonly heap = new MinHeap<T>(this.compare.bind(this))
   private readonly priorities = new HashMap<T, number>()
 

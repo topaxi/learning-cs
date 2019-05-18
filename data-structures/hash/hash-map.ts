@@ -16,7 +16,7 @@ class HashMapNode<K, T> {
 
 export type Hashable = string | number | { readonly id: string | number }
 
-export class HashMap<K extends Hashable, T> {
+export class HashMap<K extends Hashable, T> implements Iterable<[K, T]> {
   protected slots = this.initializeSlots()
   private keyCache = this.initializeKeyCache()
 

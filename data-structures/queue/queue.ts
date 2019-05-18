@@ -2,7 +2,7 @@ import { LinkedList } from '../list/linked-list'
 import { identity } from '../../utils/function/identity'
 import { map } from '../../utils/iterator/map'
 
-export class Queue<T> {
+export class Queue<T> implements Iterable<T> {
   private readonly list = new LinkedList<T>()
 
   static from<T, R = T>(
