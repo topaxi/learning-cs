@@ -2,7 +2,8 @@ import { HashMap, Hashable } from './hash-map'
 import { HashSet } from './hash-set'
 import { flat } from '../../utils/iterator/flat'
 import { flatMap } from '../../utils/iterator/flat-map'
-import { map } from '../../utils/iterator/map'
+import { zip } from '../../utils/iterator/zip'
+import { infinite } from '../../utils/iterator/infinite'
 
 export class MultiHashMap<K extends Hashable, V extends Hashable> {
   private map = new HashMap.withDefault<K, HashSet<V>>(
@@ -69,6 +70,6 @@ export class MultiHashMap<K extends Hashable, V extends Hashable> {
   private entriesMapper([key, set]: [K, HashSet<V>]): IterableIterator<
     [K, V]
   > {
-    return map(set, value => [key, value])
+    return zip(infinite(key), set)
   }
 }
