@@ -90,8 +90,8 @@ export class HashSet<T extends Hashable> {
     return this._hash.values()
   }
 
-  *[Symbol.iterator](): IterableIterator<T> {
-    yield* this.values()
+  [Symbol.iterator](): IterableIterator<T> {
+    return this.values()
   }
 
   toArray(): T[] {
