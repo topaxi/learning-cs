@@ -4,7 +4,7 @@ export function* entries<T extends object>(
   obj: T
 ): IterableIterator<Entry<T>> {
   for (let key in obj) {
-    if (Reflect.has(obj, key)) {
+    if (obj.hasOwnProperty(key)) {
       yield [key, obj[key]]
     }
   }
