@@ -1,0 +1,12 @@
+import { shortestDistanceToChar } from './shortest-distance-to-char'
+
+describe('821. Shortest Distance to a Character', () => {
+  test('should return shortest distance to char', () => {
+    expect(
+      shortestDistanceToChar(
+        'kzztfpvjmoxadcigkuxcvmlpfjgvxmmbekqxfnxnuwohcszsezwzhdcxpglroypmuobdflqmttergssgvgourdwdsexonckwhduovdhdesninellcturjhgcjwvipnsishrwtfsfnrahjajnnxkkemesdwgiyiqqrluuadaxoueyurqrvzbcshxxflywfhdzkphagyoctygznpalauzstoupnjbrgrpqslsxpqbqkggtushtkllxhgxzbdmhnbzxkwzxtaanmhtoirxheyanoplbvjrovzudznmetkkxrdmrhvmldbhqtriygqfmbtzppxgclrjjywhzzurdntkwpnhlejhfppvqjagszcnudmzwwcyuaqzgtudmpjkluqoseslygywzkixjqghsocvjqigvxwqloyugfhcjscjghqmiglgyazwelshzapaezqgmcmrmfrfzttdgquizyducbvxzzuiddcnwuaapdunzlbagnifndbjyalqqgbramhbivvervxrtcszszwigrlwzmuteyswzagudtpvlrjmobuhozbghkhvoxawcxmjnazlqlkqqqnoclufgkovbokvkoezeknwhcfgcenvaablpvtcejvzndtzncrelhedwlwiqgdbdgctgubzczgtovufncicjlwsmfdcrqeaghuevyexqdhffikvecuazrelofjmyjjznnjdkimbklrhsjusbstqhvlejtjcczqnzbvyfzxgaudyosckysmminoanjmbafhtnbrrzqagllwxlxmjanyfelmwruftlzuuhbsjexoobjkmymlitiwjtdxscotzvznvixpdhnsxsodieatipiaodgcmdgyvzrjrvfccmecchxtiraiqijowzwnrvrkosimqsdyrscbonppjteyoebnuomrbifrbqbteclfqztbbyroomrehvfwtrvcodllgjctguxeicjoudmxbevzrvravkidnricwsbnxmxvdc',
+        'j'
+      )
+    ).toMatchSnapshot()
+  })
+})
