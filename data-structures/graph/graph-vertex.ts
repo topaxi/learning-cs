@@ -1,6 +1,7 @@
 import { GraphEdge } from './graph-edge'
 import { HashSet } from '../hash/hash-set'
 import { map } from '../../utils/iterator/map'
+import { pick } from '../../utils/object/pick'
 
 export class GraphVertex<T> {
   private static nextId = 0
@@ -44,11 +45,8 @@ export class GraphVertex<T> {
     return String(this.value)
   }
 
-  toJSON() {
-    return {
-      value: this.value,
-      edges: this.edges
-    }
+  toJSON(): { value: T; edges: HashSet<GraphEdge<T>> } {
+    return pick('value', 'edges')(this as any)
   }
 
   private normalizeNeighbors<T>(

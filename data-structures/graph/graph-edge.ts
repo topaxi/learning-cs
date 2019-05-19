@@ -1,5 +1,6 @@
 import { GraphVertex } from './graph-vertex'
 import { swap } from '../../utils/swap'
+import { pick } from '../../utils/object/pick'
 
 export class GraphEdge<T> {
   private static nextId = 0
@@ -25,11 +26,7 @@ export class GraphEdge<T> {
     endVertex: GraphVertex<T>
     weight: number
   } {
-    return {
-      startVertex: this.startVertex,
-      endVertex: this.endVertex,
-      weight: this.weight
-    }
+    return pick('startVertex', 'endVertex', 'weight')(this)
   }
 
   toString(): string {

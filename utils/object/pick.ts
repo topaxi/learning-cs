@@ -3,7 +3,10 @@ import { c } from '../function/compose'
 import { arity2 } from '../function/arity'
 import { paR } from '../function/partial'
 import { not } from '../function/not'
+import { flip } from '../function/flip'
 import { filter } from '../iterator/filter'
+import { map } from '../iterator/map'
+import { zip } from '../iterator/zip'
 import { entries, Entry } from './entries'
 import { prop } from './prop'
 
@@ -32,5 +35,6 @@ const props = <R extends Record<ObjectIndex, unknown>>(
   ...keys: (keyof R)[]
 ): PickPredicate<R> => c(includedIn(keys), prop<Entry<R>, 0>(0))
 
-export const pick: PickFn = c(pickBy, props) as any
+export const pick: PickFn = (...props) => obj =>
+  fromEntries(zip(props, map(props, flip(prop)(obj))))
 export const omit: OmitFn = c(omitBy, props) as any

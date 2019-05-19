@@ -2,6 +2,7 @@ import { notNull } from '../../utils/filters/null'
 import { filter } from '../../utils/iterator/filter'
 import { HashMap } from '../hash/hash-map'
 import { Queue } from '../queue/queue'
+import { pick } from '../../utils/object/pick'
 
 export class BinaryTreeNode<T = number, M = unknown> implements Iterable<T> {
   readonly meta = new HashMap<string | number, M>()
@@ -158,10 +159,6 @@ export class BinaryTreeNode<T = number, M = unknown> implements Iterable<T> {
     left: BinaryTreeNode<T> | null
     right: BinaryTreeNode<T> | null
   } {
-    return {
-      value: this.value,
-      left: this._left,
-      right: this._right
-    }
+    return pick('value', 'left', 'right')(this)
   }
 }
