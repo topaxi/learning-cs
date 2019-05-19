@@ -60,7 +60,7 @@ export class HashMap<K extends Hashable, T> implements Iterable<[K, T]> {
     let list = this.getSlot(key)
     let index = list.findIndex(byKey(key))
 
-    delete this.keyCache[this.normalizeKey(key as Hashable)]
+    delete this.keyCache[this.normalizeKey(key)]
 
     if (index !== -1) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
