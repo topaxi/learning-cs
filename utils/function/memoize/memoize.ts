@@ -18,11 +18,13 @@ export function memoize<
   M extends MemoStore = MemoTrie
 >(fn: T, store: M = (new MemoTrie() as unknown) as M): Memoized<T, M> {
   function memoized(this: unknown, ...args: unknown[]): ReturnType<T> {
+    args.unshift(this)
+
     if (memoized.memo.has(args)) {
       return memoized.memo.get(args)
     }
 
-    let r = fn.apply(this, args)
+    let r = fn.apply(this, arguments as any)
     memoized.memo.set(args, r)
     return r
   }
