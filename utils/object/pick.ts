@@ -1,3 +1,4 @@
+import { head } from '../array/head'
 import { includedIn } from '../filters/included-in'
 import { c } from '../function/compose'
 import { arity2 } from '../function/arity'
@@ -31,10 +32,7 @@ export const pickBy: PickByFn = predicate => o =>
 
 export const omitBy: PickByFn = c(pickBy, not) as any
 
-const props = <R extends Record<ObjectIndex, unknown>>(
-  ...keys: (keyof R)[]
-): PickPredicate<R> => c(includedIn(keys), prop<Entry<R>, 0>(0))
-
-export const pick: PickFn = (...props) => obj =>
-  fromEntries(zip(props, map(props, flip(prop)(obj))))
-export const omit: OmitFn = c(omitBy, props) as any
+export const pick: PickFn = (...keys) => obj =>
+  fromEntries(zip(keys, map(keys, flip(prop)(obj))))
+export const omit: OmitFn = (...keys) =>
+  omitBy(c(includedIn(keys), head)) as any
