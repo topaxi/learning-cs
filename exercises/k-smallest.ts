@@ -1,12 +1,12 @@
 import { BinarySearchTree } from '../data-structures/tree/binary-search-tree'
+import { take } from '../utils/iterator/take'
+import { last } from '../utils/iterator/last'
 
 export function kSmallestBinarySearchTree(
   node: BinarySearchTree<number>,
   k: number
 ): number {
-  for (let value of node) {
-    if (--k === 0) return value
-  }
+  let smallest = last(take(node, k))
 
-  return -1
+  return smallest === undefined ? -1 : smallest
 }

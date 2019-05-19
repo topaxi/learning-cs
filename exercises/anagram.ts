@@ -1,5 +1,6 @@
 import { sum } from '../utils/array/sum'
 import { gt } from '../utils/filters/eq'
+import { filter } from '../utils/iterator/filter'
 import { HashMap } from '../data-structures/hash/hash-map'
 
 // Without sort
@@ -16,5 +17,5 @@ export function isAnagram(str1: string, str2: string): boolean {
     map.set(char, map.get(char) - 1)
   }
 
-  return sum(Array.from(map.values()).filter(gt(0))) === 0
+  return sum(Array.from(filter(map.values(), gt(0)))) === 0
 }

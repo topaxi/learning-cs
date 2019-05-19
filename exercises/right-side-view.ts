@@ -1,3 +1,5 @@
+import { Queue } from '../data-structures/queue/queue'
+
 export interface BinaryTreeNode {
   val: number
   left: BinaryTreeNode | null
@@ -7,13 +9,13 @@ export interface BinaryTreeNode {
 export function rightSideView(root: BinaryTreeNode): number[] {
   let nodes = []
   let currentDepth = -1
-  let queue: any[] = [root, currentDepth + 1]
+  let queue = Queue.of<[BinaryTreeNode | null, number]>([
+    root,
+    currentDepth + 1
+  ])
   let lastNode = null
 
-  while (queue.length) {
-    let node = queue.shift()
-    let depth = queue.shift()
-
+  for (let [node, depth] of queue) {
     if (depth !== currentDepth && lastNode !== null) {
       nodes.push(lastNode.val)
     }
@@ -24,7 +26,7 @@ export function rightSideView(root: BinaryTreeNode): number[] {
 
     lastNode = node
 
-    queue.push(node.left, depth + 1, node.right, depth + 1)
+    queue.enqueue([node.left, depth + 1], [node.right, depth + 1])
   }
 
   return nodes

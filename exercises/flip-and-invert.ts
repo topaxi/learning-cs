@@ -1,9 +1,12 @@
+import { range } from '../utils/range'
+
 export function flipAndInvertImage(A: number[][]): number[][] {
-  for (let i = 0; i < A.length; i++) {
-    for (let j = 0, l = A[i].length / 2; j < l; j++) {
+  for (let i of range(A.length)) {
+    for (let j of range(A[i].length / 2)) {
       swapInvert(A[i], j, A[i].length - j - 1)
     }
   }
+
   return A
 }
 

@@ -1,4 +1,5 @@
 import { HashMap, HashMapWithDefault } from '../data-structures/hash/hash-map'
+import { HashSet } from '../data-structures/hash/hash-set'
 
 const countWord = (map: HashMapWithDefault<string, number>, word: string) => {
   map.set(word, map.get(word) + 1)
@@ -8,7 +9,7 @@ const countWord = (map: HashMapWithDefault<string, number>, word: string) => {
 export function mostCommonWord(paragraph: string, banned: string[]): string {
   let words = paragraph.match(/\w+/g)!.map(w => w.toLowerCase())
   let wordCounts = words.reduce(countWord, new HashMap.withDefault(0))
-  let bannedSet = new Set(banned)
+  let bannedSet = HashSet.from(banned)
   let maxCount = 0
   let mostCommon = ''
 

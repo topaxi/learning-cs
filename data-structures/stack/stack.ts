@@ -2,7 +2,7 @@ import { identity } from '../../utils/function/identity'
 import { map } from '../../utils/iterator/map'
 import { LinkedList } from '../list/linked-list'
 
-export class Stack<T> {
+export class Stack<T> implements Iterable<T> {
   private readonly list = new LinkedList<T>()
 
   static from<T, R = T>(
@@ -37,6 +37,10 @@ export class Stack<T> {
     while (!this.empty) {
       yield this.pop()
     }
+  }
+
+  [Symbol.iterator](): IterableIterator<T> {
+    return this.consume()
   }
 
   toJSON(): T[] {
