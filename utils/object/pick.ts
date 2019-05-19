@@ -29,7 +29,6 @@ const fromEntries: <T>(entries: Iterable<Entry<T>>) => T = Object.fromEntries
 
 export const pickBy: PickByFn = predicate => o =>
   fromEntries(filter(entries(o), arity2(paR(predicate, o))))
-
 export const omitBy: PickByFn = c(pickBy, not) as any
 
 export const pick: PickFn = (...keys) => obj =>
