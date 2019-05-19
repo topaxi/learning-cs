@@ -27,7 +27,7 @@ export class Graph<T> {
     let vertexA = this._findVertex(a)
     let vertexB = this._findVertex(b)
 
-    if (vertexA !== undefined && vertexB !== undefined) {
+    if (vertexA !== null && vertexB !== null) {
       this._addEdge(vertexA, vertexB, weight)
     }
 
@@ -42,7 +42,7 @@ export class Graph<T> {
     }
   }
 
-  protected _findVertex(value: T): GraphVertex<T> | undefined {
+  protected _findVertex(value: T): GraphVertex<T> | null {
     return find(this.vertices.values(), by('value', value))
   }
 

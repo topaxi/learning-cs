@@ -9,6 +9,8 @@ import { concat } from '../../utils/operators'
 import { map } from '../../utils/iterator/map'
 import { isIterable } from '../../utils/iterator/is-iterable'
 import { LinkedListNode } from './linked-list-node'
+import { find } from '../../utils/iterator/find'
+import { findIndex } from '../../utils/iterator/find-index'
 
 export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   static of<T>(...values: T[]) {
@@ -215,27 +217,13 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   }
 
   find(predicate: (value: T, key: number, list: this) => boolean): T | null {
-    return this._find(predicate, identity)
+    return find(this, paR(predicate, this))
   }
 
   findIndex(
     predicate: (value: T, key: number, list: this) => boolean
   ): number {
-    return this._find(predicate, secondArg)
-  }
-
-  private _find<U>(
-    predicate: (value: T, key: number, list: this) => boolean,
-    callback: (value: T | null, key: number, list: this) => U
-  ): U {
-    let i = -1
-    for (let value of this) {
-      if (predicate(value, ++i, this) === true) {
-        return callback(value, i, this)
-      }
-    }
-
-    return callback(null, -1, this)
+    return findIndex(this, paR(predicate, this))
   }
 
   slice(start: number, end?: number): LinkedList<T> {
