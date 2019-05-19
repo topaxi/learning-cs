@@ -1,5 +1,7 @@
 import { HashMap } from '../data-structures/hash/hash-map'
 
+const { max } = Math
+
 export function lengthOfLongestSubstring(s: string): number {
   if (s === '') return 0
   if (s.length === 1) return 1
@@ -14,7 +16,7 @@ export function lengthOfLongestSubstring(s: string): number {
       w = nw
     }
 
-    length = Math.max(length, i - w + 1)
+    length = max(length, i - w + 1)
     map.set(s[i], i + 1)
   }
 

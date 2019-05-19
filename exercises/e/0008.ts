@@ -1,4 +1,7 @@
-const digits = `
+const { max } = Math
+
+const digits = Array.from(
+  `
 73167176531330624919225119674426574742355349194934
 96983520312774506326239578318016984801869478851843
 85861560789112949495459501737958331952853208805511
@@ -19,17 +22,16 @@ const digits = `
 84580156166097919133875499200524063689912560717606
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450
-`
-  .replace(/\s*/gm, '')
-  .split('')
-  .map(d => Number(d))
+`.replace(/\s*/gm, ''),
+  d => Number(d)
+)
 
 const product = (a: number, b: number) => a * b
 
 console.log(
   digits.reduce(
     (maxProduct, digit, i, digits) =>
-      Math.max(maxProduct, digits.slice(i, i + 13).reduce(product, 1)),
+      max(maxProduct, digits.slice(i, i + 13).reduce(product, 1)),
     0
   )
 )

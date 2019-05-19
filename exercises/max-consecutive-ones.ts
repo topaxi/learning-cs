@@ -1,5 +1,7 @@
+const { max } = Math
+
 export function maxConsecutiveOnes(nums: number[]): number {
-  let max = 0
+  let maxOnes = 0
   let curr = 0
 
   for (let num of nums) {
@@ -7,9 +9,9 @@ export function maxConsecutiveOnes(nums: number[]): number {
       curr = 0
     } else {
       curr++
-      max = Math.max(max, curr)
+      maxOnes = max(maxOnes, curr)
     }
   }
 
-  return max
+  return maxOnes
 }

@@ -1,5 +1,7 @@
 import { Y, mY } from '../../utils/function/y'
 
+const { min } = Math
+
 const minDistanceR = (
   minDistanceR: (word1: string, word2: string, i: number, j: number) => number
 ): typeof minDistanceR => (word1, word2, i, j) => {
@@ -11,7 +13,7 @@ const minDistanceR = (
 
   return (
     1 +
-    Math.min(
+    min(
       minDistanceR(word1, word2, i - 1, j - 1),
       minDistanceR(word1, word2, i - 1, j),
       minDistanceR(word1, word2, i, j - 1)

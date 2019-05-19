@@ -7,6 +7,9 @@ import { flat } from '../../utils/iterator/flat'
 import { LinkedList } from '../list/linked-list'
 import { constant } from '../../utils/function/constant'
 
+const { abs } = Math
+const { isFinite } = Number
+
 class HashMapNode<K, T> {
   constructor(readonly key: K, public value: T) {}
 
@@ -104,11 +107,9 @@ export class HashMap<K extends Hashable, T> implements Iterable<[K, T]> {
     if (this.keyCache[key] !== undefined) return this.keyCache[key]
 
     let hash =
-      typeof key === 'number' && Number.isFinite(key)
-        ? key
-        : hashCode(String(key))
+      typeof key === 'number' && isFinite(key) ? key : hashCode(String(key))
 
-    return Math.abs(hash) % this.slots.length
+    return abs(hash) % this.slots.length
   }
 
   protected getNode(key: K): HashMapNode<K, T> | null {

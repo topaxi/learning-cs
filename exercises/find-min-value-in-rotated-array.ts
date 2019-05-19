@@ -1,5 +1,7 @@
 import { lastIndex } from '../utils/array/last-index'
 
+const { floor } = Math
+
 export function findMinValueInRotatedArray(array: number[]): number {
   let start = 0
   let end = lastIndex(array)
@@ -9,7 +11,7 @@ export function findMinValueInRotatedArray(array: number[]): number {
   }
 
   while (start < end) {
-    let i = Math.floor((start + end) / 2)
+    let i = floor((start + end) / 2)
 
     if (array[i] >= array[0]) {
       start = i + 1

@@ -2,6 +2,8 @@ import { returnTrue } from './function/constant'
 import { filter } from './iterator/filter'
 import { range } from './range'
 
+const { sqrt } = Math
+
 const primeReducer = (
   primes: Set<number>,
   isPrime: boolean,
@@ -12,7 +14,7 @@ export function primes(max: number): Set<number> {
   let primes = Array.from(range(max), returnTrue)
   primes[0] = primes[1] = false
 
-  for (let i of filter(range(2, Math.sqrt(max)), i => primes[i])) {
+  for (let i of filter(range(2, sqrt(max)), i => primes[i])) {
     for (let j of range(i * i, max, { step: i })) {
       primes[j] = false
     }

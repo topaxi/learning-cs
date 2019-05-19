@@ -1,9 +1,11 @@
+const { floor } = Math
+
 export function singleNonDuplicate(nums: readonly number[]): number {
   let lo = 0
   let hi = nums.length - 1
 
   while (lo < hi) {
-    let mi = Math.floor((hi + lo) / 2)
+    let mi = floor((hi + lo) / 2)
 
     // 0123456
     // 0011233

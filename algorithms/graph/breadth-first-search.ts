@@ -3,6 +3,7 @@ import { returnTrue } from '../../utils/function/constant'
 import { HashSet } from '../../data-structures/hash/hash-set'
 import { Queue } from '../../data-structures/queue/queue'
 import { GraphVertex } from '../../data-structures/graph/graph-vertex'
+import { filter } from '../../utils/iterator/filter'
 
 export interface BreadthFirstSearchCallbacks<T> {
   find?(currentVertex: GraphVertex<T>): boolean | unknown
@@ -25,28 +26,28 @@ export function breadthFirstSearch<T>(
     leaveVertex = noop,
     canVisitVertex = returnTrue
   }: BreadthFirstSearchCallbacks<T>,
-  visited = new HashSet<number>()
+  visited = new HashSet<GraphVertex<T>>()
 ): GraphVertex<T> | undefined {
   let queue = Queue.of(startVertex)
 
   for (let currentVertex of queue.consume()) {
-    if (visited.has(currentVertex.id)) return
+    if (visited.has(currentVertex)) continue
 
-    visited.add(currentVertex.id)
+    visited.add(currentVertex)
     enterVertex(currentVertex)
 
     if (find(currentVertex) === true) {
       return currentVertex
     }
 
-    for (let neighborVertex of currentVertex.getNeighbors()) {
-      if (
-        !visited.has(neighborVertex.id) &&
-        canVisitVertex(currentVertex, neighborVertex)
-      ) {
-        queue.enqueue(neighborVertex)
-      }
-    }
+    queue.enqueue(
+      ...filter(
+        currentVertex.getNeighbors(),
+        neighborVertex =>
+          !visited.has(neighborVertex) &&
+          canVisitVertex(currentVertex, neighborVertex)
+      )
+    )
 
     leaveVertex(currentVertex)
   }

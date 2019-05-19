@@ -1,6 +1,8 @@
 import { lastIndex } from '../../utils/array/last-index'
 import { swap } from '../../utils/swap'
 
+const { floor } = Math
+
 export class Heap<T> {
   private readonly memory: T[] = []
 
@@ -31,7 +33,7 @@ export class Heap<T> {
   }
 
   getParentIndex(i: number): number {
-    return Math.floor((i - 1) / 2)
+    return floor((i - 1) / 2)
   }
 
   parent(i: number): T {

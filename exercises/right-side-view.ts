@@ -1,5 +1,7 @@
 import { Queue } from '../data-structures/queue/queue'
 
+const { max } = Math
+
 export interface BinaryTreeNode {
   val: number
   left: BinaryTreeNode | null
@@ -20,7 +22,7 @@ export function rightSideView(root: BinaryTreeNode): number[] {
       nodes.push(lastNode.val)
     }
 
-    currentDepth = Math.max(currentDepth, depth)
+    currentDepth = max(currentDepth, depth)
 
     if (node === null) continue
 

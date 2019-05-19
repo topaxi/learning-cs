@@ -1,13 +1,15 @@
 import { includes } from '../../utils/iterator/includes'
 import { HashMap, Hashable } from './hash-map'
 
+const { max } = Math
+
 export class HashSet<T extends Hashable> implements Iterable<T> {
   private _hash = new HashMap<T, T>(this._hashSize)
 
   private static defaultSetSize = 32
 
   static of<T extends Hashable>(...args: T[]) {
-    let set = new this<T>(Math.max(this.defaultSetSize, args.length))
+    let set = new this<T>(max(this.defaultSetSize, args.length))
 
     for (let value of args) {
       set.add(value)

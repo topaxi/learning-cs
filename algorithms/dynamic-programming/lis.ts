@@ -1,4 +1,5 @@
 import { range } from '../../utils/range'
+import { filter } from '../../utils/iterator/filter'
 import { mY } from '../../utils/function/y'
 import { SingleParamStore } from '../../utils/function/memoize/single-param-store'
 
@@ -12,13 +13,11 @@ const lisr = (list: readonly number[]) => (lisr: (n: number) => number[]) => (
 ): number[] => {
   let sequence = [list[n]]
 
-  for (let i of range(n)) {
-    if (list[n] > list[i]) {
-      let subSequence = lisr(i).concat(list[n])
+  for (let i of filter(range(n), i => list[n] > list[i])) {
+    let subSequence = lisr(i).concat(list[n])
 
-      if (subSequence.length > sequence.length) {
-        sequence = subSequence
-      }
+    if (subSequence.length > sequence.length) {
+      sequence = subSequence
     }
   }
 

@@ -1,7 +1,9 @@
 import { range } from '../utils/range'
 
+const { floor, random } = Math
+
 function rand5(): number {
-  return Math.floor(Math.random() * 5) + 1
+  return floor(random() * 5) + 1
 }
 
 export function rand7(): number {

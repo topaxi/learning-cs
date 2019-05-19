@@ -3,6 +3,7 @@ import { mY } from '../../utils/function/y'
 import { range } from '../../utils/range'
 import { isWithinMatrix } from '../../utils/matrix'
 
+const { max } = Math
 const failsBoundaryCheck = not(isWithinMatrix)
 
 const measureLongestPath = mY(
@@ -17,7 +18,7 @@ const measureLongestPath = mY(
 
     return (
       1 +
-      Math.max(
+      max(
         measureLongestPath(matrix, row - 1, column, matrix[row][column]),
         measureLongestPath(matrix, row, column + 1, matrix[row][column]),
         measureLongestPath(matrix, row + 1, column, matrix[row][column]),
@@ -32,7 +33,7 @@ export function longestIncreasingPath(matrix: number[][]): number {
 
   for (let row of range(matrix.length)) {
     for (let column of range(matrix[row].length)) {
-      longestPath = Math.max(
+      longestPath = max(
         longestPath,
         measureLongestPath(matrix, row, column, -1)
       )

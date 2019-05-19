@@ -1,5 +1,8 @@
 // Based on http://web.archive.org/web/20090617110918/http://www.openasthra.com/c-tidbits/printing-binary-trees-in-ascii/
 import { BinaryTreeNode } from '../data-structures/tree/binary-tree-node'
+import { range } from './range'
+
+const { min, max, floor } = Math
 
 const MAX_HEIGHT = 1000
 
@@ -16,11 +19,9 @@ class AsciiNode {
   parentDir: -1 | 0 | 1 = 0
 }
 
-const returnZero = (): number => 0
-
 export class BinaryTreePrinter<T extends BinaryTreeNode<any, any>> {
-  private lprofile = Array.from({ length: this.maxHeight }, returnZero)
-  private rprofile = Array.from({ length: this.maxHeight }, returnZero)
+  private lprofile = new Int16Array(this.maxHeight)
+  private rprofile = new Int16Array(this.maxHeight)
   private gap = 3
   private printNext = 0
   private out = ''
@@ -34,16 +35,16 @@ export class BinaryTreePrinter<T extends BinaryTreeNode<any, any>> {
     let proot = this.buildAsciiTree(root)!
     this.computeEdgeLengths(proot)
     for (let i = 0; i < proot.height && i < this.maxHeight; i++) {
-      this.lprofile[i] = Infinity
+      this.lprofile[i] = 0x7fff
     }
 
     this.computeLprofile(proot, 0, 0)
     let xmin = 0
     for (let i = 0; i < proot.height && i < this.maxHeight; i++) {
-      xmin = Math.min(xmin, this.lprofile[i])
+      xmin = min(xmin, this.lprofile[i])
     }
 
-    for (let i = 0; i < proot.height; i++) {
+    for (let i of range(proot.height)) {
       this.printNext = 0
       this.printLevel(proot, -xmin, i)
       this.printf('\n')
@@ -75,7 +76,7 @@ export class BinaryTreePrinter<T extends BinaryTreeNode<any, any>> {
       let i = 0
       for (
         ;
-        i < x - this.printNext - Math.floor((node.label.length - isleft) / 2);
+        i < x - this.printNext - floor((node.label.length - isleft) / 2);
         i++
       ) {
         this.printf(' ')
@@ -133,7 +134,7 @@ export class BinaryTreePrinter<T extends BinaryTreeNode<any, any>> {
 
       if (node.left != null) {
         for (let i = -1; i < node.left.height && i < this.maxHeight; i++) {
-          this.rprofile[i] = -Infinity
+          this.rprofile[i] = -0x8000
         }
         this.computeRprofile(node.left, -1, 0)
         hmin = node.left.height
@@ -142,19 +143,16 @@ export class BinaryTreePrinter<T extends BinaryTreeNode<any, any>> {
       }
       if (node.right != null) {
         for (let i = 0; i < node.right.height && i < this.maxHeight; i++) {
-          this.lprofile[i] = Infinity
+          this.lprofile[i] = 0x7fff
         }
         this.computeLprofile(node.right, 0, 0)
-        hmin = Math.min(node.right.height, hmin)
+        hmin = min(node.right.height, hmin)
       } else {
         hmin = 0
       }
       let delta = 4
-      for (let i = 0; i < hmin; i++) {
-        delta = Math.max(
-          delta,
-          this.gap + 1 + this.rprofile[i] - this.lprofile[i]
-        )
+      for (let i of range(hmin)) {
+        delta = max(delta, this.gap + 1 + this.rprofile[i] - this.lprofile[i])
       }
 
       //If the node has two children of height 1, then we allow the
@@ -167,16 +165,16 @@ export class BinaryTreePrinter<T extends BinaryTreeNode<any, any>> {
         delta--
       }
 
-      node.edgeLength = Math.floor((delta + 1) / 2) - 1
+      node.edgeLength = floor((delta + 1) / 2) - 1
     }
 
     //now fill in the height of node
     let h = 1
     if (node.left != null) {
-      h = Math.max(node.left.height + node.edgeLength + 1, h)
+      h = max(node.left.height + node.edgeLength + 1, h)
     }
     if (node.right != null) {
-      h = Math.max(node.right.height + node.edgeLength + 1, h)
+      h = max(node.right.height + node.edgeLength + 1, h)
     }
     node.height = h
   }
@@ -218,14 +216,14 @@ export class BinaryTreePrinter<T extends BinaryTreeNode<any, any>> {
 
     let isleft = node.parentDir === -1 ? 1 : 0
 
-    this.lprofile[y] = Math.min(
+    this.lprofile[y] = min(
       this.lprofile[y],
-      x - Math.floor((node.label.length - isleft) / 2)
+      x - floor((node.label.length - isleft) / 2)
     )
 
     if (node.left !== null) {
       for (let i = 1; i <= node.edgeLength && y + i < this.maxHeight; i++) {
-        this.lprofile[y + i] = Math.min(this.lprofile[y + i], x - i)
+        this.lprofile[y + i] = min(this.lprofile[y + i], x - i)
       }
     }
 
@@ -246,14 +244,14 @@ export class BinaryTreePrinter<T extends BinaryTreeNode<any, any>> {
 
     let notleft = node.parentDir != -1 ? 1 : 0
 
-    this.rprofile[y] = Math.max(
+    this.rprofile[y] = max(
       this.rprofile[y],
-      x + Math.floor((node.label.length - notleft) / 2)
+      x + floor((node.label.length - notleft) / 2)
     )
 
     if (node.right !== null) {
       for (let i = 1; i <= node.edgeLength && y + i < this.maxHeight; i++) {
-        this.rprofile[y + i] = Math.max(this.rprofile[y + i], x + i)
+        this.rprofile[y + i] = max(this.rprofile[y + i], x + i)
       }
     }
 
