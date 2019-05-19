@@ -1,4 +1,5 @@
 import { prop } from '../object/prop'
+import { flat } from './flat'
 import { isIterable } from './is-iterable'
 import { withCallback } from './with-callback'
 
@@ -8,19 +9,27 @@ export function flatMap<T, U, This = undefined>(
     this: This,
     value: T,
     i: number
-  ) => Iterable<Iterable<Iterable<T>>>,
+  ) =>
+    | U
+    | Iterable<U>
+    | Iterable<Iterable<U>>
+    | Iterable<Iterable<Iterable<U>>>,
   depth: 3,
   thisArg?: This
 ): IterableIterator<U>
 export function flatMap<T, U, This = undefined>(
   iterator: Iterable<T>,
-  project: (this: This, value: T, i: number) => Iterable<Iterable<T>>,
+  project: (
+    this: This,
+    value: T,
+    i: number
+  ) => U | Iterable<U> | Iterable<Iterable<U>>,
   depth: 2,
   thisArg?: This
 ): IterableIterator<U>
 export function flatMap<T, U, This = undefined>(
   iterator: Iterable<T>,
-  project: (this: This, value: T, i: number) => Iterable<U>,
+  project: (this: This, value: T, i: number) => U | Iterable<U>,
   depth?: 1,
   thisArg?: This
 ): IterableIterator<U>
@@ -50,11 +59,9 @@ export function* flatMap<This = undefined>(
   depth = 1,
   thisArg?: This
 ): IterableIterator<unknown> {
-  if (depth <= 0) return yield* iterator
-
   for (let value of withCallback(iterator, project, thisArg, prop('result'))) {
-    if (isIterable(value)) {
-      yield* flatMap(value, project, depth - 1, thisArg)
+    if (depth > 0 && isIterable(value)) {
+      yield* flat(value, depth - 1)
     } else {
       yield value
     }
