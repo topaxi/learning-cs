@@ -1,95 +1,39 @@
-export type TokenType =
-  | 'num'
-  | 'kw'
-  | 'punc'
-  | 'op'
-  | 'str'
-  | 'bool'
-  | 'var'
-  | 'binary'
-  | 'assign'
-  | 'let'
-  | 'fn'
-  | 'if'
-  | 'prog'
-  | 'call'
+export type TokenType = 'num' | 'kw' | 'punc' | 'op' | 'str' | 'var'
 
-export interface NumberToken {
+export interface BaseToken {
+  type: TokenType
+}
+
+export interface NumberToken extends BaseToken {
   type: 'num'
   value: number
 }
 
-export interface KeywordToken {
+export interface KeywordToken extends BaseToken {
   type: 'kw'
   value: string
 }
 
-export interface VarToken {
+export interface VarToken extends BaseToken {
   type: 'var'
   value: string
 }
 
 export type IdentifierToken = KeywordToken | VarToken
 
-export interface StringToken {
+export interface StringToken extends BaseToken {
   type: 'str'
   value: string
 }
 
-export interface PunctuationToken {
+export interface PunctuationToken extends BaseToken {
   type: 'punc'
   value: string
 }
 
-export interface OperatorToken {
+export interface OperatorToken extends BaseToken {
   type: 'op'
   value: string
-}
-
-export interface BooleanToken {
-  type: 'bool'
-  value: boolean
-}
-
-export interface CallToken {
-  type: 'call'
-  func: Token
-  args: any[]
-}
-
-export interface IfToken {
-  type: 'if'
-  cond: Token
-  then: Token
-  else: Token | undefined
-}
-
-export interface FnToken {
-  type: 'fn'
-  name: string | undefined
-  vars: any[]
-  body: Token
-}
-
-export interface BinaryToken {
-  type: 'binary' | 'assign'
-  operator: string
-  left: Token
-  right: Token
-}
-
-export interface AssignToken extends BinaryToken {
-  type: 'assign'
-  operator: '='
-}
-
-export interface ProgToken {
-  type: 'prog'
-  prog: Token[]
-}
-
-export interface LetToken {
-  type: 'let'
 }
 
 export type Token =
@@ -99,11 +43,3 @@ export type Token =
   | StringToken
   | PunctuationToken
   | OperatorToken
-  | BooleanToken
-  | CallToken
-  | IfToken
-  | FnToken
-  | BinaryToken
-  | AssignToken
-  | ProgToken
-  | LetToken

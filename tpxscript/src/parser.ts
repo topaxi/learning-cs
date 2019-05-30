@@ -1,8 +1,9 @@
 import { InputStream } from './input-stream'
 import { TokenStream } from './lexer/token-stream'
 import * as t from './lexer/tokens'
+import * as n from './parser/ast'
 
-export const FALSE: t.BooleanToken = { type: 'bool', value: false }
+export const FALSE: n.BooleanNode = { type: 'bool', value: false }
 const PRECEDENCE: Record<string, number> = {
   '=': 2,
   '||': 3,
@@ -82,7 +83,7 @@ export class Parser {
     return this.tokens.croak(`Unexpected token: ${JSON.stringify(token)}`)
   }
 
-  maybeBinary(left: t.Token, myPrec: number): t.Token {
+  maybeBinary(left: n.Node, myPrec: number): n.Node {
     let token = this.isOperator()
 
     if (token !== false) {
@@ -91,7 +92,7 @@ export class Parser {
       if (hisPrec > myPrec) {
         this.tokens.next()
 
-        let binary: t.BinaryToken | t.AssignToken = {
+        let binary: n.BinaryNode | n.AssignNode = {
           type: token.value === '=' ? 'assign' : 'binary',
           operator: token.value,
           left,
@@ -130,7 +131,7 @@ export class Parser {
     return a
   }
 
-  parseCall(func: t.Token): t.CallToken {
+  parseCall(func: n.Node): n.CallNode {
     return {
       type: 'call',
       func,
@@ -148,7 +149,7 @@ export class Parser {
     return name.value
   }
 
-  parseIf(): t.IfToken {
+  parseIf(): n.IfNode {
     this.skipKeyword('if')
 
     let cond = this.parseExpression()
@@ -166,7 +167,7 @@ export class Parser {
     return { type: 'if', cond, then, else: _else }
   }
 
-  parseFn(): t.FnToken {
+  parseFn(): n.FnNode {
     return {
       type: 'fn',
       name:
@@ -178,14 +179,14 @@ export class Parser {
     }
   }
 
-  parseBool(): t.BooleanToken {
+  parseBool(): n.BooleanNode {
     return {
       type: 'bool',
       value: (this.tokens.next() as t.IdentifierToken).value === 'true'
     }
   }
 
-  maybeCall(expr: (this: this) => t.Token) {
+  maybeCall(expr: (this: this) => n.Node) {
     let res = expr.call(this)
 
     return this.isPunctuation('(') !== false ? this.parseCall(res) : res
@@ -221,7 +222,7 @@ export class Parser {
     return this.maybeCall(this._parseAtom)
   }
 
-  parseToplevel(): t.ProgToken {
+  parseToplevel(): n.ProgNode {
     let prog = []
 
     while (!this.tokens.eof()) {
@@ -233,14 +234,14 @@ export class Parser {
     return { type: 'prog', prog }
   }
 
-  parseProg(): t.ProgToken | t.Token | typeof FALSE {
+  parseProg(): n.ProgNode | n.Node | typeof FALSE {
     let prog = this.delimited('{', '}', ';', this.parseExpression)
     if (prog.length === 0) return FALSE
     if (prog.length === 1) return prog[0]
     return { type: 'prog', prog }
   }
 
-  private _parseExpression(): t.Token {
+  private _parseExpression(): n.Node {
     return this.maybeBinary(this.parseAtom(), 0)
   }
 

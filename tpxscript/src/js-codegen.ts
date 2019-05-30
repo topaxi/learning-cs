@@ -1,9 +1,9 @@
-import * as t from './lexer/tokens'
+import * as n from './parser/ast'
 import { FALSE } from './parser'
 
 export class JsCodegen {
   // eslint-disable-next-line complexity
-  generate(exp: t.Token): string {
+  generate(exp: n.Node): string {
     switch (exp.type) {
       case 'num':
       case 'str':
@@ -14,7 +14,7 @@ export class JsCodegen {
       case 'var':
         return this.var(exp)
       case 'assign':
-        return this.assign(exp as t.AssignToken)
+        return this.assign(exp as n.AssignNode)
       case 'if':
         return this.if(exp)
       case 'fn':
@@ -23,16 +23,13 @@ export class JsCodegen {
         return this.prog(exp)
       case 'call':
         return this.call(exp)
-      case 'kw':
-      case 'punc':
-      case 'op':
       case 'let':
       default:
-        throw new Error(`Unexpected token ${exp.type}`)
+        throw new Error(`Unexpected node ${exp.type}`)
     }
   }
 
-  private atom(exp: t.Token | any): string {
+  private atom(exp: n.Node | any): string {
     return JSON.stringify(exp.value)
   }
 
@@ -40,11 +37,11 @@ export class JsCodegen {
     return name
   }
 
-  private var(exp: t.VarToken): string {
+  private var(exp: n.VarNode): string {
     return this.makeVar(exp.value)
   }
 
-  private binary(exp: t.BinaryToken): string {
+  private binary(exp: n.BinaryNode): string {
     return `(${this.generate(exp.left)} ${this.operator(
       exp.operator
     )} ${this.generate(exp.right)})`
@@ -61,11 +58,11 @@ export class JsCodegen {
     }
   }
 
-  private assign(exp: t.AssignToken): string {
+  private assign(exp: n.AssignNode): string {
     return this.binary(exp)
   }
 
-  private fn(exp: t.FnToken): string {
+  private fn(exp: n.FnNode): string {
     let argList = exp.vars.map(this.makeVar, this).join(', ')
     let fnBody = this.generate(exp.body)
 
@@ -78,17 +75,17 @@ export class JsCodegen {
     return `(${argList}) => ${fnBody}`
   }
 
-  private prog(exp: t.ProgToken): string {
+  private prog(exp: n.ProgNode): string {
     return `(${exp.prog.map(this.generate, this).join(',')})`
   }
 
-  private call(exp: t.CallToken): string {
+  private call(exp: n.CallNode): string {
     return `${this.generate(exp.func)}(${exp.args
       .map(this.generate, this)
       .join(', ')})`
   }
 
-  private if(exp: t.IfToken): string {
+  private if(exp: n.IfNode): string {
     return `(${this.generate(exp.cond)} ? ${this.generate(
       exp.then
     )} : ${this.generate(exp.else || FALSE)})`
