@@ -61,7 +61,7 @@ export interface IfToken {
   type: 'if'
   cond: Token
   then: Token
-  else: Token
+  else: Token | undefined
 }
 
 export interface FnToken {

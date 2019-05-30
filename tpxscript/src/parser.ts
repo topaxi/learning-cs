@@ -178,7 +178,7 @@ export class Parser {
     }
   }
 
-  parseBool() {
+  parseBool(): t.BooleanToken {
     return {
       type: 'bool',
       value: (this.tokens.next() as t.IdentifierToken).value === 'true'
@@ -214,14 +214,14 @@ export class Parser {
       return token
     }
 
-    this.unexpected(token)
+    return this.unexpected(token)
   }
 
   parseAtom() {
     return this.maybeCall(this._parseAtom)
   }
 
-  parseToplevel(): { type: 'prog'; prog: t.Token[] } {
+  parseToplevel(): t.ProgToken {
     let prog = []
 
     while (!this.tokens.eof()) {
@@ -233,7 +233,7 @@ export class Parser {
     return { type: 'prog', prog }
   }
 
-  parseProg(): { type: 'prog'; prog: t.Token[] } | typeof FALSE {
+  parseProg(): t.ProgToken | t.Token | typeof FALSE {
     let prog = this.delimited('{', '}', ';', this.parseExpression)
     if (prog.length === 0) return FALSE
     if (prog.length === 1) return prog[0]
@@ -244,7 +244,7 @@ export class Parser {
     return this.maybeBinary(this.parseAtom(), 0)
   }
 
-  parseExpression(): any {
+  parseExpression() {
     return this.maybeCall(this._parseExpression)
   }
 }
