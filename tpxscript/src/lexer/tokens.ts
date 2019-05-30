@@ -81,8 +81,6 @@ export interface BinaryToken {
 export interface AssignToken extends BinaryToken {
   type: 'assign'
   operator: '='
-  left: Token
-  right: Token
 }
 
 export interface ProgToken {
