@@ -1,38 +1,19 @@
-import { InputStream } from './input-stream'
-
-export type TokenType =
-  | 'num'
-  | 'kw'
-  | 'punc'
-  | 'op'
-  | 'str'
-  | 'bool'
-  | 'var'
-  | 'binary'
-  | 'assign'
-  | 'let'
-  | 'fn'
-  | 'if'
-  | 'prog'
-  | 'call'
-
-export interface Token<T = any> {
-  type: TokenType
-  value: T
-}
+import { InputStream } from '../input-stream'
+import * as t from './tokens'
+import w from 'w-array'
 
 export class TokenStream {
-  private current: Token | null = null
-  private keywords = new Set([
-    'if',
-    'then',
-    'else',
-    'fn',
-    'true',
-    'false',
-    'and',
-    'or'
-  ])
+  private current: t.Token | null = null
+  private keywords = new Set(w`
+    if
+    then
+    else
+    fn
+    true
+    false
+    and
+    or
+  `)
 
   constructor(readonly input: InputStream) {}
 
@@ -74,7 +55,7 @@ export class TokenStream {
     return str
   }
 
-  readNumber(): { type: 'num'; value: number } {
+  readNumber(): t.NumberToken {
     let hasDot = false
     let n = this.readWhile(ch => {
       if (ch === '.') {
@@ -88,7 +69,7 @@ export class TokenStream {
     return { type: 'num', value: Number.parseFloat(n) }
   }
 
-  readIdentifier(): { type: 'kw' | 'var'; value: string } {
+  readIdentifier(): t.IdentifierToken {
     let id = this.readWhile(this.isIdentifier)
 
     return { type: this.isKeyword(id) ? 'kw' : 'var', value: id }
@@ -118,7 +99,7 @@ export class TokenStream {
     return str
   }
 
-  readString(): { type: 'str'; value: string } {
+  readString(): t.StringToken {
     return { type: 'str', value: this.readEscaped('"') }
   }
 
@@ -127,7 +108,7 @@ export class TokenStream {
     this.input.next()
   }
 
-  readNext(): Token | null {
+  readNext(): t.Token | null {
     this.readWhile(this.isWhitespace)
 
     if (this.input.eof()) return null
@@ -150,11 +131,11 @@ export class TokenStream {
     return this.input.croak(`Unable to handle character: ${ch}`)
   }
 
-  peek() {
+  peek(): t.Token | null {
     return this.current || (this.current = this.readNext())
   }
 
-  next() {
+  next(): t.Token | null {
     let token = this.current
     this.current = null
     return token || this.readNext()

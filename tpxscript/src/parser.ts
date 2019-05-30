@@ -1,7 +1,8 @@
 import { InputStream } from './input-stream'
-import { TokenStream, Token } from './token-stream'
+import { TokenStream } from './lexer/token-stream'
+import * as t from './lexer/tokens'
 
-export const FALSE: Token<false> = { type: 'bool', value: false }
+export const FALSE: t.BooleanToken = { type: 'bool', value: false }
 const PRECEDENCE: Record<string, number> = {
   '=': 2,
   '||': 3,
@@ -28,32 +29,32 @@ const PRECEDENCE: Record<string, number> = {
 export class Parser {
   constructor(readonly tokens: TokenStream) {}
 
-  isToken(type: string, ch?: string): Token | false {
+  isToken(type: t.TokenType, ch?: string): t.Token | false {
     let token = this.tokens.peek()
 
     return (
       token !== null &&
       token.type === type &&
-      (!ch || token.value === ch) &&
+      (!ch || (token as any).value === ch) &&
       token
     )
   }
 
-  isPunctuation(ch?: string): Token | false {
-    return this.isToken('punc', ch)
+  isPunctuation(ch?: string): t.PunctuationToken | false {
+    return this.isToken('punc', ch) as any
   }
 
-  isKeyword(kw?: string): Token | false {
-    return this.isToken('kw', kw)
+  isKeyword(kw?: string): t.KeywordToken | false {
+    return this.isToken('kw', kw) as any
   }
 
-  isOperator(op?: string): Token | false {
-    return (
-      this.isToken('op', op) || this.isKeyword('or') || this.isKeyword('and')
-    )
+  isOperator(op?: string): t.OperatorToken | false {
+    return (this.isToken('op', op) ||
+      this.isKeyword('or') ||
+      this.isKeyword('and')) as any
   }
 
-  skipPunctuation(ch: string) {
+  skipPunctuation(ch: string): void {
     if (this.isPunctuation(ch) !== false) {
       this.tokens.next()
     } else {
@@ -61,7 +62,7 @@ export class Parser {
     }
   }
 
-  skipKeyword(kw: string) {
+  skipKeyword(kw: string): void {
     if (this.isKeyword(kw) !== false) {
       this.tokens.next()
     } else {
@@ -69,7 +70,7 @@ export class Parser {
     }
   }
 
-  skipOperator(op: string) {
+  skipOperator(op: string): void {
     if (this.isOperator(op) !== false) {
       this.tokens.next()
     } else {
@@ -81,7 +82,7 @@ export class Parser {
     return this.tokens.croak(`Unexpected token: ${JSON.stringify(token)}`)
   }
 
-  maybeBinary(left: Token | any, myPrec: number): Token {
+  maybeBinary(left: t.Token, myPrec: number): t.Token {
     let token = this.isOperator()
 
     if (token !== false) {
@@ -89,15 +90,15 @@ export class Parser {
 
       if (hisPrec > myPrec) {
         this.tokens.next()
-        return this.maybeBinary(
-          {
-            type: token.value === '=' ? 'assign' : 'binary',
-            operator: token.value,
-            left,
-            right: this.maybeBinary(this.parseAtom(), hisPrec)
-          },
-          myPrec
-        )
+
+        let binary: t.BinaryToken | t.AssignToken = {
+          type: token.value === '=' ? 'assign' : 'binary',
+          operator: token.value,
+          left,
+          right: this.maybeBinary(this.parseAtom(), hisPrec)
+        }
+
+        return this.maybeBinary(binary, myPrec)
       }
     }
 
@@ -129,7 +130,7 @@ export class Parser {
     return a
   }
 
-  parseCall(func: Token) {
+  parseCall(func: t.Token): t.CallToken {
     return {
       type: 'call',
       func,
@@ -140,14 +141,14 @@ export class Parser {
   parseVarname(): string {
     let name = this.tokens.next()
 
-    if (!name || name.type !== 'var') {
+    if (name === null || name.type !== 'var') {
       return this.tokens.croak('Expecting variable name')
     }
 
     return name.value
   }
 
-  parseIf() {
+  parseIf(): t.IfToken {
     this.skipKeyword('if')
 
     let cond = this.parseExpression()
@@ -165,12 +166,12 @@ export class Parser {
     return { type: 'if', cond, then, else: _else }
   }
 
-  parseFn() {
+  parseFn(): t.FnToken {
     return {
       type: 'fn',
       name:
         this.tokens.peek()!.type === 'var'
-          ? this.tokens.next()!.value
+          ? (this.tokens.next() as t.VarToken).value
           : undefined,
       vars: this.delimited('(', ')', ',', this.parseVarname),
       body: this.parseExpression()
@@ -180,11 +181,11 @@ export class Parser {
   parseBool() {
     return {
       type: 'bool',
-      value: this.tokens.next()!.value === 'true'
+      value: (this.tokens.next() as t.IdentifierToken).value === 'true'
     }
   }
 
-  maybeCall(expr: (this: this) => Token) {
+  maybeCall(expr: (this: this) => t.Token) {
     let res = expr.call(this)
 
     return this.isPunctuation('(') !== false ? this.parseCall(res) : res
@@ -220,7 +221,7 @@ export class Parser {
     return this.maybeCall(this._parseAtom)
   }
 
-  parseToplevel(): { type: 'prog'; prog: Token[] } {
+  parseToplevel(): { type: 'prog'; prog: t.Token[] } {
     let prog = []
 
     while (!this.tokens.eof()) {
@@ -232,15 +233,19 @@ export class Parser {
     return { type: 'prog', prog }
   }
 
-  parseProg(): { type: 'prog'; prog: Token[] } | typeof FALSE {
+  parseProg(): { type: 'prog'; prog: t.Token[] } | typeof FALSE {
     let prog = this.delimited('{', '}', ';', this.parseExpression)
     if (prog.length === 0) return FALSE
     if (prog.length === 1) return prog[0]
     return { type: 'prog', prog }
   }
 
+  private _parseExpression(): t.Token {
+    return this.maybeBinary(this.parseAtom(), 0)
+  }
+
   parseExpression(): any {
-    return this.maybeCall(() => this.maybeBinary(this.parseAtom(), 0))
+    return this.maybeCall(this._parseExpression)
   }
 }
 

@@ -1,9 +1,9 @@
-import { Token } from './token-stream'
+import * as t from './lexer/tokens'
 import { FALSE } from './parser'
 
 export class JsCodegen {
   // eslint-disable-next-line complexity
-  generate(exp: Token): string {
+  generate(exp: t.Token): string {
     switch (exp.type) {
       case 'num':
       case 'str':
@@ -14,7 +14,7 @@ export class JsCodegen {
       case 'var':
         return this.var(exp)
       case 'assign':
-        return this.assign(exp)
+        return this.assign(exp as t.AssignToken)
       case 'if':
         return this.if(exp)
       case 'fn':
@@ -32,7 +32,7 @@ export class JsCodegen {
     }
   }
 
-  private atom(exp: Token): string {
+  private atom(exp: t.Token | any): string {
     return JSON.stringify(exp.value)
   }
 
@@ -40,11 +40,11 @@ export class JsCodegen {
     return name
   }
 
-  private var(exp: Token<string>): string {
+  private var(exp: t.VarToken): string {
     return this.makeVar(exp.value)
   }
 
-  private binary(exp: Token | any): string {
+  private binary(exp: t.BinaryToken): string {
     return `(${this.generate(exp.left)} ${this.operator(
       exp.operator
     )} ${this.generate(exp.right)})`
@@ -61,11 +61,11 @@ export class JsCodegen {
     }
   }
 
-  private assign(exp: Token): string {
+  private assign(exp: t.AssignToken): string {
     return this.binary(exp)
   }
 
-  private fn(exp: Token | any): string {
+  private fn(exp: t.FnToken): string {
     let argList = exp.vars.map(this.makeVar, this).join(', ')
     let fnBody = this.generate(exp.body)
 
@@ -78,17 +78,17 @@ export class JsCodegen {
     return `(${argList}) => ${fnBody}`
   }
 
-  private prog(exp: Token | any): string {
+  private prog(exp: t.ProgToken): string {
     return `(${exp.prog.map(this.generate, this).join(',')})`
   }
 
-  private call(exp: Token | any): string {
+  private call(exp: t.CallToken): string {
     return `${this.generate(exp.func)}(${exp.args
       .map(this.generate, this)
       .join(', ')})`
   }
 
-  private if(exp: Token | any): string {
+  private if(exp: t.IfToken): string {
     return `(${this.generate(exp.cond)} ? ${this.generate(
       exp.then
     )} : ${this.generate(exp.else || FALSE)})`

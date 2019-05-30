@@ -1,4 +1,4 @@
-import { InputStream } from './input-stream'
+import { InputStream } from '../input-stream'
 import { TokenStream } from './token-stream'
 
 function parse(str: string) {
