@@ -1,3 +1,4 @@
+import { assertNever } from '../../utils/assert-never'
 import * as n from './parser/ast'
 import { FALSE } from './parser'
 
@@ -24,8 +25,9 @@ export class JsCodegen {
       case 'call':
         return this.call(exp)
       case 'let':
+        throw new Error(`let blocks are not implemented yet`)
       default:
-        throw new Error(`Unexpected node ${exp.type}`)
+        return assertNever(exp)
     }
   }
 
