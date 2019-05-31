@@ -9,6 +9,11 @@ exports[`tpxscript::JsCodegen should codegen assignments 1`] = `
 "
 `;
 
+exports[`tpxscript::JsCodegen should codegen blocks 1`] = `
+"ret = ((a = 5), (b = a * 2), a + b)
+"
+`;
+
 exports[`tpxscript::JsCodegen should codegen conditionals 1`] = `
 "foo ? bar : baz
 "

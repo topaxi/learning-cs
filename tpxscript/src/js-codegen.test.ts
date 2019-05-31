@@ -75,16 +75,16 @@ describe('tpxscript::JsCodegen', () => {
     expect(new Function(`${js}; return ret`)()).toBe(55)
   })
 
-  test.skip('should codegen blocks', () => {
-    expect(
-      codegen(`
-      {
+  test('should codegen blocks', () => {
+    let js = codegen(`
+      ret = {
         a = 5;
         b = a * 2;
         a + b;
       };
     `)
-    ).toMatchSnapshot()
+    expect(js).toMatchSnapshot()
+    expect(new Function(`${js}; return ret`)()).toBe(15)
   })
 
   test.skip('should codegen block variables', () => {
