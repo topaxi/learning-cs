@@ -29,7 +29,7 @@ export class JsCodegen {
     }
   }
 
-  private atom(exp: n.Node | any): string {
+  private atom(exp: n.NumberNode | n.StringNode | n.BooleanNode): string {
     return JSON.stringify(exp.value)
   }
 
