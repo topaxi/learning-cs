@@ -37,6 +37,11 @@ export class Food extends Point implements Actor {
   }
 
   private isValid(): boolean {
-    return this.game.player.tail.every(not(pa(Point.equal, this)))
+    let notColliding = not(pa(Point.equal, this))
+
+    return (
+      this.game.player.tail.every(notColliding) &&
+      this.game.level.walls.every(notColliding)
+    )
   }
 }
