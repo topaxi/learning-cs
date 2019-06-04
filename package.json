@@ -10,12 +10,14 @@
     "lint": "eslint '**/*.ts'",
     "type-check": "tsc --noEmit -p .",
     "precommit": "lint-staged && yarn type-check",
-    "start:snake": "parcel web/snake/index.html"
+    "start:snake": "parcel web/snake/index.html",
+    "clean:dist": "rm -rf dist",
+    "prebuild:snake": "yarn clean:dist",
+    "build:snake": "npx parcel build --no-cache --public-url=/snake --experimental-scope-hoisting web/snake/index.html",
+    "predeploy:snake": "yarn build:snake",
+    "deploy:snake": "rsync -av --delete dist/ topaxi.ch:www/snake/"
   },
-  "browserslist": [
-    "last 1 firefox version",
-    "last 1 chrome version"
-  ],
+  "browserslist": ["last 1 firefox version", "last 1 chrome version"],
   "devDependencies": {
     "@types/jest": "24.0.13",
     "@types/node": "12.0.4",
