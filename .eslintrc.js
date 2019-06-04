@@ -68,6 +68,14 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off'
       }
+    },
+    {
+      files: ['web/**/*.ts'],
+      env: {
+        node: false,
+        es6: true,
+        browser: true
+      }
     }
   ]
 }

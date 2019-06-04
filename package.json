@@ -9,8 +9,13 @@
     "test:watch": "yarn test --watch",
     "lint": "eslint '**/*.ts'",
     "type-check": "tsc --noEmit -p .",
-    "precommit": "lint-staged && yarn type-check"
+    "precommit": "lint-staged && yarn type-check",
+    "start:snake": "parcel web/snake/index.html"
   },
+  "browserslist": [
+    "last 1 firefox version",
+    "last 1 chrome version"
+  ],
   "devDependencies": {
     "@types/jest": "24.0.13",
     "@types/node": "12.0.4",
@@ -22,6 +27,7 @@
     "husky": "2.3.0",
     "jest": "24.8.0",
     "lint-staged": "8.1.7",
+    "parcel-bundler": "^1.12.3",
     "prettier": "1.17.1",
     "ts-jest": "24.0.2",
     "typescript": "3.5.1"

@@ -1,0 +1,13 @@
+{
+  "ecma": 8,
+  "compress": {
+    "arguments": true,
+    "hoist_funs": true,
+    "passes": 3,
+    "pure_getters": true,
+    "unsafe_arrows": true,
+    "unsafe_comps": true,
+    "unsafe_math": true,
+    "unsafe_methods": true
+  }
+}
