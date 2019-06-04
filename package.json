@@ -13,7 +13,7 @@
     "start:snake": "parcel web/snake/index.html",
     "clean:dist": "rm -rf dist",
     "prebuild:snake": "yarn clean:dist",
-    "build:snake": "npx parcel build --no-cache --public-url=/snake --experimental-scope-hoisting web/snake/index.html",
+    "build:snake": "npx parcel build --no-cache --no-content-hash --public-url=/snake --experimental-scope-hoisting web/snake/index.html",
     "predeploy:snake": "yarn build:snake",
     "deploy:snake": "rsync -av --delete dist/ topaxi.ch:www/snake/"
   },

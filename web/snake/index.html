@@ -2,7 +2,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>🐍 Snake 🐍</title>
+    <script>
+      window.addEventListener('load', () =>
+        navigator.serviceWorker.register('/sw.js', { scope: '/snake/' })
+      )
+    </script>
     <style>
       html,
       body {
