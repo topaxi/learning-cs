@@ -47,19 +47,19 @@ export class Game implements Actor {
     switch (e.key) {
       case 'w':
       case 'ArrowUp':
-        this.userInput = () => (this.player.direction = Direction.up)
+        this.updatePlayerDirection(Direction.up)
         break
       case 'a':
       case 'ArrowLeft':
-        this.userInput = () => (this.player.direction = Direction.left)
+        this.updatePlayerDirection(Direction.left)
         break
       case 's':
       case 'ArrowDown':
-        this.userInput = () => (this.player.direction = Direction.down)
+        this.updatePlayerDirection(Direction.down)
         break
       case 'd':
       case 'ArrowRight':
-        this.userInput = () => (this.player.direction = Direction.right)
+        this.updatePlayerDirection(Direction.right)
         break
     }
   }
@@ -82,6 +82,14 @@ export class Game implements Actor {
     }
 
     e.preventDefault()
+  }
+
+  private updatePlayerDirection(dir: Direction) {
+    this.setUserInput(() => (this.player.direction = dir))
+  }
+
+  private setUserInput(input: () => void) {
+    this.userInput = input
   }
 
   private handleUserInput() {
