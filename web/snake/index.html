@@ -10,20 +10,74 @@
       )
     </script>
     <style>
-      html,
-      body {
+      html {
         height: 100%;
       }
 
       body {
-        margin: 0;
+        margin: 0 0 1rem;
+        height: calc(100% - 1rem);
         display: flex;
         align-items: center;
         justify-content: center;
       }
 
+      t-snake {
+        display: grid;
+        grid-gap: 0.5rem;
+      }
+
+      t-snake > button {
+        display: none;
+      }
+
       canvas {
+        grid-area: canvas;
         border: 1px solid black;
+      }
+
+      @media (pointer: coarse) {
+        t-snake {
+          grid-template-areas:
+            '. canvas .'
+            'up canvas right'
+            'left canvas down';
+        }
+
+        t-snake > button {
+          display: block;
+          -webkit-appearance: none;
+          appearance: none;
+          border: 0;
+          background: transparent;
+          font-size: 3rem;
+          outline: none !important;
+        }
+        t-snake > button[value='0'] {
+          grid-area: up;
+        }
+        t-snake > button[value='3'] {
+          grid-area: right;
+        }
+        t-snake > button[value='1'] {
+          grid-area: down;
+        }
+        t-snake > button[value='2'] {
+          grid-area: left;
+        }
+      }
+
+      @media (pointer: coarse) and (orientation: portrait) {
+        t-snake {
+          height: 100%;
+          grid-template:
+            '. . . .' minmax(10%, auto)
+            'canvas canvas canvas canvas'
+            '. . up .' max-content
+            '. left . right' max-content
+            '. . down .' max-content;
+          grid-gap: 0.5rem;
+        }
       }
     </style>
     <script async src="src/game.ts"></script>

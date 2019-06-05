@@ -8,13 +8,25 @@ import { Actor } from './actor'
 import { Level } from './level'
 
 const { floor } = Math
+const buttonTexts = {
+  [Direction.up]: '⬆',
+  [Direction.right]: '➡',
+  [Direction.down]: '⬇',
+  [Direction.left]: '⬅'
+}
 
 export class Game implements Actor {
   static start() {
     let game = new this(32, 18)
     ;(window as any).currentGame = game
     document.body.addEventListener('keydown', game, true)
-    document.body.append(game.canvas)
+    game.element.addEventListener('click', game, true)
+    game.element.append(game.canvas)
+    game.element.append(game.createDirectionButton(Direction.up))
+    game.element.append(game.createDirectionButton(Direction.right))
+    game.element.append(game.createDirectionButton(Direction.down))
+    game.element.append(game.createDirectionButton(Direction.left))
+    document.body.append(game.element)
     game.draw()
     return game
   }
@@ -23,6 +35,7 @@ export class Game implements Actor {
     tickRate: 10
   })
 
+  element = document.createElement('t-snake')
   canvas = document.createElement('canvas')
   private renderer = new Renderer(this.canvas.getContext('2d')!)
   private userInput = noop
@@ -36,10 +49,14 @@ export class Game implements Actor {
     this.canvas.height = rows * 10
   }
 
-  handleEvent(e: KeyboardEvent) {
+  handleEvent(e: KeyboardEvent | MouseEvent | TouchEvent) {
     switch (e.type) {
       case 'keydown':
-        return this.handleKeyDown(e)
+        return this.handleKeyDown(e as KeyboardEvent)
+      case 'click':
+        return this.handleClick(e as MouseEvent)
+      case 'touchend':
+        return this.handleTouch(e as TouchEvent)
     }
   }
 
@@ -82,6 +99,25 @@ export class Game implements Actor {
     }
 
     e.preventDefault()
+  }
+
+  private handleClick(e: MouseEvent & { target: HTMLElement }) {
+    if (e.target.tagName === 'BUTTON') {
+      this.updatePlayerDirection(Number((e.target as any).value))
+    }
+  }
+
+  private handleTouch(e: TouchEvent & { target: HTMLElement }) {
+    if (e.target.tagName === 'BUTTON') {
+      this.updatePlayerDirection(Number((e.target as any).value))
+    }
+  }
+
+  private createDirectionButton(dir: Direction) {
+    let button = document.createElement('button')
+    button.value = String(dir)
+    button.textContent = buttonTexts[dir]
+    return button
   }
 
   private updatePlayerDirection(dir: Direction) {
