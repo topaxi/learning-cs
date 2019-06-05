@@ -88,11 +88,7 @@ export class Game implements Actor {
 
     switch (e.key) {
       case ' ':
-        if (this.loop.running) {
-          this.loop.stop()
-        } else {
-          this.loop.start()
-        }
+        this.toggleLoop()
         break
       default:
         return
@@ -102,14 +98,24 @@ export class Game implements Actor {
   }
 
   private handleClick(e: MouseEvent & { target: HTMLElement }) {
-    if (e.target.tagName === 'BUTTON') {
-      this.updatePlayerDirection(Number((e.target as any).value))
+    switch (e.target.tagName) {
+      case 'CANVAS':
+        this.toggleLoop()
+        return
+      case 'BUTTON':
+        this.updatePlayerDirection(Number((e.target as any).value))
+        return
     }
   }
 
   private handleTouch(e: TouchEvent & { target: HTMLElement }) {
-    if (e.target.tagName === 'BUTTON') {
-      this.updatePlayerDirection(Number((e.target as any).value))
+    switch (e.target.tagName) {
+      case 'CANVAS':
+        this.toggleLoop()
+        return
+      case 'BUTTON':
+        this.updatePlayerDirection(Number((e.target as any).value))
+        return
     }
   }
 
@@ -145,6 +151,14 @@ export class Game implements Actor {
     this.level.draw(this.renderer)
     this.player.draw(this.renderer)
     this.food.draw(this.renderer)
+  }
+
+  private toggleLoop() {
+    if (this.loop.running) {
+      this.loop.stop()
+    } else {
+      this.loop.start()
+    }
   }
 
   start() {
