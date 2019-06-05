@@ -1,4 +1,5 @@
 import { head, Head } from '../../../utils/array/head'
+import { pa } from '../../../utils/function/partial'
 import { Renderer } from './renderer'
 import { Actor } from './actor'
 import { Point } from './point'
@@ -81,16 +82,17 @@ export class Player implements Actor, Head<{ x: number; y: number }> {
   }
 
   private verifyAlive(): void {
+    let colliding = pa(Point.equal, head(this))
+
     for (let i = 1; i < this.tail.length; i++) {
-      if (Point.equal(head(this), this.tail[i])) {
+      if (colliding(this.tail[i])) {
         this.alive = false
+        return
       }
     }
 
-    for (let i = 0; i < this.game.level.walls.length; i++) {
-      if (Point.equal(head(this), this.game.level.walls[i])) {
-        this.alive = false
-      }
+    if (this.game.level.walls.some(colliding)) {
+      this.alive = false
     }
   }
 
