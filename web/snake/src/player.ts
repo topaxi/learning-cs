@@ -5,8 +5,6 @@ import { Actor } from './actor'
 import { Point } from './point'
 import { Game } from './game'
 
-const { floor } = Math
-
 export const enum Direction {
   up,
   down,

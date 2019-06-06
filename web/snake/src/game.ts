@@ -3,11 +3,9 @@ import { Loop } from './loop'
 import { Player, Direction } from './player'
 import { Renderer } from './renderer'
 import { Food } from './food'
-import { Point } from './point'
 import { Actor } from './actor'
 import { Level } from './level'
 
-const { floor } = Math
 const buttonTexts = {
   [Direction.up]: '⬆',
   [Direction.right]: '➡',
