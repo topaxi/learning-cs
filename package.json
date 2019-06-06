@@ -8,7 +8,7 @@
     "test:ci": "yarn test --coverage",
     "test:watch": "yarn test --watch",
     "lint": "eslint '**/*.ts'",
-    "type-check": "tsc --noEmit -p .",
+    "type-check": "tsc --noEmit -p . && tsc --noEmit -p web",
     "precommit": "lint-staged && yarn type-check",
     "start:snake": "parcel web/snake/index.html",
     "clean:dist": "rm -rf dist",

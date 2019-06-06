@@ -95,8 +95,8 @@ export class Game implements Actor {
     e.preventDefault()
   }
 
-  private handleClick(e: MouseEvent & { target: HTMLElement }) {
-    switch (e.target.tagName) {
+  private handleClick(e: MouseEvent) {
+    switch ((e.target as any).tagName) {
       case 'CANVAS':
         this.toggleLoop()
         return
@@ -106,8 +106,8 @@ export class Game implements Actor {
     }
   }
 
-  private handleTouch(e: TouchEvent & { target: HTMLElement }) {
-    switch (e.target.tagName) {
+  private handleTouch(e: TouchEvent) {
+    switch ((e.target as any).tagName) {
       case 'CANVAS':
         this.toggleLoop()
         return
