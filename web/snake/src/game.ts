@@ -109,9 +109,6 @@ export class Game implements Actor {
 
   private handleTouch(e: TouchEvent) {
     switch ((e.target as any).tagName) {
-      case 'CANVAS':
-        this.toggleLoop()
-        return
       case 'BUTTON':
         this.updatePlayerDirection(Number((e.target as any).value))
         return
