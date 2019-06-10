@@ -6,9 +6,10 @@ export interface LoopOptions {
 const ONE_SECONDS_MS = 1000
 
 export class Loop<T> {
-  private loops = 0
   private nextGameTick = 0
   private animationFrame = 0
+  private lastUpdate = 0
+  private lastFrame = 0
 
   private readonly tickRate: number
   private readonly skipTicks: number
@@ -20,13 +21,12 @@ export class Loop<T> {
 
   constructor(
     private readonly context: T,
-    private readonly update: (this: T, t: number) => void,
-    private readonly render: (this: T) => void,
+    private readonly update: (this: T, lastUpdateDelta: number) => void,
+    private readonly render: (this: T, lastFrameDelta: number) => void,
     { tickRate = 30, maxFrameSkip = 10 }: LoopOptions = {}
   ) {
     this.tickRate = tickRate
     this.maxFrameSkip = maxFrameSkip
-
     this.skipTicks = ONE_SECONDS_MS / this.tickRate
   }
 
@@ -34,26 +34,29 @@ export class Loop<T> {
     this.animationFrame = requestAnimationFrame(this.loop)
   }
 
-  private loop = (t: number) => {
-    this.loops = 0
+  private loop = (_t: number) => {
+    const t = _t >>> 0
+    let loops = 0
 
-    while (t > this.nextGameTick && this.loops < this.maxFrameSkip) {
-      this.update.call(this.context, t)
+    while (t > this.nextGameTick && loops++ < this.maxFrameSkip) {
+      this.update.call(this.context, t - this.lastUpdate)
+      this.lastUpdate = t
       this.nextGameTick += this.skipTicks
-      this.loops++
     }
 
-    this.render.call(this.context)
+    this.render.call(this.context, t - this.lastFrame)
+    this.lastFrame = t
     this.schedule()
   }
 
   start() {
-    this.nextGameTick = performance.now()
+    this.nextGameTick = this.lastUpdate = this.lastFrame =
+      performance.now() >>> 0
     this.schedule()
   }
 
   stop() {
-    window.cancelAnimationFrame(this.animationFrame)
+    cancelAnimationFrame(this.animationFrame)
     this.animationFrame = 0
   }
 }

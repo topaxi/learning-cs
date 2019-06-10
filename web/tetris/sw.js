@@ -1,6 +1,6 @@
 import { precache, fromCache, update } from '../sw/utils'
 
-const CACHE = 'snake-assets'
+const CACHE = 'tetris-assets'
 
 self.addEventListener('install', event => {
   event.waitUntil(precache(CACHE, ['game.ce49b8ae.js', '/']))

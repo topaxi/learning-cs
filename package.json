@@ -10,12 +10,17 @@
     "lint": "eslint '**/*.ts'",
     "type-check": "tsc --noEmit -p . && tsc --noEmit -p web",
     "precommit": "lint-staged && yarn type-check",
-    "start:snake": "parcel web/snake/index.html",
     "clean:dist": "rm -rf dist",
+    "start:snake": "parcel web/snake/index.html",
     "prebuild:snake": "yarn clean:dist",
     "build:snake": "npx parcel build --no-cache --no-content-hash --public-url=/snake --experimental-scope-hoisting web/snake/index.html",
     "predeploy:snake": "yarn build:snake",
-    "deploy:snake": "rsync -av --delete dist/ topaxi.ch:www/snake/"
+    "deploy:snake": "rsync -av --delete dist/ topaxi.ch:www/snake/",
+    "start:tetris": "parcel web/tetris/index.html",
+    "prebuild:tetris": "yarn clean:dist",
+    "build:tetris": "npx parcel build --no-cache --no-content-hash --public-url=/tetris --experimental-scope-hoisting web/tetris/index.html",
+    "predeploy:tetris": "yarn build:tetris",
+    "deploy:tetris": "rsync -av --delete dist/ topaxi.ch:www/tetris/"
   },
   "browserslist": [
     "last 1 firefox version",

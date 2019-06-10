@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tetris</title>
+    <script>
+      window.addEventListener('load', () =>
+        navigator.serviceWorker.register('/sw.js', { scope: '/teris/' })
+      )
+    </script>
+    <style>
+      html {
+        height: 100%;
+      }
+
+      body {
+        margin: 0 0 1rem;
+        height: calc(100% - 1rem);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      t-tetris {
+        display: grid;
+        grid-gap: 0.5rem;
+      }
+
+      t-tetris > button {
+        display: none;
+      }
+
+      canvas {
+        grid-area: canvas;
+        border: 1px solid black;
+      }
+
+      @media (pointer: coarse) {
+        t-tetris {
+          grid-template-areas:
+            '. canvas .'
+            'up canvas right'
+            'left canvas down';
+        }
+
+        t-tetris > button {
+          display: block;
+          -webkit-appearance: none;
+          appearance: none;
+          border: 0;
+          background: transparent;
+          font-size: 3rem;
+          outline: none !important;
+        }
+        t-tetris > button[value='0'] {
+          grid-area: up;
+        }
+        t-tetris > button[value='3'] {
+          grid-area: right;
+        }
+        t-tetris > button[value='1'] {
+          grid-area: down;
+        }
+        t-tetris > button[value='2'] {
+          grid-area: left;
+        }
+      }
+
+      @media (pointer: coarse) and (orientation: portrait) {
+        t-tetris {
+          height: 100%;
+          grid-template:
+            '. . . .' minmax(10%, auto)
+            'canvas canvas canvas canvas'
+            '. . up .' max-content
+            '. left . right' max-content
+            '. . down .' max-content;
+          grid-gap: 0.5rem;
+        }
+      }
+    </style>
+    <script async src="src/game.ts"></script>
+  </head>
+  <body></body>
+</html>

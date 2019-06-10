@@ -1,5 +1,5 @@
 import { noop } from '../../../utils/function/noop'
-import { Loop } from './loop'
+import { Loop } from '../../game-utils/loop'
 import { Player, Direction } from './player'
 import { Renderer } from './renderer'
 import { Food } from './food'
@@ -48,7 +48,7 @@ export class Game implements Actor {
     this.canvas.height = rows * 10
   }
 
-  handleEvent(e: KeyboardEvent | MouseEvent | TouchEvent) {
+  handleEvent(e: KeyboardEvent | MouseEvent | TouchEvent): void {
     switch (e.type) {
       case 'keydown':
         return this.handleKeyDown(e as KeyboardEvent)
@@ -59,7 +59,7 @@ export class Game implements Actor {
     }
   }
 
-  private handlePlayerKeyDown(e: KeyboardEvent) {
+  private handlePlayerKeyDown(e: KeyboardEvent): void {
     switch (e.key) {
       case 'w':
       case 'ArrowUp':
@@ -80,7 +80,7 @@ export class Game implements Actor {
     }
   }
 
-  private handleKeyDown(e: KeyboardEvent) {
+  private handleKeyDown(e: KeyboardEvent): void {
     if (this.loop.running) {
       this.handlePlayerKeyDown(e)
     }
@@ -96,7 +96,7 @@ export class Game implements Actor {
     e.preventDefault()
   }
 
-  private handleClick(e: MouseEvent) {
+  private handleClick(e: MouseEvent): void {
     switch ((e.target as any).tagName) {
       case 'CANVAS':
         this.toggleLoop()
@@ -107,7 +107,7 @@ export class Game implements Actor {
     }
   }
 
-  private handleTouch(e: TouchEvent) {
+  private handleTouch(e: TouchEvent): void {
     switch ((e.target as any).tagName) {
       case 'BUTTON':
         this.updatePlayerDirection(Number((e.target as any).value))
@@ -115,41 +115,41 @@ export class Game implements Actor {
     }
   }
 
-  private createDirectionButton(dir: Direction) {
+  private createDirectionButton(dir: Direction): HTMLButtonElement {
     let button = document.createElement('button')
     button.value = String(dir)
     button.textContent = buttonTexts[dir]
     return button
   }
 
-  private updatePlayerDirection(dir: Direction) {
+  private updatePlayerDirection(dir: Direction): void {
     this.setUserInput(() => (this.player.direction = dir))
   }
 
-  private setUserInput(input: () => void) {
+  private setUserInput(input: () => void): void {
     this.userInput = input
   }
 
-  private handleUserInput() {
+  private handleUserInput(): void {
     this.userInput()
     this.userInput = noop
   }
 
-  update(_time: number) {
+  update(_time: number): void {
     this.handleUserInput()
     this.level.update(_time)
     this.player.update(_time)
     this.food.update(_time)
   }
 
-  draw() {
+  draw(): void {
     this.renderer.drawGame(this)
     this.level.draw(this.renderer)
     this.player.draw(this.renderer)
     this.food.draw(this.renderer)
   }
 
-  private toggleLoop() {
+  private toggleLoop(): void {
     if (this.loop.running) {
       this.loop.stop()
     } else {
@@ -157,12 +157,12 @@ export class Game implements Actor {
     }
   }
 
-  start() {
+  start(): this {
     this.loop.start()
     return this
   }
 
-  stop() {
+  stop(): this {
     this.loop.stop()
     return this
   }
