@@ -18,6 +18,7 @@ export class Game implements Actor {
     let game = new this(32, 18)
     ;(window as any).currentGame = game
     document.body.addEventListener('keydown', game, true)
+    document.body.addEventListener('touchend', game, true)
     game.element.addEventListener('click', game, true)
     game.element.append(game.canvas)
     game.element.append(game.createDirectionButton(Direction.up))
