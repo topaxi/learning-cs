@@ -20,7 +20,7 @@ describe('LinkedList<T>', () => {
       let list1 = LinkedList.from([1, 2, 3], n => n * 2)
       expect(list1.toArray()).toEqual([2, 4, 6])
 
-      let list2 = LinkedList.from([1, 2, 3], (n, i) => i)
+      let list2 = LinkedList.from([1, 2, 3], (_n, i) => i)
       expect(list2.toArray()).toEqual([0, 1, 2])
     })
   })
