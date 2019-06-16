@@ -1,8 +1,10 @@
 import { identity } from './function/identity'
+import { pa } from './function/partial'
 import { forEach } from './iterator/for-each'
+import { add } from './operators'
 
 export interface RangeOptions<T> {
-  step: number
+  step: number | ((i: number) => number)
   inclusive: boolean
   project: (i: number, index: number) => T
 }
@@ -11,14 +13,14 @@ class Range<T = number> implements Iterable<T> {
   constructor(
     private readonly start: number,
     private readonly end: number,
-    private readonly step: number,
+    private readonly step: (i: number) => number,
     private readonly project: RangeOptions<T>['project']
   ) {}
 
   *[Symbol.iterator](): IterableIterator<T> {
     const { start, end, step, project } = this
 
-    for (let i = start, index = 0; i < end; i += step)
+    for (let i = start, index = 0; i < end; i = step(i))
       yield project(i, index++)
   }
 
@@ -46,6 +48,10 @@ export function range<T = number>(
 
   if (inclusive) {
     end++
+  }
+
+  if (typeof step === 'number') {
+    step = pa(add, step)
   }
 
   return new Range(start, end, step, project)
