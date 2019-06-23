@@ -95,7 +95,7 @@ export class Piece {
   private static seedPieces() {
     return shuffle(
       flatMap(range(4), constant(Object.keys(PIECES)))
-    ) as (keyof typeof PIECES)[]
+    ) as PieceType['name'][]
   }
 
   private static pieces = Piece.seedPieces()
