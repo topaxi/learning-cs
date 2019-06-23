@@ -19,49 +19,65 @@ export const enum Rotation {
   left = 3
 }
 
-const I = {
+export interface PieceType {
+  name: 'I' | 'J' | 'L' | 'O' | 'S' | 'T' | 'Z'
+  color: string
+  [Rotation.up]: number
+  [Rotation.down]: number
+  [Rotation.left]: number
+  [Rotation.right]: number
+}
+
+const I: PieceType = {
+  name: 'I',
   [Rotation.up]: 0x0f00,
   [Rotation.down]: 0x2222,
   [Rotation.left]: 0x00f0,
   [Rotation.right]: 0x4444,
   color: 'cyan'
 }
-const J = {
+const J: PieceType = {
+  name: 'J',
   [Rotation.up]: 0x44c0,
   [Rotation.down]: 0x8e00,
   [Rotation.left]: 0x6440,
   [Rotation.right]: 0x0e20,
   color: 'blue'
 }
-const L = {
+const L: PieceType = {
+  name: 'L',
   [Rotation.up]: 0x4460,
   [Rotation.down]: 0x0e80,
   [Rotation.left]: 0xc440,
   [Rotation.right]: 0x2e00,
   color: 'orange'
 }
-const O = {
+const O: PieceType = {
+  name: 'O',
   [Rotation.up]: 0xcc00,
   [Rotation.down]: 0xcc00,
   [Rotation.left]: 0xcc00,
   [Rotation.right]: 0xcc00,
   color: 'yellow'
 }
-const S = {
+const S: PieceType = {
+  name: 'S',
   [Rotation.up]: 0x06c0,
   [Rotation.down]: 0x8c40,
   [Rotation.left]: 0x6c00,
   [Rotation.right]: 0x4620,
   color: 'green'
 }
-const T = {
+const T: PieceType = {
+  name: 'T',
   [Rotation.up]: 0x0e40,
   [Rotation.down]: 0x4c40,
   [Rotation.left]: 0x4e00,
   [Rotation.right]: 0x4640,
   color: 'purple'
 }
-const Z = {
+const Z: PieceType = {
+  name: 'Z',
   [Rotation.up]: 0x0c60,
   [Rotation.down]: 0x4c80,
   [Rotation.left]: 0xc600,
@@ -72,7 +88,7 @@ const Z = {
 const PIECES = { I, J, L, O, S, T, Z }
 
 export class Piece {
-  static create(game: Game, pieceType: keyof typeof PIECES): Piece {
+  static create(game: Game, pieceType: PieceType['name']): Piece {
     return new this(game, PIECES[pieceType])
   }
 
@@ -94,10 +110,7 @@ export class Piece {
   rotation = Rotation.up
   private lastMove = 0
 
-  private constructor(
-    private readonly game: Game,
-    readonly type: (typeof PIECES)[keyof typeof PIECES]
-  ) {}
+  private constructor(private readonly game: Game, readonly type: PieceType) {}
 
   rotate(): void {
     let rotation = (this.rotation + 1) % 4
@@ -121,11 +134,11 @@ export class Piece {
   }
 
   eachBlock<This = undefined>(
-    fn: (this: This, x: number, y: number, color: string) => void,
+    fn: (this: This, x: number, y: number, pieceType: PieceType) => void,
     thisArg?: This
   ): void {
     for (let [x, y] of this.blocks()) {
-      fn.call(thisArg!, x, y, this.type.color)
+      fn.call(thisArg!, x, y, this.type)
     }
   }
 
@@ -170,18 +183,18 @@ export class Piece {
   }
 
   drop(): boolean {
-    if (!this.move(MoveDirection.down)) {
-      for (let [x, y] of this.blocks()) {
-        this.game.setBlock(x, y, this)
-      }
-
-      this.game.removeRows()
-      this.game.createNextPiece()
-
-      return false
+    if (this.move(MoveDirection.down)) {
+      return true
     }
 
-    return true
+    for (let [x, y] of this.blocks()) {
+      this.game.setBlock(x, y, this)
+    }
+
+    this.game.removeRows()
+    this.game.createNextPiece()
+
+    return false
   }
 
   draw(renderer: Renderer) {
