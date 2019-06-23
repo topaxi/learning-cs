@@ -31,7 +31,7 @@ export class Game {
     width: this.width * 10 + 100,
     height: this.height * 10
   })
-  private readonly renderer = new Renderer(this.canvas.getContext('2d')!)
+  private readonly renderer = new Renderer(this.canvas)
   private readonly loop = new Loop(this, this.update, this.draw)
   private readonly actions: Action[] = []
   private currentPiece = Piece.random(this)

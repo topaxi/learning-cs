@@ -1,15 +1,14 @@
 import { head } from '../../../utils/array/head'
+import { Renderer2d } from '../../game-utils/renderer2d'
 import { Player } from './player'
 import { Point } from './point'
 import { Game } from './game'
 import { Level } from './level'
 import { Food } from './food'
 
-export class Renderer {
-  constructor(private readonly context: CanvasRenderingContext2D) {}
-
-  drawGame({ canvas }: Game): void {
-    this.context.clearRect(0, 0, canvas.width, canvas.height)
+export class Renderer extends Renderer2d {
+  drawGame(_game: Game): void {
+    this.clearScreen()
   }
 
   drawLevel(level: Level): void {

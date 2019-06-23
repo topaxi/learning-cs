@@ -1,12 +1,11 @@
+import { Renderer2d } from '../../game-utils/renderer2d'
 import { Game } from './game'
 import { Piece, PieceType } from './piece'
 import { Scoreboard } from './scoreboard'
 
-export class Renderer {
-  constructor(private readonly context: CanvasRenderingContext2D) {}
-
-  drawGame({ canvas, blocks, width, height }: Game): void {
-    this.context.clearRect(0, 0, canvas.width, canvas.height)
+export class Renderer extends Renderer2d {
+  drawGame({ blocks, width, height }: Game): void {
+    this.clearScreen()
 
     for (let i = 0; i < blocks.length; i++) {
       let block = blocks[i]

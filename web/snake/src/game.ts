@@ -36,7 +36,7 @@ export class Game implements Actor {
 
   element = document.createElement('t-snake')
   canvas = document.createElement('canvas')
-  private renderer = new Renderer(this.canvas.getContext('2d')!)
+  private renderer = new Renderer(this.canvas)
   private userInput = noop
 
   level = new Level(this)
