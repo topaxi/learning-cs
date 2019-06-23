@@ -59,35 +59,35 @@ export class Game {
     )
   }
 
-  removeLines(): void {
-    let linesRemoved = 0
+  removeRows(): void {
+    let rowsRemoved = 0
 
-    lines: for (let y = this.height - 1; y >= 0; y--) {
+    rows: for (let y = this.height - 1; y >= 0; y--) {
       for (let x = 0; x < this.width - 1; x++) {
         if (this.getBlock(x, y) === null) {
-          continue lines
+          continue rows
         }
       }
 
-      this.removeLine(y++)
-      linesRemoved++
+      this.removeRow(y++)
+      rowsRemoved++
     }
 
-    if (linesRemoved !== 0) {
-      this.rows += linesRemoved
+    if (rowsRemoved !== 0) {
+      this.rows += rowsRemoved
       this.scoreboard.rows = this.rows
       this.scoreboard.score = this.scoreboard.score +=
-        linesRemoved === 1
+        rowsRemoved === 1
           ? 40
-          : linesRemoved === 2
+          : rowsRemoved === 2
           ? 100
-          : linesRemoved === 3
+          : rowsRemoved === 3
           ? 300
           : 1200
     }
   }
 
-  private removeLine(n: number): void {
+  private removeRow(n: number): void {
     for (let y = n; y >= 0; y--) {
       for (let x = 0; x < this.width; x++) {
         this.setBlock(x, y, y === 0 ? null : this.getBlock(x, y - 1))

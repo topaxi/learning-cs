@@ -175,7 +175,7 @@ export class Piece {
         this.game.setBlock(x, y, this)
       }
 
-      this.game.removeLines()
+      this.game.removeRows()
       this.game.createNextPiece()
 
       return false
