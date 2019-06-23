@@ -37,7 +37,6 @@ export class Game {
   private currentPiece = Piece.random(this)
   private nextPiece = Piece.random(this)
   private readonly dropSpeed = { start: 600, decrement: 5, min: 100 }
-  rows = 0
   scoreboard = new Scoreboard()
   blocks = this.initBlocks()
 
@@ -74,8 +73,7 @@ export class Game {
     }
 
     if (rowsRemoved !== 0) {
-      this.rows += rowsRemoved
-      this.scoreboard.rows = this.rows
+      this.scoreboard.rows += rowsRemoved
       this.scoreboard.score = this.scoreboard.score +=
         rowsRemoved === 1
           ? 40
@@ -102,7 +100,7 @@ export class Game {
   get step() {
     return Math.max(
       this.dropSpeed.min,
-      this.dropSpeed.start - this.dropSpeed.decrement * this.rows
+      this.dropSpeed.start - this.dropSpeed.decrement * this.scoreboard.rows
     )
   }
 
