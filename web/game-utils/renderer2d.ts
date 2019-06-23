@@ -1,7 +1,9 @@
 export class Renderer2d {
   protected readonly context = this.canvas.getContext('2d')!
 
-  constructor(protected readonly canvas: HTMLCanvasElement) {}
+  constructor(protected readonly canvas: HTMLCanvasElement) {
+    this.context.translate(0.5, 0.5)
+  }
 
   clearScreen() {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
