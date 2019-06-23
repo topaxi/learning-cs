@@ -1,5 +1,5 @@
 import { range } from '../../../utils/range'
-import { shuffle } from '../../../utils/array/shuffle'
+import { shuffle, shuffleInplace } from '../../../utils/array/shuffle'
 import { flatMap } from '../../../utils/iterator/flat-map'
 import { some } from '../../../utils/iterator/some'
 import { constant } from '../../../utils/function/constant'
@@ -93,8 +93,8 @@ export class Piece {
   }
 
   private static seedPieces() {
-    return shuffle(
-      flatMap(range(4), constant(Object.keys(PIECES)))
+    return shuffleInplace(
+      shuffle(flatMap(range(4), constant(Object.keys(PIECES))))
     ) as PieceType['name'][]
   }
 
