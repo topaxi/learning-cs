@@ -100,10 +100,10 @@ export class Piece {
   ) {}
 
   rotate(): void {
-    let newRotation = (this.rotation + 1) % 4
+    let rotation = (this.rotation + 1) % 4
 
-    if (!this.occupied(newRotation)) {
-      this.rotation = newRotation
+    if (!this.occupied(this.x, this.y, rotation)) {
+      this.rotation = rotation
     }
   }
 
