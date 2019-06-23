@@ -2,6 +2,7 @@ import { constant } from '../../../utils/function/constant'
 import { Loop } from '../../game-utils/loop'
 import { Renderer } from './renderer'
 import { Piece, MoveDirection } from './piece'
+import { Scoreboard } from './scoreboard'
 
 const enum Action {
   moveLeft,
@@ -36,7 +37,8 @@ export class Game {
   private currentPiece = Piece.random(this)
   private nextPiece = Piece.random(this)
   private readonly dropSpeed = { start: 600, decrement: 5, min: 100 }
-  private rows = 0
+  rows = 0
+  scoreboard = new Scoreboard()
   blocks = this.initBlocks()
 
   getBlock(x: number, y: number) {
@@ -55,6 +57,42 @@ export class Game {
       y >= this.height ||
       this.getBlock(x, y) !== null
     )
+  }
+
+  removeLines(): void {
+    let linesRemoved = 0
+
+    lines: for (let y = this.height - 1; y >= 0; y--) {
+      for (let x = 0; x < this.width - 1; x++) {
+        if (this.getBlock(x, y) === null) {
+          continue lines
+        }
+      }
+
+      this.removeLine(y++)
+      linesRemoved++
+    }
+
+    if (linesRemoved !== 0) {
+      this.rows += linesRemoved
+      this.scoreboard.rows = this.rows
+      this.scoreboard.score = this.scoreboard.score +=
+        linesRemoved === 1
+          ? 40
+          : linesRemoved === 2
+          ? 100
+          : linesRemoved === 3
+          ? 300
+          : 1200
+    }
+  }
+
+  private removeLine(n: number): void {
+    for (let y = n; y >= 0; y--) {
+      for (let x = 0; x < this.width; x++) {
+        this.setBlock(x, y, y === 0 ? null : this.getBlock(x, y - 1))
+      }
+    }
   }
 
   private initBlocks(): Array<Piece | null> {
@@ -139,6 +177,7 @@ export class Game {
 
   private draw(): void {
     this.renderer.drawGame(this)
+    this.scoreboard.draw(this.renderer)
 
     if (this.currentPiece !== null) {
       this.currentPiece.draw(this.renderer)

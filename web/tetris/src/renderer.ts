@@ -1,5 +1,6 @@
 import { Game } from './game'
 import { Piece } from './piece'
+import { Scoreboard } from './scoreboard'
 
 export class Renderer {
   constructor(private readonly context: CanvasRenderingContext2D) {}
@@ -35,5 +36,9 @@ export class Renderer {
     this.context.fillStyle = color
     this.context.fillRect(x * 10, y * 10, 10, 10)
     this.context.strokeRect(x * 10, y * 10, 10, 10)
+  }
+
+  drawScoreboard(scoreboard: Scoreboard) {
+    this.context.strokeText(`Score: ${scoreboard.score}`, 120, 60)
   }
 }
