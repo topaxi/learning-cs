@@ -22,22 +22,23 @@ export class Renderer extends Renderer2d {
     this.context.strokeRect(0, 0, width * 10, height * 10 - 1)
   }
 
-  drawPiece(piece: Piece): void {
-    for (let [x, y] of piece.blocks()) {
+  drawPiece(piece: Piece, column = piece.x, row = piece.y): void {
+    for (let [x, y] of piece.blocks(column, row)) {
       this.drawBlock(x, y, piece.type)
     }
   }
 
   drawNextPiece(piece: Piece): void {
-    for (let [x, y] of piece.blocks(11, 1)) {
-      this.drawBlock(x, y, piece.type)
-    }
+    this.drawPiece(piece, 11, 1)
   }
 
   private drawSimpleBlock(x: number, y: number, color: string): void {
+    let rectX = x * 10
+    let rectY = y * 10
+
     this.context.fillStyle = color
-    this.context.fillRect(x * 10, y * 10, 10, 10)
-    this.context.strokeRect(x * 10, y * 10, 10, 10)
+    this.context.fillRect(rectX, rectY, 10, 10)
+    this.context.strokeRect(rectX, rectY, 10, 10)
   }
 
   drawBlock(x: number, y: number, pieceType: PieceType): void {

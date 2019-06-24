@@ -137,7 +137,11 @@ export class Piece {
   /**
    * Tetris block layout by https://codeincomplete.com/posts/javascript-tetris/
    */
-  *blocks(x = this.x, y = this.y, rotation = this.rotation) {
+  *blocks(
+    x = this.x,
+    y = this.y,
+    rotation = this.rotation
+  ): IterableIterator<[number, number]> {
     for (let bit = 0x8000, row = 0, col = 0; bit !== 0; bit >>= 1) {
       if ((this.type[rotation] & bit) !== 0) {
         yield [x + col, y + row]
@@ -151,9 +155,11 @@ export class Piece {
   }
 
   occupied(x = this.x, y = this.y, rotation = this.rotation): boolean {
-    return some(this.blocks(x, y, rotation), ([x, y]) =>
-      this.game.hasBlock(x, y)
-    )
+    return some(this.blocks(x, y, rotation), this._hasBlock, this)
+  }
+
+  private _hasBlock([x, y]: [number, number]): boolean {
+    return this.game.hasBlock(x, y)
   }
 
   move(direction: number): boolean {
