@@ -4,21 +4,24 @@ import { Piece, PieceType } from './piece'
 import { Scoreboard } from './scoreboard'
 
 export class Renderer extends Renderer2d {
-  drawGame({ blocks, width, height }: Game): void {
+  drawGame({ blocks, width, height, gameOver }: Game): void {
     this.clearScreen()
 
     for (let i = 0; i < blocks.length; i++) {
       let block = blocks[i]
+      let y = (i / width) >>> 0
+      let x = i % width
 
-      if (block !== null) {
-        let y = (i / width) >>> 0
-        let x = i % width
-
+      if (gameOver) {
+        this.context.fillStyle = 'gray'
+        this.context.fillRect(x * 10, y * 10, 10, 10)
+        this.context.strokeRect(x * 10, y * 10, 10, 10)
+      } else if (block !== null) {
         this.drawBlock(x, y, block.type)
       }
     }
 
-    this.context.strokeRect(0, 0, width * 10 - 1, height * 10 - 1)
+    this.context.strokeRect(0, 0, width * 10, height * 10 - 1)
   }
 
   drawPiece(piece: Piece): void {

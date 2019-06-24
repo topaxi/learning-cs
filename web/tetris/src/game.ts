@@ -39,6 +39,7 @@ export class Game {
   private readonly dropSpeed = { start: 600, decrement: 5, min: 100 }
   scoreboard = new Scoreboard()
   blocks = this.initBlocks()
+  gameOver = false
 
   getBlock(x: number, y: number) {
     return this.blocks[y * this.width + x]
@@ -107,6 +108,10 @@ export class Game {
   createNextPiece() {
     this.currentPiece = this.nextPiece
     this.nextPiece = Piece.random(this)
+
+    if (this.currentPiece.occupied()) {
+      this.gameOver = true
+    }
   }
 
   handleEvent(event: KeyboardEvent): void {
@@ -176,6 +181,8 @@ export class Game {
   private draw(): void {
     this.renderer.drawGame(this)
     this.scoreboard.draw(this.renderer)
+
+    if (this.gameOver) return void this.stop()
 
     if (this.currentPiece !== null) {
       this.currentPiece.draw(this.renderer)
