@@ -27,8 +27,8 @@ export class Renderer extends Renderer2d {
   }
 
   drawNextPiece(piece: Piece): void {
-    for (let [x, y] of piece.blocks()) {
-      this.drawBlock(x + 11, y + 1, piece.type)
+    for (let [x, y] of piece.blocks(11, 1)) {
+      this.drawBlock(x, y, piece.type)
     }
   }
 

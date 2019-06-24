@@ -22,6 +22,7 @@ export const enum Rotation {
 export interface PieceType {
   name: 'I' | 'J' | 'L' | 'O' | 'S' | 'T' | 'Z'
   color: string
+  initialPositionOffset: { x: number; y: number }
   [Rotation.up]: number
   [Rotation.down]: number
   [Rotation.left]: number
@@ -30,59 +31,66 @@ export interface PieceType {
 
 const I: PieceType = {
   name: 'I',
+  color: 'cyan',
+  initialPositionOffset: { x: 0, y: 0 },
   [Rotation.up]: 0x0f00,
   [Rotation.down]: 0x2222,
   [Rotation.left]: 0x00f0,
-  [Rotation.right]: 0x4444,
-  color: 'cyan'
+  [Rotation.right]: 0x4444
 }
 const J: PieceType = {
   name: 'J',
+  color: 'blue',
+  initialPositionOffset: { x: 1, y: 0 },
   [Rotation.up]: 0x44c0,
   [Rotation.down]: 0x8e00,
   [Rotation.left]: 0x6440,
-  [Rotation.right]: 0x0e20,
-  color: 'blue'
+  [Rotation.right]: 0x0e20
 }
 const L: PieceType = {
   name: 'L',
+  color: 'orange',
+  initialPositionOffset: { x: 0, y: 0 },
   [Rotation.up]: 0x4460,
   [Rotation.down]: 0x0e80,
   [Rotation.left]: 0xc440,
-  [Rotation.right]: 0x2e00,
-  color: 'orange'
+  [Rotation.right]: 0x2e00
 }
 const O: PieceType = {
   name: 'O',
+  color: 'yellow',
+  initialPositionOffset: { x: 1, y: 1 },
   [Rotation.up]: 0xcc00,
   [Rotation.down]: 0xcc00,
   [Rotation.left]: 0xcc00,
-  [Rotation.right]: 0xcc00,
-  color: 'yellow'
+  [Rotation.right]: 0xcc00
 }
 const S: PieceType = {
   name: 'S',
+  color: 'green',
+  initialPositionOffset: { x: 0, y: 0 },
   [Rotation.up]: 0x06c0,
   [Rotation.down]: 0x8c40,
   [Rotation.left]: 0x6c00,
-  [Rotation.right]: 0x4620,
-  color: 'green'
+  [Rotation.right]: 0x4620
 }
 const T: PieceType = {
   name: 'T',
+  color: 'purple',
+  initialPositionOffset: { x: 0, y: 0 },
   [Rotation.up]: 0x0e40,
   [Rotation.down]: 0x4c40,
   [Rotation.left]: 0x4e00,
-  [Rotation.right]: 0x4640,
-  color: 'purple'
+  [Rotation.right]: 0x4640
 }
 const Z: PieceType = {
   name: 'Z',
+  color: 'red',
+  initialPositionOffset: { x: 0, y: 0 },
   [Rotation.up]: 0x0c60,
   [Rotation.down]: 0x4c80,
   [Rotation.left]: 0xc600,
-  [Rotation.right]: 0x2640,
-  color: 'red'
+  [Rotation.right]: 0x2640
 }
 
 const PIECES = { I, J, L, O, S, T, Z }
@@ -105,8 +113,8 @@ export class Piece {
     return this.create(game, this.pieces.shift()!)
   }
 
-  x = 0
-  y = 0
+  x = this.game.width / 2 - 2 + this.type.initialPositionOffset.x
+  y = this.type.initialPositionOffset.y
   rotation = Rotation.up
   private lastMove = 0
 
@@ -121,7 +129,7 @@ export class Piece {
   }
 
   *blocks(x = this.x, y = this.y, rotation = this.rotation) {
-    for (let bit = 0x8000, row = 0, col = 0; bit > 0; bit >>= 1) {
+    for (let bit = 0x8000, row = 0, col = 0; bit !== 0; bit >>= 1) {
       if ((this.type[rotation] & bit) !== 0) {
         yield [x + col, y + row]
       }
