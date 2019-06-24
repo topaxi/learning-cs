@@ -62,8 +62,8 @@ export class Game {
   removeRows(): void {
     let rowsRemoved = 0
 
-    rows: for (let y = this.height - 1; y >= 0; y--) {
-      for (let x = 0; x < this.width - 1; x++) {
+    rows: for (let y = this.height - 1; y !== 0; y--) {
+      for (let x = 0; x < this.width; x++) {
         if (this.getBlock(x, y) === null) {
           continue rows
         }
