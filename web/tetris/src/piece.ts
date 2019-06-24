@@ -150,15 +150,6 @@ export class Piece {
     }
   }
 
-  eachBlock<This = undefined>(
-    fn: (this: This, x: number, y: number, pieceType: PieceType) => void,
-    thisArg?: This
-  ): void {
-    for (let [x, y] of this.blocks()) {
-      fn.call(thisArg!, x, y, this.type)
-    }
-  }
-
   occupied(x = this.x, y = this.y, rotation = this.rotation): boolean {
     return some(this.blocks(x, y, rotation), ([x, y]) =>
       this.game.hasBlock(x, y)

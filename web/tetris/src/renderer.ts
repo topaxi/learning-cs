@@ -23,7 +23,9 @@ export class Renderer extends Renderer2d {
   }
 
   drawPiece(piece: Piece): void {
-    piece.eachBlock(this.drawBlock, this)
+    for (let [x, y] of piece.blocks()) {
+      this.drawBlock(x, y, piece.type)
+    }
   }
 
   drawNextPiece(piece: Piece): void {
