@@ -100,6 +100,12 @@ export class Piece {
     return new this(game, PIECES[pieceType])
   }
 
+  /**
+   * Newer tetris implementations use this pseudo random implementation
+   * of pieces where it is not possible to have more than 4 consecutive
+   * pieces of the same type.
+   * This causes the game to be played more reliable.
+   */
   private static seedPieces() {
     return shuffleInplace(
       shuffle(flatMap(range(4), constant(Object.keys(PIECES))))
