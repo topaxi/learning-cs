@@ -13,9 +13,7 @@ export class Renderer extends Renderer2d {
       let x = i % width
 
       if (gameOver) {
-        this.context.fillStyle = 'gray'
-        this.context.fillRect(x * 10, y * 10, 10, 10)
-        this.context.strokeRect(x * 10, y * 10, 10, 10)
+        this.drawSimpleBlock(x, y, 'gray')
       } else if (block !== null) {
         this.drawBlock(x, y, block.type)
       }
@@ -34,10 +32,14 @@ export class Renderer extends Renderer2d {
     }
   }
 
-  drawBlock(x: number, y: number, pieceType: PieceType): void {
-    this.context.fillStyle = pieceType.color
+  private drawSimpleBlock(x: number, y: number, color: string): void {
+    this.context.fillStyle = color
     this.context.fillRect(x * 10, y * 10, 10, 10)
     this.context.strokeRect(x * 10, y * 10, 10, 10)
+  }
+
+  drawBlock(x: number, y: number, pieceType: PieceType): void {
+    this.drawSimpleBlock(x, y, pieceType.color)
 
     if (pieceType.name === 'O') {
       this.context.strokeRect(x * 10 + 2, y * 10 + 2, 6, 6)
