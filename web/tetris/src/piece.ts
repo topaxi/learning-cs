@@ -134,6 +134,9 @@ export class Piece {
     }
   }
 
+  /**
+   * Tetris block layout by https://codeincomplete.com/posts/javascript-tetris/
+   */
   *blocks(x = this.x, y = this.y, rotation = this.rotation) {
     for (let bit = 0x8000, row = 0, col = 0; bit !== 0; bit >>= 1) {
       if ((this.type[rotation] & bit) !== 0) {
