@@ -7,6 +7,7 @@ import { Scoreboard } from './scoreboard'
 const enum Action {
   moveLeft,
   moveRight,
+  moveDown,
   rotatePiece,
   dropPiece
 }
@@ -121,6 +122,7 @@ export class Game {
     }
   }
 
+  // eslint-disable-next-line complexity
   private handleKeyDown(event: KeyboardEvent): void {
     switch (event.key) {
       case 'w':
@@ -133,15 +135,19 @@ export class Game {
         break
       case 's':
       case 'ArrowDown':
-        this.actions.push(Action.dropPiece)
+        this.actions.push(Action.moveDown)
         break
       case 'd':
       case 'ArrowRight':
         this.actions.push(Action.moveRight)
         break
       case ' ':
-        this.start()
+        this.actions.push(Action.dropPiece)
         break
+    }
+
+    if (!this.loop.running && this.actions.length !== 0) {
+      this.start()
     }
   }
 
@@ -163,6 +169,9 @@ export class Game {
         break
       case Action.moveRight:
         this.currentPiece.move(MoveDirection.right)
+        break
+      case Action.moveDown:
+        this.currentPiece.move(MoveDirection.down)
         break
       case Action.dropPiece:
         while (this.currentPiece.drop());
