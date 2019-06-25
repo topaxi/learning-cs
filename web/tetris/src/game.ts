@@ -119,6 +119,8 @@ export class Game {
     switch (event.type) {
       case 'keydown':
         return this.handleKeyDown(event)
+      case 'click':
+        return void this.start()
     }
   }
 
