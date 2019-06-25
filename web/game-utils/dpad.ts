@@ -9,14 +9,14 @@ export interface DPadEvent extends CustomEvent<{ direction: DPadDirection }> {
   type: 'dpad'
 }
 
-export class DPad extends EventTarget {
-  private static readonly buttonTexts = {
-    [DPadDirection.up]: '⬆',
-    [DPadDirection.right]: '➡',
-    [DPadDirection.down]: '⬇',
-    [DPadDirection.left]: '⬅'
-  }
+const buttonTexts = {
+  [DPadDirection.up]: '⬆',
+  [DPadDirection.right]: '➡',
+  [DPadDirection.down]: '⬇',
+  [DPadDirection.left]: '⬅'
+}
 
+export class DPad extends EventTarget {
   readonly element = document.createDocumentFragment()
 
   private ignoreNextClick = false
@@ -53,7 +53,7 @@ export class DPad extends EventTarget {
   private createDirectionButton(dir: DPadDirection): HTMLButtonElement {
     let button = document.createElement('button')
     button.value = String(dir)
-    button.textContent = DPad.buttonTexts[dir]
+    button.textContent = buttonTexts[dir]
     button.addEventListener('click', this, true)
     button.addEventListener('touchend', this, true)
     return button
