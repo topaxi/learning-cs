@@ -50,6 +50,8 @@ export class Loop<T> {
   }
 
   start() {
+    if (this.running) return
+
     this.nextGameTick = this.lastUpdate = this.lastFrame =
       performance.now() >>> 0
     this.schedule()
