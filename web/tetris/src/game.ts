@@ -131,6 +131,10 @@ export class Game {
   }
 
   private handleDPad(event: DPadEvent): void {
+    if (!this.loop.running) {
+      this.start()
+    }
+
     switch (event.detail.direction) {
       case DPadDirection.up:
         this.actions.push(Action.rotatePiece)
