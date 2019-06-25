@@ -3,6 +3,7 @@ import { Loop } from '../../game-utils/loop'
 import { Renderer } from './renderer'
 import { Piece, MoveDirection } from './piece'
 import { Scoreboard } from './scoreboard'
+import { DPad, DPadEvent, DPadDirection } from '../../game-utils/dpad'
 
 const enum Action {
   moveLeft,
@@ -15,11 +16,14 @@ const enum Action {
 export class Game {
   static start() {
     let game = new this()
+    let dpad = new DPad()
     ;(window as any).currentGame = game
     document.body.addEventListener('keydown', game, true)
     document.body.addEventListener('touchend', game, true)
+    dpad.addEventListener('dpad', game, true)
     game.element.addEventListener('click', game, true)
     game.element.append(game.canvas)
+    game.element.append(dpad.element)
     document.body.append(game.element)
     game.draw()
     return game
@@ -115,12 +119,31 @@ export class Game {
     }
   }
 
-  handleEvent(event: KeyboardEvent): void {
+  handleEvent(event: KeyboardEvent | MouseEvent | DPadEvent): void {
     switch (event.type) {
       case 'keydown':
-        return this.handleKeyDown(event)
+        return this.handleKeyDown(event as KeyboardEvent)
       case 'click':
         return void this.start()
+      case 'dpad':
+        return this.handleDPad(event as DPadEvent)
+    }
+  }
+
+  private handleDPad(event: DPadEvent): void {
+    switch (event.detail.direction) {
+      case DPadDirection.up:
+        this.actions.push(Action.rotatePiece)
+        break
+      case DPadDirection.left:
+        this.actions.push(Action.moveLeft)
+        break
+      case DPadDirection.down:
+        this.actions.push(Action.moveDown)
+        break
+      case DPadDirection.right:
+        this.actions.push(Action.moveRight)
+        break
     }
   }
 

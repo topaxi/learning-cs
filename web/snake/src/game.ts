@@ -1,30 +1,23 @@
 import { noop } from '../../../utils/function/noop'
 import { Loop } from '../../game-utils/loop'
+import { DPad, DPadEvent } from '../../game-utils/dpad'
 import { Player, Direction } from './player'
 import { Renderer } from './renderer'
 import { Food } from './food'
 import { Actor } from './actor'
 import { Level } from './level'
 
-const buttonTexts = {
-  [Direction.up]: '⬆',
-  [Direction.right]: '➡',
-  [Direction.down]: '⬇',
-  [Direction.left]: '⬅'
-}
-
 export class Game implements Actor {
   static start() {
     let game = new this(32, 18)
+    let dpad = new DPad()
     ;(window as any).currentGame = game
     document.body.addEventListener('keydown', game, true)
     document.body.addEventListener('touchend', game, true)
+    dpad.addEventListener('dpad', game, true)
     game.element.addEventListener('click', game, true)
     game.element.append(game.canvas)
-    game.element.append(game.createDirectionButton(Direction.up))
-    game.element.append(game.createDirectionButton(Direction.right))
-    game.element.append(game.createDirectionButton(Direction.down))
-    game.element.append(game.createDirectionButton(Direction.left))
+    game.element.append(dpad.element)
     document.body.append(game.element)
     game.draw()
     return game
@@ -48,14 +41,14 @@ export class Game implements Actor {
     this.canvas.height = rows * 10
   }
 
-  handleEvent(e: KeyboardEvent | MouseEvent | TouchEvent): void {
+  handleEvent(e: KeyboardEvent | MouseEvent | TouchEvent | DPadEvent): void {
     switch (e.type) {
       case 'keydown':
         return this.handleKeyDown(e as KeyboardEvent)
       case 'click':
         return this.handleClick(e as MouseEvent)
-      case 'touchend':
-        return this.handleTouch(e as TouchEvent)
+      case 'dpad':
+        return this.handleDPad(e as DPadEvent)
     }
   }
 
@@ -107,19 +100,8 @@ export class Game implements Actor {
     }
   }
 
-  private handleTouch(e: TouchEvent): void {
-    switch ((e.target as any).tagName) {
-      case 'BUTTON':
-        this.updatePlayerDirection(Number((e.target as any).value))
-        return
-    }
-  }
-
-  private createDirectionButton(dir: Direction): HTMLButtonElement {
-    let button = document.createElement('button')
-    button.value = String(dir)
-    button.textContent = buttonTexts[dir]
-    return button
+  private handleDPad(e: CustomEvent): void {
+    this.updatePlayerDirection(e.detail.direction)
   }
 
   private updatePlayerDirection(dir: Direction): void {
