@@ -44,8 +44,35 @@ export class Renderer extends Renderer2d {
   drawBlock(x: number, y: number, pieceType: PieceType): void {
     this.drawSimpleBlock(x, y, pieceType.color)
 
-    if (pieceType.name === 'O') {
-      this.context.strokeRect(x * 10 + 2, y * 10 + 2, 6, 6)
+    const { context } = this
+
+    switch (pieceType.name) {
+      case 'O':
+        context.strokeRect(x * 10 + 2, y * 10 + 2, 6, 6)
+        return
+      case 'Z':
+        context.strokeRect(x * 10 + 4, y * 10 + 4, 2, 2)
+        context.strokeRect(x * 10 + 5, y * 10 + 5, 1, 1)
+        return
+      case 'J':
+      case 'S':
+        context.fillStyle = 'white'
+        context.fillRect(x * 10 + 3, y * 10 + 3, 4, 4)
+        context.strokeRect(x * 10 + 3, y * 10 + 3, 4, 4)
+        return
+      case 'T':
+        context.strokeRect(x * 10 + 3, y * 10 + 3, 4, 4)
+        context.beginPath()
+        context.strokeStyle = 'magenta'
+        context.moveTo(x * 10 + 3, y * 10 + 3)
+        context.lineTo(x * 10 + 3, y * 10 + 3 + 3)
+        context.stroke()
+        context.moveTo(x * 10 + 3, y * 10 + 3)
+        context.lineTo(x * 10 + 3 + 3, y * 10 + 3)
+        context.stroke()
+        context.strokeStyle = 'black'
+        context.closePath()
+        return
     }
   }
 

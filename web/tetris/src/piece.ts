@@ -67,7 +67,7 @@ const O: PieceType = {
 }
 const S: PieceType = {
   name: 'S',
-  color: 'green',
+  color: 'lime',
   initialPositionOffset: { x: 0, y: 0 },
   [Rotation.up]: 0x06c0,
   [Rotation.down]: 0x8c40,
