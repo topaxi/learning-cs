@@ -78,17 +78,7 @@ export class Game {
       rowsRemoved++
     }
 
-    if (rowsRemoved !== 0) {
-      this.scoreboard.rows += rowsRemoved
-      this.scoreboard.score = this.scoreboard.score +=
-        rowsRemoved === 1
-          ? 40
-          : rowsRemoved === 2
-          ? 100
-          : rowsRemoved === 3
-          ? 300
-          : 1200
-    }
+    this.setRemovedRowsScore(rowsRemoved)
   }
 
   private removeRow(n: number): void {
@@ -96,6 +86,14 @@ export class Game {
       for (let x = 0; x < this.width; x++) {
         this.setBlock(x, y, y === 0 ? null : this.getBlock(x, y - 1))
       }
+    }
+  }
+
+  private setRemovedRowsScore(n: number): void {
+    if (n !== 0) {
+      this.scoreboard.rows += n
+      this.scoreboard.score = this.scoreboard.score +=
+        n === 1 ? 40 : n === 2 ? 100 : n === 3 ? 300 : 1200
     }
   }
 

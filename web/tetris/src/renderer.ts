@@ -51,5 +51,6 @@ export class Renderer extends Renderer2d {
 
   drawScoreboard(scoreboard: Scoreboard) {
     this.context.strokeText(`Score: ${scoreboard.score}`, 120, 60)
+    this.context.strokeText(`Rows: ${scoreboard.rows}`, 120, 76)
   }
 }
