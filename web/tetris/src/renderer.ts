@@ -61,22 +61,29 @@ export class Renderer extends Renderer2d {
         context.strokeRect(x * 10 + 3, y * 10 + 3, 4, 4)
         return
       case 'T':
-        context.strokeRect(x * 10 + 3, y * 10 + 3, 4, 4)
-        context.beginPath()
-        context.strokeStyle = 'magenta'
-        context.moveTo(x * 10 + 3, y * 10 + 3)
-        context.lineTo(x * 10 + 3, y * 10 + 3 + 3)
-        context.stroke()
-        context.moveTo(x * 10 + 3, y * 10 + 3)
-        context.lineTo(x * 10 + 3 + 3, y * 10 + 3)
-        context.stroke()
-        context.strokeStyle = 'black'
-        context.closePath()
-        return
+        return this.drawTPieceBlockTexture(x, y)
     }
   }
 
-  drawScoreboard(scoreboard: Scoreboard) {
+  private drawTPieceBlockTexture(x: number, y: number): void {
+    const { context } = this
+
+    context.strokeRect(x * 10 + 3, y * 10 + 3, 4, 4)
+
+    context.strokeStyle = 'magenta'
+    context.beginPath()
+    context.moveTo(x * 10 + 3, y * 10 + 3)
+    context.lineTo(x * 10 + 3, y * 10 + 3 + 3)
+    context.stroke()
+
+    context.moveTo(x * 10 + 3, y * 10 + 3)
+    context.lineTo(x * 10 + 3 + 3, y * 10 + 3)
+    context.stroke()
+    context.closePath()
+    context.strokeStyle = 'black'
+  }
+
+  drawScoreboard(scoreboard: Scoreboard): void {
     this.context.strokeText(`Score: ${scoreboard.score}`, 120, 60)
     this.context.strokeText(`Rows: ${scoreboard.rows}`, 120, 76)
   }

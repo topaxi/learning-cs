@@ -155,10 +155,10 @@ export class Piece {
   }
 
   occupied(x = this.x, y = this.y, rotation = this.rotation): boolean {
-    return some(this.blocks(x, y, rotation), this._hasBlock, this)
+    return some(this.blocks(x, y, rotation), this._gameHasBlock, this)
   }
 
-  private _hasBlock([x, y]: [number, number]): boolean {
+  private _gameHasBlock([x, y]: [number, number]): boolean {
     return this.game.hasBlock(x, y)
   }
 
