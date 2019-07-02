@@ -1,11 +1,16 @@
 import { identity } from '../function/identity'
 import { entries } from './entries'
+import { prop } from '../object/prop'
 
 export interface WithCallbackEntry<T, U> {
   result: U
   value: T
   index: number
 }
+
+export const result = prop('result')
+export const value = prop('value')
+export const index = prop('index')
 
 export function* withCallback<
   T,

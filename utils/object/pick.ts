@@ -30,6 +30,6 @@ export const pickBy: PickByFn = predicate => o =>
 export const omitBy: PickByFn = c(pickBy, not) as any
 
 export const pick: PickFn = (...keys) => obj =>
-  fromEntries(zip(keys, map(keys, flip(prop)(obj))))
+  fromEntries(zip(keys, map(keys, flip(prop)(obj as any))) as any)
 export const omit: OmitFn = (...keys) =>
   omitBy(c(includedIn(keys), head)) as any

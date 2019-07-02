@@ -16,7 +16,7 @@ export function* traverseNodes<T>(
 
 export const traverseNext: <T extends ListNode>(
   node: T | null
-) => IterableIterator<T> = paR(traverseNodes, prop<any>('next'))
+) => IterableIterator<T> = paR(traverseNodes, prop<any, any>('next'))
 
 export interface ListNodePrev {
   prev: ListNodePrev | null
@@ -24,4 +24,4 @@ export interface ListNodePrev {
 
 export const traversePrev: <T extends ListNodePrev>(
   node: T | null
-) => IterableIterator<T> = paR(traverseNodes, prop<any>('prev'))
+) => IterableIterator<T> = paR(traverseNodes, prop<any, any>('prev'))

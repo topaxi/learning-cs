@@ -1,7 +1,6 @@
-import { prop } from '../object/prop'
 import { flat } from './flat'
 import { isIterable } from './is-iterable'
-import { withCallback } from './with-callback'
+import { withCallback, result } from './with-callback'
 
 export function flatMap<T, U, This = undefined>(
   iterator: Iterable<T>,
@@ -59,7 +58,7 @@ export function* flatMap<This = undefined>(
   depth = 1,
   thisArg?: This
 ): IterableIterator<unknown> {
-  for (let value of withCallback(iterator, project, thisArg, prop('result'))) {
+  for (let value of withCallback(iterator, project, thisArg, result)) {
     if (depth > 0 && isIterable(value)) {
       yield* flat(value, depth - 1)
     } else {
