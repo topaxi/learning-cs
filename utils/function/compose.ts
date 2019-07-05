@@ -255,7 +255,14 @@ export function compose(
   funcs: Array<Many<(...args: any[]) => any>>
 ): (...args: any[]) => any
 export function compose(...funcs: any[]) {
-  return funcs.reduce((a, b) => (...args: any[]) => a(b(...args)), identity)
+  return funcs.reduce(_compose, identity)
+}
+
+function _compose<T, U, V>(
+  a: (t: T) => U,
+  b: (...args: V[]) => T
+): (...args: V[]) => U {
+  return (...args) => a(b(...args))
 }
 
 export const c = compose
