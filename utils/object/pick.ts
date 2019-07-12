@@ -4,12 +4,11 @@ import { c } from '../function/compose'
 import { arity2 } from '../function/arity'
 import { paR } from '../function/partial'
 import { not } from '../function/not'
-import { flip } from '../function/flip'
 import { filter } from '../iterator/filter'
 import { map } from '../iterator/map'
 import { zip } from '../iterator/zip'
 import { entries, Entry } from './entries'
-import { prop } from './prop'
+import { get } from './get'
 
 type ObjectIndex = string | number | symbol
 type PickPredicate<T> = (entry: Entry<T>, index: number, obj: T) => boolean
@@ -30,6 +29,6 @@ export const pickBy: PickByFn = predicate => o =>
 export const omitBy: PickByFn = c(pickBy, not) as any
 
 export const pick: PickFn = (...keys) => obj =>
-  fromEntries(zip(keys, map(keys, flip(prop)(obj))) as any)
+  fromEntries(zip(keys, map(keys, get(obj))))
 export const omit: OmitFn = (...keys) =>
   omitBy(c(includedIn(keys), head)) as any
