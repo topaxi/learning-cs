@@ -1,6 +1,8 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module',
     project: './tsconfig.json'
   },
   plugins: ['@typescript-eslint', 'jest'],
@@ -18,11 +20,6 @@ module.exports = {
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'
-  },
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module',
-    project: './tsconfig.json'
   },
   rules: {
     complexity: ['error', 10],
