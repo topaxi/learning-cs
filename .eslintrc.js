@@ -23,6 +23,7 @@ module.exports = {
   },
   rules: {
     complexity: ['error', 10],
+    'prefer-const': 'off',
     'prefer-object-spread': 'error',
     'no-dupe-class-members': 'off',
     '@typescript-eslint/no-unused-vars': [
@@ -36,6 +37,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-parameter-properties': 'off',
+    '@typescript-eslint/no-this-alias': 'off',
     '@typescript-eslint/no-use-before-define': [
       'error',
       { functions: false, typedefs: false }
@@ -73,6 +75,9 @@ module.exports = {
         node: false,
         es6: true,
         browser: true
+      },
+      parserOptions: {
+        project: './web/tsconfig.json'
       }
     }
   ]

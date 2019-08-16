@@ -24,6 +24,7 @@ export function memoize<
       return memoized.memo.get(args)
     }
 
+    // eslint-disable-next-line
     let r = fn.apply(this, arguments as any)
     memoized.memo.set(args, r)
     return r

@@ -62,6 +62,7 @@ export class Level implements Actor, LevelConfig {
     Object.assign(this, levels[random(0, levels.length - 1)])
   }
 
+  // eslint-disable-next-line
   update(_time: number): void {}
 
   draw(renderer: Renderer): void {

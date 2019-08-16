@@ -31,6 +31,7 @@ describe('memoize', () => {
   })
 
   test('should have meaningful function name', () => {
+    // eslint-disable-next-line
     expect(memoize(function expensive() {}).name).toBe('memoized(expensive)')
   })
 
