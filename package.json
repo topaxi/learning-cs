@@ -27,7 +27,7 @@
     "last 1 chrome version"
   ],
   "devDependencies": {
-    "@types/jest": "24.0.18",
+    "@types/jest": "24.0.21",
     "@types/node": "12.7.3",
     "@typescript-eslint/eslint-plugin": "2.6.0",
     "@typescript-eslint/parser": "2.6.0",
