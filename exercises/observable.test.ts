@@ -61,7 +61,7 @@ describe('Observable<T>', () => {
       sub.unsubscribe()
       expect(values).toEqual([1, 2, 3])
       done()
-    }, 35)
+    }, 38)
   })
 
   test('should emit error and close observable', () => {
@@ -99,7 +99,7 @@ describe('Observable<T>', () => {
       let o = new Observable<number>(observer => {
         let i = 0
         let id = setInterval(() => observer.next(++i), 10)
-        setTimeout(() => observer.complete(), 35)
+        setTimeout(() => observer.complete(), 38)
         return () => clearInterval(id)
       })
 
