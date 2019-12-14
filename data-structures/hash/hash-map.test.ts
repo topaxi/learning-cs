@@ -43,10 +43,12 @@ describe('HashMap', () => {
     map.set('test3', 'baz')
     map.set('test4', 'qux')
 
+    expect(map.empty).toBe(false)
     expect(map.size).toBe(4)
 
     map.delete('test1')
 
+    expect(map.empty).toBe(false)
     expect(map.size).toBe(3)
 
     map.delete('test2')
@@ -54,6 +56,7 @@ describe('HashMap', () => {
     map.delete('test4')
 
     expect(map.size).toBe(0)
+    expect(map.empty).toBe(true)
     expect(map.has('test2')).toBe(false)
   })
 

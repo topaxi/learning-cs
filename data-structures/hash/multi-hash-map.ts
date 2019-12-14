@@ -17,6 +17,10 @@ export class MultiHashMap<K extends Hashable, V extends Hashable> {
     return this.map.size
   }
 
+  get empty(): boolean {
+    return this.map.empty
+  }
+
   get(key: K): V[] {
     return this.map.get(key)!.toArray()
   }
@@ -40,7 +44,7 @@ export class MultiHashMap<K extends Hashable, V extends Hashable> {
 
     set.delete(value)
 
-    if (set.size === 0) this.map.delete(key)
+    if (set.empty) this.map.delete(key)
 
     return true
   }

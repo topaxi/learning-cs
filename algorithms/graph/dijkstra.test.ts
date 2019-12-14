@@ -1,11 +1,12 @@
 import { range } from '../../utils/range'
+import { construct } from '../../utils/function/construct'
 import { GraphVertex } from '../../data-structures/graph/graph-vertex'
 import { GraphEdge } from '../../data-structures/graph/graph-edge'
 import { dijkstra } from './dijkstra'
 
 describe('dijkstra', () => {
   test('should find shortest path', () => {
-    let v = Array.from(range(10), v => new GraphVertex(v))
+    let v = Array.from(range(10), construct(GraphVertex))
 
     v[0].addEdge(new GraphEdge(v[0], v[1], 1))
     v[1].addEdge(new GraphEdge(v[1], v[2], 1))

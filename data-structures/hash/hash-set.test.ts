@@ -61,10 +61,12 @@ describe('HashSet<T>', () => {
 
       expect(set.has(1)).toBe(true)
       expect(set.has(2)).toBe(true)
+      expect(set.empty).toBe(false)
       expect(set.size).toBe(2)
 
       set.clear()
 
+      expect(set.empty).toBe(true)
       expect(set.size).toBe(0)
       expect(set.has(1)).toBe(false)
       expect(set.has(2)).toBe(false)

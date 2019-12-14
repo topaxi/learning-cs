@@ -1,4 +1,5 @@
 import { range } from '../../utils/range'
+import { construct } from '../../utils/function/construct'
 import { GraphVertex } from '../../data-structures/graph/graph-vertex'
 import { GraphEdge } from '../../data-structures/graph/graph-edge'
 import { bellmanFord } from './bellman-ford'
@@ -6,7 +7,7 @@ import { bellmanFord } from './bellman-ford'
 describe('bellmanFord()', () => {
   // TestCase from https://github.com/williamfiset/Algorithms/blob/master/com/williamfiset/algorithms/graphtheory/BellmanFordEdgeList.java
   test('finds shortest paths', () => {
-    let v = Array.from(range(10), v => new GraphVertex(v))
+    let v = Array.from(range(10), construct(GraphVertex))
 
     let edges = [
       new GraphEdge(v[0], v[1], 1),

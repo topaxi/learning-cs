@@ -45,6 +45,7 @@ describe('MultiHashMap<K, V>', () => {
     map.set('test3', 'baz')
     map.set('test4', 'qux')
 
+    expect(map.empty).toBe(false)
     expect(map.size).toBe(4)
 
     map.deleteAll('test1')
@@ -61,6 +62,7 @@ describe('MultiHashMap<K, V>', () => {
     expect(map.size).toBe(1)
 
     map.delete('test4', 'buz')
+    expect(map.empty).toBe(true)
     expect(map.size).toBe(0)
 
     expect(map.has('test3')).toBe(false)

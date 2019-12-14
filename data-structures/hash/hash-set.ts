@@ -28,6 +28,10 @@ export class HashSet<T extends Hashable> implements Iterable<T> {
     return this._hash.size
   }
 
+  get empty(): boolean {
+    return this._hash.empty
+  }
+
   has(value: T): boolean {
     return this._hash.has(value)
   }

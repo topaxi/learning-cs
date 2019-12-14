@@ -6,6 +6,8 @@ import { map } from '../../utils/iterator/map'
 import { flat } from '../../utils/iterator/flat'
 import { LinkedList } from '../list/linked-list'
 import { constant } from '../../utils/function/constant'
+import { construct } from '../../utils/function/construct'
+import { isEmpty } from '../../utils/object/is-empty'
 
 const { abs } = Math
 const { isFinite } = Number
@@ -29,6 +31,10 @@ export class HashMap<K extends Hashable, T> implements Iterable<[K, T]> {
 
   get size(): number {
     return size(this.keyCache)
+  }
+
+  get empty(): boolean {
+    return isEmpty(this.keyCache)
   }
 
   constructor(private readonly internalSize = 32) {}
@@ -121,7 +127,7 @@ export class HashMap<K extends Hashable, T> implements Iterable<[K, T]> {
   }
 
   protected initializeSlots(): Array<LinkedList<HashMapNode<K, T>>> {
-    return Array.from({ length: this.internalSize }, () => new LinkedList())
+    return Array.from({ length: this.internalSize }, construct(LinkedList))
   }
 
   protected initializeKeyCache(): Record<string | number, number> {
