@@ -1,12 +1,11 @@
 import { random } from '../../../utils/random'
+import { construct } from '../../../utils/function/construct'
 import { Actor } from './actor'
 import { Game } from './game'
 import { Renderer } from './renderer'
 import { Point } from './point'
 
-function p(x: number, y: number) {
-  return new Point(x, y)
-}
+const p = construct(Point)
 
 interface LevelConfig {
   player: Point
@@ -18,17 +17,17 @@ const levels: LevelConfig[] = [
   {
     player: p(16, 9),
     walls: [
-      ...Array.from({ length: 32 }).map((_, i) => p(i, 0)),
-      ...Array.from({ length: 32 }).map((_, i) => p(i, 17))
+      ...Array.from({ length: 32 }, (_, i) => p(i, 0)),
+      ...Array.from({ length: 32 }, (_, i) => p(i, 17))
     ]
   },
   {
     player: p(16, 9),
     walls: [
-      ...Array.from({ length: 32 }).map((_, i) => p(i, 0)),
-      ...Array.from({ length: 32 }).map((_, i) => p(i, 17)),
-      ...Array.from({ length: 18 }).map((_, i) => p(0, i)),
-      ...Array.from({ length: 18 }).map((_, i) => p(31, i))
+      ...Array.from({ length: 32 }, (_, i) => p(i, 0)),
+      ...Array.from({ length: 32 }, (_, i) => p(i, 17)),
+      ...Array.from({ length: 18 }, (_, i) => p(0, i)),
+      ...Array.from({ length: 18 }, (_, i) => p(31, i))
     ]
   },
   {
