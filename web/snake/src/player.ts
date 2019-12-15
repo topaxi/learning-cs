@@ -1,5 +1,8 @@
 import { head, Head } from '../../../utils/array/head'
 import { pa } from '../../../utils/function/partial'
+import { concat } from '../../../utils/iterator/concat'
+import { skip } from '../../../utils/iterator/skip'
+import { some } from '../../../utils/iterator/some'
 import { Renderer } from './renderer'
 import { Actor } from './actor'
 import { Point } from './point'
@@ -12,7 +15,7 @@ export const enum Direction {
   right
 }
 
-export class Player implements Actor, Head<{ x: number; y: number }> {
+export class Player implements Actor, Head<Point> {
   tail: Point[] = []
   alive = true
 
@@ -81,15 +84,9 @@ export class Player implements Actor, Head<{ x: number; y: number }> {
 
   private verifyAlive(): void {
     let colliding = pa(Point.equal, head(this))
+    let collidables = concat(skip(this.tail, 1), this.game.level.walls)
 
-    for (let i = 1; i < this.tail.length; i++) {
-      if (colliding(this.tail[i])) {
-        this.alive = false
-        return
-      }
-    }
-
-    if (this.game.level.walls.some(colliding)) {
+    if (some(collidables, colliding)) {
       this.alive = false
     }
   }
