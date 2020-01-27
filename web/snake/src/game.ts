@@ -126,9 +126,6 @@ export class Game implements Actor {
 
   draw(): void {
     this.renderer.drawGame(this)
-    this.level.draw(this.renderer)
-    this.player.draw(this.renderer)
-    this.food.draw(this.renderer)
   }
 
   private toggleLoop(): void {

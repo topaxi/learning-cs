@@ -33,12 +33,14 @@ export class Renderer extends Renderer2d {
   }
 
   private drawSimpleBlock(x: number, y: number, color: string): void {
-    let rectX = x * 10
-    let rectY = y * 10
+    this.withContext(context => {
+      let rectX = x * 10
+      let rectY = y * 10
 
-    this.context.fillStyle = color
-    this.context.fillRect(rectX, rectY, 10, 10)
-    this.context.strokeRect(rectX, rectY, 10, 10)
+      context.fillStyle = color
+      context.fillRect(rectX, rectY, 10, 10)
+      context.strokeRect(rectX, rectY, 10, 10)
+    })
   }
 
   drawBlock(x: number, y: number, pieceType: PieceType): void {
@@ -56,9 +58,11 @@ export class Renderer extends Renderer2d {
         return
       case 'J':
       case 'S':
-        context.fillStyle = 'white'
-        context.fillRect(x * 10 + 3, y * 10 + 3, 4, 4)
-        context.strokeRect(x * 10 + 3, y * 10 + 3, 4, 4)
+        this.withContext(context => {
+          context.fillStyle = 'white'
+          context.fillRect(x * 10 + 3, y * 10 + 3, 4, 4)
+          context.strokeRect(x * 10 + 3, y * 10 + 3, 4, 4)
+        })
         return
       case 'T':
         return this.drawTPieceBlockTexture(x, y)
@@ -66,21 +70,20 @@ export class Renderer extends Renderer2d {
   }
 
   private drawTPieceBlockTexture(x: number, y: number): void {
-    const { context } = this
+    this.withContext(context => {
+      context.strokeRect(x * 10 + 3, y * 10 + 3, 4, 4)
 
-    context.strokeRect(x * 10 + 3, y * 10 + 3, 4, 4)
+      context.strokeStyle = 'magenta'
+      context.beginPath()
+      context.moveTo(x * 10 + 3, y * 10 + 3)
+      context.lineTo(x * 10 + 3, y * 10 + 3 + 3)
+      context.stroke()
 
-    context.strokeStyle = 'magenta'
-    context.beginPath()
-    context.moveTo(x * 10 + 3, y * 10 + 3)
-    context.lineTo(x * 10 + 3, y * 10 + 3 + 3)
-    context.stroke()
-
-    context.moveTo(x * 10 + 3, y * 10 + 3)
-    context.lineTo(x * 10 + 3 + 3, y * 10 + 3)
-    context.stroke()
-    context.closePath()
-    context.strokeStyle = 'black'
+      context.moveTo(x * 10 + 3, y * 10 + 3)
+      context.lineTo(x * 10 + 3 + 3, y * 10 + 3)
+      context.stroke()
+      context.closePath()
+    })
   }
 
   drawScoreboard(scoreboard: Scoreboard): void {
