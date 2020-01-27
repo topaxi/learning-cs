@@ -10,7 +10,7 @@ import { Renderer } from './renderer'
 import { Game } from './game'
 
 export class Food extends Point implements Actor {
-  readonly notColliding = not(pa(Point.equal, this))
+  private readonly notColliding = not(pa(Point.equal, this))
 
   constructor(readonly game: Game) {
     super(0, 0)

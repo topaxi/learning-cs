@@ -20,7 +20,7 @@ export class Player implements Actor, Head<Point> {
   alive = true
 
   get 0() {
-    return this.tail[0]
+    return head(this.tail)!
   }
 
   private _direction = Direction.right

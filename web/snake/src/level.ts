@@ -6,6 +6,8 @@ import { Renderer } from './renderer'
 import { Point } from './point'
 
 const p = construct(Point)
+const a = <T>(length: number, fn: (i: number) => T): T[] =>
+  Array.from({ length }, (_, i) => fn(i))
 
 interface LevelConfig {
   player: Point
@@ -16,40 +18,20 @@ const levels: LevelConfig[] = [
   { player: p(16, 9), walls: [] },
   {
     player: p(16, 9),
-    walls: [
-      ...Array.from({ length: 32 }, (_, i) => p(i, 0)),
-      ...Array.from({ length: 32 }, (_, i) => p(i, 17))
-    ]
+    walls: [...a(32, i => p(i, 0)), ...a(32, i => p(i, 17))]
   },
   {
     player: p(16, 9),
     walls: [
-      ...Array.from({ length: 32 }, (_, i) => p(i, 0)),
-      ...Array.from({ length: 32 }, (_, i) => p(i, 17)),
-      ...Array.from({ length: 18 }, (_, i) => p(0, i)),
-      ...Array.from({ length: 18 }, (_, i) => p(31, i))
+      ...a(32, i => p(i, 0)),
+      ...a(32, i => p(i, 17)),
+      ...a(18, i => p(0, i)),
+      ...a(18, i => p(31, i))
     ]
   },
   {
     player: p(4, 4),
-    walls: [
-      p(8, 8),
-      p(9, 8),
-      p(10, 8),
-      p(11, 8),
-      p(12, 8),
-      p(13, 8),
-      p(14, 8),
-      p(15, 8),
-      p(16, 8),
-      p(17, 8),
-      p(18, 8),
-      p(19, 8),
-      p(20, 8),
-      p(21, 8),
-      p(22, 8),
-      p(23, 8)
-    ]
+    walls: a(16, i => p(i + 8, 8))
   }
 ]
 

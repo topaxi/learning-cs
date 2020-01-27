@@ -117,11 +117,11 @@ export class Game implements Actor {
     this.userInput = noop
   }
 
-  update(_time: number): void {
+  update(time: number): void {
     this.handleUserInput()
-    this.level.update(_time)
-    this.player.update(_time)
-    this.food.update(_time)
+    this.level.update(time)
+    this.player.update(time)
+    this.food.update(time)
   }
 
   draw(): void {
