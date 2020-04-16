@@ -121,7 +121,7 @@ describe('MultiHashMap<K, V>', () => {
         ['test2', 'bar'],
         ['test3', 'baz'],
         ['test4', 'qux'],
-        ['test4', 'buz']
+        ['test4', 'buz'],
       ])
     )
   })

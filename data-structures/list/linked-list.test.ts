@@ -147,23 +147,11 @@ describe('LinkedList<T>', () => {
 
   describe('#reverse()', () => {
     test('should reverse list in place', () => {
-      expect(
-        LinkedList.of(1, 2, 3)
-          .reverse()
-          .toArray()
-      ).toEqual([3, 2, 1])
+      expect(LinkedList.of(1, 2, 3).reverse().toArray()).toEqual([3, 2, 1])
 
-      expect(
-        LinkedList.of(1, 2)
-          .reverse()
-          .toArray()
-      ).toEqual([2, 1])
+      expect(LinkedList.of(1, 2).reverse().toArray()).toEqual([2, 1])
 
-      expect(
-        LinkedList.of(1)
-          .reverse()
-          .toArray()
-      ).toEqual([1])
+      expect(LinkedList.of(1).reverse().toArray()).toEqual([1])
 
       expect(new LinkedList().reverse().toArray()).toEqual([])
     })
@@ -298,7 +286,7 @@ describe('LinkedList<T>', () => {
         [0, 'a'],
         [1, 'b'],
         [2, 'c'],
-        [3, 'd']
+        [3, 'd'],
       ])
     })
   })

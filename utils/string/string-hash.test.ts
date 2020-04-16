@@ -11,7 +11,7 @@ describe('utils/string/string-hash', () => {
     let values = [
       'a',
       'a longer string',
-      'something quite a bit longer than those before'
+      'something quite a bit longer than those before',
     ]
 
     for (let value of values) {

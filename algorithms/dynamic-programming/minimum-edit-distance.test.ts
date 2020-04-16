@@ -1,6 +1,6 @@
 import {
   minimumEditDistanceNaive,
-  minimumEditDistanceMemo
+  minimumEditDistanceMemo,
 } from './minimum-edit-distance'
 
 describe.each([minimumEditDistanceNaive, minimumEditDistanceMemo])(
@@ -9,7 +9,7 @@ describe.each([minimumEditDistanceNaive, minimumEditDistanceMemo])(
     test.each<[string, string, number]>([
       ['horse', 'ros', 3],
       ['intention', 'execution', 5],
-      ['minimum', 'distance', 7]
+      ['minimum', 'distance', 7],
     ])(
       `${minimumEditDistance.name}(%o, %o) is %o`,
       (word1, word2, expectedEditDistance) => {
@@ -20,7 +20,7 @@ describe.each([minimumEditDistanceNaive, minimumEditDistanceMemo])(
     if (minimumEditDistance === minimumEditDistanceMemo) {
       test.each<[string, string, number]>([
         ['Dampfschifffahrt', 'Schornsteinfeger', 13],
-        ['Dampfschifffahrtsgesellschaft', 'Schornsteinfegermeister', 24]
+        ['Dampfschifffahrtsgesellschaft', 'Schornsteinfegermeister', 24],
       ])(
         `${minimumEditDistance.name}(%o, %o) is %o`,
         (word1, word2, expectedEditDistance) => {

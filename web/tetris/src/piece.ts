@@ -9,14 +9,14 @@ import { Game } from './game'
 export const enum MoveDirection {
   left,
   right,
-  down
+  down,
 }
 
 export const enum Rotation {
   up = 0,
   right = 1,
   down = 2,
-  left = 3
+  left = 3,
 }
 
 export interface PieceType {
@@ -36,7 +36,7 @@ const I: PieceType = {
   [Rotation.up]: 0x0f00,
   [Rotation.down]: 0x2222,
   [Rotation.left]: 0x00f0,
-  [Rotation.right]: 0x4444
+  [Rotation.right]: 0x4444,
 }
 const J: PieceType = {
   name: 'J',
@@ -45,7 +45,7 @@ const J: PieceType = {
   [Rotation.up]: 0x44c0,
   [Rotation.down]: 0x8e00,
   [Rotation.left]: 0x6440,
-  [Rotation.right]: 0x0e20
+  [Rotation.right]: 0x0e20,
 }
 const L: PieceType = {
   name: 'L',
@@ -54,7 +54,7 @@ const L: PieceType = {
   [Rotation.up]: 0x4460,
   [Rotation.down]: 0x0e80,
   [Rotation.left]: 0xc440,
-  [Rotation.right]: 0x2e00
+  [Rotation.right]: 0x2e00,
 }
 const O: PieceType = {
   name: 'O',
@@ -63,7 +63,7 @@ const O: PieceType = {
   [Rotation.up]: 0xcc00,
   [Rotation.down]: 0xcc00,
   [Rotation.left]: 0xcc00,
-  [Rotation.right]: 0xcc00
+  [Rotation.right]: 0xcc00,
 }
 const S: PieceType = {
   name: 'S',
@@ -72,7 +72,7 @@ const S: PieceType = {
   [Rotation.up]: 0x06c0,
   [Rotation.down]: 0x8c40,
   [Rotation.left]: 0x6c00,
-  [Rotation.right]: 0x4620
+  [Rotation.right]: 0x4620,
 }
 const T: PieceType = {
   name: 'T',
@@ -81,7 +81,7 @@ const T: PieceType = {
   [Rotation.up]: 0x0e40,
   [Rotation.down]: 0x4c40,
   [Rotation.left]: 0x4e00,
-  [Rotation.right]: 0x4640
+  [Rotation.right]: 0x4640,
 }
 const Z: PieceType = {
   name: 'Z',
@@ -90,7 +90,7 @@ const Z: PieceType = {
   [Rotation.up]: 0x0c60,
   [Rotation.down]: 0x4c80,
   [Rotation.left]: 0xc600,
-  [Rotation.right]: 0x2640
+  [Rotation.right]: 0x2640,
 }
 
 const PIECES = { I, J, L, O, S, T, Z }

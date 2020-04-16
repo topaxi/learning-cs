@@ -16,7 +16,7 @@ describe('utils/iterator/zip', () => {
     expect(Array.from(zip(numbers(), letters()))).toEqual([
       [1, 'a'],
       [2, 'b'],
-      [3, 'c']
+      [3, 'c'],
     ])
   })
 
@@ -31,6 +31,9 @@ describe('utils/iterator/zip', () => {
       yield 'c'
     }
 
-    expect(Array.from(zip(numbers(), letters()))).toEqual([[1, 'a'], [2, 'b']])
+    expect(Array.from(zip(numbers(), letters()))).toEqual([
+      [1, 'a'],
+      [2, 'b'],
+    ])
   })
 })

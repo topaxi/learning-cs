@@ -12,7 +12,7 @@ export const enum Direction {
   up,
   down,
   left,
-  right
+  right,
 }
 
 export class Player implements Actor, Head<Point> {

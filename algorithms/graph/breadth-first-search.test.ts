@@ -23,7 +23,7 @@ describe('Graph Breadh First Search', () => {
 
     breadthFirstSearch(startVertex, {
       enterVertex: ({ value }) => path.push(`enter ${value}`),
-      leaveVertex: ({ value }) => path.push(`leave ${value}`)
+      leaveVertex: ({ value }) => path.push(`leave ${value}`),
     })
 
     expect(path).toMatchInlineSnapshot(`
@@ -72,7 +72,7 @@ describe('Graph Breadh First Search', () => {
     let vertex = breadthFirstSearch(startVertex, {
       find: ({ value }) => value === 2,
       enterVertex: ({ value }) => path.push(`enter ${value}`),
-      leaveVertex: ({ value }) => path.push(`leave ${value}`)
+      leaveVertex: ({ value }) => path.push(`leave ${value}`),
     })
 
     expect(vertex!.value).toBe(2)

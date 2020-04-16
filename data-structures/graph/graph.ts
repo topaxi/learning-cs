@@ -8,7 +8,7 @@ import { GraphVertex } from './graph-vertex'
 import { GraphEdge } from './graph-edge'
 import {
   depthFirstSearch,
-  DepthFirstSearchCallbacks
+  DepthFirstSearchCallbacks,
 } from '../../algorithms/graph/depth-first-search'
 
 export class Graph<T> {

@@ -42,7 +42,7 @@ describe('bubbleSort', () => {
           { id: 4 },
           { id: 5 },
           { id: 6 },
-          { id: 7 }
+          { id: 7 },
         ],
         (a, b) => a.id - b.id
       )
@@ -91,7 +91,7 @@ describe('bubbleSortOptimized', () => {
           { id: 4 },
           { id: 5 },
           { id: 6 },
-          { id: 7 }
+          { id: 7 },
         ],
         (a, b) => a.id - b.id
       )

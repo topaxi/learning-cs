@@ -31,7 +31,7 @@ export function depthFirstSearch<T>(
     find = noop,
     enterVertex = noop,
     leaveVertex = noop,
-    canVisitVertex = returnTrue
+    canVisitVertex = returnTrue,
   }: DepthFirstSearchCallbacks<T>,
   visited = new HashSet<number>()
 ): GraphVertex<T> | undefined {

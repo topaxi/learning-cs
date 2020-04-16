@@ -2,7 +2,7 @@ export const enum DPadDirection {
   up = 0,
   right = 3,
   down = 1,
-  left = 2
+  left = 2,
 }
 
 export interface DPadEvent extends CustomEvent<{ direction: DPadDirection }> {
@@ -13,7 +13,7 @@ const buttonTexts = {
   [DPadDirection.up]: '⬆',
   [DPadDirection.right]: '➡',
   [DPadDirection.down]: '⬇',
-  [DPadDirection.left]: '⬅'
+  [DPadDirection.left]: '⬅',
 }
 
 export class DPad extends EventTarget {
@@ -45,7 +45,7 @@ export class DPad extends EventTarget {
 
     this.dispatchEvent(
       new CustomEvent('dpad', {
-        detail: { direction: Number(event.target.value) }
+        detail: { direction: Number(event.target.value) },
       })
     )
   }

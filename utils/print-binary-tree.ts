@@ -52,9 +52,7 @@ export class BinaryTreePrinter<T extends BinaryTreeNode<any, any>> {
 
     if (proot.height >= this.maxHeight) {
       this.printf(
-        `(This tree is taller than ${
-          this.maxHeight
-        }, and may be drawn incorrectly.)\n`
+        `(This tree is taller than ${this.maxHeight}, and may be drawn incorrectly.)\n`
       )
     }
 

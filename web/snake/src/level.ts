@@ -18,7 +18,7 @@ const levels: LevelConfig[] = [
   { player: p(16, 9), walls: [] },
   {
     player: p(16, 9),
-    walls: [...a(32, i => p(i, 0)), ...a(32, i => p(i, 17))]
+    walls: [...a(32, i => p(i, 0)), ...a(32, i => p(i, 17))],
   },
   {
     player: p(16, 9),
@@ -26,13 +26,13 @@ const levels: LevelConfig[] = [
       ...a(32, i => p(i, 0)),
       ...a(32, i => p(i, 17)),
       ...a(18, i => p(0, i)),
-      ...a(18, i => p(31, i))
-    ]
+      ...a(18, i => p(31, i)),
+    ],
   },
   {
     player: p(4, 4),
-    walls: a(16, i => p(i + 8, 8))
-  }
+    walls: a(16, i => p(i + 8, 8)),
+  },
 ]
 
 export class Level implements Actor, LevelConfig {

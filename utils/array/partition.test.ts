@@ -7,7 +7,7 @@ describe('utils/array/partition', () => {
 
       expect(partition(array, n => n === 0)).toEqual([
         [0, 0, 0, 0],
-        [1, 1, 1, 1]
+        [1, 1, 1, 1],
       ])
     })
   })

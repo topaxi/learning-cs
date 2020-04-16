@@ -16,7 +16,11 @@ describe('utils/filters/included-in', () => {
   test('should filter values based on different property', () => {
     expect(
       [{ id: 1 }, { id: 2 }, { id: 3 }].filter(
-        includedIn([{ fid: 2 }, { fid: 4 }], o => o.fid, o => o.id)
+        includedIn(
+          [{ fid: 2 }, { fid: 4 }],
+          o => o.fid,
+          o => o.id
+        )
       )
     ).toEqual([{ id: 2 }])
   })

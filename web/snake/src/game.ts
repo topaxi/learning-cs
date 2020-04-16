@@ -24,7 +24,7 @@ export class Game implements Actor {
   }
 
   private readonly loop = new Loop(this, this.update, this.draw, {
-    tickRate: 10
+    tickRate: 10,
   })
 
   element = document.createElement('t-snake')

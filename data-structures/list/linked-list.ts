@@ -160,7 +160,7 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
     }
 
     return Object.assign(new LinkedList<T>(), {
-      firstNode: this.firstNode.next
+      firstNode: this.firstNode.next,
     })
   }
 

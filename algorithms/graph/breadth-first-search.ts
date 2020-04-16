@@ -24,7 +24,7 @@ export function breadthFirstSearch<T>(
     find = noop,
     enterVertex = noop,
     leaveVertex = noop,
-    canVisitVertex = returnTrue
+    canVisitVertex = returnTrue,
   }: BreadthFirstSearchCallbacks<T>,
   visited = new HashSet<GraphVertex<T>>()
 ): GraphVertex<T> | undefined {

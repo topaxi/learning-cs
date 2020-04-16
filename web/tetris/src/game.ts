@@ -10,7 +10,7 @@ const enum Action {
   moveRight,
   moveDown,
   rotatePiece,
-  dropPiece
+  dropPiece,
 }
 
 export class Game {
@@ -34,7 +34,7 @@ export class Game {
   readonly element = document.createElement('t-tetris')
   readonly canvas = Object.assign(document.createElement('canvas'), {
     width: this.width * 10 + 100,
-    height: this.height * 10
+    height: this.height * 10,
   })
   private readonly renderer = new Renderer(this.canvas)
   private readonly loop = new Loop(this, this.update, this.draw)

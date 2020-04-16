@@ -32,7 +32,7 @@ export function memoize<
 
   if (fn.name !== '') {
     Object.defineProperty(memoized, 'name', {
-      value: `memoized(${fn.name})`
+      value: `memoized(${fn.name})`,
     })
   }
 
@@ -46,7 +46,7 @@ memoize.weak = {
     fn: (arg: T) => R
   ): Memoized<typeof fn, WeakSingleParamStore<[T], R>> {
     return memoize(fn, new WeakSingleParamStore())
-  }
+  },
 }
 
 memoize.unary = function memoizeUnary<T, R>(

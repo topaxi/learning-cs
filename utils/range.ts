@@ -38,7 +38,7 @@ export function range<T = number>(
   {
     step = 1,
     inclusive = false,
-    project = identity as RangeOptions<T>['project']
+    project = identity as RangeOptions<T>['project'],
   }: Partial<RangeOptions<T>> = {}
 ): Range<T> {
   if (end === undefined) {

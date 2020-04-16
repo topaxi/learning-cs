@@ -27,6 +27,6 @@ export function* withCallback<
     yield project({
       result: callback.call(thisArg!, value, index),
       value,
-      index
+      index,
     })
 }

@@ -12,7 +12,7 @@ describe('utils/filters/null', () => {
       expect([1, null, 1, undefined].filter(notNull)).toEqual([
         1,
         1,
-        undefined
+        undefined,
       ])
     })
   })
@@ -21,7 +21,7 @@ describe('utils/filters/null', () => {
     test('should filter null and undefined values', () => {
       expect([1, null, 1, undefined].filter(isNullish)).toEqual([
         null,
-        undefined
+        undefined,
       ])
     })
   })

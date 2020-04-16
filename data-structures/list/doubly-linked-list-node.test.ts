@@ -63,7 +63,7 @@ describe('DoublyLinkedListNode<T>', () => {
 
       expect(Array.from(node, prop('value'))).toEqual([1, 2, 3, 4])
       expect(Array.from(new DoublyLinkedListNode(1), prop('value'))).toEqual([
-        1
+        1,
       ])
     })
   })

@@ -4,7 +4,7 @@ describe('utils/iterator/flat-map', () => {
   test('should map and flatten iterable', () => {
     expect(
       Array.from(
-        flatMap([1, 2, 3, 4], function*(n) {
+        flatMap([1, 2, 3, 4], function* (n) {
           yield n * n
         })
       )
@@ -18,14 +18,14 @@ describe('utils/iterator/flat-map', () => {
       3,
       3,
       4,
-      4
+      4,
     ])
   })
 
   test('should map and flatten iterable with mixed return values', () => {
     expect(
       Array.from(
-        flatMap([1, 2, 3, 4], function*(n) {
+        flatMap([1, 2, 3, 4], function* (n) {
           yield n * n
         })
       )
@@ -39,7 +39,10 @@ describe('utils/iterator/flat-map', () => {
   test('should map and flatten deeply', () => {
     expect(
       Array.from(flatMap([1, 2], n => [n, [n, n, [n, n, [n]]]], 0))
-    ).toEqual([[1, [1, 1, [1, 1, [1]]]], [2, [2, 2, [2, 2, [2]]]]])
+    ).toEqual([
+      [1, [1, 1, [1, 1, [1]]]],
+      [2, [2, 2, [2, 2, [2]]]],
+    ])
     expect(
       Array.from(flatMap([1, 2], n => [n, [n, n, [n, n, [n]]]], 1))
     ).toEqual([1, [1, 1, [1, 1, [1]]], 2, [2, 2, [2, 2, [2]]]])

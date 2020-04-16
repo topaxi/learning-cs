@@ -24,11 +24,7 @@ describe('PriorityQueue', () => {
   it('should dequeue with respect to priorities', () => {
     const queue = new PriorityQueue<number>()
 
-    queue
-      .enqueue(1, 1)
-      .enqueue(2, 2)
-      .enqueue(3, 0)
-      .enqueue(4, 0)
+    queue.enqueue(1, 1).enqueue(2, 2).enqueue(3, 0).enqueue(4, 0)
 
     expect(queue.dequeue()).toBe(3)
     expect(queue.dequeue()).toBe(4)
@@ -39,11 +35,7 @@ describe('PriorityQueue', () => {
   it('should be consumable as an iterator', () => {
     const queue = new PriorityQueue<number>()
 
-    queue
-      .enqueue(1, 1)
-      .enqueue(2, 2)
-      .enqueue(3, 0)
-      .enqueue(4, 0)
+    queue.enqueue(1, 1).enqueue(2, 2).enqueue(3, 0).enqueue(4, 0)
 
     expect(queue).toHaveLength(4)
     expect(Array.from(queue)).toEqual([3, 4, 1, 2])
@@ -53,10 +45,7 @@ describe('PriorityQueue', () => {
   it('should be able to reprioritize items', () => {
     const queue = new PriorityQueue<number>()
 
-    queue
-      .enqueue(1, 1)
-      .enqueue(2, 2)
-      .enqueue(3, 0)
+    queue.enqueue(1, 1).enqueue(2, 2).enqueue(3, 0)
 
     queue.updatePriority(3, 3)
 

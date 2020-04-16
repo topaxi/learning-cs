@@ -23,7 +23,7 @@ describe('Graph Depth First Search', () => {
 
     depthFirstSearch(startVertex, {
       enterVertex: ({ value }) => path.push(`enter ${value}`),
-      leaveVertex: ({ value }) => path.push(`leave ${value}`)
+      leaveVertex: ({ value }) => path.push(`leave ${value}`),
     })
 
     expect(path).toMatchInlineSnapshot(`
@@ -72,7 +72,7 @@ describe('Graph Depth First Search', () => {
     let vertex = depthFirstSearch(startVertex, {
       find: ({ value }) => value === 4,
       enterVertex: ({ value }) => path.push(`enter ${value}`),
-      leaveVertex: ({ value }) => path.push(`leave ${value}`)
+      leaveVertex: ({ value }) => path.push(`leave ${value}`),
     })
 
     expect(vertex!.value).toBe(4)

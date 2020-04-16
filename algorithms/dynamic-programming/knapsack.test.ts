@@ -5,7 +5,7 @@ describe('Knapsack', () => {
     let items: Item[] = [
       { value: 10, size: 5 },
       { value: 15, size: 5 },
-      { value: 100, size: 10 }
+      { value: 100, size: 10 },
     ]
 
     expect(knapsack(items, 10)).toBe(100)
@@ -44,7 +44,7 @@ describe('Knapsack', () => {
       { value: 15, size: 5 },
       { value: 1, size: 1 },
       { value: 1, size: 2 },
-      { value: 15, size: 5 }
+      { value: 15, size: 5 },
     ]
 
     expect(knapsack(items, 100)).toBe(3465)

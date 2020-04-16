@@ -11,7 +11,7 @@ describe('utils/iterator/entries', () => {
     expect(Array.from(entries(values()))).toEqual([
       [0, 'a'],
       [1, 'b'],
-      [2, 'c']
+      [2, 'c'],
     ])
   })
 })

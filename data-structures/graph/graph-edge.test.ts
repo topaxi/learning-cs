@@ -66,7 +66,7 @@ describe('GraphEdge<T>', () => {
       expect(edge.toJSON()).toEqual({
         startVertex,
         endVertex,
-        weight: 0
+        weight: 0,
       })
     })
   })

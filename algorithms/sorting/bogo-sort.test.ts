@@ -2,7 +2,7 @@ import {
   bogosort,
   bogosortIncremental,
   bogosortMinIncremental,
-  bogosortMinMaxIncremental
+  bogosortMinMaxIncremental,
 } from './bogo-sort'
 import { shuffle } from '../../utils/array/shuffle'
 
@@ -47,7 +47,7 @@ describe('bogosort', () => {
           { id: 4 },
           { id: 5 },
           { id: 6 },
-          { id: 7 }
+          { id: 7 },
         ],
         (a, b) => a.id - b.id
       )
@@ -96,7 +96,7 @@ describe('bogosortIncremental', () => {
           { id: 4 },
           { id: 5 },
           { id: 6 },
-          { id: 7 }
+          { id: 7 },
         ],
         (a, b) => a.id - b.id
       )
@@ -145,7 +145,7 @@ describe('bogosortMinIncremental', () => {
           { id: 4 },
           { id: 5 },
           { id: 6 },
-          { id: 7 }
+          { id: 7 },
         ],
         (a, b) => a.id - b.id
       )
@@ -194,7 +194,7 @@ describe('bogosortMinMaxIncremental', () => {
           { id: 4 },
           { id: 5 },
           { id: 6 },
-          { id: 7 }
+          { id: 7 },
         ],
         (a, b) => a.id - b.id
       )

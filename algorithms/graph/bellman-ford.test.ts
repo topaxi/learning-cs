@@ -19,7 +19,7 @@ describe('bellmanFord()', () => {
       new GraphEdge(v[1], v[6], 4),
       new GraphEdge(v[5], v[6], 5),
       new GraphEdge(v[6], v[7], 4),
-      new GraphEdge(v[5], v[7], 3)
+      new GraphEdge(v[5], v[7], 3),
     ]
 
     expect(
