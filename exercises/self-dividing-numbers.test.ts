@@ -15,7 +15,7 @@ describe('selfDividingNumbers', () => {
       11,
       12,
       15,
-      22
+      22,
     ])
   })
 })

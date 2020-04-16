@@ -9,7 +9,7 @@ describe('189. Rotate Array', () => {
       1,
       2,
       3,
-      4
+      4,
     ])
     expect(rotateArray([-1, -100, 3, 99], 2)).toEqual([3, 99, -1, -100])
   })

@@ -83,7 +83,7 @@ describe('regex', () => {
     ['^ba+$', 'baaa', true],
     ['^ba+$', 'aaa', false],
     ['^ba+$', 'aabaaaa', false],
-    ['ba*$', 'aabaaaa', true]
+    ['ba*$', 'aabaaaa', true],
   ])('match(%o, %o) is %o', (pattern, str, expected) => {
     expect(match(pattern, str)).toBe(expected)
   })

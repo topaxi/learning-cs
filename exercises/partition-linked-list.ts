@@ -30,6 +30,6 @@ export function partition<T>(
     loHead.next,
     hiHead.next,
     lo === loHead ? null : lo,
-    hi === hiHead ? null : hi
+    hi === hiHead ? null : hi,
   ]
 }

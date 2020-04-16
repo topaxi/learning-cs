@@ -13,7 +13,7 @@ const romanLiteralMap = {
   CD: 400,
   D: 500,
   CM: 900,
-  M: 1000
+  M: 1000,
 }
 
 export function romanToInt(romanString: string): number {

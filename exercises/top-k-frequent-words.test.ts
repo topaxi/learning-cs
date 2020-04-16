@@ -12,7 +12,7 @@ describe('topKFrequentWords()', () => {
       'the',
       'sunny',
       'is',
-      'is'
+      'is',
     ]
 
     expect(topKFrequentWords(words, 1)).toEqual(['the'])
@@ -34,7 +34,7 @@ describe('topKFrequentWords()', () => {
       'the',
       'sunny',
       'is',
-      'is'
+      'is',
     ]
 
     expect(topKFrequentWords(words, 1)).toEqual(['the'])

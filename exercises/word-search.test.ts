@@ -5,7 +5,7 @@ describe('79. Word Search', () => {
     let board = [
       ['A', 'B', 'C', 'E'],
       ['S', 'F', 'C', 'S'],
-      ['A', 'D', 'E', 'E']
+      ['A', 'D', 'E', 'E'],
     ]
 
     expect(wordSearch(board, 'ABCCED')).toBe(true)

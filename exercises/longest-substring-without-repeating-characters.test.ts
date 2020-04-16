@@ -6,7 +6,7 @@ describe('3. Longest Substring Without Repeating Characters', () => {
     ['a', 1],
     ['abcabcbb', 3],
     ['bbbbb', 1],
-    ['pwwkew', 3]
+    ['pwwkew', 3],
   ])('lengthOfLongestSubstring(%o) is %o', (str, length) => {
     expect(lengthOfLongestSubstring(str)).toBe(length)
   })

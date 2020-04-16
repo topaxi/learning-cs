@@ -6,7 +6,7 @@ describe('929. Unique Email Addresses', () => {
       uniqueEmails([
         'test.email+alex@example.com',
         'test.e.mail+bob.cathy@example.com',
-        'testemail+david@ex.ample.com'
+        'testemail+david@ex.ample.com',
       ])
     ).toBe(2)
   })

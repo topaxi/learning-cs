@@ -5,9 +5,9 @@ describe('819. Most Common Word', () => {
     [
       'Bob hit a ball, the hit BALL flew far after it was hit.',
       ['hit'],
-      'ball'
+      'ball',
     ],
-    ['Bob. hIt, baLl', ['bob', 'hit'], 'ball']
+    ['Bob. hIt, baLl', ['bob', 'hit'], 'ball'],
   ])('mostCommonWord(%o, %o) is %o', (paragraph, banned, expected) => {
     expect(mostCommonWord(paragraph, banned)).toBe(expected)
   })

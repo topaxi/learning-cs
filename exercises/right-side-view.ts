@@ -13,7 +13,7 @@ export function rightSideView(root: BinaryTreeNode): number[] {
   let currentDepth = -1
   let queue = Queue.of<[BinaryTreeNode | null, number]>([
     root,
-    currentDepth + 1
+    currentDepth + 1,
   ])
   let lastNode = null
 

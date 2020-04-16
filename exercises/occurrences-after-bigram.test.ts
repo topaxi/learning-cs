@@ -8,7 +8,7 @@ describe('1078. Occurrences After Bigram', () => {
 
     expect(findOcurrences('we will we will rock you', 'we', 'will')).toEqual([
       'we',
-      'rock'
+      'rock',
     ])
   })
 })
