@@ -252,7 +252,7 @@ export function compose(
   ...funcs: Array<Many<(...args: any[]) => any>>
 ): (...args: any[]) => any
 export function compose(
-  funcs: Array<Many<(...args: any[]) => any>>
+  ...funcs: Array<Many<(...args: any[]) => any>>
 ): (...args: any[]) => any
 export function compose(...funcs: any[]) {
   return funcs.reduce(_compose, identity)
