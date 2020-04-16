@@ -1,11 +1,7 @@
-import { hasOwnProperty } from './has-own-property'
+import { keys } from './keys'
+import { every } from '../iterator/every'
+import { returnFalse } from '../function/constant'
 
-export function isEmpty(obj: object): boolean {
-  for (let key in obj) {
-    if (hasOwnProperty(obj, key)) {
-      return false
-    }
-  }
-
-  return true
+export function isEmpty(obj: object): obj is {} {
+  return every(keys(obj), returnFalse)
 }

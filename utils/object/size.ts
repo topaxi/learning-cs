@@ -1,12 +1,10 @@
-import { hasOwnProperty } from './has-own-property'
+import { keys } from './keys'
 
 export function size(obj: object): number {
   let size = 0
 
-  for (let key in obj) {
-    if (hasOwnProperty(obj, key)) {
-      size++
-    }
+  for (let _key of keys(obj)) {
+    size++
   }
 
   return size
