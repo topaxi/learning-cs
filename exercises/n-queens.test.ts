@@ -1,12 +1,11 @@
 import { nQueens, ChessFigure, Queen } from './n-queens'
+import { c } from '../utils/function/compose'
 import { range } from '../utils/range'
 
 describe('nQueens', () => {
   test('should place queens without threatening each other', () => {
     for (let i of range(3, 8, { inclusive: true })) {
-      expect(
-        nQueens(i).map(placeQueens).map(printChessboard)
-      ).toMatchSnapshot()
+      expect(nQueens(i).map(c(printChessboard, placeQueens))).toMatchSnapshot()
     }
   })
 })
