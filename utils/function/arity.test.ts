@@ -15,11 +15,11 @@ describe('utils/arity', () => {
   })
 
   test('should reflect arity in fn length', () => {
-    expect(arity(0, nAry)).toHaveLength(0)
-    expect(arity(1, nAry)).toHaveLength(1)
-    expect(arity(2, nAry)).toHaveLength(2)
-    expect(arity(5, nAry)).toHaveLength(5)
+    expect(arity(0, nAry).length).toBe(0)
+    expect(arity(1, nAry).length).toBe(1)
+    expect(arity(2, nAry).length).toBe(2)
+    expect(arity(5, nAry).length).toBe(5)
 
-    expect(arity(2, arity(5, nAry))).toHaveLength(2)
+    expect(arity(2, arity(5, nAry)).length).toBe(2)
   })
 })
