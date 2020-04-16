@@ -1,10 +1,13 @@
 import { memoize } from '../function/memoize'
 
+export interface Sliceable<T> {
+  slice(start: number, end?: number): T
+}
+
 function _tail<T>(list: [unknown, ...T[]]): readonly T[]
 function _tail<T>(list: readonly T[]): readonly T[]
-function _tail<T>(list: T[]): readonly T[]
-function _tail<T extends { slice(start: number, end?: number): T }>(list: T): T
-function _tail(list: readonly unknown[]): readonly unknown[] {
+function _tail<T>(list: Sliceable<T>): T
+function _tail(list: readonly unknown[] | Sliceable<unknown>): unknown {
   return list.slice(1)
 }
 
