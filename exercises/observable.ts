@@ -81,7 +81,7 @@ export class Observable<T> {
       this.subscribe({
         next: v => (value = v),
         error: reject,
-        complete: () => resolve(value)
+        complete: () => resolve(value),
       })
     )
   }
