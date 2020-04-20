@@ -1,6 +1,7 @@
 import { lastIndex } from '../../utils/array/last-index'
 import { shuffleInplace } from '../../utils/array/shuffle'
 import { neg } from '../../utils/function/neg'
+import { findIndex } from '../../utils/iterator/find-index'
 import { range } from '../../utils/range'
 import { swap } from '../../utils/swap'
 import { define, Compare } from './utils'
@@ -8,13 +9,13 @@ import { define, Compare } from './utils'
 const { min, max } = Math
 
 function isSortedTo<T>(list: T[], start: number, compare: Compare<T>): number {
-  for (let i of range(start, lastIndex(list))) {
-    if (compare(list[i], list[i + 1]) > 0) {
-      return i
-    }
-  }
+  let end = lastIndex(list)
+  let index = findIndex(
+    range(start, end),
+    i => compare(list[i], list[i + 1]) > 0
+  )
 
-  return lastIndex(list)
+  return index !== -1 ? index : end
 }
 
 export const bogosort = define((list, compare) => {
