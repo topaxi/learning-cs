@@ -1,10 +1,11 @@
 // Java hashCode reimplementation
+import { map } from '../iterator/map'
+import { reduce } from '../iterator/reduce'
+
+const toCharCode = (str: string) => str.charCodeAt(0)
+const hashCodeReducer = (hash: number, charCode: number) =>
+  ((hash << 5) - hash + charCode) << 0
+
 export function hashCode(str: string): number {
-  let hash = 0
-
-  for (let i = 0; i < str.length; i++) {
-    hash = ((hash << 5) - hash + str.charCodeAt(i)) << 0
-  }
-
-  return hash
+  return reduce(map(str, toCharCode), hashCodeReducer, 0)
 }
