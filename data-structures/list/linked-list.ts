@@ -204,8 +204,12 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
     return this.values()
   }
 
+  private nodeToEntry(node: LinkedListNode<T>, i: number): [number, T] {
+    return [i, node.value]
+  }
+
   entries(): IterableIterator<[number, T]> {
-    return map(this.nodes(), (node, i) => [i, node.value])
+    return map(this.nodes(), this.nodeToEntry)
   }
 
   keys(): IterableIterator<number> {
