@@ -5,7 +5,7 @@ import { Piece, MoveDirection } from './piece'
 import { Scoreboard } from './scoreboard'
 import { DPad, DPadEvent, DPadDirection } from '../../game-utils/dpad'
 
-const enum Action {
+enum Action {
   moveLeft,
   moveRight,
   moveDown,

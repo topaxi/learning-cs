@@ -6,13 +6,13 @@ import { constant } from '@topaxi/lcs-utils/function/constant'
 import { Renderer } from './renderer'
 import { Game } from './game'
 
-export const enum MoveDirection {
+export enum MoveDirection {
   left,
   right,
   down,
 }
 
-export const enum Rotation {
+export enum Rotation {
   up = 0,
   right = 1,
   down = 2,

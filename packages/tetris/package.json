@@ -1,5 +1,13 @@
 {
   "name": "@topaxi/lcs-tetris",
+  "scripts": {
+    "clean:dist": "rm -rf dist",
+    "start": "lerna exec --scope @topaxi/lcs-tetris -- parcel index.html",
+    "prebuild": "yarn clean:dist",
+    "build": "lerna exec --scope @topaxi/lcs-tetris -- parcel build index.html",
+    "predeploy": "yarn build",
+    "deploy": "rsync -av --delete dist/ topaxi.ch:www/tetris/"
+  },
   "dependencies": {
     "@topaxi/lcs-utils": "*",
     "@topaxi/lcs-game-utils": "*",

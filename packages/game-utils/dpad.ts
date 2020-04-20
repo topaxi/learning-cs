@@ -1,4 +1,4 @@
-export const enum DPadDirection {
+export enum DPadDirection {
   up = 0,
   right = 3,
   down = 1,

@@ -1,5 +1,13 @@
 {
   "name": "@topaxi/lcs-snake",
+  "scripts": {
+    "clean:dist": "rm -rf dist",
+    "start": "lerna exec --scope @topaxi/lcs-snake -- parcel serve index.html",
+    "prebuild": "yarn clean:dist",
+    "build": "lerna exec --scope @topaxi/lcs-snake -- parcel build index.html",
+    "predeploy": "yarn build",
+    "deploy": "rsync -av --delete dist/ topaxi.ch:www/snake/"
+  },
   "dependencies": {
     "@topaxi/lcs-utils": "*",
     "@topaxi/lcs-game-utils": "*",

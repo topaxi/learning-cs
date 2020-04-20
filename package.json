@@ -9,24 +9,16 @@
     "test:watch": "yarn test --watch",
     "lint": "eslint '**/*.ts'",
     "type-check": "for i in packages/*; do tsc --noEmit -p $i; done",
-    "precommit": "lint-staged && yarn type-check",
-    "clean:dist": "rm -rf dist",
-    "start:snake": "parcel web/snake/index.html",
-    "prebuild:snake": "yarn clean:dist",
-    "build:snake": "npx parcel build --no-cache --no-content-hash --public-url=/snake --experimental-scope-hoisting web/snake/index.html",
-    "predeploy:snake": "yarn build:snake",
-    "deploy:snake": "rsync -av --delete dist/ topaxi.ch:www/snake/",
-    "start:tetris": "parcel web/tetris/index.html",
-    "prebuild:tetris": "yarn clean:dist",
-    "build:tetris": "npx parcel build --no-cache --no-content-hash --public-url=/tetris --experimental-scope-hoisting web/tetris/index.html",
-    "predeploy:tetris": "yarn build:tetris",
-    "deploy:tetris": "rsync -av --delete dist/ topaxi.ch:www/tetris/"
+    "precommit": "lint-staged && yarn type-check"
   },
   "browserslist": [
     "last 1 firefox version",
     "last 1 chrome version"
   ],
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "7.8.3",
+    "@babel/preset-env": "7.9.5",
+    "@babel/preset-typescript": "7.9.0",
     "@types/jest": "25.2.1",
     "@types/node": "12.12.36",
     "@typescript-eslint/eslint-plugin": "2.28.0",
@@ -36,9 +28,9 @@
     "eslint-plugin-jest": "23.8.2",
     "husky": "2.5.0",
     "jest": "25.4.0",
-    "lerna": "^3.20.2",
+    "lerna": "3.20.2",
     "lint-staged": "10.1.6",
-    "parcel-bundler": "1.12.4",
+    "parcel": "2.0.0-alpha.3.2",
     "prettier": "2.0.4",
     "ts-jest": "25.4.0",
     "typescript": "3.8.3"

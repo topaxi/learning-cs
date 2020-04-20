@@ -8,7 +8,7 @@ import { Actor } from './actor'
 import { Point } from './point'
 import { Game } from './game'
 
-export const enum Direction {
+export enum Direction {
   up,
   down,
   left,
