@@ -3,11 +3,11 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   collectCoverageFrom: [
-    'algorithms/**/*.ts',
-    'data-structures/**/*.ts',
-    'exercises/**/*.ts',
-    'utils/**/*.ts'
+    'packages/algorithms/**/*.ts',
+    'packages/data-structures/**/*.ts',
+    'packages/exercises/**/*.ts',
+    'packages/utils/**/*.ts',
   ],
   coveragePathIgnorePatterns: ['/node_modules/', '/exercises/e/'],
-  snapshotSerializers: ['./tests/binary-tree-serializer.ts']
+  snapshotSerializers: ['./tests/binary-tree-serializer.ts'],
 }

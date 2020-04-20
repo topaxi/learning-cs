@@ -1,4 +1,4 @@
-import { Renderer2d } from '../../game-utils/renderer2d'
+import { Renderer2d } from '@topaxi/lcs-game-utils/renderer2d'
 import { Game } from './game'
 import { Piece, PieceType } from './piece'
 import { Scoreboard } from './scoreboard'

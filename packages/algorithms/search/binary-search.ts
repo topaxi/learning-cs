@@ -1,4 +1,4 @@
-import { lastIndex } from '../../utils/array/last-index'
+import { lastIndex } from '@topaxi/lcs-utils/array/last-index'
 
 export function binarySearch<T = number>(
   list: T[],

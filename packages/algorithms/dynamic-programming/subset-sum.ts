@@ -1,6 +1,6 @@
-import { mY } from '../../utils/function/y'
-import { head } from '../../utils/array/head'
-import { tail } from '../../utils/array/tail'
+import { mY } from '@topaxi/lcs-utils/function/y'
+import { head } from '@topaxi/lcs-utils/array/head'
+import { tail } from '@topaxi/lcs-utils/array/tail'
 
 // Given a set of non-negative integers, and a value sum,
 // determine if there is a subset of the given set with sum equal to given sum.

@@ -1,9 +1,9 @@
-import { lastIndex } from '../../utils/array/last-index'
-import { shuffleInplace } from '../../utils/array/shuffle'
-import { neg } from '../../utils/function/neg'
-import { findIndex } from '../../utils/iterator/find-index'
-import { range } from '../../utils/range'
-import { swap } from '../../utils/swap'
+import { lastIndex } from '@topaxi/lcs-utils/array/last-index'
+import { shuffleInplace } from '@topaxi/lcs-utils/array/shuffle'
+import { neg } from '@topaxi/lcs-utils/function/neg'
+import { findIndex } from '@topaxi/lcs-utils/iterator/find-index'
+import { range } from '@topaxi/lcs-utils/range'
+import { swap } from '@topaxi/lcs-utils/swap'
 import { define, Compare } from './utils'
 
 const { min, max } = Math

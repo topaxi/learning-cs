@@ -1,5 +1,5 @@
-import { head } from '../../../utils/array/head'
-import { Renderer2d } from '../../game-utils/renderer2d'
+import { head } from '@topaxi/lcs-utils/array/head'
+import { Renderer2d } from '@topaxi/lcs-game-utils/renderer2d'
 import { Player } from './player'
 import { Point } from './point'
 import { Game } from './game'

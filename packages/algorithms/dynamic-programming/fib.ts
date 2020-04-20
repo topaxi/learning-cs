@@ -1,5 +1,5 @@
-import { HashMap } from '../../data-structures/hash/hash-map'
-import { range } from '../../utils/range'
+import { HashMap } from '@topaxi/lcs-data-structures/hash/hash-map'
+import { range } from '@topaxi/lcs-utils/range'
 
 // O(n²)
 export function fibNaive(n: number): number {

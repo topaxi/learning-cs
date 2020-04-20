@@ -3,5 +3,10 @@
   "compilerOptions": {
     "target": "esnext"
   },
-  "exclude": ["web"]
+  "exclude": [
+    "packages/game-utils",
+    "packages/sw-utils",
+    "packages/snake",
+    "packages/tetris"
+  ]
 }

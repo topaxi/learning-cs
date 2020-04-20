@@ -52,9 +52,9 @@ module.exports = {
   overrides: [
     {
       files: [
-        'exercises/movie.ts',
-        'exercises/e/*',
-        'utils/print-binary-tree.ts',
+        'packages/exercises/movie.ts',
+        'packages/exercises/e/*',
+        'tests/print-binary-tree.ts',
       ],
       rules: {
         'no-console': 'off',
@@ -76,16 +76,16 @@ module.exports = {
         '@typescript-eslint/explicit-function-return-type': 'off',
       },
     },
-    {
-      files: ['web/**/*.ts', 'web/**/*.js'],
+    ...['game-utils', 'sw-utils', 'snake', 'tetris'].map(package => ({
+      files: [`packages/${package}/**/*.ts`, `packages/${package}/**/*.js`],
       env: {
         node: false,
         es6: true,
         browser: true,
       },
       parserOptions: {
-        project: './web/tsconfig.json',
+        project: `./packages/${package}/tsconfig.json`,
       },
-    },
+    })),
   ],
 }

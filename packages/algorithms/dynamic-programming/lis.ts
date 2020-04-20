@@ -1,7 +1,7 @@
-import { range } from '../../utils/range'
-import { filter } from '../../utils/iterator/filter'
-import { mY } from '../../utils/function/y'
-import { SingleParamStore } from '../../utils/function/memoize/single-param-store'
+import { range } from '@topaxi/lcs-utils/range'
+import { filter } from '@topaxi/lcs-utils/iterator/filter'
+import { mY } from '@topaxi/lcs-utils/function/y'
+import { SingleParamStore } from '@topaxi/lcs-utils/function/memoize/single-param-store'
 
 // Longest increasing subsequence
 // Subproblem: Suffix

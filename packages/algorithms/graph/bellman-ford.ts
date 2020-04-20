@@ -1,8 +1,8 @@
-import { lastIndex } from '../../utils/array/last-index'
-import { filter } from '../../utils/iterator/filter'
-import { HashMap } from '../../data-structures/hash/hash-map'
-import { GraphEdge } from '../../data-structures/graph/graph-edge'
-import { GraphVertex } from '../../data-structures/graph/graph-vertex'
+import { lastIndex } from '@topaxi/lcs-utils/array/last-index'
+import { filter } from '@topaxi/lcs-utils/iterator/filter'
+import { HashMap } from '@topaxi/lcs-data-structures/hash/hash-map'
+import { GraphEdge } from '@topaxi/lcs-data-structures/graph/graph-edge'
+import { GraphVertex } from '@topaxi/lcs-data-structures/graph/graph-vertex'
 
 function* relax<T>(
   vertices: readonly GraphVertex<T>[],

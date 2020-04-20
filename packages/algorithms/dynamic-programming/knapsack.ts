@@ -1,6 +1,6 @@
-import { mY } from '../../utils/function/y'
-import { head } from '../../utils/array/head'
-import { tail } from '../../utils/array/tail'
+import { mY } from '@topaxi/lcs-utils/function/y'
+import { head } from '@topaxi/lcs-utils/array/head'
+import { tail } from '@topaxi/lcs-utils/array/tail'
 
 const { max } = Math
 

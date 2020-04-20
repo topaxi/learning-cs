@@ -1,5 +1,5 @@
-import { range } from '../../utils/range'
-import { swap } from '../../utils/swap'
+import { range } from '@topaxi/lcs-utils/range'
+import { swap } from '@topaxi/lcs-utils/swap'
 import { define } from './utils'
 
 export const bubbleSort = define((list, compare) => {

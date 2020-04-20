@@ -1,10 +1,8 @@
 {
-  "name": "@topaxi/lcs-utils",
+  "name": "@topaxi/lcs-algorithms",
   "version": "1.0.0",
-  "exports": {
-    "./": "./src"
-  },
   "dependencies": {
+    "@topaxi/lcs-utils": "*",
     "@topaxi/lcs-data-structures": "*"
   }
 }

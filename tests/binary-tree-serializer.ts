@@ -1,4 +1,4 @@
-import { BinaryTreeNode } from '../src/tree/binary-tree-node'
+import { BinaryTreeNode } from '../packages/data-structures/tree/binary-tree-node'
 import { BinaryTreePrinter } from './print-binary-tree'
 
 export function print(

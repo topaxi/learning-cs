@@ -1,6 +1,6 @@
-import { lastIndex } from '../../utils/array/last-index'
-import { partitionInline } from '../../utils/array/partition'
-import { random } from '../../utils/random'
+import { lastIndex } from '@topaxi/lcs-utils/array/last-index'
+import { partitionInline } from '@topaxi/lcs-utils/array/partition'
+import { random } from '@topaxi/lcs-utils/random'
 
 export function quickselect(
   list: number[],

@@ -1,5 +1,5 @@
-import { random } from '../../../utils/random'
-import { construct } from '../../../utils/function/construct'
+import { random } from '@topaxi/lcs-utils/random'
+import { construct } from '@topaxi/lcs-utils/function/construct'
 import { Actor } from './actor'
 import { Game } from './game'
 import { Renderer } from './renderer'

@@ -1,7 +1,7 @@
-import { not } from '../../utils/function/not'
-import { mY } from '../../utils/function/y'
-import { range } from '../../utils/range'
-import { isWithinMatrix } from '../../utils/matrix'
+import { not } from '@topaxi/lcs-utils/function/not'
+import { mY } from '@topaxi/lcs-utils/function/y'
+import { range } from '@topaxi/lcs-utils/range'
+import { isWithinMatrix } from '@topaxi/lcs-utils/matrix'
 
 const { max } = Math
 const failsBoundaryCheck = not(isWithinMatrix)

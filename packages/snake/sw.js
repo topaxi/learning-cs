@@ -1,4 +1,4 @@
-import { precache, fromCache, update } from '../sw/utils'
+import { precache, fromCache, update } from '@topaxi/lcs-sw-utils'
 
 const CACHE = 'snake-assets'
 

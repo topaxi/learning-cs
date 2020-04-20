@@ -1,9 +1,9 @@
-import { noop } from '../../utils/function/noop'
-import { returnTrue } from '../../utils/function/constant'
-import { HashSet } from '../../data-structures/hash/hash-set'
-import { Queue } from '../../data-structures/queue/queue'
-import { GraphVertex } from '../../data-structures/graph/graph-vertex'
-import { filter } from '../../utils/iterator/filter'
+import { noop } from '@topaxi/lcs-utils/function/noop'
+import { returnTrue } from '@topaxi/lcs-utils/function/constant'
+import { HashSet } from '@topaxi/lcs-data-structures/hash/hash-set'
+import { Queue } from '@topaxi/lcs-data-structures/queue/queue'
+import { GraphVertex } from '@topaxi/lcs-data-structures/graph/graph-vertex'
+import { filter } from '@topaxi/lcs-utils/iterator/filter'
 
 export interface BreadthFirstSearchCallbacks<T> {
   find?(currentVertex: GraphVertex<T>): boolean | unknown

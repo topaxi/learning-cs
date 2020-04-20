@@ -1,7 +1,3 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "target": "esnext",
-    "lib": ["dom"]
-  }
+  "extends": "../../tsconfig.web.json"
 }

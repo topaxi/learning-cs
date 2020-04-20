@@ -1,0 +1,8 @@
+{
+  "name": "@topaxi/lcs-tetris",
+  "dependencies": {
+    "@topaxi/lcs-utils": "*",
+    "@topaxi/lcs-game-utils": "*",
+    "@topaxi/lcs-sw-utils": "*"
+  }
+}

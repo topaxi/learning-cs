@@ -1,6 +1,6 @@
 // Based on http://web.archive.org/web/20090617110918/http://www.openasthra.com/c-tidbits/printing-binary-trees-in-ascii/
-import { BinaryTreeNode } from '../data-structures/tree/binary-tree-node'
-import { range } from './range'
+import { BinaryTreeNode } from '../packages/data-structures/tree/binary-tree-node'
+import { range } from '../packages/utils/range'
 
 const { min, max, floor } = Math
 

@@ -1,8 +1,8 @@
-import { range } from '../../../utils/range'
-import { shuffle, shuffleInplace } from '../../../utils/array/shuffle'
-import { flatMap } from '../../../utils/iterator/flat-map'
-import { some } from '../../../utils/iterator/some'
-import { constant } from '../../../utils/function/constant'
+import { range } from '@topaxi/lcs-utils/range'
+import { shuffle, shuffleInplace } from '@topaxi/lcs-utils/array/shuffle'
+import { flatMap } from '@topaxi/lcs-utils/iterator/flat-map'
+import { some } from '@topaxi/lcs-utils/iterator/some'
+import { constant } from '@topaxi/lcs-utils/function/constant'
 import { Renderer } from './renderer'
 import { Game } from './game'
 

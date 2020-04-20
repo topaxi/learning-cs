@@ -1,5 +1,5 @@
-import { constant } from '../../../utils/function/constant'
-import { Loop } from '../../game-utils/loop'
+import { constant } from '@topaxi/lcs-utils/function/constant'
+import { Loop } from '@topaxi/lcs-game-utils/loop'
 import { Renderer } from './renderer'
 import { Piece, MoveDirection } from './piece'
 import { Scoreboard } from './scoreboard'

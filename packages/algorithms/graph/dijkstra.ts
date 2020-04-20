@@ -1,8 +1,8 @@
-import { filter } from '../../utils/iterator/filter'
-import { GraphVertex } from '../../data-structures/graph/graph-vertex'
-import { HashSet } from '../../data-structures/hash/hash-set'
-import { HashMap } from '../../data-structures/hash/hash-map'
-import { PriorityQueue } from '../../data-structures/queue/priority-queue'
+import { filter } from '@topaxi/lcs-utils/iterator/filter'
+import { GraphVertex } from '@topaxi/lcs-data-structures/graph/graph-vertex'
+import { HashSet } from '@topaxi/lcs-data-structures/hash/hash-set'
+import { HashMap } from '@topaxi/lcs-data-structures/hash/hash-map'
+import { PriorityQueue } from '@topaxi/lcs-data-structures/queue/priority-queue'
 
 export function dijkstra<T>(
   vertices: readonly GraphVertex<T>[],

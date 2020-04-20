@@ -1,7 +1,7 @@
-import { noop } from '../../utils/function/noop'
-import { returnTrue } from '../../utils/function/constant'
-import { HashSet } from '../../data-structures/hash/hash-set'
-import { GraphVertex } from '../../data-structures/graph/graph-vertex'
+import { noop } from '@topaxi/lcs-utils/function/noop'
+import { returnTrue } from '@topaxi/lcs-utils/function/constant'
+import { HashSet } from '@topaxi/lcs-data-structures/hash/hash-set'
+import { GraphVertex } from '@topaxi/lcs-data-structures/graph/graph-vertex'
 
 export interface DepthFirstSearchCallbacks<T> {
   find?(

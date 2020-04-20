@@ -1,5 +1,5 @@
-import { Y, mY } from '../../utils/function/y'
-import { SingleParamStore } from '../../utils/function/memoize/single-param-store'
+import { Y, mY } from '@topaxi/lcs-utils/function/y'
+import { SingleParamStore } from '@topaxi/lcs-utils/function/memoize/single-param-store'
 
 export const staircase = (staircase: (n: number) => number) => (n: number) => {
   if (n < 1) return 0

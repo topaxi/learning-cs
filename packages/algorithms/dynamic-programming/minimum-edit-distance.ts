@@ -1,4 +1,4 @@
-import { Y, mY } from '../../utils/function/y'
+import { Y, mY } from '@topaxi/lcs-utils/function/y'
 
 const { min } = Math
 

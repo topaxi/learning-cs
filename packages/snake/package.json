@@ -1,0 +1,8 @@
+{
+  "name": "@topaxi/lcs-snake",
+  "dependencies": {
+    "@topaxi/lcs-utils": "*",
+    "@topaxi/lcs-game-utils": "*",
+    "@topaxi/lcs-sw-utils": "*"
+  }
+}
