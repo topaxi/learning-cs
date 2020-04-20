@@ -1,0 +1,8 @@
+{
+  "name": "@topaxi/lcs-data-structures",
+  "version": "1.0.0",
+  "dependencies": {
+    "@topaxi/lcs-utils": "*",
+    "@topaxi/lcs-algorithms": "*"
+  }
+}

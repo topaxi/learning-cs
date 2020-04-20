@@ -1,5 +1,5 @@
 {
-  "name": "learning-cs",
+  "name": "@topaxi/learning-cs",
   "private": true,
   "version": "1.0.0",
   "license": "MIT",
@@ -36,13 +36,13 @@
     "eslint-plugin-jest": "23.8.2",
     "husky": "2.5.0",
     "jest": "25.4.0",
+    "lerna": "^3.20.2",
     "lint-staged": "10.1.6",
     "parcel-bundler": "1.12.4",
     "prettier": "2.0.4",
     "ts-jest": "25.4.0",
     "typescript": "3.8.3"
   },
-  "dependencies": {},
   "husky": {
     "hooks": {
       "pre-commit": "yarn precommit"
