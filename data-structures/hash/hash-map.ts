@@ -131,7 +131,7 @@ export class HashMap<K extends Hashable, T> implements Iterable<[K, T]> {
   }
 
   protected initializeKeyCache(): Record<string | number, number> {
-    return ({} as unknown) as Record<string | number, number>
+    return {}
   }
 
   protected normalizeKey(key: Hashable): string | number {
