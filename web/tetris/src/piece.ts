@@ -94,6 +94,7 @@ const Z: PieceType = {
 }
 
 const PIECES = { I, J, L, O, S, T, Z }
+const PIECES_KEYS = Object.keys(PIECES) as ['I', 'J', 'L', 'O', 'S', 'T', 'Z']
 
 export class Piece {
   static create(game: Game, pieceType: PieceType['name']): Piece {
@@ -107,9 +108,7 @@ export class Piece {
    * This causes the game to be played more reliable.
    */
   private static seedPieces() {
-    return shuffleInplace(
-      shuffle(flatMap(range(4), constant(Object.keys(PIECES))))
-    ) as PieceType['name'][]
+    return shuffleInplace(shuffle(flatMap(range(4), constant(PIECES_KEYS))))
   }
 
   private static pieces = Piece.seedPieces()
