@@ -4,3 +4,5 @@
 /tsconfig.tsbuildinfo
 /.cache
 /dist
+
+.DS_Store
