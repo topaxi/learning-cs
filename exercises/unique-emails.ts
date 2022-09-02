@@ -6,5 +6,5 @@ export function uniqueEmails(emails: readonly string[]): number {
 
 function normalize(email: string): string {
   let [local, domain] = email.split('@')
-  return local.replace(/\.|\+.*$/g, '') + '@' + domain
+  return local!.replace(/\.|\+.*$/g, '') + '@' + domain
 }

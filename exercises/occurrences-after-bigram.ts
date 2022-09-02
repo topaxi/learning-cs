@@ -8,7 +8,7 @@ export function findOcurrences(
   let s = []
 
   while ((m = r.exec(text))) {
-    s.push(m[1])
+    s.push(m[1]!)
   }
 
   return s

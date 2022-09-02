@@ -15,7 +15,7 @@ export class Loop<T> {
   private readonly skipTicks: number
   private readonly maxFrameSkip: number
 
-  get running() {
+  get running(): boolean {
     return this.animationFrame !== 0
   }
 
@@ -49,7 +49,7 @@ export class Loop<T> {
     this.schedule()
   }
 
-  start() {
+  start(): void {
     if (this.running) return
 
     this.nextGameTick = this.lastUpdate = this.lastFrame =
@@ -57,7 +57,7 @@ export class Loop<T> {
     this.schedule()
   }
 
-  stop() {
+  stop(): void {
     cancelAnimationFrame(this.animationFrame)
     this.animationFrame = 0
   }

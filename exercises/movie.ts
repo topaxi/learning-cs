@@ -20,7 +20,7 @@ function schedule(movies: Movie[]): Movie[] {
   return movies
     .sort((a, b) => a.end - b.end)
     .reduce((scheduled: Movie[], movie, i) => {
-      if (i === 0 || movie.start >= scheduled[scheduled.length - 1].end) {
+      if (i === 0 || movie.start >= scheduled[scheduled.length - 1]!.end) {
         scheduled.push(movie)
       }
 

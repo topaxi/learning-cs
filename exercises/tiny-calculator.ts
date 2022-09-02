@@ -31,7 +31,7 @@ export function tinyCalculator(s: string): number {
       default:
         {
           let cur = 0
-          while (i < s.length && s[i] >= '0' && s[i] <= '9') {
+          while (i < s.length && s[i]! >= '0' && s[i]! <= '9') {
             cur = cur * 10 + (((s[i++] as unknown) as number) | 0)
           }
           i--

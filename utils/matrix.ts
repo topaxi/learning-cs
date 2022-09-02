@@ -7,6 +7,6 @@ export function isWithinMatrix(
     row > -1 &&
     column > -1 &&
     row < matrix.length &&
-    column < matrix[row].length
+    column < matrix[row]!.length
   )
 }

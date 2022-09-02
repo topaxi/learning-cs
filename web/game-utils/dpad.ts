@@ -32,7 +32,7 @@ export class DPad extends EventTarget {
 
   handleEvent(
     event: (MouseEvent | TouchEvent) & { target: HTMLButtonElement }
-  ) {
+  ): void {
     event.preventDefault()
     event.stopPropagation()
 

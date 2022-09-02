@@ -2,7 +2,6 @@ import { MemoTrie } from '../../data-structures/tree/memo-trie'
 import { memo, Memoized, MemoStore } from './memoize'
 import { c } from './compose'
 
-// eslint-disable-next-line
 type AnyFunction = (...args: any[]) => any
 
 export const Y = <F extends AnyFunction>(m: (f: F) => F): F => {

@@ -1,5 +1,5 @@
 import { head } from '../utils/array/head'
-import { range } from '../utils/range'
+import { tail } from '../utils/array/tail'
 
 const { max } = Math
 
@@ -7,8 +7,8 @@ export function maximumSubarraySum(list: readonly number[]): number {
   let maximum = head(list) || 0
   let currentMaximum = maximum
 
-  for (let i of range(1, list.length)) {
-    currentMaximum = max(list[i], currentMaximum + list[i])
+  for (let n of tail(list)) {
+    currentMaximum = max(n, currentMaximum + n)
     maximum = max(maximum, currentMaximum)
   }
 

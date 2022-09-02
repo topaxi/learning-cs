@@ -10,8 +10,8 @@ export function smallest(array: number[]): number {
   // As the array is sorted, we sum each value until we find a gap.
   // We found a gap once our sum is smaller than the current value or hit the
   // end of the array.
-  for (let i = 0; i < array.length && sum >= array[i]; i++) {
-    sum = sum + array[i]
+  for (let i = 0; i < array.length && sum >= array[i]!; i++) {
+    sum = sum + array[i]!
   }
 
   return sum

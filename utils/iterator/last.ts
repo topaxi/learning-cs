@@ -5,7 +5,7 @@ export function last<T>(iterator: Iterable<T>): T | undefined {
     return iterator[lastIndex(iterator)]
   }
 
-  let last = undefined
-  for (let value of iterator) last = value
-  return last
+  let value
+  for (value of iterator);
+  return value
 }

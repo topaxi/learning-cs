@@ -24,5 +24,5 @@ export function singleNonDuplicate(nums: readonly number[]): number {
     else lo = mi + 2
   }
 
-  return nums[lo]
+  return nums[lo]!
 }

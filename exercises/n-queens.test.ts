@@ -1,5 +1,6 @@
 import { nQueens, ChessFigure, Queen } from './n-queens'
 import { c } from '../utils/function/compose'
+import { returnNull } from '../utils/function/constant'
 import { range } from '../utils/range'
 
 describe('nQueens', () => {
@@ -29,8 +30,6 @@ function printChessboard(queens: Chessboard): string {
     .trimRight()
 }
 
-const returnNull = () => null
-
 function createEmptyBoard(size: number): Chessboard {
   return Array.from({ length: size }, () =>
     Array.from({ length: size }, returnNull)
@@ -41,7 +40,7 @@ function placeQueens(queens: Queen[]): Chessboard {
   let board = createEmptyBoard(queens.length)
 
   for (let i of range(queens.length)) {
-    board[queens[i].row][queens[i].column] = queens[i]
+    board[queens[i]!.row]![queens[i]!.column] = queens[i]!
   }
 
   return board

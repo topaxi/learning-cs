@@ -37,7 +37,7 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
 
   unshift(...values: T[]): this {
     for (let i = 0; i < values.length; i++) {
-      this.firstNode = new LinkedListNode(values[i], this.firstNode)
+      this.firstNode = new LinkedListNode(values[i]!, this.firstNode)
     }
 
     return this

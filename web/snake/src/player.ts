@@ -19,7 +19,7 @@ export class Player implements Actor, Head<Point> {
   tail: Point[] = []
   alive = true
 
-  get 0() {
+  get 0(): Point {
     return head(this.tail)!
   }
 

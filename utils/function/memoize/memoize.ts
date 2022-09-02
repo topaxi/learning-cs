@@ -8,15 +8,17 @@ export interface MemoStore {
   clear(): void
 }
 
+type AnyFunction = (...args: any[]) => unknown
+
 export type Memoized<
-  T extends Function,
+  T extends AnyFunction,
   M extends MemoStore = MemoTrie
 > = T & { memo: M }
 
-export function memoize<
-  T extends (...args: any[]) => any,
-  M extends MemoStore = MemoTrie
->(fn: T, store: M = (new MemoTrie() as unknown) as M): Memoized<T, M> {
+export function memoize<T extends AnyFunction, M extends MemoStore = MemoTrie>(
+  fn: T,
+  store: M = (new MemoTrie() as unknown) as M
+): Memoized<T, M> {
   function memoized(this: unknown, ...args: unknown[]): ReturnType<T> {
     args.unshift(this)
 
@@ -25,7 +27,7 @@ export function memoize<
     }
 
     // eslint-disable-next-line
-    let r = fn.apply(this, arguments as any)
+    let r = fn.apply(this, arguments as any) as ReturnType<T>
     memoized.memo.set(args, r)
     return r
   }
@@ -55,9 +57,6 @@ memoize.unary = function memoizeUnary<T, R>(
   return memoize(fn, new SingleParamStore())
 }
 
-export const memo = <
-  F extends (...args: unknown[]) => unknown,
-  M extends MemoStore = MemoTrie
->(
+export const memo = <F extends AnyFunction, M extends MemoStore = MemoTrie>(
   store?: M
 ) => (f: F) => memoize(f, store)

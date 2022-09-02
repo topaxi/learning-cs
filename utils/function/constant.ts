@@ -4,3 +4,4 @@ export function constant<T>(value: T): () => T {
 
 export const returnTrue = constant(true as const)
 export const returnFalse = constant(false as const)
+export const returnNull = constant(null)

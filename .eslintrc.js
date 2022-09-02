@@ -26,6 +26,15 @@ module.exports = {
     'prefer-const': 'off',
     'prefer-object-spread': 'error',
     'no-dupe-class-members': 'off',
+    '@typescript-eslint/ban-types': [
+      'error',
+      {
+        types: {
+          '{}': false,
+          object: false,
+        },
+      },
+    ],
     '@typescript-eslint/no-unused-vars': [
       'error',
       {

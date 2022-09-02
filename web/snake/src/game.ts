@@ -8,7 +8,7 @@ import { Actor } from './actor'
 import { Level } from './level'
 
 export class Game implements Actor {
-  static start() {
+  static start(): Game {
     let game = new this(32, 18)
     let dpad = new DPad()
     ;(window as any).currentGame = game

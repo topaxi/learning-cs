@@ -11,7 +11,7 @@ export function partition<T>(
   let b: T[] = []
 
   for (let i of range(array.length)) {
-    ;(fn(array[i], i, array) ? a : b).push(array[i])
+    ;(fn(array[i]!, i, array) ? a : b).push(array[i]!)
   }
 
   return [a, b]
@@ -24,13 +24,13 @@ export function partitionInline<T>(
   left = 0,
   right = lastIndex(array)
 ): number {
-  let pivotElement = array[pivot]
+  let pivotElement = array[pivot]!
 
   swap(array, pivot, right)
 
   let newPivot = left
 
-  for (let i of filter(range(left, right), i => fn(array[i], pivotElement))) {
+  for (let i of filter(range(left, right), i => fn(array[i]!, pivotElement))) {
     swap(array, i, newPivot++)
   }
 

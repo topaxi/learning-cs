@@ -25,7 +25,7 @@ export class Food extends Point implements Actor {
     }
   }
 
-  draw(renderer: Renderer) {
+  draw(renderer: Renderer): void {
     renderer.drawFood(this)
   }
 

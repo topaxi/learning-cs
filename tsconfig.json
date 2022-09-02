@@ -1,7 +1,4 @@
 {
   "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "target": "esnext"
-  },
   "exclude": ["web"]
 }
