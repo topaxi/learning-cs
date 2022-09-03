@@ -28,24 +28,24 @@ describe('MaxHeap', () => {
     heap.push(44)
 
     expect(heap).toMatchInlineSnapshot(`
-                        Array [
-                          46,
-                          44,
-                          44,
-                          42,
-                          43,
-                        ]
-                `)
+      [
+        46,
+        44,
+        44,
+        42,
+        43,
+      ]
+    `)
 
     expect(Array.from(heap.consume())).toMatchInlineSnapshot(`
-                  Array [
-                    46,
-                    44,
-                    44,
-                    43,
-                    42,
-                  ]
-            `)
+      [
+        46,
+        44,
+        44,
+        43,
+        42,
+      ]
+    `)
   })
 
   test('should pop values from the heap', () => {
@@ -58,43 +58,43 @@ describe('MaxHeap', () => {
     heap.push(42)
 
     expect(heap).toMatchInlineSnapshot(`
-            Array [
-              46,
-              44,
-              42,
-              43,
-              42,
-            ]
-        `)
+      [
+        46,
+        44,
+        42,
+        43,
+        42,
+      ]
+    `)
 
     expect(heap.pop()).toBe(46)
 
     expect(heap).toMatchInlineSnapshot(`
-            Array [
-              44,
-              43,
-              42,
-              42,
-            ]
-        `)
+      [
+        44,
+        43,
+        42,
+        42,
+      ]
+    `)
 
     expect(heap.pop()).toBe(44)
 
     expect(heap).toMatchInlineSnapshot(`
-                        Array [
-                          43,
-                          42,
-                          42,
-                        ]
-                `)
+      [
+        43,
+        42,
+        42,
+      ]
+    `)
 
     expect(Array.from(heap.consume())).toMatchInlineSnapshot(`
-                              Array [
-                                43,
-                                42,
-                                42,
-                              ]
-                    `)
+      [
+        43,
+        42,
+        42,
+      ]
+    `)
   })
 
   test('should be able to return index of element', () => {
@@ -113,7 +113,7 @@ describe('MaxHeap', () => {
 
     expect(heap.delete(3)).toBe(3)
     expect(Array.from(heap.consume())).toMatchInlineSnapshot(`
-      Array [
+      [
         4,
         2,
         1,

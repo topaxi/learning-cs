@@ -23,8 +23,8 @@ class HashMapNode<K, T> {
 export type Hashable = string | number | { readonly id: string | number }
 
 export class HashMap<K extends Hashable, T> implements Iterable<[K, T]> {
-  protected slots = this.initializeSlots()
-  private keyCache = this.initializeKeyCache()
+  protected slots: Array<LinkedList<HashMapNode<K, T>>>
+  private keyCache: Record<string | number, number>
 
   // eslint-disable-next-line
   static withDefault: typeof HashMapWithDefault
@@ -37,7 +37,10 @@ export class HashMap<K extends Hashable, T> implements Iterable<[K, T]> {
     return isEmpty(this.keyCache)
   }
 
-  constructor(private readonly internalSize = 32) {}
+  constructor(private readonly internalSize = 32) {
+    this.slots = this.initializeSlots()
+    this.keyCache = this.initializeKeyCache()
+  }
 
   set(key: K, value: T): T {
     let keyHash = this.hash(key)
@@ -127,7 +130,10 @@ export class HashMap<K extends Hashable, T> implements Iterable<[K, T]> {
   }
 
   protected initializeSlots(): Array<LinkedList<HashMapNode<K, T>>> {
-    return Array.from({ length: this.internalSize }, construct(LinkedList))
+    return Array.from(
+      { length: this.internalSize },
+      construct(LinkedList<HashMapNode<K, T>>)
+    )
   }
 
   protected initializeKeyCache(): Record<string | number, number> {

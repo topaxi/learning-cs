@@ -20,13 +20,16 @@ class AsciiNode {
 }
 
 export class BinaryTreePrinter<T extends BinaryTreeNode<any, any>> {
-  private lprofile = new Int16Array(this.maxHeight)
-  private rprofile = new Int16Array(this.maxHeight)
+  private lprofile: Int16Array
+  private rprofile: Int16Array
   private gap = 3
   private printNext = 0
   private out = ''
 
-  constructor(private readonly maxHeight = MAX_HEIGHT) {}
+  constructor(private readonly maxHeight = MAX_HEIGHT) {
+    this.lprofile = new Int16Array(maxHeight)
+    this.rprofile = new Int16Array(maxHeight)
+  }
 
   //prints ascii tree for given Tree structure
   print(root: T): string {

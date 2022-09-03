@@ -27,27 +27,27 @@ describe('Graph Depth First Search', () => {
     })
 
     expect(path).toMatchInlineSnapshot(`
-            Array [
-              "enter 0",
-              "enter 1",
-              "enter 2",
-              "leave 2",
-              "enter 3",
-              "leave 3",
-              "leave 1",
-              "enter 4",
-              "leave 4",
-              "enter 5",
-              "enter 6",
-              "enter 7",
-              "leave 7",
-              "leave 6",
-              "enter 8",
-              "leave 8",
-              "leave 5",
-              "leave 0",
-            ]
-        `)
+      [
+        "enter 0",
+        "enter 1",
+        "enter 2",
+        "leave 2",
+        "enter 3",
+        "leave 3",
+        "leave 1",
+        "enter 4",
+        "leave 4",
+        "enter 5",
+        "enter 6",
+        "enter 7",
+        "leave 7",
+        "leave 6",
+        "enter 8",
+        "leave 8",
+        "leave 5",
+        "leave 0",
+      ]
+    `)
   })
 
   test('should stop traversing on found vertex', () => {
@@ -78,7 +78,7 @@ describe('Graph Depth First Search', () => {
     expect(vertex!.value).toBe(4)
 
     expect(path).toMatchInlineSnapshot(`
-      Array [
+      [
         "enter 0",
         "enter 1",
         "enter 2",

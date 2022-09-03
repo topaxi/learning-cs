@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`nQueens should place queens without threatening each other 1`] = `Array []`;
+exports[`nQueens should place queens without threatening each other 1`] = `[]`;
 
 exports[`nQueens should place queens without threatening each other 2`] = `
-Array [
+[
   "---------
 | |♕| | |
 ---------
@@ -26,7 +26,7 @@ Array [
 `;
 
 exports[`nQueens should place queens without threatening each other 3`] = `
-Array [
+[
   "-----------
 |♕| | | | |
 -----------
@@ -141,7 +141,7 @@ Array [
 `;
 
 exports[`nQueens should place queens without threatening each other 4`] = `
-Array [
+[
   "-------------
 | |♕| | | | |
 -------------
@@ -198,7 +198,7 @@ Array [
 `;
 
 exports[`nQueens should place queens without threatening each other 5`] = `
-Array [
+[
   "---------------
 |♕| | | | | | |
 ---------------
@@ -803,7 +803,7 @@ Array [
 `;
 
 exports[`nQueens should place queens without threatening each other 6`] = `
-Array [
+[
   "-----------------
 |♕| | | | | | | |
 -----------------

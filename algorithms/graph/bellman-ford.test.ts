@@ -28,7 +28,7 @@ describe('bellmanFord()', () => {
           `The cost to get from node ${v[0]} to ${vertex} is ${distance}`
       )
     ).toMatchInlineSnapshot(`
-      Array [
+      [
         "The cost to get from node 0 to 0 is 0",
         "The cost to get from node 0 to 1 is 1",
         "The cost to get from node 0 to 2 is -Infinity",

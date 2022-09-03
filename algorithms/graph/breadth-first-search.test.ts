@@ -27,7 +27,7 @@ describe('Graph Breadh First Search', () => {
     })
 
     expect(path).toMatchInlineSnapshot(`
-      Array [
+      [
         "enter 0",
         "leave 0",
         "enter 1",
@@ -78,7 +78,7 @@ describe('Graph Breadh First Search', () => {
     expect(vertex!.value).toBe(2)
 
     expect(path).toMatchInlineSnapshot(`
-      Array [
+      [
         "enter 0",
         "leave 0",
         "enter 1",

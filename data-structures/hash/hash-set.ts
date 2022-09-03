@@ -4,7 +4,7 @@ import { HashMap, Hashable } from './hash-map'
 const { max } = Math
 
 export class HashSet<T extends Hashable> implements Iterable<T> {
-  private _hash = new HashMap<T, T>(this._hashSize)
+  private _hash: HashMap<T, T>
 
   private static defaultSetSize = 32
 
@@ -22,7 +22,9 @@ export class HashSet<T extends Hashable> implements Iterable<T> {
     return this.of(...iterable)
   }
 
-  constructor(private readonly _hashSize = HashSet.defaultSetSize) {}
+  constructor(hashSize = HashSet.defaultSetSize) {
+    this._hash = new HashMap(hashSize)
+  }
 
   get size(): number {
     return this._hash.size

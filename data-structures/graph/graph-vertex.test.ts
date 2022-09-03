@@ -60,11 +60,11 @@ describe('GraphVertex<T>', () => {
     v0.addEdge(new GraphEdge(v0, v1))
 
     expect(v0).toMatchInlineSnapshot(`
-      Object {
-        "edges": Array [
-          Object {
-            "endVertex": Object {
-              "edges": Array [],
+      {
+        "edges": [
+          {
+            "endVertex": {
+              "edges": [],
               "value": 1,
             },
             "startVertex": [Circular],

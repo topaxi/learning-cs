@@ -15,5 +15,5 @@ export function define(sort: SortFunctionDefinition): SortFunction {
   const s = <T>(list: Iterable<T>, compare = defaultCompare) =>
     sort(Array.from(list), compare)
 
-  return Object.defineProperty(s, 'sort', { value: sort })
+  return Object.defineProperty(s, 'sort', { value: sort }) as SortFunction
 }

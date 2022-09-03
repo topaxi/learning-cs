@@ -1,4 +1,4 @@
-import { HashMap, Hashable } from './hash-map'
+import { HashMap, Hashable, HashMapWithDefault } from './hash-map'
 import { HashSet } from './hash-set'
 import { flat } from '../../utils/iterator/flat'
 import { flatMap } from '../../utils/iterator/flat-map'
@@ -6,12 +6,14 @@ import { zip } from '../../utils/iterator/zip'
 import { infinite } from '../../utils/iterator/infinite'
 
 export class MultiHashMap<K extends Hashable, V extends Hashable> {
-  private map = new HashMap.withDefault<K, HashSet<V>>(
-    () => new HashSet<V>(Math.floor(this.internalSize / 2)),
-    this.internalSize
-  )
+  private map: HashMapWithDefault<K, HashSet<V>>
 
-  constructor(private readonly internalSize = 24) {}
+  constructor(internalSize = 24) {
+    this.map = new HashMap.withDefault<K, HashSet<V>>(
+      () => new HashSet(Math.floor(internalSize / 2)),
+      internalSize
+    )
+  }
 
   get size(): number {
     return this.map.size

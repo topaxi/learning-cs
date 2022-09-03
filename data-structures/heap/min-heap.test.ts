@@ -28,24 +28,24 @@ describe('MinHeap', () => {
     heap.push(44)
 
     expect(heap).toMatchInlineSnapshot(`
-                              Array [
-                                42,
-                                43,
-                                46,
-                                44,
-                                44,
-                              ]
-                    `)
+      [
+        42,
+        43,
+        46,
+        44,
+        44,
+      ]
+    `)
 
     expect(Array.from(heap.consume())).toMatchInlineSnapshot(`
-                                    Array [
-                                      42,
-                                      43,
-                                      44,
-                                      44,
-                                      46,
-                                    ]
-                        `)
+      [
+        42,
+        43,
+        44,
+        44,
+        46,
+      ]
+    `)
   })
 
   test('should pop values from the heap', () => {
@@ -58,43 +58,43 @@ describe('MinHeap', () => {
     heap.push(42)
 
     expect(heap).toMatchInlineSnapshot(`
-                        Array [
-                          42,
-                          42,
-                          43,
-                          46,
-                          44,
-                        ]
-                `)
+      [
+        42,
+        42,
+        43,
+        46,
+        44,
+      ]
+    `)
 
     expect(heap.pop()).toBe(42)
 
     expect(heap).toMatchInlineSnapshot(`
-                        Array [
-                          42,
-                          44,
-                          43,
-                          46,
-                        ]
-                `)
+      [
+        42,
+        44,
+        43,
+        46,
+      ]
+    `)
 
     expect(heap.pop()).toBe(42)
 
     expect(heap).toMatchInlineSnapshot(`
-                              Array [
-                                43,
-                                44,
-                                46,
-                              ]
-                    `)
+      [
+        43,
+        44,
+        46,
+      ]
+    `)
 
     expect(Array.from(heap.consume())).toMatchInlineSnapshot(`
-                                          Array [
-                                            43,
-                                            44,
-                                            46,
-                                          ]
-                            `)
+      [
+        43,
+        44,
+        46,
+      ]
+    `)
   })
 
   test('should be able to return index of element', () => {
@@ -113,7 +113,7 @@ describe('MinHeap', () => {
 
     expect(heap.delete(3)).toBe(3)
     expect(Array.from(heap.consume())).toMatchInlineSnapshot(`
-      Array [
+      [
         0,
         1,
         2,

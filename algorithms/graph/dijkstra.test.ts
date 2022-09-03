@@ -6,7 +6,7 @@ import { dijkstra } from './dijkstra'
 
 describe('dijkstra', () => {
   test('should find shortest path', () => {
-    let v = Array.from(range(10), construct(GraphVertex))
+    let v = Array.from(range(10), construct(GraphVertex<number>))
 
     v[0].addEdge(new GraphEdge(v[0], v[1], 1))
     v[1].addEdge(new GraphEdge(v[1], v[2], 1))
@@ -28,17 +28,17 @@ describe('dijkstra', () => {
           `The cost to get from node ${v[0]} to ${vertex} is ${distance}`
       )
     ).toMatchInlineSnapshot(`
-                        Array [
-                          "The cost to get from node 0 to 0 is 0",
-                          "The cost to get from node 0 to 1 is 1",
-                          "The cost to get from node 0 to 2 is 2",
-                          "The cost to get from node 0 to 3 is 3",
-                          "The cost to get from node 0 to 4 is 3",
-                          "The cost to get from node 0 to 5 is 5",
-                          "The cost to get from node 0 to 6 is 5",
-                          "The cost to get from node 0 to 7 is 8",
-                        ]
-                `)
+      [
+        "The cost to get from node 0 to 0 is 0",
+        "The cost to get from node 0 to 1 is 1",
+        "The cost to get from node 0 to 2 is 2",
+        "The cost to get from node 0 to 3 is 3",
+        "The cost to get from node 0 to 4 is 3",
+        "The cost to get from node 0 to 5 is 5",
+        "The cost to get from node 0 to 6 is 5",
+        "The cost to get from node 0 to 7 is 8",
+      ]
+    `)
 
     function path(
       vertex: GraphVertex<number>,
@@ -57,7 +57,7 @@ describe('dijkstra', () => {
         path(vertex, previousVertex)
       )
     ).toMatchInlineSnapshot(`
-      Array [
+      [
         "0 -> 1",
         "0 -> 1 -> 2",
         "0 -> 1 -> 2 -> 4 -> 3",

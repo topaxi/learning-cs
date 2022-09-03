@@ -4,7 +4,7 @@ describe('Stack<T>', () => {
   describe('.from()', () => {
     test('should create stack from iterable', () => {
       expect(Stack.from([1, 2, 3])).toMatchInlineSnapshot(`
-        Array [
+        [
           3,
           2,
           1,
@@ -14,7 +14,7 @@ describe('Stack<T>', () => {
 
     test('should have an optional project function', () => {
       expect(Stack.from([1, 2, 3], n => n * 2)).toMatchInlineSnapshot(`
-        Array [
+        [
           6,
           4,
           2,
@@ -22,7 +22,7 @@ describe('Stack<T>', () => {
       `)
 
       expect(Stack.from([1, 2, 3], (n, i) => i)).toMatchInlineSnapshot(`
-        Array [
+        [
           2,
           1,
           0,
@@ -34,7 +34,7 @@ describe('Stack<T>', () => {
   describe('.of()', () => {
     test('should create stack of given values', () => {
       expect(Stack.of(1, 2, 3, 4)).toMatchInlineSnapshot(`
-        Array [
+        [
           4,
           3,
           2,
@@ -55,12 +55,12 @@ describe('Stack<T>', () => {
     test('should push values onto the stack', () => {
       let stack = new Stack()
 
-      expect(stack).toMatchInlineSnapshot(`Array []`)
+      expect(stack).toMatchInlineSnapshot(`[]`)
 
       stack.push(1).push(2, 3)
 
       expect(stack).toMatchInlineSnapshot(`
-        Array [
+        [
           3,
           2,
           1,
@@ -74,7 +74,7 @@ describe('Stack<T>', () => {
       let stack = Stack.of(1, 2, 3)
 
       expect(stack).toMatchInlineSnapshot(`
-        Array [
+        [
           3,
           2,
           1,
@@ -84,7 +84,7 @@ describe('Stack<T>', () => {
       expect(stack.pop()).toBe(3)
 
       expect(stack).toMatchInlineSnapshot(`
-        Array [
+        [
           2,
           1,
         ]

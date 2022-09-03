@@ -5,7 +5,7 @@ import { HashMap } from '../../data-structures/hash/hash-map'
 import { PriorityQueue } from '../../data-structures/queue/priority-queue'
 
 export function dijkstra<T>(
-  vertices: readonly GraphVertex<T>[],
+  _vertices: readonly GraphVertex<T>[],
   startVertex: GraphVertex<T>
 ) {
   let distances = new HashMap.withDefault<GraphVertex<T>, number>(Infinity)
