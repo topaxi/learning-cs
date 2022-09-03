@@ -20,7 +20,8 @@
     "prebuild:tetris": "yarn clean:dist",
     "build:tetris": "npx parcel build --no-cache --no-content-hash --public-url=/tetris --experimental-scope-hoisting web/tetris/index.html",
     "predeploy:tetris": "yarn build:tetris",
-    "deploy:tetris": "rsync -av --delete dist/ topaxi.ch:www/tetris/"
+    "deploy:tetris": "rsync -av --delete dist/ topaxi.ch:www/tetris/",
+    "prepare": "husky install"
   },
   "browserslist": [
     "last 1 firefox version",
@@ -42,10 +43,5 @@
     "ts-jest": "28.0.8",
     "typescript": "4.8.2"
   },
-  "dependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn precommit"
-    }
-  }
+  "dependencies": {}
 }
