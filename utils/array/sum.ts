@@ -1,5 +1,5 @@
-import { add } from '../operators'
+import { sum as sumIterable } from '../iterator/sum'
 
 export function sum(array: readonly number[]): number {
-  return array.reduce(add, 0)
+  return sumIterable(array)
 }

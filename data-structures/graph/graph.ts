@@ -1,5 +1,6 @@
 import { prop } from '../../utils/object/prop'
-import { sum } from '../../utils/array/sum'
+import { map } from '../../utils/iterator/map'
+import { sum } from '../../utils/iterator/sum'
 import { find } from '../../utils/iterator/find'
 import { by } from '../../utils/filters/by'
 import { HashMap } from '../hash/hash-map'
@@ -16,7 +17,7 @@ export class Graph<T> {
   readonly edges = new HashMap<number, GraphEdge<T>>()
 
   get weight(): number {
-    return sum(Array.from(this.edges.values(), prop('weight')))
+    return sum(map(this.edges.values(), prop('weight')))
   }
 
   addVertex(vertex: GraphVertex<T>): void {
