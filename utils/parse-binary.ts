@@ -1,17 +1,18 @@
+import { assertNever, assertNonEmptyString } from './assert'
+import { reduce } from './iterator/reduce'
+import { reverse } from './string/reverse'
+
 export function parseBinary(str: string): number {
-  let n = 0
-  let exp = 0
+  assertNonEmptyString(str, 'Not a binary string')
 
-  for (let i = str.length; i--; exp++) {
-    if (str[i] === '0') continue
+  return reduce(
+    reverse(str),
+    (n, digit, exp) => {
+      if (digit === '0') return n
+      if (digit === '1') return n + 2 ** (exp - 1)
 
-    if (str[i] === '1') {
-      n += 2 ** exp
-      continue
-    }
-
-    throw new TypeError('Not a binary string')
-  }
-
-  return n
+      assertNever(digit as never, 'Not a binary string')
+    },
+    0
+  )
 }

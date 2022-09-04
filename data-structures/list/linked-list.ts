@@ -11,6 +11,12 @@ import { isIterable } from '../../utils/iterator/is-iterable'
 import { LinkedListNode } from './linked-list-node'
 import { find } from '../../utils/iterator/find'
 import { findIndex } from '../../utils/iterator/find-index'
+import {
+  assert,
+  assertNotNull,
+  assertNotNullish,
+  assertNotUndefined,
+} from '../../utils/assert'
 
 export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   static of<T>(...values: T[]) {
@@ -62,9 +68,7 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   }
 
   shift(): T {
-    if (this.firstNode === null) {
-      throw new Error('Out of bounds!')
-    }
+    assertNotNull(this.firstNode, 'Out of bounds!')
 
     let value = this.firstNode.value
 
@@ -78,9 +82,7 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   }
 
   pop(): T {
-    if (this.firstNode === null) {
-      throw new Error('Out of bounds!')
-    }
+    assertNotNull(this.firstNode, 'Out of bounds!')
 
     let currentNode = this.firstNode
 
@@ -117,11 +119,12 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
     initialValue: A
   ): T | A {
     if (this.firstNode === null) {
-      if (initialValue !== undefined) {
-        return initialValue
-      }
+      assertNotUndefined(
+        initialValue,
+        new TypeError('Reduce of empty List with no initial value!')
+      )
 
-      throw new Error('Reduce of empty List with no initial value!')
+      return initialValue
     }
 
     return this.firstNode.reduce(arity3(paR(reducer, this)), initialValue)
@@ -316,20 +319,19 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   }
 
   private seekNode(index: number): LinkedListNode<T> {
-    if (index < 0 || this.firstNode === null) {
-      throw new Error(`Index ${index} is out of bounds!`)
-    }
+    assert(
+      index >= 0 && this.firstNode !== null,
+      `Index ${index} is out of bounds!`
+    )
 
     let node = this.firstNode
     while (index--) {
-      if (node === null || node.next === null) {
-        throw new Error('Out of bounds!')
-      }
+      assertNotNullish(node?.next, 'Out of bounds!')
 
       node = node.next
     }
 
-    return node
+    return node!
   }
 
   private concatNormalizer<S>(

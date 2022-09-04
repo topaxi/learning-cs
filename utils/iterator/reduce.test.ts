@@ -21,6 +21,8 @@ describe('utils/iterator/reduce', () => {
 
   test('throws an error on an empty iterable without default value', () => {
     expect(reduce([], (a, b) => a + b, 0)).toBe(0)
-    expect(() => reduce<number>([], (a, b) => a + b)).toThrow(TypeError)
+    expect(() => reduce<number>([], (a, b) => a + b)).toThrow(
+      /Reduce of empty iterable without initial value/
+    )
   })
 })

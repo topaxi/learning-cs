@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2019",
+    "target": "es2022",
     "module": "commonjs",
     "esModuleInterop": true,
     "sourceMap": true,
@@ -14,6 +14,10 @@
       "es2017",
       "es2018",
       "es2019",
+      "es2020",
+      "es2021",
+      "es2022",
+      "es2022.error",
       "esnext"
     ]
   }

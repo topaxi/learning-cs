@@ -1,3 +1,5 @@
+import { assert } from '../assert'
+
 export function reduce<T>(
   iterable: Iterable<T>,
   callback: (accumulator: T, value: T, index: number) => T
@@ -19,9 +21,10 @@ export function reduce(
   if (hasInitialValue === 0) {
     const n = iterator.next()
 
-    if (n.done) {
-      throw new TypeError('Reduce of empty iterable without intitial value')
-    }
+    assert(
+      !n.done,
+      new TypeError('Reduce of empty iterable without initial value')
+    )
 
     accumulator = n.value
   }
