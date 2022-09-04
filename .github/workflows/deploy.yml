@@ -23,6 +23,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
+      - run: yarn install --frozen-lockfile
       - run: yarn deploy:tetris
 
   deploy-tetris:
@@ -43,4 +44,5 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
+      - run: yarn install --frozen-lockfile
       - run: yarn deploy:snake
