@@ -1,5 +1,5 @@
-const head = (str: string) => str.charAt(0)
-const tail = (str: string) => str.slice(1)
+import { head } from '../utils/array/head'
+import { tail } from '../utils/array/tail'
 
 /**
  * Tiny RegExp engine, supporting ^.?*+$

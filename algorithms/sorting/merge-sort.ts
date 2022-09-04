@@ -1,3 +1,4 @@
+import { head } from '../../utils/array/head'
 import { define } from './utils'
 
 export const mergesort = define(function m(list, compare): typeof list {
@@ -19,7 +20,7 @@ function merge<T>(
 
   while (left.length !== 0 && right.length !== 0) {
     sorted.push(
-      compare(left[0], right[0]) <= 0 ? left.shift()! : right.shift()!
+      compare(head(left)!, head(right)!) <= 0 ? left.shift()! : right.shift()!
     )
   }
 

@@ -7,7 +7,7 @@ describe('utils/array/head', () => {
       expect(head([1])).toBe(1)
       expect(head([1, 2])).toBe(1)
 
-      expect(head('')).toBeUndefined()
+      expect(head('')).toBe('')
       expect(head('s')).toBe('s')
       expect(head('str')).toBe('s')
 
