@@ -9,14 +9,14 @@ export interface MemoStore {
 }
 
 export type Memoized<
-  T extends Function,
+  T extends (...args: any[]) => any,
   M extends MemoStore = MemoTrie
 > = T & { memo: M }
 
 export function memoize<
   T extends (...args: any[]) => any,
   M extends MemoStore = MemoTrie
->(fn: T, store: M = (new MemoTrie() as unknown) as M): Memoized<T, M> {
+>(fn: T, store: M = new MemoTrie() as unknown as M): Memoized<T, M> {
   function memoized(this: unknown, ...args: unknown[]): ReturnType<T> {
     args.unshift(this)
 
@@ -55,9 +55,9 @@ memoize.unary = function memoizeUnary<T, R>(
   return memoize(fn, new SingleParamStore())
 }
 
-export const memo = <
-  F extends (...args: unknown[]) => unknown,
-  M extends MemoStore = MemoTrie
->(
-  store?: M
-) => (f: F) => memoize(f, store)
+export const memo =
+  <F extends (...args: unknown[]) => unknown, M extends MemoStore = MemoTrie>(
+    store?: M
+  ) =>
+  (f: F) =>
+    memoize(f, store)

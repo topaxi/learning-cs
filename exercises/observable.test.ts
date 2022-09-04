@@ -42,7 +42,7 @@ describe('Observable<T>', () => {
     expect(values).toEqual([1, 2, 3])
   })
 
-  test('should emit data over time', done => {
+  test('should emit data over time', async () => {
     let o = new Observable<number>(observer => {
       let i = 0
       setTimeout(() => observer.next(++i), 10)
@@ -51,17 +51,20 @@ describe('Observable<T>', () => {
       setTimeout(() => observer.complete(), 30)
     })
 
-    let values: number[] = []
+    const values = await new Promise<number[]>(resolve => {
+      let values: number[] = []
 
-    o.subscribe({
-      next(value) {
-        values.push(value)
-      },
-      complete() {
-        expect(values).toEqual([1, 2, 3])
-        done()
-      },
+      o.subscribe({
+        next(value) {
+          values.push(value)
+        },
+        complete() {
+          resolve(values)
+        },
+      })
     })
+
+    expect(values).toEqual([1, 2, 3])
   })
 
   test('should emit error and close observable', () => {

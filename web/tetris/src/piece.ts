@@ -118,12 +118,15 @@ export class Piece {
     return this.create(game, this.pieces.shift()!)
   }
 
-  x = this.game.width / 2 - 2 + this.type.initialPositionOffset.x
-  y = this.type.initialPositionOffset.y
+  x: number
+  y: number
   rotation = Rotation.up
   private lastMove = 0
 
-  private constructor(private readonly game: Game, readonly type: PieceType) {}
+  private constructor(private readonly game: Game, readonly type: PieceType) {
+    this.x = game.width / 2 - 2 + type.initialPositionOffset.x
+    this.y = type.initialPositionOffset.y
+  }
 
   rotate(): void {
     let rotation = (this.rotation + 1) % 4
