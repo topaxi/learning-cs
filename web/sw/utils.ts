@@ -1,3 +1,7 @@
+const sw = self as any
+
+export { sw as self }
+
 export async function precache(cacheName: string, assets: RequestInfo[]) {
   let cache = await caches.open(cacheName)
   return await cache.addAll(assets)

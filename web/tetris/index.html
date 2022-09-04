@@ -4,11 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tetris</title>
-    <script>
-      window.addEventListener('load', () =>
-        navigator.serviceWorker.register('/sw.js', { scope: '/tetris/' })
-      )
-    </script>
     <style>
       html {
         height: 100%;
@@ -79,7 +74,7 @@
         }
       }
     </style>
-    <script async src="src/game.ts"></script>
+    <script type="module" src="src/index.ts"></script>
   </head>
   <body></body>
 </html>

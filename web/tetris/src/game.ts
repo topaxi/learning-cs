@@ -239,5 +239,3 @@ export class Game {
     return this
   }
 }
-
-Game.start()

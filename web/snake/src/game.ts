@@ -149,5 +149,3 @@ export class Game implements Actor {
     return this
   }
 }
-
-Game.start()

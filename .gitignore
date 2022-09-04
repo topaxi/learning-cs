@@ -3,6 +3,6 @@
 /coverage
 /tsconfig.tsbuildinfo
 /.cache
-/dist
+dist/
 
 .DS_Store
