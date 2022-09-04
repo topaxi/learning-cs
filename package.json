@@ -15,12 +15,12 @@
     "prebuild:snake": "yarn clean:dist",
     "build:snake": "npx vite build --base=/snake/ web/snake",
     "predeploy:snake": "yarn build:snake",
-    "deploy:snake": "rsync -av --delete web/snake/dist/ web01.topaxi.ch:www/snake/",
+    "deploy:snake": "rsync -av --delete web/snake/dist/ topaxi@web01.topaxi.ch:www/snake/",
     "start:tetris": "vite --base=/tetris/ web/tetris",
     "prebuild:tetris": "yarn clean:dist",
     "build:tetris": "npx vite build --base=/tetris/ web/tetris",
     "predeploy:tetris": "yarn build:tetris",
-    "deploy:tetris": "rsync -av --delete web/tetris/dist/ web01.topaxi.ch:www/tetris/",
+    "deploy:tetris": "rsync -av --delete web/tetris/dist/ topaxi@web01.topaxi.ch:www/tetris/",
     "prepare": "husky install"
   },
   "browserslist": [
