@@ -1,7 +1,11 @@
 import { lastIndex } from '../../utils/array/last-index'
 import { shuffleInplace } from '../../utils/array/shuffle'
+import { arity1 } from '../../utils/function/arity'
 import { neg } from '../../utils/function/neg'
+import { paR } from '../../utils/function/partial'
+import { find } from '../../utils/iterator/find'
 import { findIndex } from '../../utils/iterator/find-index'
+import { quickperm } from '../../utils/iterator/quickperm'
 import { range } from '../../utils/range'
 import { swap } from '../../utils/swap'
 import { define, Compare } from './utils'
@@ -18,8 +22,12 @@ function isSortedTo<T>(list: T[], start: number, compare: Compare<T>): number {
   return index !== -1 ? index : end
 }
 
+function isSorted<T>(list: T[], compare: Compare<T>): boolean {
+  return isSortedTo(list, 0, compare) === lastIndex(list)
+}
+
 export const bogosort = define((list, compare) => {
-  while (isSortedTo(list, 0, compare) !== lastIndex(list)) {
+  while (!isSorted(list, compare)) {
     shuffleInplace(list)
   }
 
@@ -103,4 +111,8 @@ export const bogosortMinMaxIncremental = define((list, compare) => {
   }
 
   return list
+})
+
+export const bogosortQuickperm = define((list, compare) => {
+  return find(quickperm(list), arity1(paR(isSorted, compare)))!
 })
