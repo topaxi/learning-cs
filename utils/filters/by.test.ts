@@ -9,6 +9,14 @@ describe('utils/filters/by', () => {
         )
       ).toEqual([{ value: 1 }, { value: 1 }])
     })
+
+    test('should filter by given callback', () => {
+      expect(
+        [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 1 }].filter(
+          by(obj => obj.value, 1)
+        )
+      ).toEqual([{ value: 1 }, { value: 1 }])
+    })
   })
 
   describe('byKey()', () => {

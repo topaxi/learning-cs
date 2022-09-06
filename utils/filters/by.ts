@@ -1,6 +1,15 @@
-export const by = <O, P extends keyof O, V extends O[P]>(
+import { prop } from '../object/prop'
+
+export function by<O, P extends keyof O, V extends O[P]>(
   p: P | ((o: O) => V),
   v: V
-) => (typeof p === 'function' ? (o: O) => p(o) === v : (o: O) => o[p] === v)
+): (o: O) => boolean {
+  if (typeof p === 'function') {
+    return o => p(o) === v
+  }
 
-export const byKey = <T>(key: T) => (o: { key: T }): boolean => o.key === key
+  return by(prop(p), v)
+}
+
+export const byKey: <T>(key: T) => (o: { key: T }) => boolean = key =>
+  by('key', key)
