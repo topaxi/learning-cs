@@ -1,9 +1,10 @@
 import { withCallback } from './with-callback'
+import { consume } from './consume'
 
 export function forEach<T, This = undefined>(
   iterator: Iterable<T>,
   callback: (this: This, t: T, i: number) => unknown,
   thisArg?: This
 ): void {
-  for (let _ of withCallback(iterator, callback, thisArg));
+  consume(withCallback(iterator, callback, thisArg))
 }
