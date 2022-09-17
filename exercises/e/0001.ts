@@ -1,8 +1,7 @@
 import { range } from '../../utils/range'
-import { add } from '../../utils/operators'
+import { filter } from '../../utils/iterator/filter'
+import { sum } from '../../utils/iterator/sum'
 
-console.log(
-  Array.from(range(1000))
-    .filter(n => n % 3 === 0 || n % 5 === 0)
-    .reduce(add)
-)
+export function solve(n: number) {
+  return sum(filter(range(n), n => n % 3 === 0 || n % 5 === 0))
+}

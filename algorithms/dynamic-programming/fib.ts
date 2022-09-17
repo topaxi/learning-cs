@@ -43,3 +43,16 @@ export function fibbuo(n: number): number {
 
   return fib
 }
+
+export function* fibgen(): Generator<bigint> {
+  let current = 1n
+  let previous = 1n
+  let fib = 0n
+
+  for (;;) {
+    fib = current + previous
+    yield fib
+    previous = current
+    current = fib
+  }
+}

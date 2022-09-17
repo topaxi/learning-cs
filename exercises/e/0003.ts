@@ -1,11 +1,15 @@
+import { filter } from '../../utils/iterator/filter'
+import { last } from '../../utils/iterator/last'
 import { primes } from '../../utils/prime'
 
-let n = 600851475143
-let factors = []
-for (let prime of primes(10000)) {
-  if (n % prime === 0) {
+export function solve(max: number): number | undefined {
+  let n = 600_851_475_143
+  let factors: number[] = []
+
+  for (let prime of filter(primes(max), prime => n % prime === 0)) {
     n /= prime
     factors.push(prime)
   }
+
+  return last(factors)
 }
-console.log(factors[factors.length - 1])

@@ -6,8 +6,8 @@ module.exports = {
     'algorithms/**/*.ts',
     'data-structures/**/*.ts',
     'exercises/**/*.ts',
-    'utils/**/*.ts'
+    'utils/**/*.ts',
   ],
   coveragePathIgnorePatterns: ['/node_modules/', '/exercises/e/'],
-  snapshotSerializers: ['./tests/binary-tree-serializer.ts']
+  snapshotSerializers: ['./tests/binary-tree-serializer.ts'],
 }

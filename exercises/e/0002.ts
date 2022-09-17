@@ -1,22 +1,15 @@
-function* fib() {
-  let current = 1
-  let previous = 1
-  let fib = 0
+import { fibgen } from '../../algorithms/dynamic-programming/fib'
+import { lt } from '../../utils/filters/eq'
+import { takeWhile } from '../../utils/iterator/take-while'
 
-  for (;;) {
-    fib = current + previous
-    yield fib
-    previous = current
-    current = fib
+export function solve(n: bigint): bigint {
+  let sum = 0n
+
+  for (let f of takeWhile(fibgen(), lt(n))) {
+    if (f % 2n === 0n) {
+      sum += f
+    }
   }
-}
 
-let sum = 0
-for (let f of fib()) {
-  if (f >= 4e6) break
-
-  if (f % 2 === 0) {
-    sum += f
-  }
+  return sum
 }
-console.log(sum)

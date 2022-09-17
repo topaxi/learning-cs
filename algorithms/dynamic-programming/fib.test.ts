@@ -1,4 +1,5 @@
-import { fibNaive, fibMemo, fibbu, fibbuo } from './fib'
+import { take } from '../../utils/iterator/take'
+import { fibNaive, fibMemo, fibbu, fibbuo, fibgen } from './fib'
 
 describe('fib', () => {
   describe('naive', () => {
@@ -52,6 +53,12 @@ describe('fib', () => {
 
     test('should calculate way bigger fibonacci numbers', () => {
       expect(fibbuo(1000)).toBe(4.346655768693743e208)
+    })
+  })
+
+  describe('generator', () => {
+    it('generates fibonacci numbers', () => {
+      expect(Array.from(take(fibgen(), 5))).toEqual([2n, 3n, 5n, 8n, 13n])
     })
   })
 })
