@@ -1,5 +1,7 @@
+import { HashSet } from '../data-structures/hash/hash-set'
+
 export function maxAreaOfIsland(grid: number[][]): number {
-  let seen = new Set()
+  let seen = new HashSet()
   let max = 0
 
   function visit(row: number, column: number): number {
