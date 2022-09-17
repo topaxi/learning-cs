@@ -1,17 +1,18 @@
 import { assert } from '../assert'
 
-export function reduce<T>(
-  iterable: Iterable<T>,
-  callback: (accumulator: T, value: T, index: number) => T
-): T
+export interface Reducer<A = unknown, T = unknown> {
+  (accumulator: A, value: T, index: number): A
+}
+
+export function reduce<T>(iterable: Iterable<T>, callback: Reducer<T, T>): T
 export function reduce<T, A>(
   iterable: Iterable<T>,
-  callback: (accumulator: A, value: T, index: number) => A,
+  callback: Reducer<A, T>,
   initialValue: A
 ): A
 export function reduce(
   iterable: Iterable<unknown>,
-  callback: (accumulator: unknown, value: unknown, index: number) => unknown,
+  callback: Reducer,
   initialValue?: unknown
 ): unknown {
   let hasInitialValue = Number(arguments.length === 3)

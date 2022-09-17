@@ -1,3 +1,7 @@
+import { consume } from '../../utils/iterator/consume'
+import { take } from '../../utils/iterator/take'
 import { primes } from '../../utils/prime'
 
-console.log(Array.from(primes(1000000))[10000])
+export function solve(n: number) {
+  return consume(take(primes(1000000), n))
+}

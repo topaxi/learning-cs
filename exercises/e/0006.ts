@@ -1,11 +1,11 @@
 import { range } from '../../utils/range'
-import { add } from '../../utils/operators'
+import { sum } from '../../utils/iterator/sum'
 
-const sumOfSquares = Array.from(
-  range(1, 100, { inclusive: true }),
-  n => n ** 2
-).reduce(add)
-const squareOfSum =
-  Array.from(range(1, 100, { inclusive: true })).reduce(add) ** 2
+export function solve(n: number): number {
+  const sumOfSquares = sum(
+    range(1, n, { inclusive: true, project: n => n ** 2 })
+  )
+  const squareOfSum = sum(range(1, n, { inclusive: true })) ** 2
 
-console.log(squareOfSum - sumOfSquares)
+  return squareOfSum - sumOfSquares
+}
