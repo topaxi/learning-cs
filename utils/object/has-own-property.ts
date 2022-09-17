@@ -1,4 +1,4 @@
-const _hasOwnProperty = Object.prototype.hasOwnProperty
-
-export const hasOwnProperty = <T>(obj: T, key: string) =>
-  _hasOwnProperty.call(obj, key)
+export const hasOwnProperty =
+  Object.hasOwn ??
+  ((obj: object, key: PropertyKey) =>
+    Object.prototype.hasOwnProperty.call(obj, key))
