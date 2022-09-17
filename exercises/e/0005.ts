@@ -2,23 +2,23 @@ import { range } from '../../utils/range'
 import { partial } from '../../utils/function/partial'
 import { add } from '../../utils/operators'
 import { arity2 } from '../../utils/function/arity'
+import { consume } from '../../utils/iterator/consume'
+import { takeOne } from '../../utils/iterator/take'
+import { filter } from '../../utils/iterator/filter'
 
 const { max } = Math
 
-function isEvenlyDivisibleBy(n: number, divisors: number[]): boolean {
-  for (let i of divisors) {
-    if (n % i !== 0) return false
-  }
-
-  return true
+function isEvenlyDivisibleBy(divisors: number[]): (n: number) => boolean {
+  return n => divisors.every(i => n % i === 0)
 }
 
-let divisors = Array.from(range(20), partial(add, 1))
-let step = divisors.reduce(arity2(max))
+export function solve(n: number): number | undefined {
+  let divisors = Array.from(range(n), partial(add, 1))
+  let step = divisors.reduce(arity2(max))
 
-for (let i of range(step, Infinity, { step })) {
-  if (isEvenlyDivisibleBy(i, divisors)) {
-    console.log(i)
-    break
-  }
+  return consume(
+    takeOne(
+      filter(range(step, Infinity, { step }), isEvenlyDivisibleBy(divisors))
+    )
+  )
 }

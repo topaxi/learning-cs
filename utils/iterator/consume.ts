@@ -1,8 +1,12 @@
-export function consume(iterator: Iterable<unknown>): void {
-  let i = iterator[Symbol.iterator]()
-  let ir: IteratorResult<unknown>
+/**
+ * Fully consumes an iterable and returns its last yielded value.
+ */
+export function consume<T>(iterator: Iterable<T>): T | undefined {
+  let lastValue: T | undefined
 
-  do {
-    ir = i.next()
-  } while (!ir.done)
+  for (let value of iterator) {
+    lastValue = value
+  }
+
+  return lastValue
 }

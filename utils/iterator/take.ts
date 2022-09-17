@@ -1,3 +1,4 @@
+import { paR } from '../function/partial'
 import { entries } from './entries'
 
 export function* take<T>(
@@ -11,3 +12,8 @@ export function* take<T>(
     if (i >= n) return
   }
 }
+
+export const takeOne: <T>(iterator: Iterable<T>) => IterableIterator<T> = paR(
+  take,
+  1
+)
