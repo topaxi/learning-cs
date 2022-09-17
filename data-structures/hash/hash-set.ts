@@ -1,3 +1,4 @@
+import { flat } from '../../utils/iterator/flat'
 import { includes } from '../../utils/iterator/includes'
 import { HashMap, Hashable } from './hash-map'
 
@@ -57,10 +58,8 @@ export class HashSet<T extends Hashable> implements Iterable<T> {
   union(...iterables: Array<Iterable<T>>): HashSet<T> {
     let set = HashSet.from(this)
 
-    for (let i = 0; i < iterables.length; i++) {
-      for (let value of iterables[i]) {
-        set.add(value)
-      }
+    for (let value of flat(iterables)) {
+      set.add(value)
     }
 
     return set
@@ -69,10 +68,8 @@ export class HashSet<T extends Hashable> implements Iterable<T> {
   difference(...iterables: Array<Iterable<T>>): HashSet<T> {
     let set = HashSet.from(this)
 
-    for (let i = 0; i < iterables.length; i++) {
-      for (let value of iterables[i]) {
-        set.delete(value)
-      }
+    for (let value of flat(iterables)) {
+      set.delete(value)
     }
 
     return set
