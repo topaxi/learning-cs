@@ -12,5 +12,5 @@ export const Y = <F extends AnyFunction>(m: (f: F) => F): F => {
 
 export const mY = <F extends AnyFunction, M extends MemoStore = MemoTrie>(
   m: (f: F) => F,
-  store?: M
-): Memoized<F, M> => Y(c(m, memo(store))) as Memoized<F, M>
+  store: M = new MemoTrie() as unknown as M
+): Memoized<F, M> => Object.assign(Y(c(m, memo(store))), { memo: store })
