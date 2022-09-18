@@ -1,6 +1,8 @@
 import { LinkedList } from '../data-structures/list/linked-list'
 
-export function add(a: number, b: number): number {
+export function add(a: bigint, b: bigint): bigint
+export function add(a: number, b: number): number
+export function add(a: any, b: any): any {
   return a + b
 }
 
