@@ -5,12 +5,11 @@ import { neg } from '../../utils/function/neg'
 import { paR } from '../../utils/function/partial'
 import { find } from '../../utils/iterator/find'
 import { findIndex } from '../../utils/iterator/find-index'
+import { min, max } from '../../utils/iterator/minmax'
 import { quickperm } from '../../utils/iterator/quickperm'
 import { range } from '../../utils/range'
 import { swap } from '../../utils/swap'
 import { define, Compare } from './utils'
-
-const { min, max } = Math
 
 function isSortedTo<T>(list: T[], start: number, compare: Compare<T>): number {
   let end = lastIndex(list)
@@ -38,7 +37,7 @@ export const bogosortIncremental = define((list, compare) => {
   let sortedIndex = 0
 
   while (
-    (sortedIndex = isSortedTo(list, max(0, sortedIndex - 1), compare)) !==
+    (sortedIndex = isSortedTo(list, max([0, sortedIndex - 1]), compare)) !==
     lastIndex(list)
   ) {
     shuffleInplace(list, sortedIndex)
@@ -63,7 +62,7 @@ export const bogosortMinIncremental = define((list, compare) => {
   swap(list, 0, findSmallestIndex(list, compare))
 
   while (
-    (sortedIndex = isSortedTo(list, max(0, sortedIndex - 1), compare)) !==
+    (sortedIndex = isSortedTo(list, max([0, sortedIndex - 1]), compare)) !==
     lastIndex(list)
   ) {
     shuffleInplace(list, sortedIndex)
@@ -98,12 +97,12 @@ export const bogosortMinMaxIncremental = define((list, compare) => {
   while (
     (sortedStartIndex = isSortedTo(
       list,
-      max(0, sortedStartIndex - 1),
+      max([0, sortedStartIndex - 1]),
       compare
     )) <
     (sortedEndIndex = isSortedFrom(
       list,
-      min(sortedEndIndex + 1, lastIndex(list)),
+      min([sortedEndIndex + 1, lastIndex(list)]),
       compare
     ))
   ) {

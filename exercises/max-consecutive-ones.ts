@@ -1,4 +1,4 @@
-const { max } = Math
+import { max } from '../utils/iterator/minmax'
 
 export function maxConsecutiveOnes(nums: number[]): number {
   let maxOnes = 0
@@ -9,7 +9,7 @@ export function maxConsecutiveOnes(nums: number[]): number {
       curr = 0
     } else {
       curr++
-      maxOnes = max(maxOnes, curr)
+      maxOnes = max([maxOnes, curr])
     }
   }
 

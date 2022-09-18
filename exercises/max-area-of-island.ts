@@ -1,8 +1,9 @@
 import { HashSet } from '../data-structures/hash/hash-set'
+import { max } from '../utils/iterator/minmax'
 
 export function maxAreaOfIsland(grid: number[][]): number {
   let seen = new HashSet()
-  let max = 0
+  let maxArea = 0
 
   function visit(row: number, column: number): number {
     if (row < 0 || column < 0) return 0
@@ -23,9 +24,9 @@ export function maxAreaOfIsland(grid: number[][]): number {
 
   for (let column = 0; column < grid.length; column++) {
     for (let row = 0; row < grid[column].length; row++) {
-      max = Math.max(max, visit(row, column))
+      maxArea = max([maxArea, visit(row, column)])
     }
   }
 
-  return max
+  return maxArea
 }

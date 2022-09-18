@@ -1,6 +1,6 @@
 import { SingleParamStore } from '../../utils/function/memoize/single-param-store'
 import { mY } from '../../utils/function/y'
-import { max } from '../../utils/iterator/max'
+import { max } from '../../utils/iterator/minmax'
 import { prop } from '../../utils/object/prop'
 import { range } from '../../utils/range'
 

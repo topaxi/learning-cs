@@ -1,6 +1,7 @@
+import { max } from '../../utils/iterator/minmax'
 import { reverse } from '../../utils/string/reverse'
 
-const { floor, max } = Math
+const { floor } = Math
 
 function splitStringInHalf(str: string): [string, string] {
   let halfLength = floor(str.length / 2)
@@ -22,7 +23,7 @@ function longestNumericPalindrome(i: number): number {
       let v = i * j
 
       if (isPalindrome(v.toString())) {
-        p = max(p, v)
+        p = max([p, v])
       }
     }
   }

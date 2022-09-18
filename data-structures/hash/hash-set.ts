@@ -1,8 +1,7 @@
 import { flat } from '../../utils/iterator/flat'
 import { includes } from '../../utils/iterator/includes'
+import { max } from '../../utils/iterator/minmax'
 import { HashMap, Hashable } from './hash-map'
-
-const { max } = Math
 
 export class HashSet<T extends Hashable> implements Iterable<T> {
   private _hash: HashMap<T, T>
@@ -10,7 +9,7 @@ export class HashSet<T extends Hashable> implements Iterable<T> {
   private static defaultSetSize = 32
 
   static of<T extends Hashable>(...args: T[]) {
-    let set = new this<T>(max(this.defaultSetSize, args.length))
+    let set = new this<T>(max([this.defaultSetSize, args.length]))
 
     for (let value of args) {
       set.add(value)

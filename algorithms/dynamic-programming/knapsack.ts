@@ -1,8 +1,7 @@
 import { mY } from '../../utils/function/y'
 import { head } from '../../utils/array/head'
 import { tail } from '../../utils/array/tail'
-
-const { max } = Math
+import { max } from '../../utils/iterator/minmax'
 
 export interface Item {
   value: number
@@ -21,9 +20,9 @@ export const knapsack = mY(
     if (head(list)!.size > space) return knapsack(tail(list), space)
 
     // Recurrence, do we get more value if we take it or not?
-    return max(
+    return max([
       knapsack(tail(list), space),
-      head(list)!.value + knapsack(tail(list), space - head(list)!.size)
-    )
+      head(list)!.value + knapsack(tail(list), space - head(list)!.size),
+    ])
   }
 )

@@ -1,4 +1,4 @@
-const { max } = Math
+import { max } from '../../utils/iterator/minmax'
 
 const digits = Array.from(
   `
@@ -30,8 +30,8 @@ const product = (a: number, b: number) => a * b
 
 console.log(
   digits.reduce(
-    (maxProduct, digit, i, digits) =>
-      max(maxProduct, digits.slice(i, i + 13).reduce(product, 1)),
+    (maxProduct, _digit, i, digits) =>
+      max([maxProduct, digits.slice(i, i + 13).reduce(product, 1)]),
     0
   )
 )

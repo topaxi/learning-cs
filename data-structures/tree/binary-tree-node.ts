@@ -3,8 +3,7 @@ import { filter } from '../../utils/iterator/filter'
 import { HashMap } from '../hash/hash-map'
 import { Queue } from '../queue/queue'
 import { pick } from '../../utils/object/pick'
-
-const { max } = Math
+import { max } from '../../utils/iterator/minmax'
 
 export class BinaryTreeNode<T = number, M = unknown> implements Iterable<T> {
   readonly meta = new HashMap<string | number, M>()
@@ -64,7 +63,7 @@ export class BinaryTreeNode<T = number, M = unknown> implements Iterable<T> {
   }
 
   get height(): number {
-    return max(this.leftHeight, this.rightHeight)
+    return max([this.leftHeight, this.rightHeight])
   }
 
   get balanceFactor(): number {
