@@ -163,7 +163,7 @@ export class HashMapWithDefault<K extends Hashable, T> extends HashMap<K, T> {
         : constant(defaultValue)
   }
 
-  get(key: K): T {
+  override get(key: K): T {
     if (this.has(key)) return super.get(key)!
     return this.getDefaultValue(key)
   }

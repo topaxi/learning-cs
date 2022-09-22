@@ -2,7 +2,7 @@ import { LinkedListNode } from './linked-list-node'
 import { traversePrev } from './utils'
 
 export class DoublyLinkedListNode<T> extends LinkedListNode<T> {
-  static of<T>(...values: T[]) {
+  static override of<T>(...values: T[]) {
     let node = new this<T>(values[0])
 
     for (let i = values.length; i > 1; i--) {
@@ -18,7 +18,7 @@ export class DoublyLinkedListNode<T> extends LinkedListNode<T> {
 
   constructor(
     value: T,
-    public next: DoublyLinkedListNode<T> | null = null,
+    public override next: DoublyLinkedListNode<T> | null = null,
     public prev: DoublyLinkedListNode<T> | null = null
   ) {
     super(value, next)
@@ -28,7 +28,7 @@ export class DoublyLinkedListNode<T> extends LinkedListNode<T> {
     return this.prev === null ? this : this.prev.head()
   }
 
-  reverse(): DoublyLinkedListNode<T> {
+  override reverse(): DoublyLinkedListNode<T> {
     let curr: DoublyLinkedListNode<T> | null = this
     let prev = null
     let next = null

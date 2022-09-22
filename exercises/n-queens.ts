@@ -32,7 +32,7 @@ export class Queen extends ChessFigure {
     )
   }
 
-  toString(): string {
+  override toString(): string {
     return '♕'
   }
 }

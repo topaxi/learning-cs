@@ -3,7 +3,7 @@ import { GraphVertex } from './graph-vertex'
 import { GraphEdge } from './graph-edge'
 
 export class DirectedGraph<T> extends Graph<T> {
-  protected _addEdge(
+  protected override _addEdge(
     vertexA: GraphVertex<T>,
     vertexB: GraphVertex<T>,
     weight: number

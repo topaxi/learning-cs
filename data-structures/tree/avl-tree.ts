@@ -2,7 +2,7 @@ import { BinarySearchTree } from './binary-search-tree'
 import { BinarySearchTreeNode } from './binary-search-tree-node'
 
 export class AvlTree<T> extends BinarySearchTree<T> {
-  insert(value: T): BinarySearchTreeNode<T> {
+  override insert(value: T): BinarySearchTreeNode<T> {
     let node = super.insert(value)
     let currentNode: BinarySearchTreeNode<T> | null = node
 
