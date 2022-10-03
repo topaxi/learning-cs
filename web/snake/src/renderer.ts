@@ -13,13 +13,12 @@ export class Renderer extends Renderer2d {
 
   drawLevel(level: Level): void {
     for (let i = 0; i < level.walls.length; i++) {
-      this.context.fillRect(
-        level.walls[i].x * 10,
-        level.walls[i].y * 10,
-        10,
-        10
-      )
+      this.drawWallPiece(level.walls[i])
     }
+  }
+
+  private drawWallPiece({ x, y }: Point): void {
+    this.context.fillRect(x * 10, y * 10, 10, 10)
   }
 
   drawPlayer(player: Player): void {
