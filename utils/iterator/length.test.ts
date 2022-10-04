@@ -11,6 +11,7 @@ describe('utils/iterator/length', () => {
 
     expect(length(values())).toBe(4)
     expect(length([0, 1, 2, 3])).toBe(4)
+    expect(length(new Set([0, 1, 2, 3]))).toBe(4)
     expect(length('abcd')).toBe(4)
   })
 })
