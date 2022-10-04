@@ -1,5 +1,6 @@
 import { flat } from '../../utils/iterator/flat'
 import { includes } from '../../utils/iterator/includes'
+import { length } from '../../utils/iterator/length'
 import { max } from '../../utils/iterator/minmax'
 import { HashMap, Hashable } from './hash-map'
 
@@ -27,7 +28,7 @@ export class HashSet<T extends Hashable> implements Iterable<T> {
   }
 
   get size(): number {
-    return this._hash.size
+    return length(this._hash)
   }
 
   get empty(): boolean {

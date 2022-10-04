@@ -1,4 +1,5 @@
 import { Y, mY } from '../../utils/function/y'
+import { length } from '../../utils/iterator/length'
 import { min } from '../../utils/iterator/minmax'
 
 const minDistanceR =
@@ -28,9 +29,9 @@ const minDistanceR =
   }
 
 export function minimumEditDistanceNaive(word1: string, word2: string) {
-  return Y(minDistanceR)(word1, word2, word1.length, word2.length)
+  return Y(minDistanceR)(word1, word2, length(word1), length(word2))
 }
 
 export function minimumEditDistanceMemo(word1: string, word2: string) {
-  return mY(minDistanceR)(word1, word2, word1.length, word2.length)
+  return mY(minDistanceR)(word1, word2, length(word1), length(word2))
 }

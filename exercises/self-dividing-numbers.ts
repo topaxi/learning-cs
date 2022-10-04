@@ -1,5 +1,6 @@
 import { range } from '../utils/range'
 import { filter } from '../utils/iterator/filter'
+import { length } from '../utils/iterator/length'
 
 export function selfDividingNumbers(left: number, right: number) {
   return Array.from(
@@ -10,7 +11,7 @@ export function selfDividingNumbers(left: number, right: number) {
 function isSelfDividing(n: number): boolean {
   let s = String(n)
 
-  for (let i of range(s.length)) {
+  for (let i of range(length(s))) {
     if (s[i] === '0') return false
     if (n % Number(s[i]) !== 0) return false
   }

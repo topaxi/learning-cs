@@ -8,6 +8,7 @@ import { LinkedList } from '../list/linked-list'
 import { constant } from '../../utils/function/constant'
 import { construct } from '../../utils/function/construct'
 import { isEmpty } from '../../utils/object/is-empty'
+import { length } from '../../utils/iterator/length'
 
 const { abs } = Math
 const { isFinite } = Number
@@ -23,7 +24,7 @@ class HashMapNode<K, T> {
 export type Hashable = string | number | { readonly id: string | number }
 
 export class HashMap<K extends Hashable, T> implements Iterable<[K, T]> {
-  protected slots: Array<LinkedList<HashMapNode<K, T>>>
+  protected slots: ReadonlyArray<LinkedList<HashMapNode<K, T>>>
   private keyCache: Record<string | number, number>
 
   // eslint-disable-next-line
@@ -118,7 +119,7 @@ export class HashMap<K extends Hashable, T> implements Iterable<[K, T]> {
     let hash =
       typeof key === 'number' && isFinite(key) ? key : hashCode(String(key))
 
-    return abs(hash) % this.slots.length
+    return abs(hash) % length(this.slots)
   }
 
   protected getNode(key: K): HashMapNode<K, T> | null {

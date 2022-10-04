@@ -1,5 +1,6 @@
 import { range } from '../range'
 import { swap } from '../swap'
+import { length } from './length'
 
 /**
  * Generate every permutation of the given iterable.
@@ -8,7 +9,7 @@ import { swap } from '../swap'
  */
 export function* quickperm<T>(iterable: Iterable<T>): Generator<T[]> {
   let a = [...iterable]
-  let N = a.length
+  let N = length(a)
   let p = [...range(N + 1)]
   let i = 1
 

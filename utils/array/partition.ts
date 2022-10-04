@@ -1,4 +1,5 @@
 import { filter } from '../iterator/filter'
+import { length } from '../iterator/length'
 import { range } from '../range'
 import { swap } from '../swap'
 import { lastIndex } from './last-index'
@@ -10,7 +11,7 @@ export function partition<T>(
   let a: T[] = []
   let b: T[] = []
 
-  for (let i of range(array.length)) {
+  for (let i of range(length(array))) {
     ;(fn(array[i], i, array) ? a : b).push(array[i])
   }
 

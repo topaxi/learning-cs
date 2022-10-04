@@ -2,6 +2,7 @@ import { GraphEdge } from './graph-edge'
 import { HashSet } from '../hash/hash-set'
 import { map } from '../../utils/iterator/map'
 import { pick } from '../../utils/object/pick'
+import { length } from '../../utils/iterator/length'
 
 export class GraphVertex<T> {
   private static nextId = 0
@@ -13,7 +14,7 @@ export class GraphVertex<T> {
   constructor(public value: T) {}
 
   get degree(): number {
-    return this.edges.size
+    return length(this.edges)
   }
 
   connect(vertex: GraphVertex<T>, weight?: number): this {

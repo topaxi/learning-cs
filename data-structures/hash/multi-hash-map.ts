@@ -4,6 +4,7 @@ import { flat } from '../../utils/iterator/flat'
 import { flatMap } from '../../utils/iterator/flat-map'
 import { zip } from '../../utils/iterator/zip'
 import { infinite } from '../../utils/iterator/infinite'
+import { length } from '../../utils/iterator/length'
 
 export class MultiHashMap<K extends Hashable, V extends Hashable> {
   private map: HashMapWithDefault<K, HashSet<V>>
@@ -16,7 +17,7 @@ export class MultiHashMap<K extends Hashable, V extends Hashable> {
   }
 
   get size(): number {
-    return this.map.size
+    return length(this.map)
   }
 
   get empty(): boolean {

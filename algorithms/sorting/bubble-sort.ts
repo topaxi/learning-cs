@@ -1,9 +1,10 @@
+import { length } from '../../utils/iterator/length'
 import { range } from '../../utils/range'
 import { swap } from '../../utils/swap'
 import { define } from './utils'
 
 export const bubbleSort = define((list, compare) => {
-  let n = list.length
+  let n = length(list)
   let swapped
 
   do {
@@ -23,7 +24,7 @@ export const bubbleSort = define((list, compare) => {
 })
 
 export const bubbleSortOptimized = define((list, compare) => {
-  let n = list.length
+  let n = length(list)
 
   do {
     let nextn = 0

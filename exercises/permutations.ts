@@ -1,4 +1,5 @@
 import { HashSet } from '../data-structures/hash/hash-set'
+import { length } from '../utils/iterator/length'
 
 export function permutations(
   nums: number[],
@@ -6,7 +7,7 @@ export function permutations(
   list: number[] = [],
   out: number[][] = []
 ): number[][] {
-  if (nums.length === list.length) return out.push(list.slice()), out
+  if (length(nums) === length(list)) return out.push(list.slice()), out
 
   for (let n of nums) {
     if (!added.has(n)) {

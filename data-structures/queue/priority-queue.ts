@@ -1,3 +1,4 @@
+import { length } from '../../utils/iterator/length'
 import { tap } from '../../utils/iterator/tap'
 import { HashMap, Hashable } from '../hash/hash-map'
 import { MinHeap } from '../heap/min-heap'
@@ -11,7 +12,7 @@ export class PriorityQueue<T extends Hashable> implements Iterable<T> {
   }
 
   get length(): number {
-    return this.heap.size
+    return length(this.heap)
   }
 
   enqueue(value: T, priority = 0): this {

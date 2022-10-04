@@ -1,3 +1,4 @@
+import { length } from '../../utils/iterator/length'
 import { LinkedListNode } from './linked-list-node'
 import { traversePrev } from './utils'
 
@@ -5,7 +6,7 @@ export class DoublyLinkedListNode<T> extends LinkedListNode<T> {
   static override of<T>(...values: T[]) {
     let node = new this<T>(values[0])
 
-    for (let i = values.length; i > 1; i--) {
+    for (let i = length(values); i > 1; i--) {
       node.next = new this<T>(values[i - 1], node.next, node)
 
       if (node.next.next !== null) {

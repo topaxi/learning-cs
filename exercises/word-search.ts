@@ -1,12 +1,15 @@
 import { not } from '../utils/function/not'
+import { length } from '../utils/iterator/length'
 import { isWithinMatrix } from '../utils/matrix'
 import { range } from '../utils/range'
 
 export function wordSearch(board: string[][], word: string): boolean {
   let a = Array.from(word)
-  for (let i of range(board.length))
-    for (let j of range(board[i].length))
+
+  for (let i of range(length(board)))
+    for (let j of range(length(board[i])))
       if (hasWord(board, a, 0, i, j)) return true
+
   return false
 }
 
