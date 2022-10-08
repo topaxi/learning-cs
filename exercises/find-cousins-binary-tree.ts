@@ -1,16 +1,17 @@
+import { Queue } from '../data-structures/queue/queue'
 import { BinaryTreeNode } from '../data-structures/tree/binary-tree-node'
 
 export function areCousins<T>(root: BinaryTreeNode<T>, x: T, y: T) {
-  let queue = [null, root, 0]
+  let queue = Queue.of<BinaryTreeNode<T> | number | null>(null, root, 0)
   let xDepth = -1
   let yDepth = -1
   let xParent = null
   let yParent = null
 
   while (queue.length !== 0) {
-    let parent = queue.shift() as BinaryTreeNode<T> | null
-    let node = queue.shift() as BinaryTreeNode<T> | null
-    let depth = queue.shift() as number
+    let parent = queue.dequeue() as BinaryTreeNode<T> | null
+    let node = queue.dequeue() as BinaryTreeNode<T> | null
+    let depth = queue.dequeue() as number
 
     if (node === null) continue
 
@@ -27,7 +28,7 @@ export function areCousins<T>(root: BinaryTreeNode<T>, x: T, y: T) {
       return xParent !== yParent && xDepth === yDepth
     }
 
-    queue.push(node, node.left, depth + 1, node, node.right, depth + 1)
+    queue.enqueue(node, node.left, depth + 1, node, node.right, depth + 1)
   }
 
   return false
