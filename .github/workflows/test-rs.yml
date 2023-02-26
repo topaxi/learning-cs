@@ -1,0 +1,33 @@
+name: test-rs
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - '.github/workflows/test-rs.yml'
+      - 'rust'
+  pull_request:
+    branches: [master]
+    paths:
+      - '.github/workflows/test-rs.yml'
+      - 'rust'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        rust-version: [stable]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Rust ${{ matrix.rust-version }}
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust-version }}
+          override: true
+          components: rustfmt, clippy
+
+      - run: cargo test
+        working-directory: rust
