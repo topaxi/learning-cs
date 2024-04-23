@@ -42,8 +42,8 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
   }
 
   unshift(...values: T[]): this {
-    for (let i = 0; i < values.length; i++) {
-      this.firstNode = new LinkedListNode(values[i], this.firstNode)
+    for (let value of values) {
+      this.firstNode = new LinkedListNode(value, this.firstNode)
     }
 
     return this
@@ -331,7 +331,7 @@ export class LinkedList<T> implements Iterable<T>, Head<T | null> {
       node = node.next
     }
 
-    return node!
+    return node
   }
 
   private concatNormalizer<S>(

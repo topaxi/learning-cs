@@ -31,7 +31,7 @@ export class LinkedListNode<T> {
     return this.of(...map(values, project))
   }
 
-  constructor(public value: T, public next: LinkedListNode<T> | null = null) {}
+  constructor(public value: T, public next: LinkedListNode<T> | null = null) { }
 
   size(): number {
     return this.reduce(increment, 0)
@@ -60,7 +60,7 @@ export class LinkedListNode<T> {
       curr = next
     }
 
-    return (prev || curr)!
+    return (prev ?? curr)!
   }
 
   reduce(

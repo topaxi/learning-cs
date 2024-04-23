@@ -1,12 +1,12 @@
 import { noop } from '../../utils/function/noop'
-import { returnTrue } from '../../utils/function/constant'
+import { returnFalse, returnTrue } from '../../utils/function/constant'
 import { HashSet } from '../../data-structures/hash/hash-set'
 import { Queue } from '../../data-structures/queue/queue'
 import { GraphVertex } from '../../data-structures/graph/graph-vertex'
 import { filter } from '../../utils/iterator/filter'
 
 export interface BreadthFirstSearchCallbacks<T> {
-  find?(currentVertex: GraphVertex<T>): boolean | unknown
+  find?(currentVertex: GraphVertex<T>): boolean
 
   enterVertex?(currentVertex: GraphVertex<T>): unknown
 
@@ -21,7 +21,7 @@ export interface BreadthFirstSearchCallbacks<T> {
 export function breadthFirstSearch<T>(
   startVertex: GraphVertex<T>,
   {
-    find = noop,
+    find = returnFalse,
     enterVertex = noop,
     leaveVertex = noop,
     canVisitVertex = returnTrue,

@@ -45,7 +45,7 @@ export class DoublyLinkedListNode<T> extends LinkedListNode<T> {
       curr = next
     }
 
-    return (prev || curr)!
+    return (prev ?? curr)!
   }
 
   reduceRight(

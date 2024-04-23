@@ -50,11 +50,7 @@ export function* flatMap<This = undefined>(
     this: This,
     value: unknown,
     i: number
-  ) =>
-    | unknown
-    | Iterable<unknown>
-    | Iterable<Iterable<unknown>>
-    | Iterable<Iterable<Iterable<unknown>>>,
+  ) => unknown,
   depth = 1,
   thisArg?: This
 ): IterableIterator<unknown> {

@@ -1,5 +1,5 @@
 import { noop } from '../../utils/function/noop'
-import { returnTrue } from '../../utils/function/constant'
+import { returnFalse, returnTrue } from '../../utils/function/constant'
 import { HashSet } from '../../data-structures/hash/hash-set'
 import { GraphVertex } from '../../data-structures/graph/graph-vertex'
 
@@ -7,7 +7,7 @@ export interface DepthFirstSearchCallbacks<T> {
   find?(
     currentVertex: GraphVertex<T>,
     previousVertex: GraphVertex<T> | null
-  ): boolean | unknown
+  ): boolean
 
   enterVertex?(
     currentVertex: GraphVertex<T>,
@@ -28,7 +28,7 @@ export interface DepthFirstSearchCallbacks<T> {
 export function depthFirstSearch<T>(
   startVertex: GraphVertex<T>,
   {
-    find = noop,
+    find = returnFalse,
     enterVertex = noop,
     leaveVertex = noop,
     canVisitVertex = returnTrue,

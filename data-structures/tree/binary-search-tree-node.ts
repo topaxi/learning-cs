@@ -4,7 +4,7 @@ export class BinarySearchTreeNode<T, M = unknown> extends BinaryTreeNode<
   T,
   M
 > {
-  insert(value: T): BinarySearchTreeNode<T> {
+  insert(value: T): this {
     if (this.value === null) {
       this.value = value
 

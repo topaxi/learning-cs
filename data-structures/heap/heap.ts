@@ -6,7 +6,7 @@ const { floor } = Math
 export class Heap<T> {
   private readonly memory: T[] = []
 
-  constructor(private readonly comparator: (a: T, b: T) => number) {}
+  constructor(private readonly comparator: (a: T, b: T) => number) { }
 
   get empty(): boolean {
     return this.memory.length === 0
@@ -41,8 +41,8 @@ export class Heap<T> {
   }
 
   push(...values: T[]): void {
-    for (let i = 0; i < values.length; i++) {
-      this.memory.push(values[i])
+    for (let value of values) {
+      this.memory.push(value)
       this.heapifyUp()
     }
   }
@@ -53,8 +53,7 @@ export class Heap<T> {
     }
 
     if (this.memory.length === 1) {
-      let value = this.memory.pop()
-      return value === undefined ? null : value
+      return this.memory.pop() ?? null
     }
 
     const value = this.memory[0]
