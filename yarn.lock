@@ -1000,10 +1000,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.7.14":
-  version: 18.7.14
-  resolution: "@types/node@npm:18.7.14"
-  checksum: 10c0/a28c69312957d57d7ccff3b339e31a82fadb26d98426094788d9a62ba2de7813f32900843f4fdaecc9107ed3ac43983ea610280253c514bae1189b0d5b15c777
+"@types/node@npm:18.19.39":
+  version: 18.19.39
+  resolution: "@types/node@npm:18.19.39"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: 10c0/a9eb33bc093beba6bd5d4e839de7d1d1f496cd7e741c2f6c7161318dba0f37227bb25d8306907194992488d6c59a7363a419d72298549483d33402227a2d435b
   languageName: node
   linkType: hard
 
@@ -3512,7 +3514,7 @@ __metadata:
   resolution: "learning-cs@workspace:."
   dependencies:
     "@types/jest": "npm:29.0.0"
-    "@types/node": "npm:18.7.14"
+    "@types/node": "npm:18.19.39"
     "@typescript-eslint/eslint-plugin": "npm:5.36.1"
     "@typescript-eslint/parser": "npm:5.36.1"
     eslint: "npm:8.23.0"
@@ -4918,6 +4920,13 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/8e7760580c82eba5f2dc91fa5a2f59d8385a9a1b48228ac4921abfa5496beccb2a11ed68a78699accc3ec12dd8a520a8407a222904206c6cf2de478a7e714ff3
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~5.26.4":
+  version: 5.26.5
+  resolution: "undici-types@npm:5.26.5"
+  checksum: 10c0/bb673d7876c2d411b6eb6c560e0c571eef4a01c1c19925175d16e3a30c4c428181fb8d7ae802a261f283e4166a0ac435e2f505743aa9e45d893f9a3df017b501
   languageName: node
   linkType: hard
 
